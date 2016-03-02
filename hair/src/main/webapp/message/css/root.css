@@ -1,0 +1,107 @@
+@CHARSET "UTF-8";
+
+.container {
+	background:;
+}
+
+.varDiv {
+	margin: auto;
+	width: 1000px;
+	background:;
+}
+
+.contentsDiv {
+	max-width: 900px;
+	background:;
+	float: left;
+}
+
+.contentDiv {
+	margin: 10px;
+	max-width: 500px;
+	background:;
+	float: right;
+}
+
+.infoDiv {
+	margin-top: 20px;
+	max-width: 250px;
+	padding: 10px;
+	background: white;
+	float: left;
+	border-radius: 5px;
+	border: 1px solid lightgrey;
+}
+
+.infoDivDummy {
+	margin-top: 20px;
+	max-width: 250px;
+	padding: 10px;
+	background:;
+	float: left;
+}
+
+.secondInfoDiv {
+	margin: 10px;
+	max-width: 250px;
+	background:;
+	float: right;
+}
+
+.personalInfoEditBtnGroup {
+	top: 130px;
+	right: 50px;
+	background: blue;
+	position: absolute;
+}
+
+.personalInfoEditBtnGroup>button {
+	float: right;
+}
+
+.message {
+	padding:0px;	
+	border:1px solid lightgrey;
+	top: 160px;
+	right: 50px;
+	position: absolute;
+	/* display: none; */
+	background: white;
+}
+.message > .messageContainer {
+	height: 300px;
+	
+}
+
+.mainContents {
+	background: white;
+	padding: 10px;
+	margin: 10px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid lightgrey;
+}
+
+.agentList tr:HOVER {
+	background: lightgrey;
+}
+
+img {
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.sticky {
+	position: fixed;
+	top: 0px;
+}
+
+.stickyElse {
+	position: fixed;
+	top: 20px;
+}
+
+.message.stickyElse {
+	position: fixed;
+	top: 50px;
+}
