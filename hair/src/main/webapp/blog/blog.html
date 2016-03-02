@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<title>blog</title>
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="css/root.css" rel="stylesheet">
+<link href="css/header.css" rel="stylesheet">
+<link href="css/shopDetail.css" rel="stylesheet">
+<link href="css/calendar.css" rel="stylesheet">
+</head>
+<body>
+	<!-- Fixed navbar -->
+	<header class="header" >
+		<div id="mainLogo">
+        	<img class="searchImg mainImg" src="img/icon/logo3.png">
+        </div>
+        
+		<div id="topHead">
+        	<button id="registButton" class="btn1" type="submit">Regist</button>
+        	<button id="login" class="btn1" type="submit">Login</button>
+        </div>
+        <!--  -->
+		<div class="content">
+        	
+        	
+        <!-- search -->
+	        <form class="form-inline">
+				<div class="form-group" id="mainSearch">
+					<label class="sr-only" for="exampleInputAmount"></label>
+					<div class="input-group">
+						<input type="text" class="form-control" id="searchBar" placeholder="검색할 태그및 내용을 입력하세요">
+						<div class="input-group-addon">
+							<button id="searchBtn"><img class="searchImg" src="img/icon/search.png"></button>
+						</div>
+						<div class="input-group-addon">
+							<a href="map.html"><img class="searchImg" src="img/icon/search2.png"></a>
+						</div>
+					</div>
+				</div>
+	        </form>
+        </div>        
+        
+        
+        
+        <!-- registForm -->
+        <div id="center" >
+		
+		<form>
+			  <div class="form-group">
+			    <label for="exampleInputId" class="sr-only">아이디</label>
+			    <div>
+				    <input type="text" class="form-control" id="id" placeholder="아이디을 입력하세요" >
+				    <button class="btn btn-default" id="idCheck" type="submit">중복확인</button>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputPassword1" class="sr-only">암호</label>
+			    <input type="password" class="form-control" id="password" placeholder="암호" >
+			  </div>
+			  <div class="radio">
+				  <label>
+				    <input type="radio" name="optionsRadios" id="option1" value="option1" checked>
+				    	일반회원
+				  </label>
+				</div>
+				<div class="radio">
+				  <label>
+				    <input type="radio" name="optionsRadios" id="option2" value="option2">
+				    	미용사
+				  </label>
+				</div>
+				<!-- 미용사 확인 -->
+				<div class="form-group checkP" style="margin-bottom: 30px">
+			    <label for="exampleInputId"></label>
+			    <div>
+				    <input type="text" class="form-control salon" placeholder="소속미용실" >
+			    </div>
+			    <div style="height: 50px;">
+				    <input type="text" class="form-control check" id="number" placeholder="사번">
+				    <input type="text" class="form-control check" id="exampleInputId1" placeholder="이름">
+				    <button class="btn btn-default check" type="submit" style="width: 20%;">체크</button>
+			    </div>
+			  </div>
+			  <!-- -->
+			  
+			  
+			  <div class="form-group">
+			    <label for="exampleInputFile">대표이미지</label>
+			    <input type="file" id="exampleInputFile">
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputName" class="sr-only">이름</label>
+			    <input type="text" class="form-control" id="InputName" placeholder="이름을 입력하세요" >
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputNickName" class="sr-only">닉네임</label>
+			    <input type="text" class="form-control" id="NickName" placeholder="닉네임을 입력하세요" >
+			   </div>
+			    
+			  <div class="form-group" style="margin-bottom: 50px;">
+			    <label for="exampleInputNickName">생일</label>
+			    <div>
+			    <input type="text" class="form-control birth" placeholder="YY" >
+			    <input type="text" class="form-control birth" placeholder="MM" >
+			    <input type="text" class="form-control birth" placeholder="DD" >	
+			    </div>
+			  </div>
+			 <div class="form-group">
+			  <button type="submit" class="btn btn-default">제출</button>
+			 </div>
+			  
+		</form>
+		</div>
+        
+        <!-- login -->
+        <div id="dolog">
+        	<form class="form-horizontal">
+			  <div class="form-group">
+				    <label class="col-sm-2 control-label sr-only leftlogin">ID</label>
+				    <div class="col-sm-10">
+				      	<input type="text" class="form-control " id="id" placeholder="아이디을 입력하세요" >
+				    </div>
+			  </div>
+			  <div class="form-group">
+				    <label for="inputPassword" class="col-sm-2 control-label sr-only leftlogin" >Password</label>
+				    <div class="col-sm-10">
+				    	  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+			   		 </div>
+			  </div>
+			   <div class="form-group">
+			 	 <button type="submit" id="loginBtn" class="btn btn-default">로그인</button>
+			 </div>
+			</form>
+        </div>
+        
+    </header>
+
+	<!-- Modal (글쓰기) -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="padding: 0px;">
+		<div class="modal-dialog">
+			<div class="modal-content"
+				style="top: 200px; width: 520px; margin: auto;">
+				<div class="modal-header" style="padding: 0px">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close"></button>
+					<h2 class="modal-title" id="myModalLabel" style="margin: 0px">
+						<input type="text" placeholder="제목"
+							style="border: 0px; margin: 5px; width: 510px">
+					</h2>
+				</div>
+				<div class="modal-body" style="padding: 0px">
+					<input type="file">
+					<textarea placeholder="사진 설명"
+						style="border: 0px; margin: 5px; width: 510px; height: 100px"></textarea>
+				</div>
+				<div class="modal-footer" style="padding: 0px">
+					<input type="text" placeholder="#태그"
+						style="border: 0px; margin: 5px; width: 510px">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						style="float: left;">Close</button>
+					<button type="button" class="btn btn-info">Regist</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="container">
+		<div class="varDiv">
+			<div class="contentsDiv">
+
+				<!-- 왼쪽 정보 DIV -->
+				<div class="infoDiv">
+					<img  src="./img/contents/info.jpg" width="230px"> <br> <br>
+					<p>이것은 미용사의 정보입니다. 이것은 미용사의 정보입니다. 이것은 미용사의 정보입니다. 이것은 미용사의
+						정보입니다.</p>
+				</div>
+				<div class="infoDivDummy" >
+					<p style="color: white;">이것은 차후에 수정하도록 하자. 띄어쓰기하기 위한 글이므로 이것은
+						나중에 필히 수정하여야 한다</p>
+				</div>
+
+				<!-- 본문 들어갈 DIV -->
+				<div class="contentDiv">
+
+					<div id="shopDetail" style="position: absolute; padding: 5px; border: 2px darkgrey solid; border-radius:5px; display:none; background: lightgrey;">
+						<div id="title">
+							<div id="choice">Choice hair</div>
+							<div style="width: 400px; float: right;">
+									<input type="text" name="date" id="date_input">
+									<button class="btn btn-default" onclick="closeDetail()">Close</button>
+									<button class="btn btn-default" onclick="closeDetail()">Loc</button>
+									<div class="btn-group">
+									  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+									    Res 
+									  </button>
+									  <ul class="dropdown-menu" role="menu">
+									    <li>
+									    <div id="datepicker" class="calendar"></div>
+									   
+									  </ul>
+									</div>
+							</div>
+						</div>
+						<div id="pic" >
+							<div id="small">
+								<a href="#" class="spic" id="one"> <img src="img/detail/mainpic.jpg"
+									width="100px" height="55px" border="0" id="pic1" />
+								</a> <a href="#" class="spic" id="two"><img src="img/detail/pic1.jpg"
+									width="100px" height="55px" border="0" id="pic2" /> </a> <a
+									href="#" class="spic" id="three"><img src="img/detail/pic2.jpg"
+									width="100px" height="55px" border="0" id="pic3" /> </a> <a
+									href="#" class="spic" id="four"><img src="img/detail/pic3.jpg"
+									width="100px" height="55px" border="0" id="pic4" /> </a>
+							</div>
+							<div id="big">
+								<img src="img/detail/mainpic.jpg" width="550px" height="290px" border="0"
+									class="bigpic" />
+							</div>
+						</div>
+						<div id="blog">
+							<div id="msg">디자이너 블로그로 이동</div>
+							<div id="dsn">
+								<a href="#" class="imgAnchor"><img src="img/detail/designer.jpg"
+									width="75px" height="100px"></a> <a href="#"
+									class="imgAnchor"><img src="img/detail/designer2.jpg" width="75px"
+									height="100px"></a> <a href="#" class="imgAnchor"><img
+									src="img/detail/designer3.jpg" width="75px" height="100px"></a> <a
+									href="#" class="imgAnchor"><img src="img/detail/designer4.jpg"
+									width="75px" height="100px"></a> <a href="#"
+									class="imgAnchor"><img src="img/detail/designer5.jpg" width="75px"
+									height="100px"></a> <a href="#" class="imgAnchor"><img
+									src="img/detail/designer6.jpg" width="75px" height="100px"></a> <a
+									href="#" class="imgAnchor"><img src="img/detail/designer7.jpg"
+									width="75px" height="100px"></a>
+							</div>
+						</div>
+					</div>
+					
+
+
+					<!-- 실제 컨텐츠 -->
+					<div class="mainContents">
+						<img src="./img/contents/main-4.jpg" width="457px">
+						<h3 style="color: navy;">
+							<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
+						</h3>
+						<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
+							id veniam ut officia minim ex nulla culpa quis elit in id Duis
+							adipisicing magna quis consectetur velit sunt aute ea pariatur
+							reprehenderit dolor officia id deserunt id quis do culpa non
+							minim consequat ad fugiat est ut incididunt nisi Duis anim elit
+							deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
+							dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
+
+						<!-- 댓글 부분 -->
+						<table>
+							<tr>
+								<td width="50px;"><img src="./img/contents/info.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">cara</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-3.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">leo</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-4.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">mago</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-3.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">leo</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+						</table>
+						<hr />
+						<p style="width: 500px; padding-left: 10px;">
+							<input type="text" style="border: 0px; width: 450px"
+								placeholder="댓글을 입력하세요">
+						</p>
+					</div>
+					<div class="mainContents">
+						<img src="./img/contents/main-3.jpg" width="457px">
+						<h3 style="color: navy;">
+							<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
+						</h3>
+						<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
+							id veniam ut officia minim ex nulla culpa quis elit in id Duis
+							adipisicing magna quis consectetur velit sunt aute ea pariatur
+							reprehenderit dolor officia id deserunt id quis do culpa non
+							minim consequat ad fugiat est ut incididunt nisi Duis anim elit
+							deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
+							dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
+
+						<!-- 댓글 부분 -->
+						<table>
+							<tr>
+								<td width="50px;"><img src="./img/contents/info.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">cara</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-3.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">leo</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-4.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">mago</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-3.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">leo</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+						</table>
+						<hr />
+						<p style="width: 500px; padding-left: 10px;">
+							<input type="text" style="border: 0px; width: 450px"
+								placeholder="댓글을 입력하세요">
+						</p>
+					</div>
+					<div class="mainContents">
+						<img src="./img/contents/main-2.jpg" width="457px">
+						<h3 style="color: navy;">
+							<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
+						</h3>
+						<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
+							id veniam ut officia minim ex nulla culpa quis elit in id Duis
+							adipisicing magna quis consectetur velit sunt aute ea pariatur
+							reprehenderit dolor officia id deserunt id quis do culpa non
+							minim consequat ad fugiat est ut incididunt nisi Duis anim elit
+							deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
+							dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
+
+						<!-- 댓글 부분 -->
+						<table>
+							<tr>
+								<td width="50px;"><img src="./img/contents/info.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">cara</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-3.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">leo</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-4.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">mago</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-3.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">leo</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+						</table>
+						<hr />
+						<p style="width: 500px; padding-left: 10px;">
+							<input type="text" style="border: 0px; width: 450px"
+								placeholder="댓글을 입력하세요">
+						</p>
+					</div>
+					<div class="mainContents">
+						<img src="./img/contents/main-1.jpg" width="457px">
+						<h3 style="color: navy;">
+							<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
+						</h3>
+						<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
+							id veniam ut officia minim ex nulla culpa quis elit in id Duis
+							adipisicing magna quis consectetur velit sunt aute ea pariatur
+							reprehenderit dolor officia id deserunt id quis do culpa non
+							minim consequat ad fugiat est ut incididunt nisi Duis anim elit
+							deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
+							dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
+
+						<!-- 댓글 부분 -->
+						<table>
+							<tr>
+								<td width="50px;"><img src="./img/contents/info.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">cara</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-3.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">leo</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-4.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">mago</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-3.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">leo</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+						</table>
+						<hr />
+						<p style="width: 500px; padding-left: 10px;">
+							<input type="text" style="border: 0px; width: 450px"
+								placeholder="댓글을 입력하세요">
+						</p>
+					</div>
+					<div class="mainContents">
+						<img src="./img/contents/main-1.jpg" width="457px">
+						<h3 style="color: navy;">
+							<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
+						</h3>
+						<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
+							id veniam ut officia minim ex nulla culpa quis elit in id Duis
+							adipisicing magna quis consectetur velit sunt aute ea pariatur
+							reprehenderit dolor officia id deserunt id quis do culpa non
+							minim consequat ad fugiat est ut incididunt nisi Duis anim elit
+							deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
+							dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
+
+						<!-- 댓글 부분 -->
+						<table>
+							<tr>
+								<td width="50px;"><img src="./img/contents/info.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">cara</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-3.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">leo</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-4.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">mago</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+							<tr>
+								<td width="50px;"><img src="./img/contents/partner-3.jpg"
+									class="img-circle" style="width: 40px; margin: 3px;"></td>
+								<td width="380px"><a href="#">leo</a> Duis sed non
+									exercitation!!!</td>
+								<td width="30px">del</td>
+							</tr>
+						</table>
+						<hr />
+						<p style="width: 500px; padding-left: 10px;">
+							<input type="text" style="border: 0px; width: 450px"
+								placeholder="댓글을 입력하세요">
+						</p>
+					</div>
+
+
+				</div>
+			</div>
+
+			<!-- 오른쪽정보 DIV -->
+			<div class="secondInfoDiv" style="height: 600px; color: grey;">
+				<!-- <table style="height: 80px; width: 200px;">
+					<tr style="border-bottom: 2px solid grey">
+						<th colspan="3">미용실 정보</th>
+					</tr>
+					<tr>
+						<td><img src="./img/contents/partner-4.jpg" width="40px"
+							height="40px"></td>
+						<td style="padding: 10px;">
+							<div style="font: bolder;">Cara</div>
+							<div>delevingne</div>
+						</td>
+						<td style="margin: 0"></td>
+					</tr>
+				</table>
+ 				-->
+
+				<table class="agentList" style="height: 200px; width: 200px;" >
+					<tr style="border-bottom: 2px solid grey">
+						<th colspan="3">
+						<img src="img/icon/office.png" style="width: 50px;" onclick="showDetail()">
+						<button type="button"
+								class="btn btn-warning" onclick="showDetail()">위치</button>
+						</th>
+					</tr>
+					<tr style="border-bottom: 1px solid black;">
+						<td><img src="./img/contents/partner-1.jpg" width="40px"
+							height="40px"></td>
+						<td style="padding: 10px;">
+							<div style="font: bolder;">이름</div>
+							<div>내용</div>
+						</td>
+						<td>
+							<div class="btn-group">
+								<button type="button" class="btn btn-info dropdown-toggle"
+									data-toggle="dropdown"
+									style="width: 25px; height: 25px; padding: 0px; margin: 0px"
+									aria-expanded="false">+</button>
+								<ul class="dropdown-menu" role="menu">
+								<li><a href="#">블로그 방문</a></li>
+									<li class="divider"></li>
+									<li><a href="#">팔로우</a></li>
+								</ul>
+							</div>
+							</td>
+					</tr>
+					<tr style="border-bottom: 1px solid black;">
+						<td><img src="./img/contents/partner-2.jpg" width="40px"
+							height="40px"></td>
+						<td style="padding: 10px;">Lorem ipsum Do dolor</td>
+						<td><div class="btn-group">
+								<button type="button" class="btn btn-info dropdown-toggle"
+									data-toggle="dropdown"
+									style="width: 25px; height: 25px; padding: 0px; margin: 0px"
+									aria-expanded="false">+</button>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">블로그 방문</a></li>
+									<li class="divider"></li>
+									<li><a href="#">팔로우</a></li>
+								</ul>
+							</div></td>
+					</tr>
+					<tr style="border-bottom: 1px solid black;">
+						<td><img src="./img/contents/partner-3.jpg" width="40px"
+							height="40px"></td>
+						<td style="padding: 10px;">Lorem ipsum Do dolor</td>
+						<td><div class="btn-group">
+								<button type="button" class="btn btn-info dropdown-toggle"
+									data-toggle="dropdown"
+									style="width: 25px; height: 25px; padding: 0px; margin: 0px"
+									aria-expanded="false">+</button>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">블로그 방문</a></li>
+									<li class="divider"></li>
+									<li><a href="#">팔로우</a></li>
+								</ul>
+							</div></td>
+					</tr>
+					<tr style="border-bottom: 1px solid black;">
+						<td><img src="./img/contents/partner-4.jpg" width="40px"
+							height="40px"></td>
+						<td style="padding: 10px;">Lorem ipsum Do dolor</td>
+						<td><div class="btn-group">
+								<button type="button" class="btn btn-info dropdown-toggle"
+									data-toggle="dropdown"
+									style="width: 25px; height: 25px; padding: 0px; margin: 0px"
+									aria-expanded="false">+</button>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">블로그 방문</a></li>
+									<li class="divider"></li>
+									<li><a href="#">팔로우</a></li>
+								</ul>
+							</div></td>
+					</tr>
+				</table>
+				<br> <br>
+
+
+				<div class="repImg" style="background: white; max-width: 200px; border: 1px solid lightgrey">
+					<img src="./img/contents/main-1.jpg" width="198px">
+					<p><a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a></p>
+					<p>Lorem ipsum Do dolor pro</p>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	<div style="bottom: 50px; right: 100px; position: fixed;">
+		<button type="button" data-toggle="modal" data-target="#myModal"
+			class="btn btn-info" style="width: 70px; height: 40px; margin: 5px">write</button>
+		<button type="button" class="btn btn-info"
+			style="width: 70px; height: 40px; margin: 5px">up</button>
+	</div>
+	
+	<div class="personalInfoEditBtnGroup">
+		<button onclick="showMessage()">메시지</button>
+		<button >정보수정?</button>
+		<button >정보수정?</button>
+	</div>
+	
+	<div class="message" style="background: #edeef1; width: 280px">
+		<div class="messageMenu" style="height: 30px;background: skyblue">
+			<p style="float: left; font-size: 20px; padding-left: 10px;" >Leo 미용실</p>
+			<button style="float: right; height: 30px">X</button>
+		</div>
+		<p></p>
+		<div class="messageContainer">
+			<p style="float: right; width:250px; height: 40px;  background: ">
+				<span style="float: right;border: 1px solid black; margin-top: 8px;">3월 4일 오asdasdasd후 다섯시에 펌 가능 한가요?</span>
+			</p>
+			<p style="width:250px; height: 40px; background:; margin: 0px; float: left;" >
+				<img src="./img/contents/partner-3.jpg"class="img-circle" style="width: 40px; margin-left: 3px;">
+				<span style="border:1px solid black">네, 가능합니다.</span>
+			</p>
+			<p style="float: right; width:250px; height: 40px;">
+				<span style="float: right;border: 1px solid black; margin-top: 8px; ">예약해주세요</span>
+			</p>
+			<p style="width:250px; height: 40px; background:; margin: 0px; float: left;" >
+				<img src="./img/contents/partner-3.jpg"class="img-circle" style="width: 40px; margin-left: 3px;">
+				<span style="border:1px solid black">네.</span>
+			</p>
+		</div>
+		<p style="padding: 3px; background: white" >
+			<input type="text" style="border: 0px;width: 244px" placeholder="메시지를 입력하세요">
+		</p>
+		</div>
+	
+	
+	<!-- /container -->
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<script src="js/blog.js"></script>
+	
+</body>
+</html>
