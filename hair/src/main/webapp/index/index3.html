@@ -24,9 +24,9 @@
 <script type="text/javascript" src="js/modernizr.custom.86080.js"></script>
 <script src="../jquery-2.2.0.js"></script>
 <script>
-	var changeDiv = function(data){
-		$(data).closest("div").hide();
-	}
+	$('#button').click(function() {
+		$("div").hide();
+	});
 </script>
 <style>
 #name {
@@ -83,7 +83,7 @@
 		<!-- Codrops top bar -->
 
 		<!--/ Codrops top bar -->
-		<a href="file:///C:/java77/workspace/hair/src/main/webapp/list/05-headerin.html" id="button" onclick="changeDiv(this)">LET'S START</a>
+		<button id="button">LET'S START</button>
 	</div>
 </body>
 </html>
