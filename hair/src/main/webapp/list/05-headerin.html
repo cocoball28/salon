@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/03.css">
+<link rel="stylesheet" href="css/chat.css">
+<script src="js/jquery-2.2.0.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="js/responsive_waterfall.js"></script>
+<style>
+
+
+#searchBar{
+	text-align: center;
+	margin-right: 10px;
+	width: 40%;
+	margin-top: 15px;
+	border-style: none;
+	border-bottom: 1px solid grey;
+	background-color: black;
+}
+
+
+.btn-group{
+	float: right;
+}
+.btn.btn-primary1{
+	display: none;
+	border-style: none;
+	background-color: white;
+}
+#scaledown-btn{
+	margin: 0px;	
+}
+.searchImg.mainImg{
+	margin-left: 50px;
+	float: left;
+	width: 90%;
+	height: 65%;
+}
+#mainLogo{
+	position: absolute;
+	width: 400px;
+	height: 150px;
+}
+
+
+
+/* section */
+.optionDiv{
+	margin-top: 10px;
+	margin-left: 10%;
+	position: absolute;
+	width: 30px;
+	display: none;
+}
+
+.leftlogin{
+	width: 0px;
+}
+.wf-box:HOVER .optionDiv{
+	display: block;
+}
+
+#mainSearch{
+	margin-top: 30px;
+	color: #eee;
+}
+#searchImg{
+	border-style: none;
+	width: 30px;
+}
+
+/* user */
+#user{
+	position: absolute;
+	color: #eee;
+	font-size: 20px;
+	left: 90%;
+	width: 150px;
+	top: 30%;
+}
+#noti{
+	float: right;
+	margin-right: 30px;
+}
+#notiImg{
+	width: 35px;
+}
+#userId{
+	margin-top: 4px;
+}
+#red{
+	width:35px;
+	top: 2px;
+	position: absolute;
+	color: yellow;
+}
+.info{
+	background-color: black;
+	border-style: none;
+}
+#search{
+	border: 1px solid #eee;
+	border-radius: 0.3em;
+	width: 50px;
+	height: 30px;
+}
+
+
+/* 알림창 */
+#notify{
+	width: 200px;
+	height: 275px;
+	border: 3px solid #363636;
+	position: absolute;
+	top: 90px;
+	left: 86%;
+	display: none;
+}
+
+#notiHead{
+	position: relative;
+	width: 100%;
+	height: 40px;
+}
+hr{
+	border: 1px solid #363636;
+	margin: 5px
+}
+.notiBody {
+	width: 100%;
+	height: 200px;
+	overflow: auto;
+	display: none;
+}
+.notiHeadTest{
+	width: 50%;
+	height: 40px;
+	float: right;
+}
+.notiHeadTest:hover{
+	font-weight: 900;
+}
+.notiP{
+	margin-top: 10px;
+	font-size: 15px;
+	font-weight: 500;
+	color: #363636;
+}
+.notiContent{
+	height: 40px;
+}
+.notiContent:hover{
+	font-weight: 900;
+	
+}
+
+.msgBtn{
+	border-style: none;
+	background-color: #eee;
+	width: 100%;
+	height: 30px;
+	margin-top: 2px;
+}
+.prevImg{
+	width: 30px;
+	height: 30px;
+	float: left;
+	margin-top: 3px;
+	margin-left: 10px;
+}
+.prevMsg{
+	margin-top: 8px;
+}
+
+
+/* chat box */
+
+#chat_window_1{
+	left: 75%;
+	top: 10.5%;
+	display: none;
+}
+
+
+
+</style>
+<script>
+/* chat box */
+$(document).on('click', '.panel-heading span.icon_minim', function (e) {
+    var $this = $(this);
+    if (!$this.hasClass('panel-collapsed')) {
+        $this.parents('.panel').find('.panel-body').slideUp();
+        $this.addClass('panel-collapsed');
+        $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
+    } else {
+        $this.parents('.panel').find('.panel-body').slideDown();
+        $this.removeClass('panel-collapsed');
+        $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
+    }
+});
+$(document).on('focus', '.panel-footer input.chat_input', function (e) {
+    var $this = $(this);
+    if ($('#minim_chat_window').hasClass('panel-collapsed')) {
+        $this.parents('.panel').find('.panel-body').slideDown();
+        $('#minim_chat_window').removeClass('panel-collapsed');
+        $('#minim_chat_window').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+    }
+});
+$(document).on('click', '#new_chat', function (e) {
+    var size = $( ".chat-window:last-child" ).css("margin-left");
+     size_total = parseInt(size) + 400;
+    alert(size_total);
+    var clone = $( "#chat_window_1" ).clone().appendTo( ".container" );
+    clone.css("margin-left", size_total);
+});
+$(document).on('click', '.icon_close', function (e) {
+    //$(this).parent().parent().parent().parent().remove();
+    $( "#chat_window_1" ).hide();
+});
+
+ $(function(){
+	 /*  */
+	 
+	 
+	 /* 알림창 */
+	 
+	 $("#chatBtn").click(function(){
+		 $(".notiBody").show();
+	 });
+	 
+	 $("#msg").click(function(){
+		 $(".notiBody").show();
+		 $("#msg p").css("font-weight", "900");
+		 $("#page p").css("font-weight", "500");
+		 $(".myBody").hide();
+	 });
+	 $("#page").click(function(){
+		 $(".notiBody").hide();
+		 $("#page p").css("font-weight", "900");
+		 $("#msg p").css("font-weight", "500");
+		 $(".myBody").show();
+	 });
+	 
+	 
+	 
+	 /* chat box */
+	 $(".msgBtn").click(function(){
+		 $("#chat_window_1").show();
+	 });
+	 
+	 
+	 /* focus */
+	 $("#searchBar").focus(function(){
+		$("section").css("opacity", "0.5");
+		$("header").css("opacity", "0.9");
+	 });
+	 $("#searchBar").blur(function(){
+		$("section").css("opacity", "1");
+		$("header").css("opacity", "0.6");
+	 });
+	 
+	 /* scroll */
+	 
+	var lastScroll = 0;
+	 $(window).scroll(function(event){
+		 var scroll = $(this).scrollTop();
+		 if(scroll > lastScroll){
+			 $("header").animate({
+				 top: -90}, "slow");
+		 }else{
+			 $("header").animate({
+				 top: 0}, "slow");
+		 }
+		 
+		 lastScroll = scroll;
+	 });
+	 
+	
+	$("#registButton").click(function(){
+		$("#center").toggle();
+		$("header > div").not("#center").css("opacity", "0.4");
+		$("section").css("opacity", "0.4");
+	});
+	
+	/* bookmark */
+	$(".bookmark").click(function(){
+		$(this).find(".optionImg").attr('src', "images/bookmarked.png");
+		return false;
+	})
+	
+}); 
+</script>
+</head>
+<body>
+	<header class="header">
+		<div id="mainLogo">
+        	<img class="searchImg mainImg" src="images/logo-white.png">
+        </div>
+		
+        <!-- 유저정보 -->
+        <div id="user">
+        	<div id="noti">
+        		<button id="chatBtn" class="info">
+	        		<p id="red">2</p>
+		        	<img id="notiImg" src="images/chat-white1.png" />
+	        	</button>
+        	</div>
+        		<button class="info">
+        			<p id="userId">Jinho</p>
+        		</button>
+        </div>
+        
+		<div class="content">
+        <!-- search -->
+	        <form class="searchForm">
+				<div  id="mainSearch">
+					<input type="text" id="searchBar" placeholder="검색할 태그및 내용을 입력하세요">
+					<input class="info" id="search" type="submit" value="검색"/>
+				</div>
+	        </form>
+	        
+	        
+	            <div class="btn-group">
+	                <button id='scaledown-btn' class="btn btn-primary1">
+						<img class="searchImg" src="images/plus.png">
+					</button>
+	                <button id='scaleup-btn' class="btn btn-primary1">
+						<img class="searchImg" src="images/minus.png">
+					</button>
+	            </div>
+        </div>        
+	
+	<!-- chat -->
+	<div id="notify">
+		<div id="notiHead">
+			<div class="notiHeadTest">
+				<button id="msg" class="msgBtn">
+					<p class="notiP">Message</p>
+				</button>
+			</div>
+			<div class="notiHeadTest">
+				<button id="page" class="msgBtn">
+					<p class="notiP">My Page</p>
+				</button>
+			</div>
+		</div>
+		<hr>
+		
+		<!-- chatBody -->
+		<div class="notiBody">
+			<div class="notiContent">
+				<button class="msgBtn">
+					<img class="prevImg" src="images/chat.jpg" />
+					<p class="prevMsg">From : Choice Hair</p>
+				</button>
+			</div>
+			<div class="notiContent">
+				<button class="msgBtn">
+					<img class="prevImg" src="images/chat.jpg" />
+					<p class="prevMsg">From : Choice Hair</p>
+				</button>
+			</div>
+		</div>
+		
+		<!-- MyPage Body -->
+		<div class="myBody">
+			<div class="notiContent">
+				<button class="msgBtn">
+					<p class="prevMsg">Bookmarks</p>
+				</button>
+			</div>
+			<div class="notiContent">
+				<button class="msgBtn">
+					<p class="prevMsg">My Reservation</p>
+				</button>
+			</div>
+			<div class="notiContent">
+				<button class="msgBtn">
+					<p class="prevMsg">Q & A</p>
+				</button>
+			</div>
+			<div class="notiContent">
+				<button class="msgBtn">
+					<p class="prevMsg">로그아웃</p>
+				</button>
+			</div>
+		</div>
+		
+		
+	</div>
+	
+	<!-- box -->
+	<div class="container">
+    <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;">
+        <div class="col-xs-12 col-md-12">
+        	<div class="panel panel-default">
+                <div class="panel-heading top-bar">
+                    <div class="col-md-8 col-xs-8">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Chat - Choice Hair</h3>
+                    </div>
+                    <div class="col-md-4 col-xs-4" style="text-align: right;">
+                        <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim"></span></a>
+                        <a href="#"><span class="glyphicon glyphicon-remove icon_close" data-id="chat_window_1"></span></a>
+                    </div>
+                </div>
+                <div class="panel-body msg_container_base">
+                    <div class="row msg_container base_sent">
+                        <div class="col-md-10 col-xs-10">
+                            <div class="messages msg_sent">
+                                <p>토요일 2시 파마 예약 가능한가요?</p>
+                                <time datetime="2009-11-13T20:00">Friday • 15 min</time>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-2 avatar">
+                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
+                        </div>
+                    </div>
+                    <div class="row msg_container base_receive">
+                        <div class="col-md-2 col-xs-2 avatar">
+                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
+                        </div>
+                        <div class="col-md-10 col-xs-10">
+                            <div class="messages msg_receive">
+                                <p>2시는 어려우실거 같고요</p>
+                                <time datetime="2009-11-13T20:00">Friday • 15 min</time>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row msg_container base_receive">
+                        <div class="col-md-2 col-xs-2 avatar">
+                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
+                        </div>
+                        <div class="col-xs-10 col-md-10">
+                            <div class="messages msg_receive">
+                                <p>파마는 3시가 예약 가능합니다. 괜찮으시면 3시로 파마 예약 잡아드려도 될까요?</p>
+                                <time datetime="2009-11-13T20:00">Friday • 15 min</time>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row msg_container base_sent">
+                        <div class="col-xs-10 col-md-10">
+                            <div class="messages msg_sent">
+                                <p>그럼 5시파마는 가능한가요??</p>
+                                <time datetime="2009-11-13T20:00">Friday • 9 min</time>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-2 avatar">
+                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
+                        </div>
+                    </div>
+                    <div class="row msg_container base_receive">
+                        <div class="col-md-2 col-xs-2 avatar">
+                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
+                        </div>
+                        <div class="col-xs-10 col-md-10">
+                            <div class="messages msg_receive">
+                                <p>네 가능합니다. 그럼 5시 파마로 예약 잡아드리겠습니다.</p>
+                                <time datetime="2009-11-13T20:00">Friday • 8 min</time>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row msg_container base_sent">
+                        <div class="col-md-10 col-xs-10 ">
+                            <div class="messages msg_sent">
+                                <p>네 알겠습니다~</p>
+                                <time datetime="2009-11-13T20:00">Friday • 31 min</time>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-2 avatar">
+                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="Write your message here..." />
+                        <span class="input-group-btn">
+                        <button class="btn btn-primary btn-sm" id="btn-chat">Send</button>
+                        </span>
+                    </div>
+                </div>
+    		</div>
+        </div>
+    </div>
+    
+    <div class="btn-group dropup">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-cog"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="#" id="new_chat"><span class="glyphicon glyphicon-plus"></span> Novo</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-list"></span> Ver outras</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-remove"></span> Fechar Tudo</a></li>
+            <li class="divider"></li>
+            <li><a href="#"><span class="glyphicon glyphicon-eye-close"></span> Invisivel</a></li>
+        </ul>
+    </div>
+</div>
+	
+	
+    </header>
+	
+	
+	
+	    
+    <!-- ************************** section ************************** -->
+    
+    <section class="section">
+        <div class="wf-container">
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-1.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-19.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-17.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-4.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-12.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-2.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-11.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-10.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-14.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-12.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-13.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            
+        </div>
+    </section>
+<script src="js/app.js"></script>
+</body>
+</html>

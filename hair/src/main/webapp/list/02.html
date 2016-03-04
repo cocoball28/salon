@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/02.css">
+<script src="js/jquery-2.2.0.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="js/responsive_waterfall.js"></script>
+<style>
+
+.btn1{
+	right: 10px;
+	background-color: white;
+	border: 1px solid rgba(0, 0, 0, 0);
+	cursor: pointer;
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin-right: 10px;
+}
+#topHead{
+	float: right;
+	top: 40px;
+	margin-bottom: 30px;
+	text-align: end;
+}
+#login{
+	margin-right: 20px;
+}
+
+/* form */
+#dolog{
+	background-color: white;
+	position: absolute;
+	margin-left: 1290px;
+	width: 450px;
+	padding: 20px;
+	display: none;
+	border-radius: 0.5em;
+}
+
+.form-control{
+	margin-left: 10px;
+	width: 100%;
+}
+.control-label{
+	width: 70px;
+	margin-top: 30px;
+	
+}
+
+.btn{
+	margin-right: 15px;
+	margin-bottom: 10px;
+	float: right;
+	
+	
+}
+#loginBtn{
+	margin-right: 50px;
+}
+
+/* registForm */
+#center{
+	border: 1px solid grey;
+	background-color: white;
+	position: absolute;
+	margin: 0px 700px;
+	width: 450px;
+	padding: 20px;
+	display: none;
+	border-radius: 0.5em;
+	z-index: 50;
+}
+
+#select{
+	width: 20;
+	size: 20;
+}
+
+#id{
+	width: 100%;
+	float: left;
+}
+#idCheck{
+	margin-left: 10px;
+}
+
+.birth{
+	float: left;
+	width: 20%;
+	margin-right: 10px;
+}
+.check{
+	float: left;
+	width: 30%;
+	margin-top: 10px;
+	margin-right: 15px;
+
+}
+.checkP{
+	display: none;
+}
+#password, .salon{
+	width: 90%;
+}
+/* 검색버튼 */
+.searchImg{
+	width: 50px;
+}
+
+#searchBar{
+	text-align: center;
+	margin-right: 10px;
+	width: 600px;
+	margin-top: 15px;
+	border-style: none;
+	border-bottom: 1px solid grey;
+	background-color: #eeeeee;
+}
+
+.input-group-addon{
+	border-style: none;
+}
+
+
+#searchBtn{
+	border-style: none;
+	background-color: #eeeeee;
+}
+
+.form-group{
+	
+	text-align: left;
+}
+
+.btn-group{
+	float: right;
+}
+.btn.btn-primary1{
+	border-style: none;
+	background-color: white;
+}
+#scaledown-btn{
+	margin: 0px;	
+}
+.searchImg.mainImg{
+	float: left;
+	width: 300px;
+	height: 80px;
+}
+#mainLogo{
+	position: absolute;
+	width: 400px;
+	height: 150px;
+}
+.input-group{
+	margin-left: 200px;
+	margin-top: 15px;
+}
+
+
+/* section */
+.optionDiv{
+	margin-top: 10px;
+	margin-left: 10%;
+	position: absolute;
+	width: 30px;
+	display: none;
+}
+.optionImg{
+}
+.leftlogin{
+	width: 0px;
+}
+.wf-box:HOVER .optionDiv{
+	display: block;
+}
+.
+
+</style>
+<script>
+ $(function(){
+	$("#login").click(function(){
+		 $("#dolog").toggle();
+	});
+	
+	/* registForm */
+	$("#option2").click(function(){
+			$(".checkP").show();
+	});
+	$("#option1").click(function(){
+			$(".checkP").hide();
+	});
+	$("#registButton").click(function(){
+		$("#center").toggle();
+		$("header > div").not("#center").css("opacity", "0.4");
+		$("section").css("opacity", "0.4");
+	});
+	
+	/* bookmark */
+	$(".bookmark").click(function(){
+		$(this).find(".optionImg").attr('src', "images/bookmarked.png");
+		return false;
+	})
+	
+}); 
+</script>
+</head>
+<body>
+	<header class="header">
+		<div id="mainLogo">
+        	<img class="searchImg mainImg" src="images/logo3.png">
+        </div>
+        
+		<div id="topHead">
+        	<button id="registButton" class="btn1" type="submit">Regist</button>
+        	<button id="login" class="btn1" type="submit">Login</button>
+        </div>
+        <!--  -->
+		<div class="content">
+        	
+        	
+        <!-- search -->
+	        <form class="form-inline">
+				<div class="form-group" id="mainSearch">
+					<label class="sr-only" for="exampleInputAmount"></label>
+					<div class="input-group">
+						<input type="text" class="form-control" id="searchBar" placeholder="검색할 태그및 내용을 입력하세요">
+						<div class="input-group-addon">
+							<button id="searchBtn"><img class="searchImg" src="images/search.png"></button>
+						</div>
+						<div class="input-group-addon">
+							<a href="map/map.html"><img class="searchImg" src="images/search2.png"></a>
+						</div>
+					</div>
+				</div>
+	        </form>
+	            <div class="btn-group">
+	                <button id='scaledown-btn' class="btn btn-primary1">
+						<img class="searchImg" src="images/plus.png">
+					</button>
+	                <button id='scaleup-btn' class="btn btn-primary1">
+						<img class="searchImg" src="images/minus.png">
+					</button>
+	            </div>
+        </div>        
+        
+        
+        
+        <!-- registForm -->
+        <div id="center" >
+		
+		<form>
+			  <div class="form-group">
+			    <label for="exampleInputId" class="sr-only">아이디</label>
+			    <div>
+				    <input type="text" class="form-control" id="id" placeholder="아이디을 입력하세요" >
+				    <button class="btn btn-default" id="idCheck" type="submit">중복확인</button>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputPassword1" class="sr-only">암호</label>
+			    <input type="password" class="form-control" id="password" placeholder="암호" >
+			  </div>
+			  <div class="radio">
+				  <label>
+				    <input type="radio" name="optionsRadios" id="option1" value="option1" checked>
+				    	일반회원
+				  </label>
+				</div>
+				<div class="radio">
+				  <label>
+				    <input type="radio" name="optionsRadios" id="option2" value="option2">
+				    	미용사
+				  </label>
+				</div>
+				<!-- 미용사 확인 -->
+				<div class="form-group checkP" style="margin-bottom: 30px">
+			    <label for="exampleInputId"></label>
+			    <div>
+				    <input type="text" class="form-control salon" placeholder="소속미용실" >
+			    </div>
+			    <div style="height: 50px;">
+				    <input type="text" class="form-control check" id="number" placeholder="사번">
+				    <input type="text" class="form-control check" id="exampleInputId1" placeholder="이름">
+				    <button class="btn btn-default check" type="submit" style="width: 20%;">체크</button>
+			    </div>
+			  </div>
+			  
+			  <!-- -->
+			  <div class="form-group">
+			    <label for="exampleInputFile">대표이미지</label>
+			    <input type="file" id="exampleInputFile">
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputName" class="sr-only">이름</label>
+			    <input type="text" class="form-control" id="InputName" placeholder="이름을 입력하세요" >
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputNickName" class="sr-only">닉네임</label>
+			    <input type="text" class="form-control" id="NickName" placeholder="닉네임을 입력하세요" >
+			   </div>
+			    
+			  <div class="form-group" style="margin-bottom: 50px;">
+			    <label for="exampleInputNickName">생일</label>
+			    <div>
+			    <input type="text" class="form-control birth" placeholder="YY" >
+			    <input type="text" class="form-control birth" placeholder="MM" >
+			    <input type="text" class="form-control birth" placeholder="DD" >	
+			    </div>
+			  </div>
+			 <div class="form-group">
+			  <button type="submit" class="btn btn-default">제출</button>
+			 </div>
+			  
+		</form>
+		</div>
+        
+        <!-- login -->
+        <div id="dolog">
+        	<form class="form-horizontal">
+			  <div class="form-group">
+				    <label class="col-sm-2 control-label sr-only leftlogin">ID</label>
+				    <div class="col-sm-10">
+				      	<input type="text" class="form-control " id="id" placeholder="아이디을 입력하세요" >
+				    </div>
+			  </div>
+			  <div class="form-group">
+				    <label for="inputPassword" class="col-sm-2 control-label sr-only leftlogin" >Password</label>
+				    <div class="col-sm-10">
+				    	  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+			   		 </div>
+			  </div>
+			   <div class="form-group">
+			 	 <button type="submit" id="loginBtn" class="btn btn-default">로그인</button>
+			 </div>
+			</form>
+        </div>
+        
+    </header>
+    
+    <!-- ************************** section ************************** -->
+    
+    <section>
+        <div class="wf-container">
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-1.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-19.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-17.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-4.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-12.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-2.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-11.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-10.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-14.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-12.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-13.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            
+        </div>
+    </section>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/03.css">
+<script src="js/jquery-2.2.0.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="js/responsive_waterfall.js"></script>
+<style>
+
+#searchBar{
+	text-align: center;
+	margin-right: 10px;
+	width: 40%;
+	margin-top: 15px;
+	border-style: none;
+	border-bottom: 1px solid grey;
+	background-color: black;
+}
+
+
+.btn-group{
+	float: right;
+}
+.btn.btn-primary1{
+	display: none;
+	border-style: none;
+	background-color: white;
+}
+#scaledown-btn{
+	margin: 0px;	
+}
+.searchImg.mainImg{
+	margin-left: 50px;
+	float: left;
+	width: 90%;
+	height: 65%;
+}
+#mainLogo{
+	position: absolute;
+	width: 400px;
+	height: 150px;
+}
+
+
+
+/* section */
+.optionDiv{
+	margin-top: 10px;
+	margin-left: 10%;
+	position: absolute;
+	width: 30px;
+	display: none;
+}
+
+.leftlogin{
+	width: 0px;
+}
+.wf-box:HOVER .optionDiv{
+	display: block;
+}
+
+#mainSearch{
+	margin-top: 30px;
+	color: #eee;
+}
+#searchImg{
+	border-style: none;
+	width: 30px;
+}
+
+/* user */
+#user{
+	position: absolute;
+	color: #eee;
+	font-size: 20px;
+	left: 90%;
+	width: 150px;
+	top: 30%;
+}
+#noti{
+	float: right;
+	margin-right: 30px;
+}
+#notiImg{
+	width: 35px;
+}
+#userId{
+	margin-top: 4px;
+}
+#red{
+	width:35px;
+	top: 2px;
+	position: absolute;
+	color: yellow;
+}
+.info{
+	background-color: black;
+	border-style: none;
+}
+#search{
+	border: 1px solid #eee;
+	border-radius: 0.3em;
+	width: 50px;
+	height: 30px;
+}
+</style>
+<script>
+ $(function(){
+	 
+	 /* focus */
+	 $("#searchBar").focus(function(){
+		$("section").css("opacity", "0.5");
+		$("header").css("opacity", "0.9");
+	 });
+	 $("#searchBar").blur(function(){
+		$("section").css("opacity", "1");
+		$("header").css("opacity", "0.6");
+	 });
+	 
+	 /* scroll */
+	 
+	var lastScroll = 0;
+	 $(window).scroll(function(event){
+		 var scroll = $(this).scrollTop();
+		 if(scroll > lastScroll){
+			 $("header").animate({
+				 top: -90}, "slow");
+		 }else{
+			 $("header").animate({
+				 top: 0}, "slow");
+		 }
+		 
+		 lastScroll = scroll;
+	 });
+	 
+	
+	$("#registButton").click(function(){
+		$("#center").toggle();
+		$("header > div").not("#center").css("opacity", "0.4");
+		$("section").css("opacity", "0.4");
+	});
+	
+	/* bookmark */
+	$(".bookmark").click(function(){
+		$(this).find(".optionImg").attr('src', "images/bookmarked.png");
+		return false;
+	})
+	
+}); 
+</script>
+</head>
+<body>
+	<header class="header">
+		<div id="mainLogo">
+        	<img class="searchImg mainImg" src="images/logo-white.png">
+        </div>
+		
+        <!-- 유저정보 -->
+        <div id="user">
+        	<div id="noti">
+        		<button class="info">
+	        		<p id="red">2</p>
+		        	<img id="notiImg" src="images/chat-white1.png" />
+	        	</button>
+        	</div>
+        		<button class="info">
+        			<p id="userId">Jinho</p>
+        		</button>
+        </div>
+        
+		<div class="content">
+        <!-- search -->
+	        <form class="searchForm">
+				<div  id="mainSearch">
+					<input type="text" id="searchBar" placeholder="검색할 태그및 내용을 입력하세요">
+					<input class="info" id="search" type="submit" value="검색"/>
+				</div>
+	        </form>
+	        
+	        
+	            <div class="btn-group">
+	                <button id='scaledown-btn' class="btn btn-primary1">
+						<img class="searchImg" src="images/plus.png">
+					</button>
+	                <button id='scaleup-btn' class="btn btn-primary1">
+						<img class="searchImg" src="images/minus.png">
+					</button>
+	            </div>
+        </div>        
+        
+       
+        
+    </header>
+    
+    <!-- ************************** section ************************** -->
+    
+    <section>
+        <div class="wf-container">
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-1.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-19.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-17.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-4.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-12.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-2.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-11.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-10.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-14.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-12.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            <div class="wf-box">
+            	<div class="optionDiv">
+	                <a class="bookmark" href="#"><img class="optionImg" src="images/bookmark.png"></a>
+            	</div>
+                <img src="images/style-13.jpg">
+                <div class="content">
+                    <h3>Title</h3>
+                    <p>Content Here</p>    
+                </div>
+            </div>
+            
+        </div>
+    </section>
+<script src="js/app.js"></script>
+</body>
+</html>

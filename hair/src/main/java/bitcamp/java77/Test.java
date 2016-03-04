@@ -9,6 +9,5 @@ public class Test {
 		String aa = "jinho";
 
 		System.out.println("차노 수정함");
-
 	}
 }
