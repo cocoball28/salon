@@ -49,146 +49,23 @@
 				</div>
 	        </form>
         </div>        
-        
-        
-        
-        <!-- registForm -->
-        <div id="center" >
-		
-		<form>
-			  <div class="form-group">
-			    <label for="exampleInputId" class="sr-only">아이디</label>
-			    <div>
-				    <input type="text" class="form-control" id="id" placeholder="아이디을 입력하세요" >
-				    <button class="btn btn-default" id="idCheck" type="submit">중복확인</button>
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="exampleInputPassword1" class="sr-only">암호</label>
-			    <input type="password" class="form-control" id="password" placeholder="암호" >
-			  </div>
-			  <div class="radio">
-				  <label>
-				    <input type="radio" name="optionsRadios" id="option1" value="option1" checked>
-				    	일반회원
-				  </label>
-				</div>
-				<div class="radio">
-				  <label>
-				    <input type="radio" name="optionsRadios" id="option2" value="option2">
-				    	미용사
-				  </label>
-				</div>
-				<!-- 미용사 확인 -->
-				<div class="form-group checkP" style="margin-bottom: 30px">
-			    <label for="exampleInputId"></label>
-			    <div>
-				    <input type="text" class="form-control salon" placeholder="소속미용실" >
-			    </div>
-			    <div style="height: 50px;">
-				    <input type="text" class="form-control check" id="number" placeholder="사번">
-				    <input type="text" class="form-control check" id="exampleInputId1" placeholder="이름">
-				    <button class="btn btn-default check" type="submit" style="width: 20%;">체크</button>
-			    </div>
-			  </div>
-			  <!-- -->
-			  
-			  
-			  <div class="form-group">
-			    <label for="exampleInputFile">대표이미지</label>
-			    <input type="file" id="exampleInputFile">
-			  </div>
-			  <div class="form-group">
-			    <label for="exampleInputName" class="sr-only">이름</label>
-			    <input type="text" class="form-control" id="InputName" placeholder="이름을 입력하세요" >
-			  </div>
-			  <div class="form-group">
-			    <label for="exampleInputNickName" class="sr-only">닉네임</label>
-			    <input type="text" class="form-control" id="NickName" placeholder="닉네임을 입력하세요" >
-			   </div>
-			    
-			  <div class="form-group" style="margin-bottom: 50px;">
-			    <label for="exampleInputNickName">생일</label>
-			    <div>
-			    <input type="text" class="form-control birth" placeholder="YY" >
-			    <input type="text" class="form-control birth" placeholder="MM" >
-			    <input type="text" class="form-control birth" placeholder="DD" >	
-			    </div>
-			  </div>
-			 <div class="form-group">
-			 	<button type="submit" class="btn btn-default">제출</button>
-			 </div>
-		</form>
-		</div>
-        
-        <!-- login -->
-        <div id="dolog">
-        	<form class="form-horizontal">
-			  <div class="form-group">
-				    <label class="col-sm-2 control-label sr-only leftlogin">ID</label>
-				    <div class="col-sm-10">
-				      	<input type="text" class="form-control " id="id" placeholder="아이디을 입력하세요" >
-				    </div>
-			  </div>
-			  <div class="form-group">
-				    <label for="inputPassword" class="col-sm-2 control-label sr-only leftlogin" >Password</label>
-				    <div class="col-sm-10">
-				    	  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-			   		 </div>
-			  </div>
-			   <div class="form-group">
-			 	 <button type="submit" id="loginBtn" class="btn btn-default">로그인</button>
-			 </div>
-			</form>
-        </div>
-        
     </header>
-
-	<!-- Modal (글쓰기) -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true"
-		style="padding: 0px;">
-		<div class="modal-dialog">
-			<div class="modal-content"
-				style="top: 200px; width: 520px; margin: auto;">
-				<div class="modal-header" style="padding: 0px">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close"></button>
-					<h2 class="modal-title" id="myModalLabel" style="margin: 0px">
-						<input type="text" placeholder="제목"
-							style="border: 0px; margin: 5px; width: 510px">
-					</h2>
-				</div>
-				<div class="modal-body" style="padding: 0px">
-					<input type="file">
-					<textarea placeholder="사진 설명"
-						style="border: 0px; margin: 5px; width: 510px; height: 100px"></textarea>
-				</div>
-				<div class="modal-footer" style="padding: 0px">
-					<input type="text" placeholder="#태그"
-						style="border: 0px; margin: 5px; width: 510px">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						style="float: left;">Close</button>
-					<button type="button" class="btn btn-info">Regist</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
+	
+	
 	<div class="container">
 		<div class="varDiv">
 			<div class="contentsDiv">
 
 				<!-- 왼쪽 정보 DIV -->
 				<div class="infoDiv">
+					
 					<div style="background: white; width: 250px; padding: 20px; border: 1px solid #F5F3F3;">
-						<img  src="./img/contents/info.jpg" width="210px; " ></div>
+						<img class="likeSign" src="img/icon/heart.png" style="width: 20px; position:fixed; ;top: -5px;;" onclick="likePush(this)">
+						<img src="./img/contents/info.jpg" width="210px;"> 
+					</div>
 					<div style="background: white; width: 250px; margin-top:5px;; border: 1px solid #F5F3F3; text-align: center;">
-						<h5><b>Cara delevingne</b></h5>
+						<h5><b>Cara Delevingne</b></h5>
+						
 					</div>
 					<div style="background: white; width: 250px; padding: 10px 0px 0px 10px; margin-top:5px;; border: 1px solid #F5F3F3; font-size: 10px">
 						<p>Cara|25|actrees, model, pangpang salon</p>
@@ -196,13 +73,20 @@
 					</div>
 				</div>
 				<div class="infoDivDummy">
-					<p style="color: white;">이것은 차후에 수정하도록 하자. 띄어쓰기하기 위한 글이므로 이것은
-						나중에 필히 수정하여야 한다</p>
+					<p style="color: white;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</p>
 				</div>
 
 				<!-- 본문 들어갈 DIV -->
 				<div class="contentDiv">
-
+					
+					<!-- 
 					<div id="shopDetail" style="position: absolute; padding: 5px; border: 2px darkgrey solid; border-radius:5px; display:none; background: lightgrey;">
 						<div id="title">
 							<div id="choice">Choice hair</div>
@@ -253,341 +137,93 @@
 							</div>
 						</div>
 					</div>
-					
+					 -->
 
 
 					<!-- 실제 컨텐츠 -->
-					<div class="mainContents registForm" style="display: none;">
-						<div style="padding: 0px">
-							<h2 class="modal-title" id="myModalLabel" style="margin: 0px">
-								<input type="text" placeholder="Title"
+					<form>
+						<div class="mainContents registForm" style="display: none;">
+							<div style="padding: 0px">
+								<h2 id="myModalLabel" style="margin: 0px">
+									<input type="text" placeholder="Tag" name="tag" style="border: 0px; margin: 5px; width: 100%">
+								</h2>
+							</div>
+							<hr style="margin: 0px">
+							<div style="padding: 5px">
+							 <input type='file' id="uploadImage" />
+								    <div id="preview"><!-- 사이즈는 알아서 하고~ ㅋㅋ -->
+									<img id="imagePreview" src="#" width="100%" alt="Preview upload images" />
+								    </div>
+								<textarea placeholder="description" style="border: 0px; margin: 0px; width: 100%; height: 100px" name="registFormContent"></textarea>
+							</div>
+							<hr style="margin: 0px">
+							
+							<!--  
+							<div style="padding: 0px">
+								<input type="text" placeholder="#Tag"
 									style="border: 0px; margin: 5px; width: 100%">
-							</h2>
+							</div>
+							<hr style="margin: 0px">
+							-->
+							
+							<div>
+								<div style="margin: 5px;">
+									<button type="button" onclick="cancelRegist()">Cancel</button>
+									<input type="submit" value="Regist">
+								</div>
+							</div>
 						</div>
-						<hr style="margin: 0px">
-						<div style="padding: 5px">
-							<input type="file">
-							<textarea placeholder="description"
-								style="border: 0px; margin: 0px; width: 100%; height: 100px"></textarea>
-						</div>
-						<hr style="margin: 0px">
-						<div style="padding: 0px">
-							<input type="text" placeholder="#Tag"
-								style="border: 0px; margin: 5px; width: 100%">
-						</div>
-						<hr style="margin: 0px">
-						<div>
-							<div style="margin: 5px;">
-								<button type="button" onclick="cancelRegist()">Cancel</button>
-								<button type="button" >Regist</button>
+					</form>
+					
+					<div class="blogMainContents">
+						<div class="mainContents">
+							<img src="./img/hairStyle/hairStyle-4.jpg" width="100%" >
+							<h3 style="color: navy;">
+								<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
+							</h3>
+							<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
+								id veniam ut officia minim ex nulla culpa quis elit in id Duis
+								adipisicing magna quis consectetur velit sunt aute ea pariatur
+								reprehenderit dolor officia id deserunt id quis do culpa non
+								minim consequat ad fugiat est ut incididunt nisi Duis anim elit
+								deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
+								dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
+							<div style="padding-bottom: 0px; margin-bottom: 0px; height: 20px;" >
+								<img class="likeSign" src="img/icon/heart.png" style="width: 20px; float: right;" onclick="likePush(this)">
+								<div class="viewCommentBtn" style="font-size: 10px; width:70px; float: none;" onclick="viewComments(this)">COMMENTS</div>
+							<br>
+							</div>
+							<!-- 댓글 부분 -->
+							<div class="comment_list_1" style="display: none; float: none;">
+								<table>
+									<tr class="comment_hover">		
+										<td width="50px;"><img src="./img/contents/info.jpg"
+											class="img-circle" style="width: 40px; margin: 3px;"></td>
+										<td width="540px" ><a href="#">cara</a><span> Duis sed non exercitation!!! </span></td>
+										<td class="deleteCommentBtn" ><img src="img/icon/close.png" width="10px;" style="cursor: pointer;" onclick="commentRemove(this)"></td>
+									</tr>
+								</table>
+								<hr />
+								<p >
+									<input type="text" style="border: 0px; width: 100%;" placeholder="댓글을 입력하세요" onkeydown="commentCommit(this);" > 
+								</p>
 							</div>
 						</div>
 					</div>
-					
-					
-					<div class="mainContents">
-						<img src="./img/hairStyle/hairStyle-4.jpg" width="100%" >
-						<h3 style="color: navy;">
-							<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
-						</h3>
-						<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
-							id veniam ut officia minim ex nulla culpa quis elit in id Duis
-							adipisicing magna quis consectetur velit sunt aute ea pariatur
-							reprehenderit dolor officia id deserunt id quis do culpa non
-							minim consequat ad fugiat est ut incididunt nisi Duis anim elit
-							deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
-							dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
-						<div style="padding-bottom: 0px; margin-bottom: 0px; height: 20px;" >
-							<img class="likeSign" src="img/icon/heart.png" style="width: 20px; float: right;" onclick="likePush(this)">
-							<div class="viewCommentBtn" style="font-size: 10px; width:70px; float: none;" onclick="viewComments()">4 COMMENTS</div>
-						<br>
-						</div>
-						<!-- 댓글 부분 -->
-						<div class="comment_list_1" style="display: none; float: none;">
-							<table>
-								<tr>		
-									<td width="50px;"><img src="./img/contents/info.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="540px" class="comments_list"><a href="#">cara</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-3.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">leo</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-4.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">mago</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-3.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">leo</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-							</table>
-							<hr />
-							<p >
-								<input type="text" style="border: 0px; width: 100%;" placeholder="댓글을 입력하세요" > 
-							</p>
-						</div>
-					</div>
-					
-					
-					<div class="mainContents">
-						<img src="./img/hairStyle/hairStyle-1.jpg" width="100%" >
-						<h3 style="color: navy;">
-							<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
-						</h3>
-						<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
-							id veniam ut officia minim ex nulla culpa quis elit in id Duis
-							adipisicing magna quis consectetur velit sunt aute ea pariatur
-							reprehenderit dolor officia id deserunt id quis do culpa non
-							minim consequat ad fugiat est ut incididunt nisi Duis anim elit
-							deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
-							dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
-						<div style="padding-bottom: 0px; margin-bottom: 0px; height: 20px;" >
-							<img class="likeSign" src="img/icon/heart.png" style="width: 20px; float: right;" onclick="likePush(this)">
-							<div class="viewCommentBtn" style="font-size: 10px; width:70px; float: none;" onclick="viewComments()">4 COMMENTS</div>
-						<br>
-						</div>
-						<!-- 댓글 부분 -->
-						<div class="comment_list_1" style="display: none; float: none;">
-							<table>
-								<tr>		
-									<td width="50px;"><img src="./img/contents/info.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="540px" class="comments_list"><a href="#">cara</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-3.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">leo</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-4.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">mago</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-3.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">leo</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-							</table>
-							<hr />
-							<p >
-								<input type="text" style="border: 0px; width: 100%;" placeholder="댓글을 입력하세요" > 
-							</p>
-						</div>
-					</div>
-					
-					
-					
-					
-					<div class="mainContents">
-						<img src="./img/hairStyle/hairStyle-2.jpg" width="100%" >
-						<h3 style="color: navy;">
-							<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
-						</h3>
-						<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
-							id veniam ut officia minim ex nulla culpa quis elit in id Duis
-							adipisicing magna quis consectetur velit sunt aute ea pariatur
-							reprehenderit dolor officia id deserunt id quis do culpa non
-							minim consequat ad fugiat est ut incididunt nisi Duis anim elit
-							deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
-							dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
-						<div style="padding-bottom: 0px; margin-bottom: 0px; height: 20px;" >
-							<img class="likeSign" src="img/icon/heart.png" style="width: 20px; float: right;" onclick="likePush(this)">
-							<div class="viewCommentBtn" style="font-size: 10px; width:70px; float: none;" onclick="viewComments()">4 COMMENTS</div>
-						<br>
-						</div>
-						<!-- 댓글 부분 -->
-						<div class="comment_list_1" style="display: none; float: none;">
-							<table>
-								<tr>		
-									<td width="50px;"><img src="./img/contents/info.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="540px" class="comments_list"><a href="#">cara</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-3.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">leo</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-4.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">mago</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-3.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">leo</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-							</table>
-							<hr />
-							<p >
-								<input type="text" style="border: 0px; width: 100%;" placeholder="댓글을 입력하세요" > 
-							</p>
-						</div>
-					</div>
-					
-					
-					
-					
-					<div class="mainContents">
-						<img src="./img/hairStyle/hairStyle-5.jpg" width="100%" >
-						<h3 style="color: navy;">
-							<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
-						</h3>
-						<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
-							id veniam ut officia minim ex nulla culpa quis elit in id Duis
-							adipisicing magna quis consectetur velit sunt aute ea pariatur
-							reprehenderit dolor officia id deserunt id quis do culpa non
-							minim consequat ad fugiat est ut incididunt nisi Duis anim elit
-							deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
-							dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
-						<div style="padding-bottom: 0px; margin-bottom: 0px; height: 20px;" >
-							<img class="likeSign" src="img/icon/heart.png" style="width: 20px; float: right;" onclick="likePush(this)">
-							<div class="viewCommentBtn" style="font-size: 10px; width:70px; float: none;" onclick="viewComments()">4 COMMENTS</div>
-						<br>
-						</div>
-						<!-- 댓글 부분 -->
-						<div class="comment_list_1" style="display: none; float: none;">
-							<table>
-								<tr>		
-									<td width="50px;"><img src="./img/contents/info.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="540px" class="comments_list"><a href="#">cara</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-3.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">leo</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-4.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">mago</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-3.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">leo</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-							</table>
-							<hr />
-							<p >
-								<input type="text" style="border: 0px; width: 100%;" placeholder="댓글을 입력하세요" > 
-							</p>
-						</div>
-					</div>
-					
-					
-					<div class="mainContents">
-						<img src="./img/hairStyle/hairStyle-3.jpg" width="100%" >
-						<h3 style="color: navy;">
-							<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
-						</h3>
-						<p>Lorem ipsum Do dolor proident riatur est ut incididunt nisi
-							id veniam ut officia minim ex nulla culpa quis elit in id Duis
-							adipisicing magna quis consectetur velit sunt aute ea pariatur
-							reprehenderit dolor officia id deserunt id quis do culpa non
-							minim consequat ad fugiat est ut incididunt nisi Duis anim elit
-							deserunt deserunt id Duis qui tempor ad do aliqua nisi elit in
-							dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
-						<div style="padding-bottom: 0px; margin-bottom: 0px; height: 20px;" >
-							<img class="likeSign" src="img/icon/heart.png" style="width: 20px; float: right;" onclick="likePush(this)">
-							<div class="viewCommentBtn" style="font-size: 10px; width:70px; float: none;" onclick="viewComments()">4 COMMENTS</div>
-						<br>
-						</div>
-						<!-- 댓글 부분 -->
-						<div class="comment_list_1" style="display: none; float: none;">
-							<table>
-								<tr>		
-									<td width="50px;"><img src="./img/contents/info.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="540px" class="comments_list"><a href="#">cara</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-3.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">leo</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-4.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">mago</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-								<tr>
-									<td width="50px;"><img src="./img/contents/partner-3.jpg"
-										class="img-circle" style="width: 40px; margin: 3px;"></td>
-									<td width="380px" class="comments_list"><a href="#">leo</a> Duis sed non
-										exercitation!!!</td>
-									<td class="deleteCommentBtn" style="display: none"><img src="img/icon/close.png" width="10px;"></td>
-								</tr>
-							</table>
-							<hr />
-							<p >
-								<input type="text" style="border: 0px; width: 100%;" placeholder="댓글을 입력하세요" > 
-							</p>
-						</div>
-					</div>
-					
-					
-					
-					
-					
-					
 				</div>
 			</div>
+				
+			
+			
+
 
 			<!-- 오른쪽정보 DIV -->
 			<div class="secondInfoDiv" style=" background:; color: grey; ">
 				<div>
-					<img src="img/icon/salon3.jpg" width="100%" style="opacity:0.5" onclick="showDetail()">
-					<div class="partnerInfoDiv_1"; style="background: white; margin: 5px">
+					<img class="showShopIcon" src="img/icon/shop.png" width="100%" style="cursor: pointer; opacity:0.8;" onclick="showShopDetail()">
+					<div class="partnerInfoDiv_1" style="background: white; margin: 5px; cursor: pointer;">
 						<img src="./img/contents/partner-1.jpg" width="40px"
-							height="40px"><span style="padding: 10px;"><b>First Partner </b></span>
+							height="40px"><span style="padding: 10px; "><b>First Partner </b></span>
 					</div>
 					<div class="partnerDetailInfoDiv_1" style="display: none;">
 						<div style="background: white; width: 250px; padding: 20px; border: 1px solid #F5F3F3;">
@@ -600,7 +236,7 @@
 							<p>2016-03-03</p>
 						</div>
 					</div>
-					<div class="partnerInfoDiv_2" style="background: white; margin: 5px">
+					<div class="partnerInfoDiv_2" style="background: white; margin: 5px; cursor: pointer;">
 						<img src="./img/contents/partner-2.jpg" width="40px"
 							height="40px"><span style="padding: 10px;"><b>Second Partner </b></span>
 					</div>
@@ -615,7 +251,7 @@
 							<p>2016-03-03</p>
 						</div>
 					</div>
-					<div class="partnerInfoDiv_3" style="background: white; margin: 5px">
+					<div class="partnerInfoDiv_3" style="background: white; margin: 5px; cursor: pointer;">
 						<img src="./img/contents/partner-3.jpg" width="40px"
 							height="40px"><span style="padding: 10px;"><b>Third Partner </b></span>
 					</div>
@@ -630,7 +266,7 @@
 							<p>2016-03-03</p>
 						</div>
 					</div>
-					<div class="partnerInfoDiv_4" style="background: white; margin: 5px">
+					<div class="partnerInfoDiv_4" style="background: white; margin: 5px; cursor: pointer;">
 						<img src="./img/contents/partner-4.jpg" width="40px"
 							height="40px"><span style="padding: 10px;"><b>Fourth Partner </b></span>
 					</div>
@@ -658,32 +294,43 @@
 	</div>
 	
 	
-	<div class="message" style="background: #edeef1; width: 280px; display: none " >
-		<div class="messageMenu" style="height: 30px;background: skyblue">
-			<p style="float: left; font-size: 20px; padding-left: 10px;" >Leo 미용실</p>
-			<img src="img/icon/close.png" height="30px;" style="float: right;" onclick="closeMessage()">
+	<div id="commentClone" style="display: none;">
+		<table>
+			<tr>		
+				<td width="50px;"><img src="./img/contents/info.jpg"
+					class="img-circle" style="width: 40px; margin: 3px;"></td>
+				<td width="540px" ><a href="#">cara</a>&nbsp;<span class="commentContent"></span></td>
+				<td class="deleteCommentBtn"><img src="img/icon/close.png" width="10px;" style="cursor: pointer;" onclick="commentRemove(this)"></td>
+			</tr>
+		</table>
+	</div>
+	
+	
+	
+	<div class="cloneMainContents" style="display: none;">
+		<div class="mainContents">
+			<img class="image" src="./img/hairStyle/hairStyle-4.jpg" width="100%" >
+			<h3 style="color: navy;">
+				<a class="tag" href="#"></a>
+			</h3>
+			<p class="description"></p>
+			<div style="padding-bottom: 0px; margin-bottom: 0px; height: 20px;" >
+				<img class="likeSign" src="img/icon/heart.png" style="width: 20px; float: right;" onclick="likePush(this)">
+				<div class="viewCommentBtn" style="font-size: 10px; width:70px; float: none;" onclick="viewComments()">COMMENTS</div>
+			<br>
+			</div>
+			<!-- 댓글 부분 -->
+			<div class="comment_list_1" style="display: none; float: none;">
+				<table>
+				</table>
+				<hr />
+				<p >
+					<input type="text" style="border: 0px; width: 100%;" placeholder="댓글을 입력하세요" onkeydown="commentCommit(this);" > 
+				</p>
+			</div>
 		</div>
-		<p></p>
-		<div class="messageContainer">
-			<p style="float: right; width:250px; height: 40px;  background: ">
-				<span style="float: right;border: 1px solid black; margin-top: 8px;">3월 4일 오asdasdasd후 다섯시에 펌 가능 한가요?</span>
-			</p>
-			<p style="width:250px; height: 40px; background:; margin: 0px; float: left;" >
-				<img src="./img/contents/partner-3.jpg"class="img-circle" style="width: 40px; margin-left: 3px;">
-				<span style="border:1px solid black">네, 가능합니다.</span>
-			</p>
-			<p style="float: right; width:250px; height: 40px;">
-				<span style="float: right;border: 1px solid black; margin-top: 8px; ">예약해주세요</span>
-			</p>
-			<p style="width:250px; height: 40px; background:; margin: 0px; float: left;" >
-				<img src="./img/contents/partner-3.jpg"class="img-circle" style="width: 40px; margin-left: 3px;">
-				<span style="border:1px solid black">네.</span>
-			</p>
-		</div>
-		<p style="padding: 3px; background: white" >
-			<input type="text" style="border: 0px;width: 244px" placeholder="메시지를 입력하세요">
-		</p>
-		</div>
+	</div>
+	
 	
 	
 	<!-- /container -->

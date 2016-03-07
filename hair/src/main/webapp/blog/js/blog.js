@@ -40,7 +40,9 @@ var closeMessage = function(){
 	$(".message").hide("fast");
 }
 
-var viewComments = function(){
+var viewComments = function(target){
+	
+	
 	$(".comment_list_1").show("fast");
 	$(".viewCommentBtn").attr('onclick','closeComments()');
 };
@@ -52,20 +54,29 @@ var closeComments = function(){
 
 
 
-$(".comments_list").hover(
+/*$(".comment_hover").hover(
 	function(){
-		$(this).closest("tr").find(".deleteCommentBtn").show();
+		$('.comment_hover').find(".deleteCommentBtn").show();
 	},
 	function(){
 		$(".deleteCommentBtn").hide();
 	}
-);
+);*/
+
+
+var showPartnerInfoStatus = 0;
 $(".partnerInfoDiv_1").hover(
 		function(){
-			$(".partnerDetailInfoDiv_1").show('slow');
+			if(showPartnerInfoStatus == 0){
+				$(".partnerDetailInfoDiv_1").show('slow');
+				showPartnerInfoStatus = 1;
+			}
 		},
 		function(){
-			$(".partnerDetailInfoDiv_1").hide('slow');
+			if(showPartnerInfoStatus == 1){
+				$(".partnerDetailInfoDiv_1").hide('slow');
+				showPartnerInfoStatus = 0;
+			}
 		}
 );
 $(".partnerInfoDiv_2").hover(
@@ -93,6 +104,15 @@ $(".partnerInfoDiv_4").hover(
 		}
 );
 
+$(".showShopIcon").hover(
+		function(){
+			$('.showShopIcon').animate({opacity:0.5},200)
+		},
+		function(){
+			$('.showShopIcon').animate({opacity:0.8},200)
+		}
+);
+
 var scrolltotop = function(){
 	$('html, body').animate({ scrollTop: 0 }, 'slow');
 };
@@ -113,3 +133,75 @@ var likePull = function(data){
 	$(data).animate({opacity:0.3},500)
 	$(data).attr('onclick','likePush(this)');
 }
+
+
+/* 댓글 파트 ==================================*/
+var commentSeq = 0;
+var commentCommit = function(data){
+	var cloneTr = $('#commentClone table').find("tr").clone();
+	if(event.keyCode == 13){
+		cloneTr.find(".commentContent").html($(data).val());
+		cloneTr.attr("commentSeq", commentSeq ++);
+		//alert(commentSeq);
+		var parentDiv = data.closest("div");//.find("table").append(cloneTr);
+		$(parentDiv).find('table').append(cloneTr);
+		$(data).val("");
+	}
+}
+
+var commentRemove = function(data){
+	var commentTr = $(data).closest("tr");
+	commentTr.remove();
+}
+/* 댓글 파트 ==================================*/
+
+
+
+
+/* 본문 파트 ==================================*/
+$('form').submit(function(){
+	var tag = $("[name=tag]").val();
+	var registFormContent = $('textarea').val();
+	var image = $('#imagePreview').attr('src');
+	console.log(image);
+	var cloneContent = $(".cloneMainContents > div").clone();
+	cloneContent.find('.tag').text(tag);
+	cloneContent.find('.description').text(registFormContent);
+	cloneContent.find('.image').attr('src',image);
+	$(".blogMainContents").prepend(cloneContent);
+	$('.registForm').hide('slow');
+	$("[name=tag]").val("");
+	$("[name=registFormContent]").val("");
+	$("[id=imagePreview]").attr("src","");
+	$("[id=uploadImage]").val("");
+	
+	return false;
+})
+/* 본문 파트 ==================================*/
+
+
+
+
+function readUploadImage( inputObject ) {
+	if ( window.File && window.FileReader ) {
+		if ( inputObject.files && inputObject.files[0]) {
+			if ( !(/image/i).test(inputObject.files[0].type ) ){
+				alert("이미지 파일을 선택해 주세요!");
+				return false;
+			}
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$('#imagePreview').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(inputObject.files[0]);
+		}
+	} else {
+
+		alert( "미리보기 안되요.~ 브라우저를 업그레이드하세요~");
+	}
+}
+
+$("#uploadImage").change(function(){
+    readUploadImage(this);
+});
+
