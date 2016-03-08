@@ -1,0 +1,266 @@
+/*
+*@author:Jacobwang
+*@date:2015-04-15
+*@info:main.css
+*/
+
+/*reset*/
+*{
+	margin: 0;
+	padding: 0;
+	
+}
+#big {
+	position:absolute;
+	width: 100%;
+	height: 50%;
+	top: 50%;
+	overflow: hidden;
+}
+#dsnpic1 {
+	width: 20%;
+	background-repeat:no-repeat;
+	height: 100%;
+	float: left;
+	background-image: url('../images/dsn11.jpg');
+}
+#dsnpic2 {
+	background-repeat:no-repeat;
+	width: 20%;
+	height: 100%;
+	float: left;
+	background-image: url('../images/dsn12.jpg');
+}
+#dsnpic3 {
+	background-repeat:no-repeat;
+	width: 20%;
+	height: 100%;
+	float: left;
+	background-image: url('../images/dsn13.jpg');
+}
+#dsnpic4 {
+	background-repeat:no-repeat;
+	width: 20%;
+	height: 100%;
+	float: left;
+	background-image: url('../images/dsn14.jpg');
+}
+#dsnpic5 {
+	background-repeat:no-repeat;
+	width: 20%;
+	height: 100%;
+	float: left;
+	background-image: url('../images/dsn15.jpg');
+}
+#big .pic {
+	-webkit-filter: grayscale(100%);
+	filter: gray;
+}
+#big .pic:hover {
+	-webkit-filter: grayscale(0%);
+	filter: none;
+	
+}
+.blog1 {
+	position:relative;
+	width: 150px;
+	height: 150px;
+	margin: auto;
+	margin-top: 50%;
+	text-align: center;
+	color: white;
+	z-index: 100;
+}
+.name {
+	font-family: 'Syncopate', sans-serif;
+	font-size: x-large;
+}
+.move {
+	font-size: x-large;
+}
+#sn {
+	width: 200px;
+	font-family: 'Syncopate', sans-serif;
+	font-size: 26px;
+	font-weight: bold;
+}
+#addr {
+	margin-top: 10px;
+}
+#des {
+	width: 240px;
+	margin: auto;
+	margin-top: 160px;
+}
+.slide {
+	z-index: 3;
+	width:20%;
+	height:50%;
+	position: absolute;
+	bottom: -60%;
+	background: rgba(255,57,104,1);
+	transition:.5s;
+	opacity:0;
+}
+.slide2 {
+	width:20%;
+	height:50%;
+	position: absolute;
+	bottom: -60%;
+	background: rgba(57,203,255,0.9);
+	transition:.5s;
+	opacity:0;
+}
+.slide3 {
+	width:20%;
+	height:50%;
+	position: absolute;
+	bottom: -60%;
+	background: rgba(255,179,71,1);
+	transition:.5s;
+	opacity:0;
+}
+.slide4 {
+	width:20%;
+	height:50%;
+	position: absolute;
+	bottom: -60%;
+	background: rgba(100,20,100,1);
+	transition:.5s;
+	opacity:0;
+}
+.slide5 {
+	width:20%;
+	height:50%;
+	position: absolute;
+	bottom: -60%;
+	background: rgba(207,207,196,1);
+	transition:.5s;
+	opacity:0;
+}
+#big .pic:hover .name {
+	color: black;
+}
+#big .pic:hover .blogm {
+	color: black;
+}
+#big .pic:hover .slide {
+	bottom: 0%;
+	opacity:0.8;
+}
+#big .pic:hover .slide2 {
+	bottom: 0%;
+	opacity:0.8;
+}
+#big .pic:hover .slide3 {
+	bottom: 0%;
+	opacity:0.8;
+}
+#big .pic:hover .slide4 {
+	bottom: 0%;
+	opacity:0.8;
+}
+#big .pic:hover .slide5 {
+	bottom: 0%;
+	opacity:0.8;
+}
+a {
+	text-decoration: none;
+	color: white;
+	background-repeat: 
+}
+
+body {
+	font-family: Microsoft YaHei, "Source Sans Pro", Helvetica, Arial,
+		sans-serif;
+}
+
+a {
+	cursor: pointer;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.wrap-index {
+	overflow: hidden;
+}
+
+.dark-green {
+	color: #4c5b52;
+}
+
+.light-green {
+	color: #00853e;
+}
+
+.mb-50 {
+	margin-bottom: 50px;
+}
+
+/*slider*/
+.slider {
+	float: left;
+}
+
+.slider .jquery-reslider .slider-block {
+	width: 100%;
+	height: 50%;
+	position: absolute;
+	z-index: 97;
+	background-position: 50% 50%;
+	background-size: cover;
+	opacity: 0;
+}
+
+.slider .jquery-reslider .slider-direction {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	top: 25%;
+	z-index: 99;
+	cursor: pointer;
+}
+
+.slider .jquery-reslider .slider-direction.slider-direction-prev {
+	left: 20px;
+	background: url('../images/prev.png') no-repeat;
+}
+
+.slider .jquery-reslider .slider-direction.slider-direction-next {
+	right: 20px;
+	background: url('../images/next.png') no-repeat
+}
+
+.slider .jquery-reslider .slider-dots {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	bottom: 50%;
+}
+
+.slider .jquery-reslider .slider-dots li {
+	width: 15px;
+	height: 15px;
+	border-radius: 100px;
+	display: inline-block;
+	margin: 10px;
+	border: 1px solid #ffffff;
+	cursor: pointer;
+}
+
+.slider .jquery-reslider .slider-dots li.active {
+	background-color: #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+	.slider .jquery-reslider .slider-direction {
+		zoom: .8;
+	}
+	.slider .jquery-reslider .slider-dots {
+		position: absolute;
+	}
+}

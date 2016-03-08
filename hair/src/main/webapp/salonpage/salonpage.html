@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>http://www.blueb.co.kr</title>
+<meta charset="UTF-8">
+<meta name=description content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link href="salon/css/main.css" rel="stylesheet" media="screen" />
+<link href='https://fonts.googleapis.com/css?family=Syncopate'
+	rel='stylesheet' type='text/css'>
+<style>
+
+</style>
+</head>
+<body>
+
+	<div class="wrap wrap-index">
+
+
+
+		<!-- slider-->
+		<div class="slider">
+			<div class="jquery-reslider">
+				<div class="slider-block"
+					data-url="./salon/images/salon3.jpg"></div>
+				<div class="slider-block"
+					data-url="./salon/images/salon4.jpg"></div>
+				<div class="slider-block"
+					data-url="./salon/images/salon5.jpg"></div>
+				<div class="slider-block"
+					data-url="./salon/images/salon6.jpg"></div>
+
+				<div class="slider-direction slider-direction-next"></div>
+				<div class="slider-direction slider-direction-prev"></div>
+
+				<div class="slider-dots">
+					<ul>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- end build-->
+
+	</div>
+	<div id="big">
+		<div id="dsnpic1" class="pic">
+			<div class="blog1">
+				<div class="bp"><a href="#"><img src="./salon/images/blog.png"></a></div>
+				<div class="name">Jennifer</div>
+				<div class="move"><a href="#" class="blogm">블로그이동</a></div>
+			</div>
+				<div class="slide"></div>
+		</div>
+		<div id="dsnpic2" class="pic">
+			<div class="blog1">
+				<div class="bp"><a href="#"><img src="./salon/images/blog.png"></a></div>
+				<div class="name">Rachael</div>
+				<div class="move"><a href="#" class="blogm">블로그이동</a></div>
+			</div>
+				<div class="slide2"></div>
+		</div>
+		<div id="dsnpic3" class="pic">
+			<div class="blog1">
+				<div class="bp"><a href="#"><img src="./salon/images/blog.png"></a></div>
+				<div class="name">Leonardo</div>
+				<div class="move"><a href="#" class="blogm">블로그이동</a></div>
+			</div>
+				<div class="slide3"></div>
+		</div>
+		<div id="dsnpic4" class="pic">
+			<div class="blog1">
+				<div class="bp"><a href="#"><img src="./salon/images/blog.png"></a></div>
+				<div class="name">Emil</div>
+				<div class="move"><a href="#" class="blogm">블로그이동</a></div>
+			</div>
+				<div class="slide4"></div>
+		</div>
+		<div id="dsnpic5" class="pic">
+			<div class="blog1">
+				<div class="bp"><a href="#"><img src="./salon/images/blog.png"></a></div>
+				<div class="name">Derrick</div>
+				<div class="move"><a href="#" class="blogm">블로그이동</a></div>
+			</div>
+				<div class="slide5"></div>
+		</div>
+</div>
+
+	<!-- jQuery -->
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<!-- Client JavaScript -->
+	<script src="salon/js/jquery.reslider.js"></script>
+
+	<script>
+		$(function() {
+			$('.jquery-reslider').reSlider({
+				speed : 1000, //페이드속도
+				delay : 5000, //자동전환 속도
+				imgCount : 4, //이미지갯수
+				dots : true, //하단 페이지 버튼
+				autoPlay : true
+			//자동재생
+			})
+		})
+	</script>
+
+</body>
+</html>
