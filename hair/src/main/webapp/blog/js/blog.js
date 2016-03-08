@@ -138,13 +138,21 @@ var likePull = function(data){
 /* 댓글 파트 ==================================*/
 var commentSeq = 0;
 var commentCommit = function(data){
-	var cloneTr = $('#commentClone table').find("tr").clone();
+	//var parentDiv = $(data).closest("div");//.find("table").append(cloneTr);
 	if(event.keyCode == 13){
+		$.getJSON("http://192.168.0.44:8008/hair/blog/list.do",
+				{comment:$(data).val()},
+				function(){
+				
+				}
+		);
+		/*
 		cloneTr.find(".commentContent").html($(data).val());
 		cloneTr.attr("commentSeq", commentSeq ++);
 		//alert(commentSeq);
-		var parentDiv = data.closest("div");//.find("table").append(cloneTr);
+		var parentDiv = $(data).closest("div");//.find("table").append(cloneTr);
 		$(parentDiv).find('table').append(cloneTr);
+		*/
 		$(data).val("");
 	}
 }
@@ -158,26 +166,67 @@ var commentRemove = function(data){
 
 
 
-/* 본문 파트 ==================================*/
-$('form').submit(function(){
-	var tag = $("[name=tag]").val();
-	var registFormContent = $('textarea').val();
-	var image = $('#imagePreview').attr('src');
-	console.log(image);
-	var cloneContent = $(".cloneMainContents > div").clone();
-	cloneContent.find('.tag').text(tag);
-	cloneContent.find('.description').text(registFormContent);
-	cloneContent.find('.image').attr('src',image);
-	$(".blogMainContents").prepend(cloneContent);
-	$('.registForm').hide('slow');
-	$("[name=tag]").val("");
-	$("[name=registFormContent]").val("");
-	$("[id=imagePreview]").attr("src","");
-	$("[id=uploadImage]").val("");
-	
+
+/* 댓글 출력 파트 ===============================*/
+var addComment = function(data){
+	var cloneTr = $('#commentClone table').find("tr").clone();
+	cloneTr.find(".commentContent").html(data.content);
+	cloneTr.attr("commentNo", data.commentNo);
+	//$(parentDiv).find('table').append(cloneTr);
+}
+
+
+/* 댓글 출력 파트 ===============================*/
+
+
+
+
+
+
+
+/* 첫 화면 출력 =================================*/
+$(function(){
+	$.getJSON("http://192.168.0.44:8008/hair/blog/list.do",
+		function(data){
+		console.log( data.blogList);
+		for(var i = 0; i < data.blogList.length ; i ++){
+				addBoard(data.blogList[i]);
+			}
+	});
+})
+
+/* 첫 화면 출력 =================================*/
+
+
+
+
+
+/* 글쓰기 파트 ==================================*/
+$('.registForm').submit(function(){
+	var param = $(this).serialize();
+	$.getJSON("http://192.168.0.44:8008/hair/blog/regist.do",
+			param,
+			function(data){
+				addBoard(data.blog);
+				$('.registForm').hide('slow');
+				$("[name=tag]").val("");
+				$("[name=content]").val("");
+	});
 	return false;
 })
-/* 본문 파트 ==================================*/
+/* 글쓰기 파트 ==================================*/
+
+
+
+/* 보드 출력 파트 =================================*/
+var addBoard = function(blog){
+	var cloneContent = $(".cloneMainContents > div").clone();
+	cloneContent.find('.tag').text(blog.tag);
+	cloneContent.find('.description').text(blog.content);
+	//cloneContent.find('.image').attr('src',image);
+	$(".blogMainContents").prepend(cloneContent);
+}
+/* 출력 파트 =================================*/
 
 
 
