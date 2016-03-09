@@ -1,0 +1,1 @@
+var blogPath = 'http://192.168.0.44:8008/hair';
