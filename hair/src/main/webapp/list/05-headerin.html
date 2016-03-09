@@ -159,7 +159,8 @@ hr{
 	
 }
 
-.msgBtn{
+
+.msgBtn,.infoTop{
 	border-style: none;
 	background-color: #eee;
 	width: 100%;
@@ -230,7 +231,10 @@ $(document).on('click', '.icon_close', function (e) {
 	 /* 알림창 */
 	 
 	 $("#chatBtn").click(function(){
+		 $("#notify").show();
+		 $("#msg p").css("font-weight", "900");
 		 $(".notiBody").show();
+		 $(".myBody").hide();
 	 });
 	 
 	 $("#msg").click(function(){
@@ -339,12 +343,12 @@ $(document).on('click', '.icon_close', function (e) {
 	<div id="notify">
 		<div id="notiHead">
 			<div class="notiHeadTest">
-				<button id="msg" class="msgBtn">
+				<button id="msg" class="infoTop">
 					<p class="notiP">Message</p>
 				</button>
 			</div>
 			<div class="notiHeadTest">
-				<button id="page" class="msgBtn">
+				<button id="page" class="infoTop">
 					<p class="notiP">My Page</p>
 				</button>
 			</div>
