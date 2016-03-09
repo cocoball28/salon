@@ -4,14 +4,14 @@
 (function($){
     function Reslider(){
         this.defaults = {
-            speed:1000,//设置轮播的高度
-            delay:5000,//设置轮播的延迟时间
-            imgCount:4,//设置轮播的图片数
-            dots:true,//设置轮播的序号点
-            autoPlay:true//设置轮播是否自动播放
+            speed:1000,
+            delay:5000,
+            imgCount:4,
+            dots:true,
+            autoPlay:true
         }
-        this.count = 0;//轮播计数器
-        this.timer = null;//轮播计时器
+        this.count = 0;
+        this.timer = null;
     }
 
     var _repro = Reslider.prototype;
@@ -171,7 +171,7 @@
       })
     }
 
-    //扩展jQuery.prototype
+    //jQuery.prototype
     $.fn.reSlider = function(options){
         var reSlider = new Reslider();
         $.extend(reSlider.defaults,options)

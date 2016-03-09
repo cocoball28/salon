@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>http://www.blueb.co.kr</title>
+<title>미용실페이지</title>
 <meta charset="UTF-8">
 <meta name=description content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap CSS -->
+<!-- Bootstrap, CSS -->
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link href="salon/css/main.css" rel="stylesheet" media="screen" />
+<link href="salon/css/salon.css" rel="stylesheet" media="screen" />
 <link href='https://fonts.googleapis.com/css?family=Syncopate'
 	rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<div class="wrap wrap-index">
-		<!-- slider-->
+		<!-- 슬라이더 부분 -->
 		<div class="slider">
 			<div class="jquery-reslider">
-				<div class="slider-block"
-					data-url="./salon/images/salon3.jpg"></div>
-				<div class="slider-block"
-					data-url="./salon/images/salon4.jpg"></div>
-				<div class="slider-block"
-					data-url="./salon/images/salon5.jpg"></div>
-				<div class="slider-block"
-					data-url="./salon/images/salon6.jpg"></div>
+				<div class="slider-block" data-url="./salon/images/salon3.jpg"></div>
+				<div class="slider-block" data-url="./salon/images/salon4.jpg"></div>
+				<div class="slider-block" data-url="./salon/images/salon5.jpg"></div>
+				<div class="slider-block" data-url="./salon/images/salon6.jpg"></div>
 				<div class="slider-direction slider-direction-next"></div>
 				<div class="slider-direction slider-direction-prev"></div>
 				<div class="slider-dots">
@@ -36,64 +32,152 @@
 		</div>
 		<!-- end build-->
 	</div>
+	
+	<!-- 디자이너부분 -->
 	<div id="big">
 		<div id="dsnpic1" class="pic">
 			<div class="blog1">
-				<div class="bp"><a href="#"><img src="./salon/images/blog.png"></a></div>
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
 				<div class="name">Jennifer</div>
-				<div class="move"><a href="#" class="blogm">블로그이동</a></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
 			</div>
-				<div class="slide"></div>
+			<div class="slide"></div>
 		</div>
 		<div id="dsnpic2" class="pic">
 			<div class="blog1">
-				<div class="bp"><a href="#"><img src="./salon/images/blog.png"></a></div>
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
 				<div class="name">Rachael</div>
-				<div class="move"><a href="#" class="blogm">블로그이동</a></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
 			</div>
-				<div class="slide2"></div>
+			<div class="slide2"></div>
 		</div>
 		<div id="dsnpic3" class="pic">
 			<div class="blog1">
-				<div class="bp"><a href="#"><img src="./salon/images/blog.png"></a></div>
-				<div class="name">Leonardo</div>
-				<div class="move"><a href="#" class="blogm">블로그이동</a></div>
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
+				<div class="name"></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
 			</div>
-				<div class="slide3"></div>
+			<div class="slide3"></div>
 		</div>
 		<div id="dsnpic4" class="pic">
 			<div class="blog1">
-				<div class="bp"><a href="#"><img src="./salon/images/blog.png"></a></div>
-				<div class="name">Emil</div>
-				<div class="move"><a href="#" class="blogm">블로그이동</a></div>
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
+				<div class="name"></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
 			</div>
-				<div class="slide4"></div>
+			<div class="slide4"></div>
 		</div>
 		<div id="dsnpic5" class="pic">
 			<div class="blog1">
-				<div class="bp"><a href="#"><img src="./salon/images/blog.png"></a></div>
-				<div class="name">Derrick</div>
-				<div class="move"><a href="#" class="blogm">블로그이동</a></div>
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
+				<div class="name"></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
 			</div>
-				<div class="slide5"></div>
+			<div class="slide5"></div>
 		</div>
-</div>
+	</div>
+	<!-- 화면끝 -->
 
-	<!-- jQuery -->
-	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-	<!-- Client JavaScript -->
-	<script src="salon/js/jquery.reslider.js"></script>
-	<script>
-		$(function() {
-			$('.jquery-reslider').reSlider({
-				speed : 1000, //페이드속도
-				delay : 5000, //자동전환 속도
-				imgCount : 4, //이미지갯수
-				dots : true, //하단 페이지 버튼
-				autoPlay : true
-			//자동재생
-			})
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<!-- Client JavaScript -->
+<script src="salon/js/jquery.reslider.js"></script>
+<script>
+	// 슬라이드 스크립트
+	$(function() {
+		$('.jquery-reslider').reSlider({
+			speed : 1000, //페이드속도
+			delay : 5000, //자동전환 속도
+			imgCount : 4, //이미지갯수
+			dots : true, //하단 페이지 버튼
+			autoPlay : true
+		//자동재생
 		})
-	</script>
+	})
+	
+	// 이름 데이터 가져오기
+	$(function() {
+		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
+				function(data){
+					$("#dsnpic1").find(".name").text(data.salonpageList[0].name);
+		});
+	})
+	$(function() {
+		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
+				function(data){
+					$("#dsnpic2").find(".name").text(data.salonpageList[1].name);
+		});
+	})
+	$(function() {
+		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
+				function(data){
+					$("#dsnpic3").find(".name").text(data.salonpageList[2].name);
+		});
+	})
+	$(function() {
+		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
+				function(data){
+					$("#dsnpic4").find(".name").text(data.salonpageList[3].name);
+		});
+	})
+	$(function() {
+		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
+				function(data) {
+					$("#dsnpic5").find(".name").text(data.salonpageList[4].name);
+		});
+	})
+	
+	// 사진 데이터 가져오기
+	$(function() {
+		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
+				function(data) {
+					$("#dsnpic1").css("background-image", "url('salon/images/dsn1" + data.salonpageList[0].no + ".jpg')")
+		});
+	})
+	$(function() {
+		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
+				function(data) {
+					$("#dsnpic2").css("background-image", "url('salon/images/dsn1" + data.salonpageList[1].no + ".jpg')")
+		});
+	})
+	$(function() {
+		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
+				function(data) {
+					$("#dsnpic3").css("background-image", "url('salon/images/dsn1" + data.salonpageList[2].no + ".jpg')")
+		});
+	})
+	$(function() {
+		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
+				function(data) {
+					$("#dsnpic4").css("background-image", "url('salon/images/dsn1" + data.salonpageList[3].no + ".jpg')")
+		});
+	})
+	$(function() {
+		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
+				function(data) {
+					$("#dsnpic5").css("background-image", "url('salon/images/dsn1" + data.salonpageList[4].no + ".jpg')")
+		});
+	})
+</script>
 </body>
 </html>
