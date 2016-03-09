@@ -40,19 +40,19 @@
 				<div class="bp">
 					<a href="#"><img src="./salon/images/blog.png"></a>
 				</div>
-				<div class="name">Jennifer</div>
+				<div class="name"></div>
 				<div class="move">
 					<a href="#" class="blogm">블로그이동</a>
 				</div>
 			</div>
-			<div class="slide"></div>
+			<div class="slide1"></div>
 		</div>
 		<div id="dsnpic2" class="pic">
 			<div class="blog1">
 				<div class="bp">
 					<a href="#"><img src="./salon/images/blog.png"></a>
 				</div>
-				<div class="name">Rachael</div>
+				<div class="name"></div>
 				<div class="move">
 					<a href="#" class="blogm">블로그이동</a>
 				</div>
@@ -83,6 +83,23 @@
 			</div>
 			<div class="slide4"></div>
 		</div>
+		<!-- 
+		<div id="dsnpic5" class="pic">
+			<div class="blog1">
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
+				<div class="name"></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
+			</div>
+			<div class="slide5"></div>
+		</div>
+	 -->
+	</div>	
+	<!-- 화면끝 -->
+	<div id="clone" style="display: none;">
 		<div id="dsnpic5" class="pic">
 			<div class="blog1">
 				<div class="bp">
@@ -96,8 +113,6 @@
 			<div class="slide5"></div>
 		</div>
 	</div>
-	<!-- 화면끝 -->
-
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <!-- Client JavaScript -->
@@ -140,13 +155,7 @@
 					$("#dsnpic4").find(".name").text(data.salonpageList[3].name);
 		});
 	})
-	$(function() {
-		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
-				function(data) {
-					$("#dsnpic5").find(".name").text(data.salonpageList[4].name);
-		});
-	})
-	
+
 	// 사진 데이터 가져오기
 	$(function() {
 		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
@@ -172,12 +181,31 @@
 					$("#dsnpic4").css("background-image", "url('salon/images/dsn1" + data.salonpageList[3].no + ".jpg')")
 		});
 	})
+	
+	
 	$(function() {
 		$.getJSON("http://localhost:8008/salon/salonpage/list.do", 
 				function(data) {
+				robot(data.salonpageList[4].name, data.salonpageList[4].no);
+				/*
+					$("#dsnpic5").find(".name").text(data.salonpageList[4].name);
 					$("#dsnpic5").css("background-image", "url('salon/images/dsn1" + data.salonpageList[4].no + ".jpg')")
+				*/
 		});
 	})
+	
+	
+	
+	var robot = function(name, no) {
+		var clonePic = $("#clone").find(".pic");
+		clonePic.find(".name").text(name);
+		clonePic.css("background-image", "url('salon/images/dsn1" + no + ".jpg')");
+		clonePic.appendTo("#big");
+	}
+	
+	
+
+	
 </script>
 </body>
 </html>

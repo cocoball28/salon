@@ -92,7 +92,7 @@
 	margin: auto;
 	margin-top: 160px;
 }
-.slide {
+.slide1 {
 	z-index: 3;
 	width:20%;
 	height:50%;
@@ -147,7 +147,7 @@
 	transition: 1s;
 	text-decoration: none;
 }
-#big .pic:hover .slide {
+#big .pic:hover .slide1 {
 	bottom: 0%;
 	opacity:0.8;
 }
