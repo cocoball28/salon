@@ -17,7 +17,6 @@
 <link href='https://fonts.googleapis.com/css?family=Syncopate'
 	rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="js/modernizr.custom.86080.js"></script>
-<script src="../js/jquery-2.2.0.js"></script>
 <style>
 .big {
 	display: none;
@@ -55,11 +54,11 @@
 			</div></li>
 		<li><span>Image 04</span>
 			<div>
-				<h3>By Design</h3>
+				<h3>By Salon</h3>
 			</div></li>
 		<li><span>Image 05</span>
 			<div>
-				<h3>Trend</h3>
+				<h3>Trendy</h3>
 			</div></li>
 		<li><span>Image 06</span>
 			<div>
@@ -120,6 +119,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript">
+		// 로그인 회원가입 전환 제이쿼리
 		$('.tabs .tab').click(function() {
 			if ($(this).hasClass('signin')) {
 				$('.tabs .tab').removeClass('active');
@@ -135,14 +135,25 @@
 			}
 		});
 		
-	</script>
-<script>
-	$(function() {
-		$("#button").click(function() {
-			$("#button").hide();
-			$(".big").show();
+		// 시작버튼, 로그인창 전환 제이쿼리
+		$(function() {
+			$("#button").click(function() {
+				$("#button").hide();
+				$(".big").show();
+			});
 		});
-	});
-</script>
+		
+		// JSON 처리
+		$('.signup-cont cont').submit(function() {
+			var param = $(this).serialize();
+			$.getJSON("http://192.168.0.5:8008/salon/member/regist.do",
+					param,
+					function(data) {
+						addBoard(data.member);
+						$('.big').hide();
+			})
+			return false;
+		})
+	</script>
 </body>
 </html>
