@@ -17,10 +17,10 @@
 		<!-- 슬라이더 부분 -->
 		<div class="slider">
 			<div class="jquery-reslider">
-				<div class="slider-block" id="s1" data-url="./salon/images/salon3.jpg"></div>
-				<div class="slider-block" id="s2" data-url="./salon/images/salon4.jpg"></div>
-				<div class="slider-block" id="s3" data-url="./salon/images/salon5.jpg"></div>
-				<div class="slider-block" id="s4" data-url="./salon/images/salon6.jpg"></div>
+				<div class="slider-block" data-url="./salon/images/salon3.jpg"></div>
+				<div class="slider-block" data-url="./salon/images/salon4.jpg"></div>
+				<div class="slider-block" data-url="./salon/images/salon5.jpg"></div>
+				<div class="slider-block" data-url="./salon/images/salon6.jpg"></div>
 				<div class="slider-direction slider-direction-next"></div>
 				<div class="slider-direction slider-direction-prev"></div>
 				<div class="slider-dots">
@@ -35,6 +35,7 @@
 	
 	<!-- 디자이너부분 -->
 	<div id="big">
+		<!-- 
 		<div id="dsnpic1" class="pic">
 			<div class="blog1">
 				<div class="bp">
@@ -83,6 +84,7 @@
 			</div>
 			<div class="slide4"></div>
 		</div>
+		
 		<div id="dsnpic5" class="pic">
 			<div class="blog1">
 				<div class="bp">
@@ -95,10 +97,23 @@
 			</div>
 			<div class="slide5"></div>
 		</div>
-
+	 -->
 	</div>	
 	<!-- 화면끝 -->
-	
+	<div id="clone" style="display: none;">
+		<div id="dsnpic5" class="pic">
+			<div class="blog1">
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
+				<div class="name"></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
+			</div>
+			<div class="slide5"></div>
+		</div>
+	</div>
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <!-- Client JavaScript -->
@@ -111,20 +126,90 @@
 			delay : 5000, //자동전환 속도
 			imgCount : 4, //이미지갯수
 			dots : true, //하단 페이지 버튼
-			autoPlay : true //자동재생
+			autoPlay : true
+		//자동재생
 		})
 	})
 	
-	// JSON 데이터 가져오기
+	// 이름 데이터 가져오기
+	/*
 	$(function() {
 		$.getJSON("http://192.168.0.5:8008/salon/salonpage/list.do", 
-			function(data){
-				for (var i = 0; i < 5; i++) {
-					$("#dsnpic" + (i+1)).find(".name").text(data.salonpageList[i].name);
-					$("#dsnpic" + (i+1)).css("background-image", "url('salon/images/dsn1" + data.salonpageList[i].no + ".jpg')")
-				}
+				function(data){
+					$("#dsnpic1").find(".name").text(data.salonpageList[0].name);
 		});
 	})
+	$(function() {
+		$.getJSON("http://192.168.0.5:8008/salon/salonpage/list.do", 
+				function(data){
+					$("#dsnpic2").find(".name").text(data.salonpageList[1].name);
+		});
+	})
+	$(function() {
+		$.getJSON("http://192.168.0.5:8008/salon/salonpage/list.do", 
+				function(data){
+					$("#dsnpic3").find(".name").text(data.salonpageList[2].name);
+		});
+	})
+	$(function() {
+		$.getJSON("http://192.168.0.5:8008/salon/salonpage/list.do", 
+				function(data){
+					$("#dsnpic4").find(".name").text(data.salonpageList[3].name);
+		});
+	})
+
+	// 사진 데이터 가져오기
+	$(function() {
+		$.getJSON("http://192.168.0.5:8008/salon/salonpage/list.do", 
+				function(data) {
+					$("#dsnpic1").css("background-image", "url('salon/images/dsn1" + data.salonpageList[0].no + ".jpg')")
+		});
+	})
+	$(function() {
+		$.getJSON("http://192.168.0.5:8008/salon/salonpage/list.do", 
+				function(data) {
+					$("#dsnpic2").css("background-image", "url('salon/images/dsn1" + data.salonpageList[1].no + ".jpg')")
+		});
+	})
+	$(function() {
+		$.getJSON("http://192.168.0.5:8008/salon/salonpage/list.do", 
+				function(data) {
+					$("#dsnpic3").css("background-image", "url('salon/images/dsn1" + data.salonpageList[2].no + ".jpg')")
+		});
+	})
+	$(function() {
+		$.getJSON("http://192.168.0.5:8008/salon/salonpage/list.do", 
+				function(data) {
+					$("#dsnpic4").css("background-image", "url('salon/images/dsn1" + data.salonpageList[3].no + ".jpg')")
+		});
+	})
+	*/
+	
+	$(function() {
+		$.getJSON("http://192.168.0.5:8008/salon/salonpage/list.do", 
+				function(data) {
+					for(var i in data.salonpageList) {
+						robot(data.salonpageList[i].name, data.salonpageList[i].no);
+					}
+				/*
+					$("#dsnpic5").find(".name").text(data.salonpageList[4].name);
+					$("#dsnpic5").css("background-image", "url('salon/images/dsn1" + data.salonpageList[4].no + ".jpg')")
+				*/
+		});
+	})
+	
+	
+	
+	var robot = function(name, no) {
+		var clonePic = $("#clone").find(".pic");
+		clonePic.find(".name").text(name);
+		clonePic.css("background-image", "url('salon/images/dsn1" + no + ".jpg')");
+		clonePic.appendTo("#big");
+	}
+	
+	
+
+	
 </script>
 </body>
 </html>
