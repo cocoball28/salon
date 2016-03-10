@@ -11,10 +11,12 @@ import salon.blog.domain.Comment;
 import salon.blog.service.BlogService;
 
 @Service
-public class BlogServiceImpl implements BlogService{
+public class BlogServiceImpl implements BlogService {
+
+	@Autowired
+	BlogDao blogDao;
 	
-	@Autowired BlogDao blogDao;
-	
+	// 본문 파트
 	@Override
 	public Blog register(Blog blog) {
 		blogDao.insert(blog);
@@ -27,13 +29,26 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public void commentRegister(Comment comment) {
+	public void delete(Blog blog) {
+		System.out.println(blog.getNo());
+		blogDao.deleteBlog(blog);
+	}
+	
+	// 댓글 파트
+	@Override
+	public Comment commentRegister(Comment comment) {
 		blogDao.insertComment(comment);
-		//return blogDao.selectComment();
+		return blogDao.selectComment();
 	}
 
 	@Override
 	public List<Comment> selectCommentList(Comment comment) {
 		return blogDao.selectCommentList(comment);
 	}
+
+	@Override
+	public void commentDelete(Comment comment) {
+		blogDao.deleteComment(comment);
+	}
+
 }

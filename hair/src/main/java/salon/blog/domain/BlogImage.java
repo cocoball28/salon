@@ -1,6 +1,6 @@
 package salon.blog.domain;
 
-public class File {
+public class BlogImage {
 	private String filePath;
 	private String fileName;
 	private String fileNo;
