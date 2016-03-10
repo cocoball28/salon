@@ -29,28 +29,28 @@
 	width: 20%;
 	height: 100%;
 	float: left;
-	background-image: url('../images/dsn12.jpg');
+	
 }
 #dsnpic3 {
 	background-repeat:no-repeat;
 	width: 20%;
 	height: 100%;
 	float: left;
-	background-image: url('../images/dsn13.jpg');
+	
 }
 #dsnpic4 {
 	background-repeat:no-repeat;
 	width: 20%;
 	height: 100%;
 	float: left;
-	background-image: url('../images/dsn14.jpg');
+	
 }
 #dsnpic5 {
 	background-repeat:no-repeat;
 	width: 20%;
 	height: 100%;
 	float: left;
-	background-image: url('../images/dsn15.jpg');
+	
 }
 #big .pic {
 	-webkit-filter: grayscale(100%);
