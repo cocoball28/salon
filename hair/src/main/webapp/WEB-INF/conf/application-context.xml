@@ -20,19 +20,39 @@
        즉 @Controller 애노테이션이 붙은 것은 제외하자!
        @Controller?
        스프링에서 페이지 컨트롤러와 DAO와 서비스 객체를 구분하기 위해 정의한 애노테이션이다.-->
+ <!-- 
   <context:component-scan base-package="salon.blog">
-    <!-- java76.pms.controller 패키지의 모든 클래스를 제외한다. -->
     <context:exclude-filter type="regex" 
                             expression="salon.blog.controller.*"/>
   </context:component-scan>
+   -->
+  
+  <context:component-scan base-package="salon.member">
+    <!-- java76.pms.controller 패키지의 모든 클래스를 제외한다. -->
+    <context:exclude-filter type="regex" 
+                            expression="salon.member.controller.*"/>
+  </context:component-scan>
+    
+    
+    
     
   <bean id="sqlSessionFactory" 
         class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
+    
+    <!-- 
     <property name="mapperLocations" 
               value="classpath*:salon/blog/dao/*Dao.xml" />
     <property name="typeAliasesPackage" 
               value="salon.blog.domain" />          
+	 -->
+
+    <property name="mapperLocations" 
+              value="classpath*:salon/member/dao/*Dao.xml" />
+    <property name="typeAliasesPackage" 
+              value="salon.member.domain" />          
+
+
   </bean>
   <!-- 
   <jee:jndi-lookup id="dataSource" 
@@ -49,7 +69,18 @@
   
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
   	<!-- DAO 인터페이스가 선언된 패키지 지정한다.-->
+  	<!-- 
   	<property name="basePackage" value="salon.blog.dao" />
+  	 -->
+  	
+  
+  
+  	
+  	<property name="basePackage" value="salon.member.dao" />
+  
+  
+  
+  
   </bean>
   
   <!-- 트랜잭션 관리 객체 등록 -->
