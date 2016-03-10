@@ -133,22 +133,28 @@ var registComment = function(target){
 		$.getJSON(
 			blogPath+"/blog/registComment.do",
 			{no:blogNo, content:content},
-			function(){
-				alert(1);
-				$(data).val("");
+			function(data){
+				console.log(data);
+				addComment(blogDiv, data.comment)
+				$(target).val("");
 			}
 		);
 	}
 }
-
-
 /* 댓글 입력 ==================================*/
 
 
 /* 댓글 삭제 ==================================*/
-var removeComment = function(data){
-	var commentTr = $(data).closest("tr");
-	commentTr.remove();
+var removeComment = function(target){
+	var commentTr = $(target).closest("tr");
+	var commentNo = $(commentTr).attr("commentno");
+		$.getJSON(
+				blogPath+"/blog/deleteComment.do",
+				{commentNo:commentNo},
+				function(){
+					commentTr.hide('slow');
+				}
+		);
 }
 /* 댓글 삭제 ==================================*/
 
@@ -176,15 +182,11 @@ var viewComments = function(target){
 /* 댓글 닫기 ==================================*/
 var closeComments = function(target){
 	var blogDiv = $(target).closest(".mainContents");
-	$(blogDiv).find(".comment_list").hide("fast");
+	$(blogDiv).find(".comment_list").hide("slow");
 	$(blogDiv).find('table tr').remove();
 	$(target).attr('onclick','viewComments(this)');
 };
 /* 댓글 닫기 ==================================*/
-
-
-
-
 
 
 /* 댓글 출력 파트 ===============================*/
@@ -198,32 +200,38 @@ var addComment = function(blogDiv, data){
 /* 댓글 출력 파트 ===============================*/
 
 
-
-
-
-
-
 /* 첫 화면 출력 =================================*/
 $(function(){
-	$.getJSON(blogPath+"/blog/list.do",
-		function(data){
-		console.log( data.blogList);
-		for(var i = 0; i < data.blogList.length ; i ++){
-				addBoard(data.blogList[i]);
-			}
+	$.getJSON(
+			blogPath+"/blog/list.do",
+			function(data){
+				console.log( data.blogList);
+				for(var i = 0; i < data.blogList.length ; i ++){
+						addBoard(data.blogList[i]);
+				}
 	});
 })
-
 /* 첫 화면 출력 =================================*/
 
+/* 보드 글삭제 파트 ==================================*/
+var deleteMainContent = function(target){
+	var blogDiv = $(target).closest(".mainContents");
+	var blogNo = $(blogDiv).attr("blogno");
+	$.getJSON(
+			blogPath+"/blog/delete.do",
+			{no:blogNo},
+			function(){
+				$(target).closest(".mainContents").hide('slow');
+	});
+};
+/* 보드 글삭제 파트 ==================================*/
 
 
-
-
-/* 글쓰기 파트 ==================================*/
-$('.registForm').submit(function(){
-	var param = $(this).serialize();
-	$.getJSON(blogPath+"/blog/regist.do",
+/* 보드 글쓰기 파트 ==================================*/
+var registBlog = function(){
+	var param = $(".registForm").serialize();
+	$.getJSON(
+			blogPath+"/blog/regist.do",
 			param,
 			function(data){
 				addBoard(data.blog);
@@ -231,10 +239,8 @@ $('.registForm').submit(function(){
 				$("[name=tag]").val("");
 				$("[name=content]").val("");
 	});
-	return false;
-})
-/* 글쓰기 파트 ==================================*/
-
+}
+/* 보드 글쓰기 파트 ==================================*/
 
 
 /* 보드 출력 파트 =================================*/
@@ -246,33 +252,30 @@ var addBoard = function(blog){
 	//cloneContent.find('.image').attr('src',image);
 	$(".blogMainContents").prepend(cloneContent);
 }
-/* 출력 파트 =================================*/
+/* 보드 출력 파트 =================================*/
 
 
-
-
-function readUploadImage( inputObject ) {
-	if ( window.File && window.FileReader ) {
-		if ( inputObject.files && inputObject.files[0]) {
-			if ( !(/image/i).test(inputObject.files[0].type ) ){
-				alert("이미지 파일을 선택해 주세요!");
-				return false;
-			}
-			var reader = new FileReader();
-			reader.onload = function (e) {
-				$('#imagePreview').attr('src', e.target.result);
-			}
-			reader.readAsDataURL(inputObject.files[0]);
-		}
-	} else {
-
-		alert( "미리보기 안되요.~ 브라우저를 업그레이드하세요~");
-	}
-}
-
-$("#uploadImage").change(function(){
-    readUploadImage(this);
-});
+/* 파일 업로드 파트 ================================*/
+$(function(){
+    $("#uploadbutton").click(function(){
+    	var formData = new FormData();
+    	//첫번째 파일태그
+    	formData.append("image",$("input[id=uploadImage]")[0].files[0]);
+    	formData.append("no","1");
+    	console.log(formData);
+    	console.log(111);
+            $.ajax({
+               url: "/hair/blog/fileupload.do",
+               processData: false,
+               contentType: false,
+               data: formData,
+               type: 'POST',
+               success: function(data){
+                   alert("업로드 성공!!");
+               }
+           });
+        });
+})
 
 //더미데이터에 임시번호 부여함, 댓글 테스트용
 $(".dummyMainContent").attr("blogNo", 1);

@@ -9,12 +9,17 @@
 	width: 1170px;
 	background:;
 }
-.viewCommentBtn {
+.contentControlBtn {
+	cursor: pointer; 
+	font-size: 10px;
+	/* 
+	font-weight:bold; 
+	*/
 	color: grey;
 	cursor:pointer;
 }
-.viewCommentBtn:HOVER {
-	color: lightGrey;
+.contentControlBtn:HOVER {
+	color: lightgrey;
 }
 
 .contentsDiv {

@@ -58,7 +58,6 @@
 				<div class="infoDiv">
 					
 					<div style="background: white; width: 250px; padding: 20px; border: 1px solid #F5F3F3;">
-						<img class="likeSign" src="img/icon/heart.png" style="width: 20px; position:fixed; ;top: -5px;;" onclick="likePush(this)">
 						<img src="./img/contents/info.jpg" width="210px;"> 
 					</div>
 					<div style="background: white; width: 250px; margin-top:5px;; border: 1px solid #F5F3F3; text-align: center;">
@@ -95,12 +94,8 @@
 							<hr style="margin: 0px">
 							  
 							<div style="padding: 5px">
-								<!-- 
 								<input type='file' id="uploadImage" />
-							    <div id="preview">
-									<img id="imagePreview" src="#" width="100%" alt="Preview upload images" />
-							    </div>
-								-->
+								<input type="button" id="uploadbutton"  value="파일업로드" />
 								<textarea placeholder="description" style="border: 0px; margin: 0px; width: 100%; height: 100px" name="content"></textarea>
 							</div>
 							
@@ -116,8 +111,9 @@
 							
 							<div>
 								<div style="margin: 5px;">
-									<button type="button" onclick="cancelRegist()">Cancel</button>
-									<input type="submit" value="Regist">
+									<span class="contentControlBtn" onclick="registBlog()" >REGIST</span>
+									&nbsp;
+									<span class="contentControlBtn" onclick="cancelRegist()" >CANCEL</span>
 								</div>
 							</div>
 						</div>
@@ -138,7 +134,11 @@
 								dolor culpa nulla adipisicing dolore tempor sunt eiusmod.</p>
 							<div style="padding-bottom: 0px; margin-bottom: 0px; height: 20px;" >
 								<img class="likeSign" src="img/icon/heart.png" style="width: 20px; float: right;" onclick="likePush(this)">
-								<div class="viewCommentBtn" style="font-size: 10px; width:70px; float: none;" onclick="viewComments(this)">COMMENTS</div>
+								<div style="font-size: 10px; float: none; "  >
+									<span class="contentControlBtn" onclick="viewComments(this)">COMMENTS</span> 
+									&nbsp;
+									<span class="contentControlBtn">DELETE</span>	
+								</div>
 							<br>
 							</div>
 							<!-- 댓글 부분 -->
@@ -235,7 +235,6 @@
 	</div>
 	<div style="bottom: 50px; right: 50px; position: fixed;">
 		<img src="img/icon/plus.png" onclick="viewRegistForm()" style="height: 40px; cursor: pointer;">
-<!-- 		<img src="img/icon/plus.png" data-toggle="modal" data-target="#myModal" style="height: 40px; cursor: pointer;"> -->
 		&nbsp;
 		&nbsp;
 		<img src="img/icon/up.png" style="height: 30px; cursor: pointer;" onclick="scrolltotop()">
@@ -264,7 +263,11 @@
 			<p class="description"></p>
 			<div style="padding-bottom: 0px; margin-bottom: 0px; height: 20px;" >
 				<img class="likeSign" src="img/icon/heart.png" style="width: 20px; float: right;" onclick="likePush(this)">
-				<div class="viewCommentBtn" style="font-size: 10px; width:70px; float: none;" onclick="viewComments(this)">COMMENTS</div>
+				<div style="float: none; "  >
+					<span class="contentControlBtn" onclick="viewComments(this)">COMMENTS</span> 
+					&nbsp;
+					<span class="contentControlBtn" onclick="deleteMainContent(this)">DELETE</span>	
+				</div>
 			<br>
 			</div>
 			<!-- 댓글 부분 -->
