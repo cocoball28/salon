@@ -92,10 +92,15 @@
 								</h2>
 							</div>
 							<hr style="margin: 0px">
-							  
-							<div style="padding: 5px">
-								<input type='file' id="uploadImage" />
-								<input type="button" id="uploadbutton"  value="파일업로드" />
+							<div style="padding-bottom: 5px;">
+								<input type='file' id="uploadImage" style="opacity:0; position: absolute; width: 20px; border: 1px solid black; cursor: pointer;"/>
+								<span class="contentControlBtn" style="z-index: 10; ">IMAGE UPLOAD</span>
+								<img id="imagePreview" src="#" alt="your image" width="100%" style="display: none;"/>
+							</div>
+							<hr style="margin: 0px">
+							<div style="padding: 0px">
+								
+								<!--  <input type="button" id="uploadbutton"  value="파일업로드" />-->
 								<textarea placeholder="description" style="border: 0px; margin: 0px; width: 100%; height: 100px" name="content"></textarea>
 							</div>
 							
@@ -121,7 +126,7 @@
 					
 					<div class="blogMainContents">
 						<div class="mainContents  dummyMainContent">
-							<img src="./img/hairStyle/hairStyle-5.jpg" width="100%" >
+							<img src="./img/hairStyle/hairStyle-5.jpg" width="100%"  >
 							<h3 style="color: navy;">
 								<a href="#">#cara</a> <a href="#">#delevingne</a> <a href="#">#caradelevingne</a>
 							</h3>
