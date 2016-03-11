@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import salon.blog.domain.Blog;
+import salon.blog.domain.BlogImage;
 import salon.blog.domain.Comment;
 
 public interface BlogService {
@@ -12,6 +13,7 @@ public interface BlogService {
 	public Blog register(Blog blog);
 	public List<Blog> selectList();
 	public void delete(Blog blog);
+	public BlogImage imageUpload (BlogImage blogImage);
 	
 	//댓글
 	public List<Comment> selectCommentList(Comment comment);

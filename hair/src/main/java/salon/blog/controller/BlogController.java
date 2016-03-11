@@ -36,17 +36,21 @@ public class BlogController {
 	ServletContext servletContext;
 	
 	
-	@RequestMapping("list")
+	@RequestMapping(value="list", method=RequestMethod.POST)
+	@ResponseBody
 	public List<Blog> list(){
 		return blogService.selectList();
 	}
 	
-	@RequestMapping("regist")
+	@RequestMapping(value="regist", method=RequestMethod.POST)
+	@ResponseBody
 	public Blog regist(Blog blog){
+		System.out.println("image"+blog.getImageFile());
 		return blogService.register(blog);
 	}
 	
-	@RequestMapping("delete")
+	@RequestMapping(value="delete", method=RequestMethod.POST)
+	@ResponseBody
 	public void delete(Blog blog){
 		blogService.delete(blog);
 	}
@@ -54,46 +58,47 @@ public class BlogController {
 	//파일 업로드
 	@RequestMapping(value="fileupload", method=RequestMethod.POST)
 	@ResponseBody
-	public String fileupload(MultipartFile image) throws Exception{
-		System.out.println(image.getOriginalFilename());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+	public BlogImage fileupload(MultipartFile image) throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
 		String realPath = servletContext.getRealPath("/upload/");
-		String filePath = realPath + sdf.format(new Date());
+		String sdfPath = sdf.format(new Date());
+		String filePath = realPath + sdfPath;
 		File file = new File(filePath);
 		file.mkdirs();
-		BlogImage imageVO = new BlogImage();
+		BlogImage blogImage = new BlogImage();
 		String oriFileName = image.getOriginalFilename();
-			if(oriFileName != null && !oriFileName.equals("")){
-				String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
-				String realFileName = UUID.randomUUID().toString()+ext;
-				String saveFullFileName = filePath+"/"+realFileName;
-				image.transferTo(new File(saveFullFileName));
-				/*
-				imageVO.setFilePath(filePath);
-				imageVO.setFileSize(mFile.getSize());
-				imageVO.setOriFileName(oriFileName);
-				imageVO.setRealFileName(realFileName);
-				*/
-			}
-		return "success";
+		if(oriFileName != null && !oriFileName.equals("")){
+			String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
+			String realFileName = UUID.randomUUID().toString()+ext;
+			String saveFullFileName = filePath+"/"+realFileName;
+			String srcPath = "../upload/"+ sdfPath;
+			image.transferTo(new File(saveFullFileName));
+			blogImage.setSaveFullFileName(srcPath+realFileName);
+			blogImage.setFileName(realFileName);
+		}
+		
+		return blogImage;
 	}
 	
 	
 	
 	//댓글 출력
-	@RequestMapping("listComment")
+	@RequestMapping(value="listComment", method=RequestMethod.POST)
+	@ResponseBody
 	public List<Comment> listComment(Comment comment){
 		return blogService.selectCommentList(comment);
 	}
 	
 	//댓글 입력
-	@RequestMapping("registComment")
+	@RequestMapping(value="registComment", method=RequestMethod.POST)
+	@ResponseBody
 	public Comment registComment(Comment comment){
 		return blogService.commentRegister(comment);
 	}
 	
 	//댓글 입력
-	@RequestMapping("deleteComment")
+	@RequestMapping(value="deleteComment", method=RequestMethod.POST)
+	@ResponseBody
 	public void deleteComment(Comment comment){
 		blogService.commentDelete(comment);
 	}

@@ -3,15 +3,16 @@ package salon.blog.domain;
 public class Blog {
 	private String tag;
 	private String content;
-	private String image;
+	private String imageFile;
 	private int no;
-	
-	public String getImage() {
-		return image;
+
+
+	public String getImageFile() {
+		return imageFile;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImageFile(String imageFile) {
+		this.imageFile = imageFile;
 	}
 
 	public int getNo() {

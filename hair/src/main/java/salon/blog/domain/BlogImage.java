@@ -1,17 +1,18 @@
 package salon.blog.domain;
 
 public class BlogImage {
-	private String filePath;
+	private String saveFullFileName;
 	private String fileName;
 	private String fileNo;
 	private String no;
 
-	public String getFilePath() {
-		return filePath;
+
+	public String getSaveFullFileName() {
+		return saveFullFileName;
 	}
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
+	public void setSaveFullFileName(String saveFullFileName) {
+		this.saveFullFileName = saveFullFileName;
 	}
 
 	public String getFileName() {

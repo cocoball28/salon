@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import salon.blog.dao.BlogDao;
 import salon.blog.domain.Blog;
+import salon.blog.domain.BlogImage;
 import salon.blog.domain.Comment;
 import salon.blog.service.BlogService;
 
@@ -20,7 +21,7 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public Blog register(Blog blog) {
 		blogDao.insert(blog);
-		return blogDao.selectBlog();
+		return blogDao.registAndselectBlog(blog);
 	}
 
 	@Override
@@ -30,15 +31,22 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public void delete(Blog blog) {
-		System.out.println(blog.getNo());
 		blogDao.deleteBlog(blog);
 	}
+	
+	// 파일
+	@Override
+	public BlogImage imageUpload(BlogImage blogImage) {
+		blogDao.insertImageFile(blogImage);
+		return null;
+	}
+	
 	
 	// 댓글 파트
 	@Override
 	public Comment commentRegister(Comment comment) {
 		blogDao.insertComment(comment);
-		return blogDao.selectComment();
+		return blogDao.selectComment(comment);
 	}
 
 	@Override
