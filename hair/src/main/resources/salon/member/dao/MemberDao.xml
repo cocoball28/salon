@@ -5,7 +5,7 @@
   
 <mapper namespace="salon.member.dao.MemberDao">
 	<insert id="insert" parameterType="member">
-		insert into sign(name, pw, email)
-		values (#{name}, #{password}, #{email})
+		insert into sign(name, email, password)
+		values (#{name}, #{email}, #{password})
 	</insert>
 </mapper>
