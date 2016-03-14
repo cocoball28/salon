@@ -21,5 +21,6 @@ public class MemberController {
 	@ResponseBody
 	public void regist(Member member) {
 		System.out.println("들어왔다");
+		memberService.register(member);
 	}
 }

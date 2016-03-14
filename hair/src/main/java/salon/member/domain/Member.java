@@ -2,7 +2,7 @@ package salon.member.domain;
 
 public class Member {
 	private String name;
-	private String pw;
+	private String password;
 	private String email;
 	public String getName() {
 		return name;
@@ -10,11 +10,11 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPw() {
-		return pw;
+	public String getPassword() {
+		return password;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getEmail() {
 		return email;
