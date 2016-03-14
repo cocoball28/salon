@@ -1,0 +1,1 @@
+var shopPath = 'http://192.168.0.5:8008/salon';

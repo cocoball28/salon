@@ -9,4 +9,8 @@
   			from salonpage
   		   order by no
   	</select>
+  	<insert id="insertImage" parameterType="shopImage">
+  		insert into salonpage(file_name, no)
+  		values (#{fileName}, #{no})
+  	</insert>
   </mapper>
