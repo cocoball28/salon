@@ -1,0 +1,71 @@
+package salon.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import salon.dao.BlogDao;
+import salon.domain.Blog;
+import salon.domain.BlogComment;
+import salon.service.BlogService;
+
+
+@Controller
+@RequestMapping("/blog/*")
+public class BlogController {
+	
+	@Autowired 
+	BlogDao blogDao;
+	
+	@Autowired 
+	BlogService blogService;
+	
+	@RequestMapping(value="list", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Blog> list(){
+		List<Blog> list = blogService.selectList();
+		System.out.println(list.get(0).getBlogImageList().size());
+		return list;
+	}
+	
+	@RequestMapping(value="delete", method=RequestMethod.POST)
+	@ResponseBody
+	public void delete(Blog blog){
+		blogService.delete(blog);
+	}
+	
+	@RequestMapping(value="regist", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> regist(Blog blog, MultipartHttpServletRequest mRequest) throws Exception{
+		return blogService.register(blog, mRequest);
+	}
+
+	
+	//댓글 출력
+	@RequestMapping(value="listComment", method=RequestMethod.POST)
+	@ResponseBody
+	public List<BlogComment> listComment(BlogComment comment){
+		return blogService.selectCommentList(comment);
+	}
+	
+	//댓글 입력
+	@RequestMapping(value="registComment", method=RequestMethod.POST)
+	@ResponseBody
+	public BlogComment registComment(BlogComment comment){
+		return blogService.commentRegister(comment);
+	}
+	
+	//댓글 입력
+	@RequestMapping(value="deleteComment", method=RequestMethod.POST)
+	@ResponseBody
+	public void deleteComment(BlogComment comment){
+		blogService.commentDelete(comment);
+	}
+	
+}
