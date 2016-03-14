@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="shortcut icon" href="../favicon.ico"> 
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+<script type="text/javascript" src="js/modernizr.custom.79639.js"></script> 
+<link rel="stylesheet" type="text/css" href="css/noJS.css" />
+<script src="js/jquery-2.2.0.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="js/responsive_waterfall.js"></script>
+<style>
+
+/* list */
+.optionDiv{
+	width: 13%;
+}
+.optionImg {
+	position: relative;
+	left: 670%;
+}
+
+hr{
+	border: 1px solid #363636;
+	margin: 5px
+}
+
+.bookHide{
+	display: none;
+}
+.bookHide{
+	color: blue;
+}
+
+</style>
+<script>
+ $(function(){
+	 	 
+	 var favFlag = false;
+	/* add bookmark */
+	$(document).on('click', '.bookmark', function(){
+		$(this).find(".liked").toggle();
+		$(this).find(".none").toggle();
+		return false;
+	});
+	
+		
+	/* ajax */
+	  $.getJSON('/hair2/salon/ajax/list.do', function(resultObj) {
+		var cnt = 0;
+		   $.each(resultObj.mList, function(key, value){
+				var html = ""
+				html += '<div class="wf-box">'; 
+				html += '<a class="detail"><image src="images/style-'+value.imageNo+'.jpg"/></a>';
+				html += '<div class="content">';
+				html += '<h3>'+value.title+'</h3>';
+				html += '<hr>';
+				html += '<p>'+value.content+'</p>';
+				html += '<div class="optionDiv">'
+				html += '<a class="bookmark">';
+				if(value.favorite == 0){
+					html += '<img class="optionImg liked" src="images/heart-icon1.png" style="display: none;">';
+					html += '<img class="optionImg none" src="images/heart-icon0.png">';
+				}else{
+					html += '<img class="optionImg liked" src="images/heart-icon1.png"">';
+					html += '<img class="optionImg none" src="images/heart-icon0.png" style="display: none;">';
+				}
+				html += '</a>';
+				html += '</div></div></div>';
+				$(".wf-column:eq("+cnt+")").append(html);
+				cnt++;
+				if(cnt == 5) cnt = 0;
+		  }) 
+		  /* 참고 */
+		   $("#dd").append(resultObj.member.nick);
+	});
+	
+}); 
+</script>
+</head>
+<body>
+	<header class="header">
+		<div id="mainLogo">
+        	<img class="searchImg mainImg" src="images/logo-7.png">
+        </div>
+		
+        <!-- My Page -->
+		<div class="wrapper-demo">
+			<div id="dd" class="wrapper-dropdown-5" tabindex="1">
+				<ul class="dropdown">
+					<li><a href="#"><i class="icon-heart"></i>Favorite</a></li>
+					<li><a href="#"><i class="icon-envelope"></i>Message(2)</a></li>
+					<li><a href="#"><i class="icon-calendar"></i>Reservation</a></li>
+					<li><a href="#"><i class="icon-question-sign"></i>Question</a></li>
+					<li><a href="#"><i class="icon-user"></i>Profile</a></li>
+					<li><a href="#"><i class="icon-remove"></i>Log out</a></li>
+				</ul>
+			</div>
+		​</div>
+		
+        
+		<div class="content">
+        <!-- search -->
+	        <form class="searchForm">
+				<div  id="mainSearch">
+					<input type="text" id="searchBar" placeholder="검색할 태그및 내용을 입력하세요">
+					<input class="info" id="search" type="submit" value="검색"/>
+					<input class="info" id="mapSearch" type="button" value="지도"/>
+				</div>
+	        </form>
+        </div>        
+    </header>
+	
+    <!-- ************************** section ************************** -->
+    
+    <section class="section">
+        <div class="wf-container">
+        	
+            
+            
+        </div>
+    </section>
+<script src="js/app.js"></script>
+<script src="js/header.js"></script>
+</body>
+</html>
