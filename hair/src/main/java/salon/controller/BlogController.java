@@ -30,7 +30,7 @@ public class BlogController {
 	@ResponseBody
 	public List<Blog> list(){
 		List<Blog> list = blogService.selectList();
-		System.out.println(list.get(0).getBlogImageList().size());
+		//System.out.println(list.get(0).getBlogImageList().size());
 		return list;
 	}
 	

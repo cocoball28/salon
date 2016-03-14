@@ -1,3 +1,4 @@
+// 왼쪽 정보창 떠다니게 하기
 $(".infoDiv").each(function(){
 	var $window = $(window),
 		$infoDiv = $(this),
@@ -13,6 +14,8 @@ $(".infoDiv").each(function(){
 	});
 	$window.trigger('scroll');
 });
+
+
 $(".repImg").each(function(){
 	var $window = $(window),
 	$repImg = $(this),
@@ -54,7 +57,6 @@ var closeMessage = function(){
 
 
 // 동료 미용사 정보 
-
 var showPartnerInfoStatus = 0;
 $(".partnerInfoDiv_1").hover(
 		function(){
@@ -113,9 +115,10 @@ var viewRegistForm = function(){
 	$('.registForm').show('slow');
 }
 var cancelRegist = function(){
-	$('#imagePreview').hide();
-	$('#imagePreview').attr('src', "");
+	$('.imagePreview').hide();
+	$('.imagePreview').attr('src', "");
 	$('.registForm').hide('slow');
+	$("input[id=uploadImage]").val("");
 }
 var likePush = function(data){
 	$(data).animate({opacity:1},500)
@@ -207,6 +210,7 @@ $(function(){
 	$.post(
 			blogPath+"/blog/list.do",
 			function(data){
+				console.log(data);
 				for(var i = 0; i < data.length ; i ++){
 						addBoard(data[i]);
 				}
@@ -214,7 +218,7 @@ $(function(){
 })
 /* 첫 화면 출력 =================================*/
 
-/* 보드 글삭제 파트 ==================================*/
+/* 블로그 글삭제 파트 ==================================*/
 var deleteMainContent = function(target){
 	var blogDiv = $(target).closest(".mainContents");
 	var blogNo = $(blogDiv).attr("blogno");
@@ -225,91 +229,56 @@ var deleteMainContent = function(target){
 				$(target).closest(".mainContents").hide('slow');
 	});
 };
-/* 보드 글삭제 파트 ==================================*/
+/* 블로그 글삭제 파트 ==================================*/
 
 
-/* 보드 글쓰기 파트 ==================================*/
+/* 블로그 레지스터 ====================================*/
 var registBlog = function(){
-	//var param = $(".registForm").serialize();
-	//console.log(param);
-	var formData = new FormData();
-	var imageUrl = "";
-	formData.append("image",$("input[id=uploadImage]")[0].files[0]);
+	var form = $(".registForm")[0];
+	var formData = new FormData(form);
 	$.ajax({
-	   url: blogPath+"/blog/fileupload.do",
+	   url: blogPath+"/blog/regist.do",
 	   processData: false,
 	   contentType: false,
 	   data: formData,
 	   type: 'POST',
 	   success: function(data){
 		   //console.log(data);
-	       //alert("업로드 성공!!");
-	       imageUrl = data.saveFullFileName;
-	       console.log(imageUrl);
-	       var param = {
-	    		   "tag":$(".registForm").find("[name=tag]").val(),
-	    		   "content":$(".registForm").find("[name=content]").val(),
-	    		   "imageFile":imageUrl
-	       };
-	       console.log(param);
-	       registFile(param);
+		   alert("성공");
+		   addBoard(data.blog, data.blogImageList);
+			$('.registForm').hide('slow');
+			$("[name=tag]").val("");
+			$("[name=content]").val("");
+			$('.imagePreview').attr('src', "");
+			$('.imagePreview').hide();
+			$("input[id=uploadImage]").val("");
 	   }
 	});
-	
-	
 }
-/* 보드 글쓰기 파트 ==================================*/
-var registFile = function(param){
-	$.post(
-			blogPath+"/blog/regist.do",
-			param,
-			function(data){
-				addBoard(data);
-				$('.registForm').hide('slow');
-				$("[name=tag]").val("");
-				$("[name=content]").val("");
-	});
-};
+/* 블로그 레지스터 ====================================*/
 
 
-
-
-
-/* 보드 출력 파트 =================================*/
-var addBoard = function(data){
-	console.log(data);
+/* 블로그 출력 파트 =================================*/
+var addBoard = function(blog){
 	var cloneContent = $(".cloneMainContents > .mainContents").clone();
-	cloneContent.attr("blogNo", data.no);
-	cloneContent.find('.tag').text(data.tag);
-	cloneContent.find('.description').text(data.content);
-	cloneContent.find('.image').attr('src',data.imageFile);
+	cloneContent.attr("blogNo", blog.no);
+	cloneContent.find('.tag').text(blog.tag);
+	cloneContent.find('.description').text(blog.content);
+	console.log(blog.blogImageList.length);
+	for(var i = 0 ; i < blog.blogImageList.length ; i ++){
+		var cloneImage = $(".cloneblogImagesDiv .blogImage").clone();
+		cloneImage.attr('src',blog.blogImageList[i].fileName);
+		cloneContent.find('.blogImagesDiv').append(cloneImage)
+	}
+	if(blog.blogImageList.length == 0 ){
+		cloneContent.find('.blogImagesDiv').remove();
+	}
 	$(".blogMainContents").prepend(cloneContent);
 }
-/* 보드 출력 파트 =================================*/
+/* 블로그 출력 파트 =================================*/
 
 
-/* 파일 업로드 파트 ================================*/
-/*
-$(function(){
-    $("#uploadbutton").click(function(){
-    	var formData = new FormData();
-    	//첫번째 파일태그
-    	formData.append("image",$("input[id=uploadImage]")[0].files[0]);
-            $.ajax({
-               url: "/hair/blog/fileupload.do",
-               processData: false,
-               contentType: false,
-               data: formData,
-               type: 'POST',
-               success: function(data){
-                   alert("업로드 성공!!");
-               }
-           });
-        });
-})
-*/
-
-//업로드 이미지 미리보기
+/* 블로그 이미지 업로드 미리보기 ======================== */
 $(function() {
     $("#uploadImage").on('change', function(){
         readURL(this);
@@ -321,12 +290,14 @@ var readURL = function(input) {
     if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function (e) {
-            $('#imagePreview').attr('src', e.target.result);
-            $("#imagePreview").show();
+            $('.imagePreview_1').attr('src', e.target.result);
+            $(".imagePreview_1").show();
         }
       reader.readAsDataURL(input.files[0]);
     }
 }
+/* 블로그 이미지 업로드 미리보기 ========================*/
+
 
 //더미데이터에 임시번호 부여함, 댓글 테스트용
 $(".dummyMainContent").attr("blogNo", 1);

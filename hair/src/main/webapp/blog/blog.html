@@ -80,10 +80,9 @@
 					</p>
 				</div>
 
-				<!-- 본문 들어갈 DIV -->
+<!-- 본문 들어갈 DIV ---------------------------------------------------------------------------------->
 				<div class="contentDiv">
-				
-					<!-- 실제 컨텐츠 -->
+<!-- 실제 컨텐츠 -------------------------------------------------------------------------------------->
 					<form class="registForm">
 						<div class="mainContents registForm" style="display: none;">
 							<div style="padding: 0px">
@@ -93,9 +92,15 @@
 							</div>
 							<hr style="margin: 0px">
 							<div style="padding-bottom: 5px;">
-								<input type='file' id="uploadImage" style="opacity:0; position: absolute; width: 20px; border: 1px solid black; cursor: pointer;"/>
+								<input type='file' name="uploadImage1" class="uploadImage" style="border: 1px solid black; cursor: pointer; position: absolute; width:"/>
+								<input type='file' name="uploadImage2" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;"/>
+								<!-- <input type='file' name="uploadImage3" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;"/>
+								<input type='file' name="uploadImage4" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;"/>
+								<input type='file' name="uploadImage5" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;"/> -->
 								<span class="contentControlBtn" style="z-index: 10; ">IMAGE UPLOAD</span>
-								<img id="imagePreview" src="#" alt="your image" width="100%" style="display: none;"/>
+								<div class="imagePreviewDiv">
+									<!-- <img class="imagePreview_1 imagePreview" src="#" alt="your image" width="100%" style="display: none;"/> -->
+								</div>
 							</div>
 							<hr style="margin: 0px">
 							<div style="padding: 0px">
@@ -165,12 +170,8 @@
 					</div>
 				</div>
 			</div>
-				
-			
-			
 
-
-			<!-- 오른쪽정보 DIV -->
+<!-- 오른쪽정보 DIV--------------------------------------------------------- -->
 			<div class="secondInfoDiv" style=" background:; color: grey; ">
 				<div>
 					<img class="showShopIcon" src="img/icon/shop.png" width="100%" style="cursor: pointer; opacity:0.8;" onclick="showShopDetail()">
@@ -238,13 +239,14 @@
 			</div>
 		</div>
 	</div>
+	
+<!-- 글쓰기 위로가기 버튼 ------------------------------------------------------  -->
 	<div style="bottom: 50px; right: 50px; position: fixed;">
 		<img src="img/icon/plus.png" onclick="viewRegistForm()" style="height: 40px; cursor: pointer;">
 		&nbsp;
 		&nbsp;
 		<img src="img/icon/up.png" style="height: 30px; cursor: pointer;" onclick="scrolltotop()">
 	</div>
-	
 	
 	<div id="commentClone" style="display: none;">
 		<table>
@@ -257,11 +259,11 @@
 		</table>
 	</div>
 	
-	
-	
+<!-- 메인컨텐츠 클론 -->
 	<div class="cloneMainContents" style="display: none;">
 		<div class="mainContents">
-			<img class="image" src="./img/hairStyle/hairStyle-4.jpg" width="100%" >
+			<div class="blogImagesDiv">
+			</div>
 			<h3 style="color: navy;">
 				<a class="tag" href="#"></a>
 			</h3>
@@ -287,6 +289,16 @@
 		</div>
 	</div>
 	
+	
+<!-- 이미지 미리보기 클론 -------------------------------------------------------------------------------->
+	<div class="cloneImagePreviewDiv" style="display: none">
+		<img class="imagePreview" src="" width="100%" style="display: none">
+	</div>
+	
+<!-- 이미지 업로드 클론 -------------------------------------------------------------------------------->
+	<div class="cloneblogImagesDiv" style="display: none">
+		<img class="blogImage" src="" width="100%" >
+	</div>
 	
 	
 	<!-- /container -->
