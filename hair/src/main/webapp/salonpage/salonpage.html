@@ -38,11 +38,11 @@
 		<div id="dsnpic1" class="pic">
 			<div class="blog1">
 				<div class="bp">
-					<a href="#"><img src="./salon/images/blog.png"></a>
+					<a href="http://192.168.0.44:8008/hair/blog/blog.html"><img src="./salon/images/blog.png"></a>
 				</div>
 				<div class="name"></div>
 				<div class="move">
-					<a href="#" class="blogm">블로그이동</a>
+					<a href="http://192.168.0.44:8008/hair/blog/blog.html" class="blogm">블로그이동</a>
 				</div>
 			</div>
 			<div class="slide1"></div>
@@ -100,7 +100,7 @@
 	<!-- 화면끝 -->
 	
 <!-- jQuery -->
-<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="./salon/js/jquery-2.2.0.js"></script>
 <!-- Client JavaScript -->
 <script src="salon/js/jquery.reslider.js"></script>
 <script>
@@ -117,7 +117,7 @@
 	
 	// JSON 데이터 가져오기
 	$(function() {
-		$.getJSON("http://192.168.0.5:8008/salon/salonpage/list.do", 
+		$.getJSON("http://192.168.0.5:8008/salon/shop/list.do", 
 			function(data){
 				for (var i = 0; i < 5; i++) {
 					$("#dsnpic" + (i+1)).find(".name").text(data.salonpageList[i].name);

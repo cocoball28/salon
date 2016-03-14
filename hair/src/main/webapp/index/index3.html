@@ -95,8 +95,8 @@
 					</form>
 				</div>
 				<div class="signup-cont cont">
-					<form action="#" method="post" enctype="multipart/form-data">
-						<input type="email" name="email" id="name" class="inpt"
+					<form class="la" action="#" method="post" enctype="multipart/form-data">
+						<input type="text" name="name" id="name" class="inpt"
 							required="required" placeholder="Your name"> <label
 							for="name"></label> <input type="email" name="email"
 							id="email" class="inpt" required="required"
@@ -144,14 +144,13 @@
 		});
 		
 		// JSON 처리
-		$('.signup-cont cont').submit(function() {
+		$('.la').submit(function() {
 			var param = $(this).serialize();
-			$.getJSON("http://192.168.0.5:8008/salon/member/regist.do",
+			console.log(123123123);
+			$.post("http://192.168.0.5:8008/salon/member/regist.do",
 					param,
-					function(data) {
-						addBoard(data.member);
-						$('.big').hide();
-			})
+					function(resultObj){
+			});
 			return false;
 		})
 	</script>
