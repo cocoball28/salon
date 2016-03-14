@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="salon.dao.MemberDao">
+  <resultMap type="member" id="memberMap">
+  	<result column="nick" property="nick"/>
+  	<result column="email" property="email"/>
+  	<result column="pwd" property="pwd"/>
+  </resultMap>
+	
+  	<select id="selectOneByEmailPassword" resultType="Member" parameterType="map">
+		select *
+		from test_member
+		where email=#{email} and pwd=#{password}
+	</select>
+	
+  
+</mapper>
+
+
+
+
+
+

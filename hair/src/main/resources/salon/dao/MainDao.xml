@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="salon.dao.MainDao">
+  <resultMap type="main" id="mainMap">
+  	<result column="no" property="no"/>
+  	<result column="image_no" property="imageNo"/>
+  	<result column="title" property="title"/>
+  	<result column="content" property="content"/>
+  	<result column="favorite" property="favorite"/>
+  </resultMap>
+	
+  <select id="mainList" resultMap="mainMap">
+  	select *
+  	  from test_test;
+  </select>
+	
+  
+</mapper>
+
+
+
+
+
+
