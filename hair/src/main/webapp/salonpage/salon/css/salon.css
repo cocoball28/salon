@@ -256,6 +256,7 @@ ul {
 	background-color: #ffffff;
 }
 .ebox {
+	display: none;
 	border: 1px solid tomato;
 	background-color: #F5F5F5;
 	position:absolute;

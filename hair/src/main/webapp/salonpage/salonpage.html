@@ -100,7 +100,7 @@
 	</div>	
 	<!-- 편집창 -->
 	<div class="ebox">
-	<form action="" method="post" enctype="multipart/form-data" name="upload1" class="registForm">
+	<form action="" name="upload1" class="registForm">
 	<div class="esp">
 	<div class="fb">
     <input type="file" name="file1" class="f1" onchange="readURL(this);">
@@ -121,9 +121,11 @@
     <input type="file" name="file4" class="f4" onchange="readURL(this);">
     </div>
 	</div>
+	<button  onclick="registShop()">저장</button>
 	</form>
 	</div>
 	<!-- 미리보기 -->
+	<!-- 
 	<div class="picbox">
 	<div class="bepic">
 		<img class="blah" src="#"/>
@@ -138,6 +140,7 @@
 		<img class="blah" src="#"/>
 	</div>
 	</div>
+	 -->
 	<!-- 화면끝 -->
 	
 <!-- jQuery -->
@@ -194,7 +197,7 @@ $(document).on("focus",".ebtn", function(){
 		$(".ebox").show();
 	});
 	$(document).on("blur",".ebtn", function(){
-		$(".ebox").css("display", "none");
+//		$(".ebox").css("display", "none");
 		$(".slider").css("opacity", "1");
 		$("#big").css("opacity", "1");
 		$("#big").css("transition", "0.5s"); 
@@ -216,7 +219,7 @@ $(document).on("focus",".ebtn", function(){
 		});
 	}
 	// 업로드 전 미리보기
-	function readURL(input) {
+/* 	function readURL(input) {
 		if(input.files&&input.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function (e) {
@@ -226,7 +229,7 @@ $(document).on("focus",".ebtn", function(){
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
-	}
+	} */
 </script>
 </body>
 </html>
