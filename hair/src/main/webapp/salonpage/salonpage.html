@@ -11,6 +11,7 @@
 <link href="salon/css/salon.css" rel="stylesheet" media="screen" />
 <link href='https://fonts.googleapis.com/css?family=Syncopate'
 	rel='stylesheet' type='text/css'>
+	
 </head>
 <body>
 	<div class="wrap wrap-index">
@@ -22,7 +23,16 @@
 				<div class="slider-block" id="s3" data-url="./salon/images/salon5.jpg"></div>
 				<div class="slider-block" id="s4" data-url="./salon/images/salon6.jpg"></div>
 				<div class="pop">
-				<button class="ebtn"><img src="./salon/images/edit.png" class="edit"></button>
+				<ul class="dropdown">
+					<li>
+						<a href="#">Info</a></li>
+					<li>
+						<a href="#">Reserve</a></li>
+					<li>
+						<a href="#">Bookmark</a></li>
+					<li>
+						<a href="#" class="ebtn">Edit</a></li>
+				</ul>
 				<!-- 슬라이드 구분버튼 (빼는게 이쁜거 같음)
 				<div class="slider-dots">
 					<ul>
@@ -103,44 +113,44 @@
 	<form action="" name="upload1" class="registForm">
 	<div class="esp">
 	<div class="fb">
-    <input type="file" name="file1" class="f1" onchange="readURL(this);">
+    <input type="file" name="file1" class="f1" onchange="readURL1(this);">
     </div>
 	</div>
 	<div class="esp">
 	<div class="fb">
-    <input type="file" name="file2" class="f2" onchange="readURL(this);">
+    <input type="file" name="file2" class="f2" onchange="readURL2(this);">
     </div>
 	</div>
 	<div class="esp">
 	<div class="fb">
-    <input type="file" name="file3" class="f3" onchange="readURL(this);">
+    <input type="file" name="file3" class="f3" onchange="readURL3(this);">
     </div>
 	</div>
 	<div class="esp">
 	<div class="fb">
-    <input type="file" name="file4" class="f4" onchange="readURL(this);">
+    <input type="file" name="file4" class="f4" onchange="readURL4(this);">
     </div>
 	</div>
-	<button  onclick="registShop()">저장</button>
+	<button  onclick="regist()">저장</button>
+	<button class="x">X</button>
 	</form>
 	</div>
 	<!-- 미리보기 -->
-	<!-- 
+	
 	<div class="picbox">
 	<div class="bepic">
-		<img class="blah" src="#"/>
+		<img class="blah1" src="#"/>
 	</div>
 	<div class="bepic">
-		<img class="blah" src="#"/>
+		<img class="blah2" src="#"/>
 	</div>
 	<div class="bepic">
-		<img class="blah" src="#"/>
+		<img class="blah3" src="#"/>
 	</div>
 	<div class="bepic">
-		<img class="blah" src="#"/>
+		<img class="blah4" src="#"/>
 	</div>
 	</div>
-	 -->
 	<!-- 화면끝 -->
 	
 <!-- jQuery -->
@@ -171,9 +181,8 @@
 		});
 	})
 	// edit 버튼 전환
-	/*  $(function() {
+	  $(function() {
 		$(".ebtn").click(function() {
-			$(".ebtn").hide();
 			$(".slider").css("opacity", "0.3");
 			$(".slider").css("transition", "0.5s");
 			$("#big").css("opacity", "0.3");
@@ -188,20 +197,15 @@
 			$(".slider-block").click(function() {
 				$(".ebox").css("display", "none");
 			});
-	}) */
-	
-$(document).on("focus",".ebtn", function(){
-		$(".slider").css("opacity", "0.3");
-		$("#big").css("opacity", "0.3");
-		$("#big").css("transition", "0.5s"); 
-		$(".ebox").show();
-	});
-	$(document).on("blur",".ebtn", function(){
-//		$(".ebox").css("display", "none");
-		$(".slider").css("opacity", "1");
-		$("#big").css("opacity", "1");
-		$("#big").css("transition", "0.5s"); 
-	});
+	})
+	// x표시
+	$(function() {
+		$(".x").click(function() {
+			$(".ebox").hide();
+			$(".slider").css("opacity", "1");
+			$("#big").css("opacity", "1");
+		});
+	})	
 	
 	// 이미지 업로드
 	var registShop= function(){
@@ -219,17 +223,50 @@ $(document).on("focus",".ebtn", function(){
 		});
 	}
 	// 업로드 전 미리보기
-/* 	function readURL(input) {
+ 	function readURL1(input) {
 		if(input.files&&input.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function (e) {
-				$(".blah").attr('src', e.target.result);
-				$(".blah").css('opacity', 1);
-				$(".blah").css('z-index', 99);
+				$(".blah1").attr('src', e.target.result);
+				$(".blah1").css('opacity', 1);
+				$(".blah1").css('z-index', 99);
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
-	} */
+	}
+ 	function readURL2(input) {
+		if(input.files&&input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$(".blah2").attr('src', e.target.result);
+				$(".blah2").css('opacity', 1);
+				$(".blah2").css('z-index', 99);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+ 	function readURL3(input) {
+		if(input.files&&input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$(".blah3").attr('src', e.target.result);
+				$(".blah3").css('opacity', 1);
+				$(".blah3").css('z-index', 99);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+ 	function readURL4(input) {
+		if(input.files&&input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$(".blah4").attr('src', e.target.result);
+				$(".blah4").css('opacity', 1);
+				$(".blah4").css('z-index', 99);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 </script>
 </body>
 </html>

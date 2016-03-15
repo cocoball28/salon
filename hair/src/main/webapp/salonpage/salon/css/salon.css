@@ -5,6 +5,19 @@
 */
 
 /*reset*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,700,700italic);
+.dropdown a:hover {
+	color: #f05504;
+	text-decoration: none;
+}
+.dropdown {
+	list-style-type: none;
+}
+.dropdown li {
+	float: left;
+	display: inline;
+}
+
 *{
 	margin: 0;
 	padding: 0;
@@ -15,6 +28,7 @@
 	width: 100%;
 	height: 50%;
 	top: 50%;
+	right: 0;
 	overflow: hidden;
 }
 #dsnpic1 {
@@ -212,6 +226,7 @@ ul {
 .slider .jquery-reslider .slider-block {
 	width: 100%;
 	height: 50%;
+	right: 0;
 	position: absolute;
 	z-index: 97;
 	background-position: 50% 50%;
@@ -219,12 +234,14 @@ ul {
 	opacity: 0;
 }
 .pop {
+	font-family: "Open Sans", sans-serif;
 	position: absolute;
 	width: 3%;
 	height: 5%;
 	bottom: 95%;
-	right: 0%;
+	right: 2%;
 	z-index: 99;
+	text-align: right;
 }
 .ebtn {
 	background-color: rgba(255, 255, 255, 0);
@@ -262,6 +279,7 @@ ul {
 	position:absolute;
 	width: 100%;
 	height: 50%;
+	right: 0;
 	z-index: 99;
 	opacity: 0.8;
 }
@@ -297,22 +315,21 @@ ul {
 	overflow: hidden;
 	cursor: default;
 	background-image: url('../images/plus.png');
-	background-size: 50%;
+	background-size: 10%;
 	background-repeat: no-repeat;
-	background-position: center center;
+	background-position: top right;
 	width: 100%;
 	height: 100%;
 }
 .fb input {
-	width: 50%;
-	height: 50%;
-	margin: auto;
-	margin-top: 21%;
+	width: 10%;
+	height: 16%;
+	margin-top:0;
+	margin-left: 90%;
 	filter:alpha(opacity=0);
     opacity:0;
     -moz-opacity:0;
 	cursot: pointer;
-	
 }
 .picbox {
 	position: absolute;
@@ -324,10 +341,36 @@ ul {
 	height: 100%;
 	float: left;
 }	
-.blah {
+.blah1 {
+	margin-left: 23%;
+	margin-top: 30%;
 	position: relative;
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 30%;
+	opacity: 0;
+}
+.blah2 {
+	margin-left: 23%;
+	margin-top: 30%;
+	position: relative;
+	width: 50%;
+	height: 30%;
+	opacity: 0;
+}
+.blah3 {
+	margin-left: 23%;
+	margin-top: 30%;
+	position: relative;
+	width: 50%;
+	height: 30%;
+	opacity: 0;
+}
+.blah4 {
+	margin-left: 23%;
+	margin-top: 30%;
+	position: relative;
+	width: 50%;
+	height: 30%;
 	opacity: 0;
 }
 
