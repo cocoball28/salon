@@ -264,7 +264,7 @@ var addBoard = function(blog){
 	cloneContent.attr("blogNo", blog.no);
 	cloneContent.find('.tag').text(blog.tag);
 	cloneContent.find('.description').text(blog.content);
-	console.log(blog.blogImageList.length);
+	//console.log(blog.blogImageList.length);
 	for(var i = 0 ; i < blog.blogImageList.length ; i ++){
 		var cloneImage = $(".cloneblogImagesDiv .blogImage").clone();
 		cloneImage.attr('src',blog.blogImageList[i].fileName);
@@ -279,19 +279,24 @@ var addBoard = function(blog){
 
 
 /* 블로그 이미지 업로드 미리보기 ======================== */
-$(function() {
-    $("#uploadImage").on('change', function(){
-        readURL(this);
-        //$("#imagePreview").show('fast');
-    });
-});
+var prevImageOrder = 4;
+var imageAttachStatus = 0;
+var imageAttach = function(target){
+		readURL(target);
+		$(".imageAttach").children().eq(imageAttachStatus++).hide();
+		$(".imageAttach").children().eq(imageAttachStatus).show();
+		if(imageAttachStatus >= 5){
+			$(".imageAttach").children().eq(imageAttachStatus).hide()
+		}
+}
 
 var readURL = function(input) {
     if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function (e) {
-            $('.imagePreview_1').attr('src', e.target.result);
-            $(".imagePreview_1").show();
+    	var previewImage = $('.imagePreviewDiv').children().eq(prevImageOrder--);
+    	previewImage.attr('src', e.target.result);
+        previewImage.show();
         }
       reader.readAsDataURL(input.files[0]);
     }

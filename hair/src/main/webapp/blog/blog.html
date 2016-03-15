@@ -91,15 +91,19 @@
 								</h2>
 							</div>
 							<hr style="margin: 0px">
-							<div style="padding-bottom: 5px;">
-								<input type='file' name="uploadImage1" class="uploadImage" style="border: 1px solid black; cursor: pointer; position: absolute; width:"/>
-								<input type='file' name="uploadImage2" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;"/>
-								<!-- <input type='file' name="uploadImage3" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;"/>
-								<input type='file' name="uploadImage4" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;"/>
-								<input type='file' name="uploadImage5" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;"/> -->
+							<div style="padding-bottom: 5px;" class="imageAttach">
+								<input type='file' name="uploadImage1" class="uploadImage" style="border: 1px solid black; cursor: pointer; width: " onchange="imageAttach(this)"/>
+								<input type='file' name="uploadImage2" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;" onchange="imageAttach(this)"/>
+								<input type='file' name="uploadImage3" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;" onchange="imageAttach(this)"/>
+								<input type='file' name="uploadImage4" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;" onchange="imageAttach(this)"/>
+								<input type='file' name="uploadImage5" class="uploadImage" style="border: 1px solid black; cursor: pointer; display: none;" onchange="imageAttach(this)"/>
 								<span class="contentControlBtn" style="z-index: 10; ">IMAGE UPLOAD</span>
 								<div class="imagePreviewDiv">
-									<!-- <img class="imagePreview_1 imagePreview" src="#" alt="your image" width="100%" style="display: none;"/> -->
+									<img class="imagePreview_5 imagePreview" src="#" alt="your image" width="100%" style="display: none;"/> 
+									<img class="imagePreview_4 imagePreview" src="#" alt="your image" width="100%" style="display: none;"/>
+									<img class="imagePreview_3 imagePreview" src="#" alt="your image" width="100%" style="display: none;"/>
+									<img class="imagePreview_2 imagePreview" src="#" alt="your image" width="100%" style="display: none;"/>
+									<img class="imagePreview_1 imagePreview" src="#" alt="your image" width="100%" style="display: none;"/>
 								</div>
 							</div>
 							<hr style="margin: 0px">
@@ -307,8 +311,9 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery-2.2.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<!--  <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>-->
 	<script src="js/blog.js"></script>
 	<script src="js/blog_common.js"></script>
 	

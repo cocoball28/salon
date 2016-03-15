@@ -115,3 +115,10 @@
 .likeSign{
 	opacity:0.3;
 }
+
+.uploadImage{
+	position: absolute;
+	width: 40px;
+	opacity:0;
+	cursor: pointer;
+}
