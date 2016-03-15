@@ -40,8 +40,18 @@ hr{
 </style>
 <script>
  $(function(){
+	 function getContextPath(){
+	    var offset=location.href.indexOf(location.host)+location.host.length;
+	    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+	    return ctxPath;
+	}
+
+	var contextPath =  getContextPath();
+	 
 	 	 
-	 var favFlag = false;
+	 /* header ajax */
+	 $(".header").load(contextPath+"/header/header.html .header")
+	 
 	/* add bookmark */
 	$(document).on('click', '.bookmark', function(){
 		$(this).find(".liked").toggle();
@@ -50,8 +60,10 @@ hr{
 	});
 	
 		
-	/* ajax */
-	  $.getJSON('/hair2/salon/ajax/list.do', function(resultObj) {
+	/* list ajax */
+	$(document).ready(function(){
+		
+	  $.getJSON( ""+contextPath+"/salon/ajax/list.do"+"", function(resultObj) {
 		var cnt = 0;
 		   $.each(resultObj.mList, function(key, value){
 				var html = ""
@@ -76,53 +88,22 @@ hr{
 				cnt++;
 				if(cnt == 5) cnt = 0;
 		  }) 
-		  /* 참고 */
+		  /* 아이디 */
 		   $("#dd").append(resultObj.member.nick);
 	});
+	})
 	
 }); 
 </script>
 </head>
 <body>
 	<header class="header">
-		<div id="mainLogo">
-        	<img class="searchImg mainImg" src="images/logo-7.png">
-        </div>
-		
-        <!-- My Page -->
-		<div class="wrapper-demo">
-			<div id="dd" class="wrapper-dropdown-5" tabindex="1">
-				<ul class="dropdown">
-					<li><a href="#"><i class="icon-heart"></i>Favorite</a></li>
-					<li><a href="#"><i class="icon-envelope"></i>Message(2)</a></li>
-					<li><a href="#"><i class="icon-calendar"></i>Reservation</a></li>
-					<li><a href="#"><i class="icon-question-sign"></i>Question</a></li>
-					<li><a href="#"><i class="icon-user"></i>Profile</a></li>
-					<li><a href="#"><i class="icon-remove"></i>Log out</a></li>
-				</ul>
-			</div>
-		​</div>
-		
-        
-		<div class="content">
-        <!-- search -->
-	        <form class="searchForm">
-				<div  id="mainSearch">
-					<input type="text" id="searchBar" placeholder="검색할 태그및 내용을 입력하세요">
-					<input class="info" id="search" type="submit" value="검색"/>
-					<input class="info" id="mapSearch" type="button" value="지도"/>
-				</div>
-	        </form>
-        </div>        
-    </header>
-	
+	</header>
     <!-- ************************** section ************************** -->
     
     <section class="section">
         <div class="wf-container">
         	
-            
-            
         </div>
     </section>
 <script src="js/app.js"></script>
