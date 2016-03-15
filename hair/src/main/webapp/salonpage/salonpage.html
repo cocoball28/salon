@@ -23,11 +23,13 @@
 				<div class="slider-block" id="s4" data-url="./salon/images/salon6.jpg"></div>
 				<div class="pop">
 				<button class="ebtn"><img src="./salon/images/edit.png" class="edit"></button>
+				<!-- 슬라이드 구분버튼 (빼는게 이쁜거 같음)
 				<div class="slider-dots">
 					<ul>
 
 					</ul>
 				</div>
+				-->
 			</div>
 		</div>
 		<!-- end build-->
@@ -98,24 +100,42 @@
 	</div>	
 	<!-- 편집창 -->
 	<div class="ebox">
+	<form action="" method="post" enctype="multipart/form-data" name="upload1" class="registForm">
 	<div class="esp">
-	미용실 사진
-	<form action="" method="post" enctype="multipart/form-data" name="" class="registForm">
-    <input type="file" name="FileName">
-    <input type="file" name="FileName">
-    <input type="file" name="FileName">
-    <input type="file" name="FileName">
+	<div class="fb">
+    <input type="file" name="file1" class="f1" onchange="readURL(this);">
+    </div>
+	</div>
+	<div class="esp">
+	<div class="fb">
+    <input type="file" name="file2" class="f2" onchange="readURL(this);">
+    </div>
+	</div>
+	<div class="esp">
+	<div class="fb">
+    <input type="file" name="file3" class="f3" onchange="readURL(this);">
+    </div>
+	</div>
+	<div class="esp">
+	<div class="fb">
+    <input type="file" name="file4" class="f4" onchange="readURL(this);">
+    </div>
+	</div>
 	</form>
 	</div>
-	<div class="edp">
-	디자이너 사진
-	<form action="" method="post" enctype="multipart/form-data" name="" class="registForm">
-    <input type="file" name="FileName">
-    <input type="file" name="FileName">
-    <input type="file" name="FileName">
-    <input type="file" name="FileName">
-    <button onclick="registShop()">저장</button>
-	</form>
+	<!-- 미리보기 -->
+	<div class="picbox">
+	<div class="bepic">
+		<img class="blah" src="#"/>
+	</div>
+	<div class="bepic">
+		<img class="blah" src="#"/>
+	</div>
+	<div class="bepic">
+		<img class="blah" src="#"/>
+	</div>
+	<div class="bepic">
+		<img class="blah" src="#"/>
 	</div>
 	</div>
 	<!-- 화면끝 -->
@@ -139,7 +159,7 @@
 	
 	// JSON 데이터 가져오기
 	$(function() {
-		$.getJSON("http://192.168.0.5:8008/salon/shop/list.do", 
+		$.getJSON(contextPath+"/shop/list.do", 
 			function(data){
 				for (var i = 0; i < 5; i++) {
 					$("#dsnpic" + (i+1)).find(".name").text(data.shopList[i].name);
@@ -148,7 +168,7 @@
 		});
 	})
 	// edit 버튼 전환
-	$(function() {
+	/*  $(function() {
 		$(".ebtn").click(function() {
 			$(".ebtn").hide();
 			$(".slider").css("opacity", "0.3");
@@ -158,21 +178,55 @@
 			$(".ebox").show();
 		});
 	})
+	// 바깥 영역 클릭시 에딧창 사라짐
+	$(function() {
+		var display = $(".ebox").css("display");
+		if (display != "none")
+			$(".slider-block").click(function() {
+				$(".ebox").css("display", "none");
+			});
+	}) */
+	
+$(document).on("focus",".ebtn", function(){
+		$(".slider").css("opacity", "0.3");
+		$("#big").css("opacity", "0.3");
+		$("#big").css("transition", "0.5s"); 
+		$(".ebox").show();
+	});
+	$(document).on("blur",".ebtn", function(){
+		$(".ebox").css("display", "none");
+		$(".slider").css("opacity", "1");
+		$("#big").css("opacity", "1");
+		$("#big").css("transition", "0.5s"); 
+	});
+	
 	// 이미지 업로드
 	var registShop= function(){
 	var form = $(".registForm")[0];
 	var formData = new FormData(form);
-	$.ajax({
-	   url: shopPath+"/shop/regist.do",
-	   processData: false,
-	   contentType: false,
-	   data: formData,
-	   type: 'POST',
-	   success: function(data){
-			$('.ebox').hide('slow');
-	   }
-	});
-}
+		$.ajax({
+		   url: contextPath+"/shop/regist.do",
+		   processData: false,
+		   contentType: false,
+		   data: formData,
+		   type: 'POST',
+		   success: function(data){
+				$('.ebox').hide();
+		   }
+		});
+	}
+	// 업로드 전 미리보기
+	function readURL(input) {
+		if(input.files&&input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$(".blah").attr('src', e.target.result);
+				$(".blah").css('opacity', 1);
+				$(".blah").css('z-index', 99);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 </script>
 </body>
 </html>
