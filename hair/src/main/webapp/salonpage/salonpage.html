@@ -11,7 +11,121 @@
 <link href="salon/css/salon.css" rel="stylesheet" media="screen" />
 <link href='https://fonts.googleapis.com/css?family=Syncopate'
 	rel='stylesheet' type='text/css'>
-	
+<style>
+.overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    bottom: 0;
+    cursor: default;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    visibility: hidden;
+    z-index: 1;
+
+    -webkit-transition: opacity .5s;
+    -moz-transition: opacity .5s;
+    -ms-transition: opacity .5s;
+    -o-transition: opacity .5s;
+    transition: opacity .5s;
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+.popup {
+    background-color: #fff;
+    border: 3px solid #fff;
+    display: inline-block;
+    left: 50%;
+    opacity: 0;
+    padding: 15px;
+    position: fixed;
+    text-align: justify;
+    top: 40%;
+    visibility: hidden;
+    z-index: 10;
+
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+
+    -webkit-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+    -moz-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+    -ms-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+    -o-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+    box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+
+    -webkit-transition: opacity .5s, top .5s;
+    -moz-transition: opacity .5s, top .5s;
+    -ms-transition: opacity .5s, top .5s;
+    -o-transition: opacity .5s, top .5s;
+    transition: opacity .5s, top .5s;
+}
+.overlay:target+.popup {
+    top: 50%;
+    opacity: 1;
+    visibility: visible;
+}
+.close {
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-decoration: none;
+    top: -15px;
+    width: 30px;
+
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+}
+.close:before {
+    color: rgba(255, 255, 255, 0.9);
+    content: "X";
+    font-size: 24px;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
+}
+.close:hover {
+    background-color: rgba(64, 128, 128, 0.8);
+}
+.popup p, .popup div {
+    margin-bottom: 10px;
+}
+.popup label {
+    display: inline-block;
+    text-align: left;
+    width: 120px;
+}
+.popup input[type="text"], .popup input[type="password"] {
+    border: 1px solid;
+    border-color: #999 #ccc #ccc;
+    margin: 0;
+    padding: 2px;
+
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+}
+.popup input[type="text"]:hover, .popup input[type="password"]:hover {
+    border-color: #555 #888 #888;
+}
+</style>	
 </head>
 <body>
 	<div class="wrap wrap-index">
@@ -23,16 +137,20 @@
 				<div class="slider-block" id="s3" data-url="./salon/images/salon5.jpg"></div>
 				<div class="slider-block" id="s4" data-url="./salon/images/salon6.jpg"></div>
 				<div class="pop">
-				<ul class="dropdown">
-					<li>
-						<a href="#">Info</a></li>
-					<li>
-						<a href="#">Reserve</a></li>
-					<li>
-						<a href="#">Bookmark</a></li>
-					<li>
-						<a href="#" class="ebtn">Edit</a></li>
-				</ul>
+				<a href="#login_form" class="mb" id="amb">Info</a>
+				<button class="mb">Reserve</button>
+				<button class="mb">Bookmark</button>
+				<button class="ebtn" id="mb">Edit</button>
+				<a href="#x" class="overlay" id="login_form"></a>
+        			<div class="popup">
+            			<h2>Juno Hair</h2>
+            			<p>서울시 강남구 강남대로 11-1</p>
+            				<div>
+                				<label for="login">Tel</label>
+                				<label id="login" >02-712-5845</label>
+            				</div>
+            			<a class="close" href="#close"></a>
+        			</div>
 				<!-- 슬라이드 구분버튼 (빼는게 이쁜거 같음)
 				<div class="slider-dots">
 					<ul>
@@ -110,30 +228,32 @@
 	</div>	
 	<!-- 편집창 -->
 	<div class="ebox">
-	<form action="" name="upload1" class="registForm">
-	<div class="esp">
-	<div class="fb">
-    <input type="file" name="file1" class="f1" onchange="readURL1(this);">
-    </div>
-	</div>
-	<div class="esp">
-	<div class="fb">
-    <input type="file" name="file2" class="f2" onchange="readURL2(this);">
-    </div>
-	</div>
-	<div class="esp">
-	<div class="fb">
-    <input type="file" name="file3" class="f3" onchange="readURL3(this);">
-    </div>
-	</div>
-	<div class="esp">
-	<div class="fb">
-    <input type="file" name="file4" class="f4" onchange="readURL4(this);">
-    </div>
-	</div>
-	<button  onclick="regist()">저장</button>
-	<button class="x">X</button>
-	</form>
+		<form name="upload1" class="registForm">
+		<input type="text" name="fileName">
+		<div class="esp">
+		<div class="fb">
+	    <input type="file" name="file1" class="f1" onchange="readURL1(this);">
+	    </div>
+		</div>
+		<div class="esp">
+		<div class="fb">
+	    <input type="file" name="file2" class="f2" onchange="readURL2(this);">
+	    </div>
+		</div>
+		<div class="esp">
+		<div class="fb">
+	    <input type="file" name="file3" class="f3" onchange="readURL3(this);">
+	    </div>
+		</div>
+		<div class="esp">
+		<div class="fb">
+	    <input type="file" name="file4" class="f4" onchange="readURL4(this);">
+	    </div>
+		</div>
+		<button  onclick="registShop()">저장</button>
+		<button class="x">X</button>
+		
+		</form>
 	</div>
 	<!-- 미리보기 -->
 	
@@ -209,18 +329,18 @@
 	
 	// 이미지 업로드
 	var registShop= function(){
-	var form = $(".registForm")[0];
-	var formData = new FormData(form);
-		$.ajax({
-		   url: contextPath+"/shop/regist.do",
-		   processData: false,
-		   contentType: false,
-		   data: formData,
-		   type: 'POST',
-		   success: function(data){
-				$('.ebox').hide();
-		   }
-		});
+		var form = $(".registForm")[0];
+		var formData = new FormData(form);
+			$.ajax({
+			   url: contextPath+"/shop/regist.do",
+			   processData: false,
+			   contentType: false,
+			   data: formData,
+			   type: 'POST',
+			   success: function(data){
+					$('.ebox').hide();
+			   }
+			});
 	}
 	// 업로드 전 미리보기
  	function readURL1(input) {

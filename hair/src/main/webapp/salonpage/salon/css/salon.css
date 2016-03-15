@@ -6,18 +6,31 @@
 
 /*reset*/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,700,700italic);
-.dropdown a:hover {
+#amb {
+	width: 80px;
+}
+.mb {
+	width: 20%;
+	margin: 0px 0px;
+	border: 1px solid black;
+	background-color: rgba(255, 255, 255, 0);
+	color: black;
+}
+.mb:hover {
+	border: 1px solid #f05504;
 	color: #f05504;
 	text-decoration: none;
 }
-.dropdown {
-	list-style-type: none;
+#mb:hover {
+	border: 1px solid #f05504;
+	color: #f05504;
 }
-.dropdown li {
-	float: left;
-	display: inline;
+#mb {
+	width: 20%;
+	margin: 0px 0px;
+	border: 1px solid black;
+	background-color: rgba(255, 255, 255, 0);
 }
-
 *{
 	margin: 0;
 	padding: 0;
@@ -236,10 +249,10 @@ ul {
 .pop {
 	font-family: "Open Sans", sans-serif;
 	position: absolute;
-	width: 3%;
+	width: 25%;
 	height: 5%;
 	bottom: 95%;
-	right: 2%;
+	right: 0%;
 	z-index: 99;
 	text-align: right;
 }
