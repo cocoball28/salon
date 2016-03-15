@@ -24,7 +24,8 @@ $('.tabs .tab').click(function() {
 });
 
 /* login */
-$("#login_frm").submit(function(){
+$("#login_frm").submit(function(event){
+	event.preventDefault();
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
@@ -49,7 +50,7 @@ $("#login_frm").submit(function(){
 /* check validation */
 /* function checkForm(form){
 	if(form.name.value == ""){
-		alert("Username cannot be black");
+		alert("Username cannot be blank");
 		form.name.focus();
 		return false;
 	}
@@ -60,22 +61,23 @@ $("#login_frm").submit(function(){
 	}
 	return true;
 } */
-$("#regist_frm").submit(function(){
+$("#regist_frm").submit(function(event){
+	event.preventDefault();
 	console.log("들오옴 submit" + $("#email").val())
 	$.post('/hair2/auth/add.do', {
-		nick: $('#nickname').val(),
-		email: $('#email').val(),
-		pwd: $('#password').val()
+		nick: $('#nickname_reg').val(),
+		email: $('#email_reg').val(),
+		pwd: $('#password_reg').val()
 	}, function(resultObj) {
 		console.dir(resultObj);
 		var ajaxResult = resultObj.ajaxResult;
 		if (ajaxResult.status == "success") {
 			alert("회원가입을 축하합니다")
-      		location.href = "/g2/auth/login.do";
-    } else {
-        alert("회원가입 실패");
-        return false;
-    }
+      		location.href = contextPath+"/auth/login.html";
+	    } else {
+	        alert("회원가입 실패");
+	        return false;
+	    }
 	}, 'json');
 
 	console.log("회원가입");

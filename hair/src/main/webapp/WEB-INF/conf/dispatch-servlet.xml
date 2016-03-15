@@ -38,8 +38,7 @@
         <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
         <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
           <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-          <property name="prefix" value="/WEB-INF/views/"/>
-          <property name="suffix" value=".jsp"/>
+          <property name="suffix" value=".html"/>
         </bean>
       </list>
     </property>
@@ -51,14 +50,12 @@
   </bean>  
   
   <!-- 인터셉터를 등록 -->
-  <!--  
   <mvc:interceptors>
     <mvc:interceptor>
         <mvc:mapping path="/**"/>
-        <bean class="java76.pms.interceptor.AuthInterceptor"/>
+        <bean class="salon.interceptor.AuthInterceptor"/>
     </mvc:interceptor>
   </mvc:interceptors>
-  -->
 </beans>
 
 
