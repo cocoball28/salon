@@ -8,5 +8,10 @@ import salon.domain.Main;
 
 @Repository
 public interface MainDao {
+	
 	List<Main> mainList();
+
+	Main selectByNo(int no);
+
+	void updateFav(Main main);
 }

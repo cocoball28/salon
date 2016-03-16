@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import salon.dao.MainDao;
 import salon.domain.AjaxResult;
@@ -39,11 +40,20 @@ public class MainController {
   }
   
   @RequestMapping(value="updateFav", method=RequestMethod.GET)
-  public AjaxResult update(int no) throws Exception {
-    
+  @ResponseBody
+  public AjaxResult updateFav(int no) throws Exception {
+	Main main = mainDao.selectByNo(no);
 	
-    
-    return new AjaxResult("success", null);
+	if(main.getFavorite() == 1){
+		main.setFavorite(0);
+		mainDao.updateFav(main);
+	}else{
+		main.setFavorite(1);
+		mainDao.updateFav(main);
+	}
+	
+	
+    return new AjaxResult("success", "success");
   }
   
   
