@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', function(e) {
     
     window.onscroll = function() {
         var i = waterfall.getHighestIndex();
-        if(i > -10) {
+        if(i > -20) {
             // get last box of the column
             var lastBox = Array.prototype.slice.call(waterfall.columns[i].children, -1)[0];
             if(checkSlide(lastBox)) {

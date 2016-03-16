@@ -1,14 +1,14 @@
 $(function(){
 	
 	/* header focus */
-	 $(document).on("focus", ".header", function(){
+	/* $(document).on("focus", ".header", function(){
 		 $("section").css("opacity", "0.5");
 		$("header").css("opacity", "0.8");
 	 })
 	 $(document).on("blur", ".header", function(){
 		 $("section").css("opacity", "1");
 		$("header").css("opacity", "0.4");
-	 })
+	 })*/
 		  
 		
 	/* My Page */
