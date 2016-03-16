@@ -5,26 +5,22 @@
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="//code.jquery.com/jquery.zPaging.2.0.2.min.js"></script>
 	<link href="./css/qna.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>	
-<script>
-var contextPath = function getContextPath(){
-    var offset=location.href.indexOf(location.host)+location.host.length;
-    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
-    return ctxPath;
-}
-$(".header").load(contextPath+"/header/header.html.header")
-</script>
+
+
+
+
 
 </head>
 <body>
-	<div id="wrap" class="qna">
-		<div id="header" class="header"></div>
-   	    <div id="sidebar"></div>
-   		
+	<div id="wrap" class="qma">
+		<div class="header" id="header"></div>
+   		<div id="sidebar">
+   		</div>
    		<div class="qna_list" id="content">
    			<font color="#FE9A2E"><h3>Q&A</h3></font>
    			<div class="content_section"></div>
@@ -58,16 +54,26 @@ $(".header").load(contextPath+"/header/header.html.header")
 		    </tr>
  			
 			</table>
-  			<br/>
+		    
+
+
+          
+             
+  
+       
+			
+			
+			<br/>
  			<p align="right"><input class="btn btn-warning" type="button" value="글쓰기" onclick="document.location.href='qnaRegistForm.html'"></p>
      	</div>
 	    <div id="righter">
-    		<img src="./img/hair1.jpg" width="200px"></br>
-    		<img src="./img/hair6.jpg" width="200px"></br>
    		</div>
+   		
+   		
+   		
 	</div>
 	<script>
-		var contextRoot = 'http://localhost:8008/salon/';
+		var contextRoot = 'http://localhost:8008/qnaboard';
 		$.ajax(contextRoot + '/board/list.do', {
 			dataType: 'json',
 			method: 'GET',
@@ -77,14 +83,12 @@ $(".header").load(contextPath+"/header/header.html.header")
 				  for (var board of resultObj.data) {
 				    $("<tr>")
 				      .html("<td>" + board.qna_no + 
-							      "</td><td><a class='detailLnk' href='#' boardNo='" 
-					          + board.qna_no + "'>" + board.qna_title +  
+							      "</td><td><a href='" + contextRoot + "/qna/qnaDetail.html?qna_no=" 
+							          + board.qna_no + "'>" + board.qna_title + 
 							      "</a></td><td>"+board.nick+"</td><td>" + board.viewnum +
 							      "</td><td>" + board.reg_Date + "</td>")
 							.appendTo(table);
-				    
-				    $("a.detailLnk").click(clickDetailLnk);
-				  }				
+				  }
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				alert("오호라.. 오류다!");
@@ -93,36 +97,36 @@ $(".header").load(contextPath+"/header/header.html.header")
 			}
 		});
 		
+
+		
 		function check_search_form() {
-			var contextRoot = 'http://localhost:8008/salon/';
+			var contextRoot = 'http://localhost:8008/qnaboard';
 			$("#basic_table").remove();
 			$.ajax(contextRoot + '/board/list.do?', {
 				dataType: 'json',
 				method: 'GET',
 				success: function(resultObj) {
 					  var table = $("#basic_table");
-					  //alert(resultObj);
+					  console.dir(resultObj);
 					  for (var board of resultObj.data) {
 					    $("<tr>")
 					      .html("<td>" + board.qna_no + 
-								      "</td><td><a class='detailLnk' href='#' boardNo='" 
+								      "</td><td><a href='" + contextRoot + "/qna/qnaDetail.html?no=" 
 								          + board.qna_no + "'>" + board.qna_title + 
 								      "</a></td><td>"+board.nick+"</td><td>" + board.viewnum +
 								      "</td><td>" + board.reg_Date + "</td>")
 								.appendTo(table);
-					    $("a.detailLnk").click(clickDetailLnk);
-					  }				
+					  }
+					
+					  
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					alert("오호라.. 오류다!");
 					console.log(textStatus);
 					console.log(errorThrown);
 				}
+				
 			});
-		}
-		function clickDetailLnk(event) {
-			event.preventDefault(); 
-			location.href = "form.html?no=" + $(event.target).attr("boardNo");
 		}
 	</script> 
 </body>
