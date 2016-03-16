@@ -134,8 +134,6 @@ var likePull = function(data){
 /* 댓글 입력 ==================================*/
 var registComment = function(target){
 	var content = $(target).val();
-	var blogDiv = $(target).closest(".mainContents");
-	var blogNo = $(blogDiv).attr('blogNo');
 	if(event.keyCode == 13){
 		$.post(
 			blogPath+"/blog/registComment.do",
@@ -306,3 +304,5 @@ var readURL = function(input) {
 
 //더미데이터에 임시번호 부여함, 댓글 테스트용
 $(".dummyMainContent").attr("blogNo", 1);
+
+$(".header").load(contextPath+"/header/header.html .header");

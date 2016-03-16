@@ -9,4 +9,5 @@ function getContextPath(){
 
 
 var blogPath =  getContextPath();
+var contextPath =  getContextPath();
 
