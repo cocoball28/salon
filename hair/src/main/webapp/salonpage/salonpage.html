@@ -36,17 +36,13 @@
             				</div>
             			<a class="close" href="#close"></a>
         			</div>
-				<!-- 슬라이드 구분버튼 (빼는게 이쁜거 같음)
-				<div class="slider-dots">
-					<ul>
-
-					</ul>
-				</div>
-				-->
 			</div>
 		</div>
 		<!-- end build-->
 	</div>
+	<!-- 디자이너 슬라이드버튼 -->
+	<div class="navl"><img src="./salon/images/prev3.png" class="prev"></div>
+	<div class="navr"><img src="./salon/images/next3.png" class="next"></div>
 	</div>
 	<!-- 디자이너부분 -->
 	<div id="big">
@@ -99,6 +95,66 @@
 			<div class="slide4"></div>
 		</div>
 		<div id="dsnpic5" class="pic">
+			<div class="blog1">
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
+				<div class="name"></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
+			</div>
+			<div class="slide5"></div>
+		</div>
+		<div id="dsnpic6" class="pic">
+			<div class="blog1">
+				<div class="bp">
+					<a href="http://192.168.0.44:8008/hair/blog/blog.html"><img src="./salon/images/blog.png"></a>
+				</div>
+				<div class="name"></div>
+				<div class="move">
+					<a href="http://192.168.0.44:8008/hair/blog/blog.html" class="blogm">블로그이동</a>
+				</div>
+			</div>
+			<div class="slide1"></div>
+		</div>
+		<div id="dsnpic7" class="pic">
+			<div class="blog1">
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
+				<div class="name"></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
+			</div>
+			<div class="slide2"></div>
+		</div>
+		<div id="dsnpic8" class="pic">
+			<div class="blog1">
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
+				<div class="name"></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
+			</div>
+			<div class="slide3"></div>
+		</div>
+		<div id="dsnpic9" class="pic">
+			<div class="blog1">
+				<div class="bp">
+					<a href="#"><img src="./salon/images/blog.png"></a>
+				</div>
+				<div class="name"></div>
+				<div class="move">
+					<a href="#" class="blogm">블로그이동</a>
+				</div>
+			</div>
+			<div class="slide4"></div>
+		</div>
+		<div id="dsnpic10" class="pic">
 			<div class="blog1">
 				<div class="bp">
 					<a href="#"><img src="./salon/images/blog.png"></a>
@@ -163,6 +219,7 @@
 <!-- Client JavaScript -->
 <script src="salon/js/jquery.reslider.js"></script>
 <script>
+	$("#big").css("left", "0");
 	// 슬라이드 스크립트
 	$(function() {
 		$('.jquery-reslider').reSlider({
@@ -178,31 +235,24 @@
 	$(function() {
 		$.getJSON(contextPath+"/shop/list.do", 
 			function(data){
-				for (var i = 0; i < 5; i++) {
+				for (var i = 0; i < 10; i++) {
 					$("#dsnpic" + (i+1)).find(".name").text(data.shopList[i].name);
 					$("#dsnpic" + (i+1)).css("background-image", "url('salon/images/dsn1" + data.shopList[i].no + ".jpg')")
 				}
+				$("#dsnpic10").css("background-image", "url('salon/images/dsn20.jpg')")
 		});
 	})
 	// edit 버튼 전환
 	  $(function() {
 		$(".ebtn").click(function() {
-			$(".slider").css("opacity", "0.3");
+			$(".slider").css("opacity", "0");
 			$(".slider").css("transition", "0.5s");
 			$("#big").css("opacity", "0.3");
 			$("#big").css("transition", "0.5s");
 			$(".ebox").show();
 		});
 	})
-	// 바깥 영역 클릭시 에딧창 사라짐
-	$(function() {
-		var display = $(".ebox").css("display");
-		if (display != "none")
-			$(".slider-block").click(function() {
-				$(".ebox").css("display", "none");
-			});
-	})
-	// x표시
+	// x버튼
 	$(function() {
 		$(".x").click(function() {
 			$(".ebox").hide();
@@ -210,7 +260,6 @@
 			$("#big").css("opacity", "1");
 		});
 	})	
-	
 	// 이미지 업로드
 	var registShop= function(){
 		var form = $(".registForm")[0];
@@ -271,26 +320,76 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+ 	// 미리보기 더블클릭시 삭제함수
  	$(function() {
  		$(".blah1").dblclick(function() {
  			$(".blah1").css("z-index", "0");
+ 			$(".blah1").css("opacity", "0");
  		});
  	})
  	$(function() {
  		$(".blah2").dblclick(function() {
  			$(".blah2").css("z-index", "0");
+ 			$(".blah2").css("opacity", "0");
  		});
  	})
  	$(function() {
  		$(".blah3").dblclick(function() {
  			$(".blah3").css("z-index", "0");
+ 			$(".blah3").css("opacity", "0");
  		});
  	})
  	$(function() {
  		$(".blah4").dblclick(function() {
  			$(".blah4").css("z-index", "0");
+ 			$(".blah4").css("opacity", "0");
  		});
  	})
+ 	// 미용사 이미지 슬라이드함수
+ 	var index = 0;
+	$(function() {
+		$(".prev").click(function() {
+			if (index == 0)
+				index = 5;
+			else
+				index--;
+			move(index);
+		});
+		$(".next").click(function() {
+			if (index == 5)
+				index = 0;
+			else
+				index++;
+			move(index);
+		});
+		var move = function(loc) {
+			$("#big").animate({
+				left : -(loc * 320)
+			}, "slow");
+		}
+	});
+ 	var index = 0;
+	$(function() {
+		$(".navl").click(function() {
+			if (index == 0)
+				index = 5;
+			else
+				index--;
+			move(index);
+		});
+		$(".navr").click(function() {
+			if (index == 5)
+				index = 0;
+			else
+				index++;
+			move(index);
+		});
+		var move = function(loc) {
+			$("#big").animate({
+				left : -(loc * 320)
+			}, "slow");
+		}
+	});
 </script>
 </body>
 </html>
