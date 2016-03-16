@@ -5,14 +5,14 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="css/header.css">
-<link rel="shortcut icon" href="../favicon.ico"> 
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" href="../header/css/header.css">
+<link rel="stylesheet" type="text/css" href="../header/css/style.css" />
+<script type="text/javascript" src="../header/js/modernizr.custom.79639.js"></script> 
 <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
-<script type="text/javascript" src="js/modernizr.custom.79639.js"></script> 
-<link rel="stylesheet" type="text/css" href="css/noJS.css" />
+<link rel="stylesheet" type="text/css" href="../header/css/noJS.css" />
 <script src="js/jquery-2.2.0.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="shortcut icon" href="../favicon.ico"> 
 <script src="js/responsive_waterfall.js"></script>
 <!-- 아이콘 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -60,20 +60,18 @@ hr{
 	var contextPath =  getContextPath();
 	 
 	 	 
-	 /* header ajax */
+	 /* header */
 	 $(".header").load(contextPath+"/header/header.html .header")
 	 
 	/* add bookmark */
 	$(document).on('click', '.bookmark', function(){
-		$(this).find(".fa").toggleClass("fa-heart fa-heart-o");
+		var no = $(this).closest('.wf-box').find("[type=hidden]").val();
 		
-		/* $.get(""+contextPath+"/salon/ajax/updateFav.do"+"", , function(){
-			
-		}) */
-		
-		/* $(this).find(".liked").toggle();
-		$(this).find(".none").toggle();
-		return false; */
+		 $.get("/hair2/salon/ajax/updateFav.do",{no: no})
+			.done(function(){
+			$(this).find(".fa").toggleClass("fa-heart fa-heart-o");
+		 }) 
+		return false; 
 	});
 	
 		
@@ -90,6 +88,7 @@ hr{
 				html += '<h3>'+value.title+'</h3>';
 				html += '<hr>';
 				html += '<p>'+value.content+'</p>';
+				html += '<input type="hidden" class="no" value='+value.no+' />'
 				html += '<div class="optionDiv">'
 				html += '<a class="bookmark">';
 				if(value.favorite == 0){
@@ -108,7 +107,7 @@ hr{
 				if(cnt == 5) cnt = 0;
 		  }) 
 		  /* 아이디 */
-		   $("#dd").append(resultObj.member.nick);
+		   /* $("#dd").append(resultObj.member.nick); */
 	});
 	})
 	
@@ -126,6 +125,6 @@ hr{
         </div>
     </section>
 <script src="js/app.js"></script>
-<script src="js/header.js"></script>
+<script src="../header/js/header.js"></script>
 </body>
 </html>
