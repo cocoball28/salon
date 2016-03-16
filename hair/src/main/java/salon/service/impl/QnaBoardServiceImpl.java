@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import salon.dao.QnaBoardDAO;
+import salon.dao.QnaBoardDao;
 import salon.domain.QnaBoard;
 import salon.service.QnaBoardService;
 
@@ -13,7 +13,7 @@ import salon.service.QnaBoardService;
 public class QnaBoardServiceImpl implements QnaBoardService{
 	
 	@Autowired
-	QnaBoardDAO dao;
+	QnaBoardDao dao;
 	
 	public List<QnaBoard> listBoard(){
 		return dao.selectBoardVOs();
