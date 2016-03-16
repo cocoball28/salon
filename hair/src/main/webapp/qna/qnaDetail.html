@@ -11,54 +11,80 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+ <script src ="https://code.jquery.com/jquery-1.11.2.js"></script>
 
 </head>
 <body>
 <div id="wrap" class="qna">
-     <
+     
    	 <div id="header"></div>
      <div id="sidebar">
-        <img src="./img/hair4.jpg" width="200px" ></br>
-   	    <img src="./img/hair5.jpg" width="200px" ></br>
- 		</div>
+      </div>
      
-     <div id="content">
-     <table width="600" align="center">
+     <div id="content" align="center">
+     <table width="600" align="center" border="1" id="basic_table">
      </table>
      <script>
-		var contextRoot = 'http://localhost:8008/salon/';
-		$.ajax(contextRoot + '/board/detail.do', {
+     	var no = location.href.split('?')[1].split('=')[1];
+		var contextRoot = 'http://localhost:8008/salon';
+		$.ajax(contextRoot + '/board/detail.do?qna_no=' + no, {
 			dataType: 'json',
 			method: 'GET',
 			success: function(resultObj) {
 				  var table = $("#basic_table");
-				  //alert(resultObj);
-				  var board of resultObj {
-				    $("<tr>")
-				      .html("<td>"+제목+"</td><td>" + board.qna_title + "</td></tr>"
-							+"<tr><td>"+닉네임+"</td><td>" +board.nick+ "</td></tr>"
-							+"<tr><td>"+번호+"</td><td>" +board.qna_no+ "</td></tr>"
-							+"<tr><td>"+조회수+"</td><td>" +board.viewnum+ "</td></tr>"
-							+"<tr><td>"+날짜+"</td><td>" +board.reg_Date+ "</td></tr>"
-							+"<tr><td colspan=2><textarea class='form-control',rows=7>"+qna_content
-							+"</textarea></td></tr>"
-							     
-							.appendTo(table);
-				  }				
+				 //alert(resultObj);
+				  var board = resultObj.data;
+				  //alert(board.qna_title);
+				    $("<tr>").html("<td>제목</td><td><input type=text value="+board.qna_title 
+				    		+"></td></tr>").appendTo(table);
+				    $("<tr>").html("<td>닉네임</td><td><input type=text value="+board.nick
+				    		+"></td></tr>").appendTo(table);
+		    		$("<tr>").html("<td>번호</td><td>" +board.qna_no+ "</td></tr>").appendTo(table);
+    				$("<tr>").html("<td>조회수</td><td>" +board.viewnum+ "</td></tr>").appendTo(table);
+					$("<tr>").html("<td>날짜</td><td>" +board.reg_Date+ "</td></tr>").appendTo(table);
+					$("<tr>").html("<td colspan=2>"+board.qna_content+"</td></tr>").appendTo(table);
 			},
-			error: function(jqXHR, textStatus, errorThrown) {
+		    error: function(jqXHR, textStatus, errorThrown) {
 				alert("오호라.. 오류다!");
 				console.log(textStatus);
 				console.log(errorThrown);
 			}
+			
+			
+					
 		});
+		
+		
 		</script>
+		<script>
+		var no = location.href.split('?')[1].split('=')[1];
+		var contextRoot = 'http://localhost:8008/salon';
+		$.ajax(contextRoot + '/board/detail.do?qna_no=' + no, {
+			dataType: 'json',
+			method: 'GET',
+			success: function(resultObj) {
+				var board =resultObj.data
+			},
+			var updateForm function(){
+				alert(aaa);
+			},
+			var delete function(){
+				"doucment.location.href='/delete.do?qna_no=board.qna_no'"
+			}
+		}	
+		</script>
+  
+         
+         <input class="btn btn-default" type="button" value="수정" onclick="updateForm()">
+         <input class="btn btn-default" type="button" value="삭제" onclick="delete()">
+         <input class="btn btn-default" type="button" value="리스트"
+          onclick="document.location.href='qnaList.html'">
+                                                            
+     
      </div>
      
      <div id="righter">
-        <img src="./img/hair1.jpg" width="200px"></br>
-        <img src="./img/hair6.jpg" width="200px"></br>
-   	</div>
+     </div>
 </div>
 </body>
 </html>
