@@ -9,6 +9,11 @@
   	<result column="email" property="email"/>
   	<result column="pwd" property="pwd"/>
   </resultMap>
+  <resultMap type="memberImage" id="memberImageMap">
+  	<result column="nick" property="nick"/>
+  	<result column="file_name" property="fileName"/>
+  </resultMap>
+  
 	
   	<select id="selectOneByEmailPassword" resultType="Member" parameterType="map">
 		select *
@@ -16,6 +21,15 @@
 		where email=#{email} and pwd=#{password}
 	</select>
 	
+	<select id="insert" parameterType="member">
+		insert into test_member(nick, email, pwd) values (#{nick}, #{email}, #{pwd});
+	</select>
+  
+  
+  <!-- 파일 -->
+    <select id="insertImage" parameterType="memberImage" resultType="memberImage">
+    	insert into test_member_image (nick, file_name) values ( #{nick}, #{fileName} );
+    </select>
   
 </mapper>
 
