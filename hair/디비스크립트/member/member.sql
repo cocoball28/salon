@@ -14,5 +14,13 @@ insert into test_member(email, pwd, nick) values ('c@c.net', '1111', 'chanho');
 
 select * from test_member;
 
-select * from test_member
-where id = 'a@a.net' and pw = '1111';
+create table test_member_image(
+	nick varchar(10) not null,
+	file_name varchar(100) primary key
+);
+
+drop table test_member_image;
+
+select * from test_member_image;
+
+insert into test_member_image (nick, file_name) values ( #{nick}, #{fileName})
