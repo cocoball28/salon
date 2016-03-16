@@ -1,0 +1,55 @@
+@charset "euc-kr";
+
+/* DBROS eBiz Dept. Yeon Byeonghwa (2012.07 ~) */
+
+/* Reset
+============================== */
+#wrap{width:1117px; height:800px; background:#222f; margin:0 auto}
+#header{width:1117px; height:130px; margin-bottom:10px; background:yellow;}
+#sidebar{width:200px;height:500px; float:left; margin-left:10px; margin-right:10px; background:white;}
+#content{width:650px; height:500px;float:left; background:#222f;}
+#righter{width:200px;height:500px; float:right; margin-left:10px; margin-right:30px; background:white;}
+
+
+html, body, object, iframe,
+h1, h2, h3, h4, h5, h6, p,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, select, input, textarea, button,
+table, caption, tbody, tfoot, thead, tr, th, td {margin:0; padding:0; vertical-align:top;}
+body {color:#222f; font-size:12px; font-family:'µ¸¿ò', Dotum, sans-serif; line-height:1.2;}
+ol, ul, li {list-style:none;}
+hr {display:none;}
+select, input, textarea {color:#666; font-size:12px; font-family:'µ¸¿ò', Dotum, sans-serif; line-height:1.2;}
+img, fieldset {border:0; vertical-align:top;}
+button {cursor:pointer;}
+a {color:#666; vertical-align:top; text-decoration:none;}
+a:hover,
+a:focus {color:#ae5200;}
+
+.basic_table {width:100%; border-collapse:collapse; border-spacing:0; border:2px solid #474747; border-width:2px 0;}
+.basic_table th,
+.basic_table td {padding:12px 0; color:#b9b9b9; font-size:11px; text-align:center;}
+.basic_table th {border-bottom:1px solid #d7d7d7; background:url(../../koloncamping/images/2012ss/common/line_th.gif) no-repeat;}
+.basic_table th:first-child {background:none;}
+.basic_table .td_title {padding-left:20px; text-align:left;}
+.basic_table .td_title,
+.basic_table .td_writer {color:#878787; font-size:12px;}
+.basic_table .td_title a:hover,
+.basic_table .td_title a:focus {color:#ae5200 !important;}
+.basic_table .td_title span,
+.basic_table .td_title span a {color:#ae5200;}
+.basic_table .reply .td_title {padding-left:40px; background:url(../../koloncamping/images/2012ss/common/ico_reply.gif) no-repeat 20px 8px;}
+.basic_table .reply .td_title a {color:#d3a57c;}
+.basic_table .notice strong {color:#d47209;}
+.basic_table .notice .td_title a {font-weight:bold;}
+.basic_table .notice td {border-bottom:1px dotted #d7d7d7;}
+
+
+.search_box {padding:14px 0; border:1px solid #d7d7d7; border-width:1px 0; text-align:center;}
+.search_box label {margin-right:8px;}
+.search_box select {height:21px;}
+.search_box .input_txt {width:280px;}
+
+.content_section {width:660px;}
+.blind {z-index:-1px; overflow:hidden; visibility:hidden; position:absolute; height:1px; text-indent:-9999em;}
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<link href="./css/qna.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div id="wrap" class="qna">
+     <
+   	 <div id="header"></div>
+     <div id="sidebar">
+        <img src="./img/hair4.jpg" width="200px" ></br>
+   	    <img src="./img/hair5.jpg" width="200px" ></br>
+ 		</div>
+     
+     <div id="content">
+     <table width="600" align="center">
+     </table>
+     <script>
+		var contextRoot = 'http://localhost:8008/salon/';
+		$.ajax(contextRoot + '/board/detail.do', {
+			dataType: 'json',
+			method: 'GET',
+			success: function(resultObj) {
+				  var table = $("#basic_table");
+				  //alert(resultObj);
+				  var board of resultObj {
+				    $("<tr>")
+				      .html("<td>"+제목+"</td><td>" + board.qna_title + "</td></tr>"
+							+"<tr><td>"+닉네임+"</td><td>" +board.nick+ "</td></tr>"
+							+"<tr><td>"+번호+"</td><td>" +board.qna_no+ "</td></tr>"
+							+"<tr><td>"+조회수+"</td><td>" +board.viewnum+ "</td></tr>"
+							+"<tr><td>"+날짜+"</td><td>" +board.reg_Date+ "</td></tr>"
+							+"<tr><td colspan=2><textarea class='form-control',rows=7>"+qna_content
+							+"</textarea></td></tr>"
+							     
+							.appendTo(table);
+				  }				
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("오호라.. 오류다!");
+				console.log(textStatus);
+				console.log(errorThrown);
+			}
+		});
+		</script>
+     </div>
+     
+     <div id="righter">
+        <img src="./img/hair1.jpg" width="200px"></br>
+        <img src="./img/hair6.jpg" width="200px"></br>
+   	</div>
+</div>
+</body>
+</html>
