@@ -5,10 +5,10 @@
 /* Reset
 ============================== */
 #wrap{width:1117px; height:800px; background:#222f; margin:0 auto}
-#header{width:1117px; height:130px; margin-bottom:10px; background:yellow;}
-#sidebar{width:200px;height:500px; float:left; margin-left:10px; margin-right:10px; background:white;}
+#header{width:1117px; height:130px; margin-bottom:10px; background:#222f;}
+#sidebar{width:200px;height:500px; float:left; margin-left:10px; margin-right:10px; background:#222f;}
 #content{width:650px; height:500px;float:left; background:#222f;}
-#righter{width:200px;height:500px; float:right; margin-left:10px; margin-right:30px; background:white;}
+#righter{width:200px;height:500px; float:right; margin-left:10px; margin-right:30px; background:#222f;}
 
 
 html, body, object, iframe,
