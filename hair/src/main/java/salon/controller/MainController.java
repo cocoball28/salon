@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import salon.dao.MainDao;
+import salon.domain.AjaxResult;
 import salon.domain.Main;
 import salon.domain.Member;
 
@@ -37,11 +38,15 @@ public class MainController {
     return resultMap;
   }
   
-  @RequestMapping(value="add", method=RequestMethod.GET)
-  public String form() {
-    return "board/BoardForm";
+  @RequestMapping(value="updateFav", method=RequestMethod.GET)
+  public AjaxResult update(int no) throws Exception {
+    
+	
+    
+    return new AjaxResult("success", null);
   }
-      
+  
+  
   /*@RequestMapping(value="add", method=RequestMethod.POST)
   public AjaxResult add(Member member, MultipartFile file) throws Exception {
     
@@ -66,26 +71,7 @@ public class MainController {
     return new AjaxResult("success", board);
   }
 
-  @RequestMapping(value="update", method=RequestMethod.POST)
-  public AjaxResult update(Board board, MultipartFile file) throws Exception {
-    
-    if (file.getSize() > 0) {
-      String newFileName = MultipartHelper.generateFilename(file.getOriginalFilename());  
-      File attachfile = new File(servletContext.getRealPath(SAVED_DIR) 
-                                  + "/" + newFileName);
-      file.transferTo(attachfile);
-      board.setAttachFile(newFileName);
-    } else if (board.getAttachFile().length() == 0) {
-      board.setAttachFile(null);
-    }
-    
-    
-    if (boardDao.update(board) <= 0) {
-      return new AjaxResult("failure", null);
-    } 
-    
-    return new AjaxResult("success", null);
-  }
+  
   
   @RequestMapping("delete.do")
   public AjaxResult delete(int no, String password) throws Exception {

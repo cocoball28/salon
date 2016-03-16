@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import salon.dao.MemberDao;
 import salon.domain.AjaxResult;
@@ -58,23 +60,16 @@ public class AuthController {
     return ajaxResult;
   }
   
-  /*@RequestMapping(value="add", method=RequestMethod.POST)
-  public AjaxResult add(Member member, MultipartFile file) throws Exception {
-    
-    if (file.getSize() > 0) {
-      String newFileName = MultipartHelper.generateFilename(file.getOriginalFilename());  
-      File attachfile = new File(servletContext.getRealPath(SAVED_DIR) 
-                                  + "/" + newFileName);
-      file.transferTo(attachfile);
-      board.setAttachFile(newFileName);
-    }
-    
-    memberDao.insert(member);
-    System.out.println(member.getEmail());
-    System.out.println(member.getPwd());
-    
-    return new AjaxResult("success", "success");
-  }*/
+  @RequestMapping(value="add", method=RequestMethod.POST)
+  @ResponseBody
+  public AjaxResult add(Member member, MultipartHttpServletRequest mRequest) throws Exception {
+   
+	  
+	  String result = memberService.insert(member, mRequest);
+//    memberDao.insert(member);
+      System.out.println("성공 후 컨트롤러");
+    return new AjaxResult("success", result);
+  }
   
   @RequestMapping("logout")
   public String logout(HttpSession session) {
