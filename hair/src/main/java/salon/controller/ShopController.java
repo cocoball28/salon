@@ -1,5 +1,6 @@
 package salon.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import salon.dao.ShopDao;
 import salon.domain.Shop;
+import salon.domain.ShopImage;
 import salon.service.ShopService;
 
 @Controller
@@ -28,9 +30,12 @@ public class ShopController {
 	
 	@RequestMapping(value="regist", method=RequestMethod.POST)
 	@ResponseBody
-	public List<Shop> regist(MultipartHttpServletRequest mRequest) throws Exception {
+	public List<Shop> regist(Shop shop, MultipartHttpServletRequest mRequest) throws Exception {
 		System.out.println("컨트롤러");
-		return null;
+		System.out.println(mRequest);
+		
+		shopService.register(shop, mRequest);
+		return shopService.selectList();
 		//return shopService.register(mRequest);
 	}
 }
