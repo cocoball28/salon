@@ -22,7 +22,7 @@ body .container {
 	overflow: hidden;
 	width: 350px;
 	height: 600px;
-	margin: 140px auto 0;
+	margin: 70px auto 0;
 	background-color: rgba( 255, 255, 255, 0.7 );
 	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -45,7 +45,7 @@ body .container .half.bg {
 body .container h1 {
 	font-size: 18px;
 	font-weight: 700;
-	margin-bottom: 23px;
+	margin: 64.5px 30px;
 	text-align: center;
 	text-indent: 6px;
 	letter-spacing: 7px;
@@ -295,3 +295,4 @@ keyframes slideIn { 0% {
 	font-weight: 700;
 	text-decoration: none;
 }
+

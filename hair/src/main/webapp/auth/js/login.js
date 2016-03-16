@@ -14,12 +14,16 @@ $('.tabs .tab').click(function() {
 		$(this).addClass('active');
 		$('.cont').hide();
 		$('.signin-cont').show();
+		$("h1").show();
+		$(".preDiv").hide();
 	}
 	if ($(this).hasClass('signup')) {
 		$('.tabs .tab').removeClass('active');
 		$(this).addClass('active');
 		$('.cont').hide();
 		$('.signup-cont').show();
+		$(".preDiv").show();
+		$("h1").hide();
 	}
 });
 
@@ -46,6 +50,24 @@ $("#login_frm").submit(function(event){
 	return false;
 });
 
+/* preview */
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.preImg').attr('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#file").change(function(){
+    readURL(this);
+});
+
 	
 /* check validation */
 /* function checkForm(form){
@@ -61,14 +83,35 @@ $("#login_frm").submit(function(event){
 	}
 	return true;
 } */
+
 $("#regist_frm").submit(function(event){
 	event.preventDefault();
-	console.log("들오옴 submit" + $("#email").val())
-	$.post('/hair2/auth/add.do', {
-		nick: $('#nickname_reg').val(),
-		email: $('#email_reg').val(),
-		pwd: $('#password_reg').val()
-	}, function(resultObj) {
+	
+	var form = $("#regist_frm")[0];
+	var formData = new FormData(form);
+	console.log(form);
+	
+	$.ajax({
+		   url: "/hair2/auth/add.do",
+		   processData: false,
+		   contentType: false,
+		   data: formData,
+		   method: 'POST',
+		   success: function(resultObj){
+			   if(resultObj.data == "success"){
+				   alert("회원가입을 축하");
+				   window.location.href = "/hair2/auth/login.html"
+			   }else{
+				   alert("회원가입 실패");
+			   }
+			   
+		   },
+		   error: function(){
+			   alert("오류");
+		   }
+		});
+	
+	/*$.post('/hair2/auth/add.do', formData, function(resultObj) {
 		console.dir(resultObj);
 		var ajaxResult = resultObj.ajaxResult;
 		if (ajaxResult.status == "success") {
@@ -78,8 +121,29 @@ $("#regist_frm").submit(function(event){
 	        alert("회원가입 실패");
 	        return false;
 	    }
-	}, 'json');
+	}, false);*/
 
+	return false;
+});
+
+/*$("#regist_frm").submit(function(event){
+	event.preventDefault();
+	$.post('/hair2/auth/add.do', {
+		nick: $('#nick_reg').val(),
+		email: $('#email_reg').val(),
+		pwd: $('#pwd_reg').val()
+	}, function(resultObj) {
+		console.dir(resultObj);
+		var ajaxResult = resultObj.ajaxResult;
+		if (ajaxResult.status == "success") {
+			alert("회원가입을 축하합니다")
+			location.href = contextPath+"/auth/login.html";
+		} else {
+			alert("회원가입 실패");
+			return false;
+		}
+	}, 'json');
+	
 	console.log("회원가입");
 	return false;
-})
+});*/

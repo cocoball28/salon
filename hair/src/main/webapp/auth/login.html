@@ -5,13 +5,35 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/login.css">
 <style>
-
+.preDiv{
+	width: 130px;
+	height: 150px;
+	margin: 0 auto;
+	display: none;
+}
+.preImg{
+	width: 130px;
+	heigth: 150px;
+	position: absolute;
+}
+#file{
+	width: 130px;
+	height: 130px;
+	position: absolute;
+	z-index: 10;
+	opacity: 0;
+}
 </style>
 </head>
 <body>
 <section class="container">
 	<article class="half">
 		<h1>Design</h1>
+		<div class="preDiv">
+			<input type="file" name="img" id="file" class="inpt designerMenu" />
+			<label for="file"></label>
+			<img class="preImg" src="images/placeholder.png"/>
+		</div>
 		<div class="tabs">
 			<span class="tab signin active"><a href="#signin">Sign in</a></span>
 			<span class="tab signup"><a href="#signup">Sign up</a></span>
@@ -32,19 +54,17 @@
 				</form>
 			</div>
 			<div class="signup-cont cont">
-				<form method="post" id="regist_frm" >
-					<input type="radio" id="userRadio" name="userInfo" value="user" checked="checked"/>이용자
-					<input type="radio" id="designerRadio" name="userInfo" value="designer" />미용사
+				<form id="regist_frm" >
+					<input type="radio" id="userRadio" name="grade" value="user" checked="checked"/>이용자
+					<input type="radio" id="designerRadio" name="grade" value="designer" />미용사
 					<label for="radio"></label>
-					<input type="text" name="text" id="nickname_reg" class="inpt" required="required" placeholder="Your nickname"> 
+					<input type="text" name="nick" id="nick_reg" class="inpt" required="required" placeholder="Your nickname"> 
 					<label for="name"></label> 
 					<input type="email" name="email" id="email_reg" class="inpt" required="required" placeholder="Your email"> 
 					<label for="email"></label> 
-					<input type="password" name="pwd1" id="password_reg" class="inpt" required="required" placeholder="Your password">
-					<input type="password" name="pwd2" id="password2_reg" class="inpt" required="required" placeholder="Your password">
+					<input type="password" name="pwd" id="pwd_reg" class="inpt" required="required" placeholder="Your password">
+					<input type="password" name="pwd1" id="pwd2_reg" class="inpt" required="required" placeholder="Your password">
 					<label for="password"></label>
-					<input type="file" id="file" class="inpt designerMenu" />
-					<label for="file"></label>
 					<div class="submit-wrap">
 						<input type="submit" value="Sign up" class="submit"> 
 						<a href="#" class="more">Treat your hair by Your own designer</a>
