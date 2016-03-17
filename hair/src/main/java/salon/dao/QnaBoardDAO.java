@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import salon.domain.QnaBoard;
 
 @Repository
-public interface QnaBoardDAO {
+public interface QnaBoardDao {
 	
 	
 	public List<QnaBoard> selectBoardVOs();
