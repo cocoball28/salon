@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>	
-    
+   
 
 
 
@@ -18,8 +18,7 @@
 <body>
 	<div id="wrap" class="qna">
 		<div class="header" id="header"></div>
-   		<div id="sidebar">
-   		</div>
+   		<div id="sidebar"></div>
    		<div class="qna_list" id="content">
    			<font color="#FE9A2E"><h3>Q&A</h3></font>
    			<div class="content_section"></div>
@@ -53,26 +52,19 @@
 		    </tr>
  			
 			</table>
-		   
-
-
-          
-             
-  
-       
-			
-			
-			<br/>
+		      
+		    <br/>
  			<p align="right"><input class="btn btn-warning" type="button" value="글쓰기" onclick="document.location.href='qnaRegistForm.html'"></p>
      	</div>
-	    <div id="righter">
+     	
+     	
+	    <div id="righter"></div>
+   		
    		</div>
-   		
-   		
-   		
-	</div>
+   	 
+	
 	<script>
-		var contextRoot = 'http://localhost:8008/qnaboard';
+		var contextRoot = 'http://localhost:8008/salon';
 		$.ajax(contextRoot + '/board/list.do', {
 			dataType: 'json',
 			method: 'GET',
@@ -99,7 +91,7 @@
 
 		
 		function check_search_form() {
-			var contextRoot = 'http://localhost:8008/qnaboard';
+			var contextRoot = 'http://localhost:8008/salon';
 			$("#basic_table").remove();
 			$.ajax(contextRoot + '/board/list.do?', {
 				dataType: 'json',
@@ -128,5 +120,7 @@
 			});
 		}
 	</script> 
+    
+   
 </body>
 </html>
