@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import salon.dao.MainDao;
@@ -29,10 +30,15 @@ public class MainController {
   
    
   @RequestMapping("list")
-  public HashMap<String, Object> list(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    List<Main> mList = mainDao.mainList();
-    Member member = (Member)request.getSession().getAttribute("loginUser");
+  @ResponseBody
+  public HashMap<String, Object> list(HttpServletRequest request, HttpServletResponse response,
+		  @RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="20") int pageSize) throws Exception {
     HashMap<String, Object> resultMap = new HashMap<>();
+	resultMap.put("startIndex", (pageNo - 1) * pageSize);
+	resultMap.put("length", pageSize);
+	
+    List<Main> mList = mainDao.mainList(resultMap);
+    Member member = (Member)request.getSession().getAttribute("loginUser");
     resultMap.put("member", member);
     resultMap.put("mList", mList);
     
@@ -52,7 +58,7 @@ public class MainController {
 		mainDao.updateFav(main);
 	}
 	
-	
+	System.out.println("성공");
     return new AjaxResult("success", "success");
   }
   
