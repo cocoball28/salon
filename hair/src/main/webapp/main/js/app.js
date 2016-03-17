@@ -13,8 +13,8 @@ window.addEventListener('DOMContentLoaded', function(e) {
             // get last box of the column
             var lastBox = Array.prototype.slice.call(waterfall.columns[i].children, -1)[0];
             if(checkSlide(lastBox)) {
-                var count = 10;
-                while(count--) waterfall.addBox(boxHandle());
+               /* var count = 10;
+                while(count--) waterfall.addBox(boxHandle());*/
             }
         }
     };
