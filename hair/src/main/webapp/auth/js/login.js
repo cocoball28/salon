@@ -43,7 +43,7 @@ $("#login_frm").submit(function(event){
 			console.log(data);
 		},
 		success: function(resultObj){
-			window.location.href = contextPath+"/main/MainList.html"
+			window.location.href = contextPath+"/main/mainlist.html"
 		}
 	}
 	)
@@ -89,7 +89,6 @@ $("#regist_frm").submit(function(event){
 	
 	var form = $("#regist_frm")[0];
 	var formData = new FormData(form);
-	console.log(form);
 	
 	$.ajax({
 		   url: "/hair2/auth/add.do",
@@ -111,17 +110,6 @@ $("#regist_frm").submit(function(event){
 		   }
 		});
 	
-	/*$.post('/hair2/auth/add.do', formData, function(resultObj) {
-		console.dir(resultObj);
-		var ajaxResult = resultObj.ajaxResult;
-		if (ajaxResult.status == "success") {
-			alert("회원가입을 축하합니다")
-      		location.href = contextPath+"/auth/login.html";
-	    } else {
-	        alert("회원가입 실패");
-	        return false;
-	    }
-	}, false);*/
 
 	return false;
 });
