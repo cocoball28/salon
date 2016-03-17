@@ -37,16 +37,11 @@ public class QnaBoardController {
 	
 	@RequestMapping("/list.do")
 	public @ResponseBody Map<String, Object> selectList(){
-	    int number;
+	 
 		int count = boardService.boardCount();
-	    if(count%10==0){
-	    	number = count/10;
-	    }else{
-	    	number = count/10 +1;
-	    }
+	   
 	    Map<String, Object> resultObj = new HashMap<String, Object>();
 		resultObj.put("status", "success");
-		resultObj.put("number", number);
 		List<QnaBoard> board = boardService.listBoard();
 		resultObj.put("data", board);	
 		
@@ -55,16 +50,10 @@ public class QnaBoardController {
 	
 	@RequestMapping("/listTitle.do")
 	public @ResponseBody Map<String, Object> selectListTitle(){
-		int count = boardService.boardCount();
-		int number;
-		if(count%10!=0){
-			number = count/10+1;
-		}else{
-			number = count/10;
-		}
-		Object bunho = number;
+		
+		
 		Map<String, Object> resultObj = new HashMap<String, Object>();
-		resultObj.put("number",number);
+		
 		resultObj.put("status", "success");
 		List<QnaBoard> board = boardService.listBoardTitle();
 		resultObj.put("data", board);	
@@ -74,16 +63,10 @@ public class QnaBoardController {
 	
 	@RequestMapping("/listContent.do")
 	public @ResponseBody Map<String, Object> selectListContent(){
-		int count = boardService.boardCount();
-		int number;
-		if(count%10!=0){
-			number = count/10+1;
-		}else{
-			number = count/10;
-		}
-		Object bunho = number;
+		
+		
 		Map<String, Object> resultObj = new HashMap<String, Object>();
-		resultObj.put("number",number);
+		
 		resultObj.put("status", "success");
 		List<QnaBoard> board = boardService.listBoardContent();
 		resultObj.put("data", board);	
@@ -93,16 +76,10 @@ public class QnaBoardController {
 	
 	@RequestMapping("/listNick.do")
 	public @ResponseBody Map<String, Object> selectListNick(){
-		int count = boardService.boardCount();
-		int number;
-		if(count%10!=0){
-			number = count/10+1;
-		}else{
-			number = count/10;
-		}
-		Object bunho = number;
+		
+		
 		Map<String, Object> resultObj = new HashMap<String, Object>();
-		resultObj.put("number",number);
+		
 		resultObj.put("status", "success");
 		List<QnaBoard> board = boardService.listBoardNick();
 		resultObj.put("data", board);	
