@@ -56,23 +56,7 @@
 		
 		
 		</script>
-		<script>
-		var no = location.href.split('?')[1].split('=')[1];
-		var contextRoot = 'http://localhost:8008/salon';
-		$.ajax(contextRoot + '/board/detail.do?qna_no=' + no, {
-			dataType: 'json',
-			method: 'GET',
-			success: function(resultObj) {
-				var board =resultObj.data
-			},
-			var updateForm function(){
-				alert(aaa);
-			},
-			var delete function(){
-				"doucment.location.href='/delete.do?qna_no=board.qna_no'"
-			}
-		}	
-		</script>
+		
   
          
          <input class="btn btn-default" type="button" value="수정" onclick="updateForm()">
