@@ -12,10 +12,16 @@
 		<result column="favorite" property="favorite"/>
 	</resultMap>
 	
-	<select id="mainList" resultMap="mainMap">
+	<select id="mainList" resultMap="mainMap" parameterType="map">
+		select *
+		  from test_test
+		 order by no desc
+		 limit #{startIndex}, #{length};
+	</select>
+<!-- 	<select id="mainList" resultMap="mainMap">
 		select *
 		  from test_test;
-	</select>
+	</select> -->
 	
 	<select id="selectByNo" parameterType="int" resultType="main">
 		select *
