@@ -32,6 +32,16 @@ $(function(){
 			// all dropdowns
 			$('.wrapper-dropdown-5').removeClass('active');
 		});
+//	profile
+		$(document).on("click", "#pro", function(){
+			alert("hi")
+		});
+		$("#pro").click(function(){
+			alert("profile")
+			
+//			$(".section").load(contextPath+"/header/modify.html .container")
+		})
 	});
+	
 
 });

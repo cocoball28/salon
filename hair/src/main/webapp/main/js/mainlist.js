@@ -5,10 +5,14 @@
 	}
 
 	var contextPath =  getContextPath();
-	 
-	 	 
-	 /* header */
-	 $(".header").load(contextPath+"/header/header.html .header")
+	 /* check login */
+	/*$.get("/hair2/check/checkLogin.do", function(data){
+		console.log(data);
+	}); 
+	*/
+	/* header */
+	$(".header").load(contextPath+"/header/header.html .header").trigger('pagecreate');
+		 
 	 
 	/* add bookmark */
 	$(document).on('click', '.bookmark', function(){
@@ -28,16 +32,16 @@
 		
 	  $.getJSON( ""+contextPath+"/salon/ajax/list.do"+"", function(resultObj) {
 		var cnt = 0;
-		console.log("first");
 		   $.each(resultObj.mList, function(key, value){
 				var html = ""
 				html += '<div class="wf-box">'; 
-				html += '<a class="detail"><image src="images/style-'+value.imageNo+'.jpg"/></a>';
+				html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.no+'">';
+				html += '<image src="images/style-'+value.imageNo+'.jpg"/></a>';
 				html += '<div class="content">';
 				html += '<h3>'+value.title+'</h3>';
 				html += '<hr>';
 				html += '<p>'+value.content+'</p>';
-				html += '<input type="hidden" class="no" value='+value.no+' />'
+				html += '<input type="hidden" class="contentNo" value='+value.no+' />'
 				html += '<div class="optionDiv">'
 				html += '<a class="bookmark">';
 				if(value.favorite == 0){
@@ -51,7 +55,8 @@
 				cnt++;
 				if(cnt == 5) cnt = 0;
 		  }) 
-		   $("#dd").html(resultObj.member.nick);
+		   $("#dd").append(resultObj.member.nick);
+		   $("#dd").append("<input type='hidden' id='memberNo' value="+resultObj.member.no+" />")
 	});
 	})
 	
@@ -92,3 +97,4 @@
 			
 		}
 	});
+	

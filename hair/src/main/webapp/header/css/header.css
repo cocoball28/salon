@@ -151,3 +151,24 @@ a:hover { color: #41ccff; }
 @media screen and (min-width: 1200px) {
     .wf-container { width: 1170px; }
 }
+
+.preDiv{
+	width: 130px;
+	height: 150px;
+	margin: 0 auto;
+}
+.preImg{
+	width: 130px;
+	heigth: 150px;
+	position: absolute;
+}
+#file{
+	width: 130px;
+	height: 130px;
+	position: absolute;
+	z-index: 10;
+	opacity: 0;
+}
+label{
+	display: none;
+}
