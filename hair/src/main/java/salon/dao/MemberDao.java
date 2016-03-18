@@ -15,4 +15,6 @@ public interface MemberDao {
 
 	MemberImage insertImage(MemberImage memberImage);
 
+	Member modifyUser(int no);
+
 }

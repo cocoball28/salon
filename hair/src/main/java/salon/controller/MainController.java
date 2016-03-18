@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import salon.dao.MainDao;
+import salon.dao.MemberDao;
 import salon.domain.AjaxResult;
 import salon.domain.Main;
 import salon.domain.Member;
@@ -27,7 +28,7 @@ public class MainController {
   
   @Autowired MainDao mainDao;
   @Autowired ServletContext servletContext;
-  
+  @Autowired MemberDao memberDao;
    
   @RequestMapping("list")
   @ResponseBody
@@ -63,6 +64,39 @@ public class MainController {
   }
   
   
+  // 회원정보
+  @RequestMapping(value="update", method=RequestMethod.GET)
+  @ResponseBody
+  public Member update(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  
+	  Member member = (Member)request.getSession().getAttribute("loginUser");
+	  System.out.println("member" + member);
+	  return member;
+  }
+/*  @RequestMapping(value="update", method=RequestMethod.GET)
+  @ResponseBody
+  public Member update(int no) throws Exception{
+	  
+	  Member member = memberDao.modifyUser(no);
+	  System.out.println("member" + member);
+	  return member;
+  }
+*/  
+  /*@RequestMapping("delete.do")
+  public AjaxResult delete(int no, String password) throws Exception {
+
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("no", no);
+    paramMap.put("password", password);
+    
+    if (mainDao.delete(paramMap) <= 0) {
+      return new AjaxResult("failure", null);
+    } 
+
+    return new AjaxResult("success", null);
+  }
+ */
+  
   /*@RequestMapping(value="add", method=RequestMethod.POST)
   public AjaxResult add(Member member, MultipartFile file) throws Exception {
     
@@ -87,19 +121,6 @@ public class MainController {
     return new AjaxResult("success", board);
   }
 
+  */
   
-  
-  @RequestMapping("delete.do")
-  public AjaxResult delete(int no, String password) throws Exception {
-
-    HashMap<String,Object> paramMap = new HashMap<>();
-    paramMap.put("no", no);
-    paramMap.put("password", password);
-    
-    if (boardDao.delete(paramMap) <= 0) {
-      return new AjaxResult("failure", null);
-    } 
-
-    return new AjaxResult("success", null);
-  }*/
 }

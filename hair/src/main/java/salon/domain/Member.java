@@ -1,10 +1,19 @@
 package salon.domain;
 
 public class Member {
+	private int no;
 	private String nick;
 	private String email;
 	private String pwd;
 	
+	
+	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public String getNick() {
 		return nick;
 	}

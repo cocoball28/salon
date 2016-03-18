@@ -71,10 +71,18 @@ public class AuthController {
     return new AjaxResult("success", result);
   }
   
+  @RequestMapping(value="checkLogin", method=RequestMethod.POST)
+  public AjaxResult check() throws Exception{
+	  
+	  
+	  
+	  return null;
+  }
+  
   @RequestMapping("logout")
   public String logout(HttpSession session) {
     session.invalidate();
-    return "redirect:login.do";
+    return "success";
   }
 }
 
