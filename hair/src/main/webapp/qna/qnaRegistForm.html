@@ -20,7 +20,7 @@
    </div>
  
  <div id="content">
-<form action="/salon/board/regist.do" method="post">
+<form action="/salon/board/regist.do" enctype="multipart/form-data" method="post">
 <table align="center" width="650px">
 <tr><td><div class="input-group">
   <span class="input-group-addon" id="basic-addon1">닉네임</span>
@@ -32,7 +32,7 @@
 </div></td></tr>
 <tr><td><textarea class="form-control" rows="7" name="qna_content"></textarea></td></tr>
 </table><br/>
-<p align="center"><input type="submit" value="글등록">
+ <p align="center"><input type="submit" value="글등록">
  <input type="button" value="취소" onclick="document.location.href='qnaList.html'"></p>
  </form>
 </div>
