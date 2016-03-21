@@ -1,9 +1,8 @@
 package salon.dao;
 
 import java.util.List;
+import java.util.Map;
 
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import salon.domain.QnaBoard;
@@ -12,15 +11,12 @@ import salon.domain.QnaBoard;
 public interface QnaBoardDao {
 	
 	
-	public List<QnaBoard> selectBoardVOs();
-    public int insertBoardVO(QnaBoard vo);
+	public List<QnaBoard> selectBoardVOs(Map<String, Object> param);
+    public int insertBoardVO(QnaBoard board);
     public QnaBoard selectBoardVO(int qna_no);
 	public void deleteBoardVO(int qna_no);
 	public void updateBoardVO(QnaBoard board);
 	public void updateView(int viewnum);
 	public int boardCount();
-	public List<QnaBoard> selectBoardVOsTitle();
-	public List<QnaBoard> selectBoardVOsContent();
-	public List<QnaBoard> selectBoardVOsNick();
-	
+	public void saveImage(Map<String, Object> hmap);
 }
