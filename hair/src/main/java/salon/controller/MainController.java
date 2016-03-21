@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import salon.dao.MainDao;
 import salon.dao.MemberDao;
 import salon.domain.AjaxResult;
 import salon.domain.Main;
 import salon.domain.Member;
+import salon.service.MemberService;
 
 @Controller("ajax.BoardController")
 @RequestMapping("/salon/ajax/*")
@@ -29,7 +31,8 @@ public class MainController {
   @Autowired MainDao mainDao;
   @Autowired ServletContext servletContext;
   @Autowired MemberDao memberDao;
-   
+  @Autowired MemberService memberService; 
+  
   @RequestMapping("list")
   @ResponseBody
   public HashMap<String, Object> list(HttpServletRequest request, HttpServletResponse response,
@@ -64,14 +67,25 @@ public class MainController {
   }
   
   
+  
+  
   // 회원정보
   @RequestMapping(value="update", method=RequestMethod.GET)
   @ResponseBody
   public Member update(HttpServletRequest request, HttpServletResponse response) throws Exception{
-	  
 	  Member member = (Member)request.getSession().getAttribute("loginUser");
-	  System.out.println("member" + member);
+	  member = memberDao.getMember(member.getNo());
+	  System.out.println("file " + member.getFilePath());
 	  return member;
+  }
+  
+  @RequestMapping(value="update", method=RequestMethod.POST)
+  @ResponseBody
+  public AjaxResult updateMember(Member member, MultipartHttpServletRequest mRequest) throws Exception{
+	  System.out.println("file " + member.getNo());
+	  String result = memberService.updateMember(member, mRequest);
+	  
+	  return null;
   }
 /*  @RequestMapping(value="update", method=RequestMethod.GET)
   @ResponseBody

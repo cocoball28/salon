@@ -48,7 +48,6 @@ public class AuthController {
     response.addCookie(emailCookie);
     
     Member member = memberService.retrieve(email, password);
-    
     AjaxResult ajaxResult = new AjaxResult("success", member);
     if (member == null) { // 로그인 실패!
       session.invalidate(); // 세션을 무효화시킴. => 새로 세션 객체 생성!
@@ -63,11 +62,8 @@ public class AuthController {
   @RequestMapping(value="add", method=RequestMethod.POST)
   @ResponseBody
   public AjaxResult add(Member member, MultipartHttpServletRequest mRequest) throws Exception {
-   
-	  
+	  System.out.println("controller" + member.getEmail());
 	  String result = memberService.insert(member, mRequest);
-//    memberDao.insert(member);
-      System.out.println("성공 후 컨트롤러");
     return new AjaxResult("success", result);
   }
   
@@ -79,7 +75,8 @@ public class AuthController {
 	  return null;
   }
   
-  @RequestMapping("logout")
+  @RequestMapping(value="logout", method=RequestMethod.GET)
+  @ResponseBody
   public String logout(HttpSession session) {
     session.invalidate();
     return "success";
