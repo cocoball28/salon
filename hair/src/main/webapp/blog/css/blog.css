@@ -1,5 +1,10 @@
 @CHARSET "UTF-8";
 
+body {
+  background: #f7f6f3;
+  font-family: sans-serif;
+}
+
 .container {
 	padding: 0px
 }
