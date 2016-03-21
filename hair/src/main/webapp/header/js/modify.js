@@ -24,3 +24,4 @@ function readURL(input) {
 $("#file").change(function(){
     readURL(this);
 });
+
