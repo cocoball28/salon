@@ -11,7 +11,7 @@
 	}); 
 	*/
 	/* header */
-	$(".header").load(contextPath+"/header/header.html .header").trigger('pagecreate');
+	$(".header").load(contextPath+"/header/header.html .header");
 		 
 	 
 	/* add bookmark */

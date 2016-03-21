@@ -89,7 +89,7 @@ $("#regist_frm").submit(function(event){
 	
 	var form = $("#regist_frm")[0];
 	var formData = new FormData(form);
-	
+	formData.append("files", $("#file")[0].files[0]);
 	$.ajax({
 		   url: "/hair2/auth/add.do",
 		   processData: false,
@@ -114,24 +114,3 @@ $("#regist_frm").submit(function(event){
 	return false;
 });
 
-/*$("#regist_frm").submit(function(event){
-	event.preventDefault();
-	$.post('/hair2/auth/add.do', {
-		nick: $('#nick_reg').val(),
-		email: $('#email_reg').val(),
-		pwd: $('#pwd_reg').val()
-	}, function(resultObj) {
-		console.dir(resultObj);
-		var ajaxResult = resultObj.ajaxResult;
-		if (ajaxResult.status == "success") {
-			alert("회원가입을 축하합니다")
-			location.href = contextPath+"/auth/login.html";
-		} else {
-			alert("회원가입 실패");
-			return false;
-		}
-	}, 'json');
-	
-	console.log("회원가입");
-	return false;
-});*/

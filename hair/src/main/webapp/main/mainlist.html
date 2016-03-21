@@ -67,44 +67,13 @@ label{
 
 $(document).ready(function(){
 	
-		/* logout */
-	
- 	$(document).on("click","#out",function(){
- 		alert("logout");
- 		$.get("/hair2/salon/ajax/logout.do", function(data){
- 			console.log(data);
- 		});
- 	}); 
-	
-	 // get modify
-	$(document).on("click","#pro",function( ){
-		var memberNo = $(this).closest('#dd').find("[type=hidden]").val();			
-		alert("정보수정 들어옴" + memberNo);
-		$.ajax({
-			   url: "/hair2/salon/ajax/update.do",
-			   method: 'get',
-			   data: {no:memberNo},
-			   success: function(data){
-					   console.log(data);
-					   
-				   
-			   },
-			   error: function(){
-				   alert("오류");
-			   }
-			});
-		
-
-		return false;
-	}); 
-		
 		
 }); 
 
 </script>
 <script src="js/mainlist.js"></script>
 <script src="js/app.js"></script>
-
+<script src="../header/js/modify.js"></script>
 <script src="../header/js/header.js"></script>
 </body>
 </html>
