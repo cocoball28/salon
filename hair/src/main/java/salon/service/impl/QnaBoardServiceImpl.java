@@ -1,6 +1,7 @@
 package salon.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	@Autowired
 	QnaBoardDao dao;
 	
-	public List<QnaBoard> listBoard(){
-		return dao.selectBoardVOs();
+	public List<QnaBoard> listBoard(Map<String, Object> param){
+		return dao.selectBoardVOs(param);
 	}
 	
 	public void regist(QnaBoard vo){
@@ -31,7 +32,7 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 		dao.deleteBoardVO(qna_no);
 	}
 	
-	public void update(QnaBoard vo){
+	public void updateBoard(QnaBoard vo){
 		dao.updateBoardVO(vo);
 	}
 	
@@ -43,17 +44,14 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 		return dao.boardCount();
 	}
 	
-	public List<QnaBoard> listBoardTitle(){
-		return dao.selectBoardVOsTitle();
+	public void regiImage(Map<String,Object> hmap){
+	    dao.saveImage(hmap);
 	}
+
 	
-	public List<QnaBoard> listBoardContent(){
-		return dao.selectBoardVOsContent();
-	}
 	
-	public List<QnaBoard> listBoardNick(){
-		return dao.selectBoardVOsNick();
-	}
+
+
 	
 	
 
