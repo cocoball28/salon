@@ -1,0 +1,129 @@
+@CHARSET "UTF-8";
+
+body {
+  background: #f7f6f3;
+  font-family: sans-serif;
+}
+
+.container {
+	padding: 0px
+}
+
+.varDiv {
+	margin: auto;
+	width: 1170px;
+	background:;
+}
+
+
+
+.contentControlBtn {
+	cursor: pointer; 
+	font-size: 10px;
+	/* 
+	font-weight:bold; 
+	*/
+	color: grey;
+	cursor:pointer;
+}
+.contentControlBtn:HOVER {
+	color: lightgrey;
+}
+
+.contentsDiv {
+	max-width: 1000px;
+	background: ;
+	float: left;
+}
+
+.contentDiv {
+	margin: 10px;
+	max-width: 650px;
+	background:;
+	float: right;
+}
+
+.infoDiv {
+	margin-top: 20px;
+	max-width: 250px;
+	float: left;
+	
+}
+
+.partnerInfoDiv_1{
+	transition-delay:1s;
+}
+
+
+.infoDivDummy {
+	margin-top: 20px;
+	max-width: 250px;
+	padding: 10px;
+	background:;
+	float: left;
+}
+
+.secondInfoDiv {
+	margin-top: 20px;
+	width:250px;
+	background:;
+	float: right;
+}
+
+.message {
+	padding:0px;	
+	border:1px solid lightgrey;
+	top: 200px;
+	right: 400px;
+	position: absolute;
+	/* display: none; */
+	background: white;
+	z-index: 10;
+}
+.message > .messageContainer {
+	height: 300px;
+	
+}
+
+.mainContents {
+	background: white;
+	padding: 10px;
+	margin: 10px;
+	border: 1px solid #F5F3F3;
+}
+.agentList td{
+	padding: 3px;
+}
+
+.mainContents img{
+	margin-bottom: 10px;
+}
+.agentList tr:HOVER {
+	background: lightgrey;
+}
+
+.sticky {
+	position: fixed;
+	top: 0px;
+}
+
+.stickyElse {
+	position: fixed;
+	top: 20px;
+}
+
+.message.stickyElse {
+	position: fixed;
+	top: 50px;
+}
+
+.likeSign{
+	opacity:0.3;
+}
+
+.uploadImage{
+	position: absolute;
+	width: 40px;
+	opacity:0;
+	cursor: pointer;
+}
