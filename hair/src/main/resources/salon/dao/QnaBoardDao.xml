@@ -18,25 +18,35 @@
 	   select count(*) from qna_board
 	</select>
 	
-	<select id="selectBoardVOs" resultType="qnaBoard">
-        select * from qna_board order by qna_no desc  
+	<select id="selectBoardVOs" parameterType="map" resultType="qnaBoard">		
+        select * 
+        from qna_board
+        <if test="searchSelect != null">
+        	<if test="search_txt != null">
+        		<choose>
+        		<when test="searchSelect.equals('subject')">
+        			WHERE qna_title LIKE CONCAT('%', #{search_txt}, '%')
+        		</when>
+        		<when test="searchSelect.equals('content')">
+        			WHERE qna_content LIKE CONCAT('%', #{search_txt}, '%')
+        		</when>
+        		<when test="searchSelect.equals('name')">
+        			WHERE nick = #{search_txt}
+        		</when>
+        		</choose>
+        	</if>
+        </if>
+        order by qna_no desc
+        <if test="pageNo != null">
+        limit #{startIdx}, 10
+        </if>
 	</select>
 	
-	<select id="selectBoardVOsTitle" resultType="qnaBoard">
-	   select * from qna_board where qna_title = #{%qna_title%} order by qna_no desc
-	</select>
 	
-	<select id="selectBoardVOsContent" resultType="qnaBoard">
-	   select * from qna_board where qna_content = #{%qna_content%} order by qna_no desc
-	</select>
-	
-	<select id="selectBoardVOsNick" resultType="qnaboard">
-	   select * from qna_board where nick = #{nick} order by qna_no desc
-	</select>
 	
 	<insert id="insertBoardVO" parameterType="qnaBoard">
-	    insert into qna_board (qna_title,qna_content,nick) 
-	    values (#{qna_title},#{qna_content},#{nick}) 
+	    insert into qna_board (qna_title,qna_content,nick, viewnum) 
+	    values (#{qna_title},#{qna_content},#{nick}, 0) 
 	</insert>
 	
 	<select id="selectBoardVO" parameterType="int" resultType="qnaBoard">
@@ -47,13 +57,18 @@
 	   delete from qna_board where qna_no = #{qna_no}
 	</delete>
 	
-	<update id="updateForm" parameterType="qnaBoard">
-	   update qna_board set qna_title=#{qna_title} qna_content=#{qna_content}
+	<update id="updateBoardVO" parameterType="qnaBoard">
+	   update qna_board set qna_title=#{qna_title} qna_content=#{qna_content} where qna_no = #{qna_no}
 	</update>
 	
-	<update id="updateView">
+	<update id="updateView" parameterType="int">
 	    update qna_board set viewnum = viewnum+1 where qna_no = #{qna_no}
 	</update>
 	
+	<insert id="saveImage" parameterType="java.util.Map">
+    insert into img_table blob values (#{img})    
+    </insert>
+    
+    
 	
 </mapper>
