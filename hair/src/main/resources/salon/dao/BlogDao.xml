@@ -5,7 +5,7 @@
 
 <mapper namespace="salon.dao.BlogDao">
 	
-	<resultMap id="blogMap" type="Blog">
+	<resultMap id="blogMap" type="blog">
   		<id property="no" column="no" />
   		<result property="tag" column="tag"/>
   		<result property="content" column="content"/>
