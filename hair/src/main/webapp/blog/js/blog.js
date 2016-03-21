@@ -16,6 +16,9 @@ $(".infoDiv").each(function(){
 });
 
 
+
+
+
 $(".repImg").each(function(){
 	var $window = $(window),
 	$repImg = $(this),
@@ -205,6 +208,18 @@ var addComment = function(blogDiv, data){
 
 /* 첫 화면 출력 =================================*/
 $(function(){
+	//hairdresser정보
+	$.post(
+			"",
+			{
+				hairdresserNo:hairdresserNo, 
+				viewPostNo: viewPostNo	
+			},
+			function(data){
+			}
+	)
+	
+	
 	$.post(
 			blogPath+"/blog/list.do",
 			function(data){
@@ -214,6 +229,7 @@ $(function(){
 				}
 	});
 })
+
 /* 첫 화면 출력 =================================*/
 
 /* 블로그 글삭제 파트 ==================================*/
@@ -242,7 +258,7 @@ var registBlog = function(){
 	   type: 'POST',
 	   success: function(data){
 		   //console.log(data);
-		   alert("성공");
+		  /* alert("성공");*/
 		   addBoard(data.blog, data.blogImageList);
 			$('.registForm').hide('slow');
 			$("[name=tag]").val("");
