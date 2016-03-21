@@ -9,7 +9,7 @@
   		<id property="no" column="no" />
   		<result property="tag" column="tag"/>
   		<result property="content" column="content"/>
-  		<collection property="blogImageList" ofType="BlogImage">
+  		<collection property="blogImageList" ofType="blogImage">
   			<id property="fileNo" column="file_no"/>
   			<result property="fileName" column="file_name"/>
   		</collection>
