@@ -5,32 +5,59 @@
 
 <mapper namespace="salon.dao.MemberDao">
   <resultMap type="member" id="memberMap">
-  	<result column="nick" property="nick"/>
+  	<result column="mno" property="mno"/>
   	<result column="email" property="email"/>
   	<result column="pwd" property="pwd"/>
-  </resultMap>
-  <resultMap type="memberImage" id="memberImageMap">
+  	<result column="name" property="name"/>
   	<result column="nick" property="nick"/>
-  	<result column="file_name" property="fileName"/>
+  	<result column="photo_path" property="photoPath"/>
+  	<result column="gender" property="gender"/>
+  	<result column="status" property="status"/>
   </resultMap>
-  
 	
-  	<select id="selectOneByEmailPassword" resultType="Member" parameterType="map">
+  	<select id="selectOneByEmailPassword" resultMap="memberMap" parameterType="map">
 		select *
-		from test_member
+		from member
 		where email=#{email} and pwd=#{password}
 	</select>
 	
-	<select id="insert" parameterType="member">
-		insert into test_member(nick, email, pwd) values (#{nick}, #{email}, #{pwd});
+	<insert id="insert" parameterType="member" >
+		insert into member(nick, email, pwd, photo_path, gender, status) 
+		values (#{nick}, #{email}, #{pwd}, #{photoPath}, #{gender}, #{status});
+	</insert>
+  	
+  	<select id="getMember" parameterType="int" resultMap="memberMap">
+  		select *
+  		  from member
+  		 where mno = #{mno}
+  	</select>
+   	
+	<select id="modifyUser" parameterType="int" resultType="member">
+		select *
+		  from member
+		 where mno = #{mno}
 	</select>
-  
-  
-  <!-- 파일 -->
-    <select id="insertImage" parameterType="memberImage" resultType="memberImage">
-    	insert into test_member_image (nick, file_name) values ( #{nick}, #{fileName} );
-    </select>
-  
+
+	<update id="updateMember" parameterType="member" >
+		update member 
+		   set nick = #{nick},
+		       photo_path = #{photoPath}
+		 where mno = #{mno},
+		       pwd = #{pwd}
+	</update>
+  	
+  	<select id="emailCheck" parameterType="string" resultType="int">
+  		select count(email)
+  		  from member
+  		 where email = #{email}
+  	</select>
+  	
+  	<!-- shop information -->
+  	<select id="getShop" parameterType="string">
+  		select *
+  		  from shop
+  		 where name like %#{name}%
+  	</select>
 </mapper>
 
 
