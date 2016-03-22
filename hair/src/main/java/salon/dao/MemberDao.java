@@ -17,4 +17,6 @@ public interface MemberDao {
 	Member getMember(int no);
 
 	void updateMember(Member member);
+
+	int emailCheck(String email);
 }
