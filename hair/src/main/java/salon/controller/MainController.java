@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,67 +75,26 @@ public class MainController {
   @ResponseBody
   public Member update(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  Member member = (Member)request.getSession().getAttribute("loginUser");
-	  member = memberDao.getMember(member.getNo());
-	  System.out.println("file " + member.getFilePath());
+	  member = memberDao.getMember(member.getMno());
+	  System.out.println("file " + member.getPhotoPath());
 	  return member;
   }
   
   @RequestMapping(value="update", method=RequestMethod.POST)
   @ResponseBody
-  public AjaxResult updateMember(Member member, MultipartHttpServletRequest mRequest) throws Exception{
-	  System.out.println("file " + member.getNo());
-	  String result = memberService.updateMember(member, mRequest);
+  public AjaxResult updateMember(Member member, MultipartHttpServletRequest mRequest,HttpSession session) throws Exception{
+	  System.out.println("mno " + member.getMno());
+	  member = memberService.updateMember(member, mRequest);
+	  session.setAttribute("loginUser", member);
+	  return new AjaxResult("success", "success");
+  }
+
+  @RequestMapping(value="shopSearch", method=RequestMethod.POST)
+  @ResponseBody
+  public AjaxResult shopSearch() throws Exception{
 	  
 	  return null;
   }
-/*  @RequestMapping(value="update", method=RequestMethod.GET)
-  @ResponseBody
-  public Member update(int no) throws Exception{
-	  
-	  Member member = memberDao.modifyUser(no);
-	  System.out.println("member" + member);
-	  return member;
-  }
-*/  
-  /*@RequestMapping("delete.do")
-  public AjaxResult delete(int no, String password) throws Exception {
-
-    HashMap<String,Object> paramMap = new HashMap<>();
-    paramMap.put("no", no);
-    paramMap.put("password", password);
-    
-    if (mainDao.delete(paramMap) <= 0) {
-      return new AjaxResult("failure", null);
-    } 
-
-    return new AjaxResult("success", null);
-  }
- */
   
-  /*@RequestMapping(value="add", method=RequestMethod.POST)
-  public AjaxResult add(Member member, MultipartFile file) throws Exception {
-    
-    if (file.getSize() > 0) {
-      String newFileName = MultipartHelper.generateFilename(file.getOriginalFilename());  
-      File attachfile = new File(servletContext.getRealPath(SAVED_DIR) 
-                                  + "/" + newFileName);
-      file.transferTo(attachfile);
-      board.setAttachFile(newFileName);
-    }
-    
-	System.out.println("controller debugggggggggggggggg");
-    boardDao.insert(member);
-    System.out.println("controller debugggggggggggggggg after daooooooooooooooooooo");
-    
-    return new AjaxResult("success", "success");
-  }
-  
-  @RequestMapping("detail")
-  public Object detail(int no) throws Exception {
-    Board board = boardDao.selectOne(no);
-    return new AjaxResult("success", board);
-  }
-
-  */
   
 }

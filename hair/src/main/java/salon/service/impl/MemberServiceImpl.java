@@ -60,18 +60,18 @@ public class MemberServiceImpl implements MemberService{
 				} catch (Exception e) {
 					e.printStackTrace();
 				} 
-				System.out.println(srcPath+realFileName);
-				
-				member.setFilePath(srcPath+realFileName);
-				memberDao.insert(member);
+				member.setPhotoPath(srcPath+realFileName);
+				System.out.println(member.getPhotoPath());
 			}
 		}
+		memberDao.insert(member);
 		System.out.println("성공 후 서비스");
 		return "success";
 	}
 
 	@Override
-	public String updateMember(Member member, MultipartHttpServletRequest mRequest) {
+	public Member updateMember(Member member, MultipartHttpServletRequest mRequest) {
+		System.out.println("service" + member.getNick());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
 		String realPath = servletContext.getRealPath("/upload/");
 		String sdfPath = sdf.format(new Date());
@@ -95,12 +95,27 @@ public class MemberServiceImpl implements MemberService{
 				} 
 				System.out.println(srcPath+realFileName);
 				
-				member.setFilePath(srcPath+realFileName);
-				memberDao.updateMember(member);
+				member.setPhotoPath(srcPath+realFileName);
 			}
 		}
+		System.out.println("member service last" + member.getNick());
+		memberDao.updateMember(member);
+		member = memberDao.getMember(member.getMno());
+		
 		System.out.println("성공 후 서비스");
-		return "success";
+		return member;
+	}
+
+	@Override
+	public boolean emailCheck(String email) {
+		int result = memberDao.emailCheck(email);
+		System.out.println(result);
+		if(result == 0){
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 	
 	

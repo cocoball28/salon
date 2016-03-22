@@ -1,6 +1,7 @@
 package salon.controller;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -62,17 +63,37 @@ public class AuthController {
   @RequestMapping(value="add", method=RequestMethod.POST)
   @ResponseBody
   public AjaxResult add(Member member, MultipartHttpServletRequest mRequest) throws Exception {
-	  System.out.println("controller" + member.getEmail());
 	  String result = memberService.insert(member, mRequest);
     return new AjaxResult("success", result);
   }
   
-  @RequestMapping(value="checkLogin", method=RequestMethod.POST)
-  public AjaxResult check() throws Exception{
+  @RequestMapping(value="emailCheck", method=RequestMethod.POST)
+  public AjaxResult emailCheck(String email) throws Exception{
+	  boolean result = memberService.emailCheck(email);
+	  AjaxResult ajaxResult = new AjaxResult("success", result);
 	  
+	  return ajaxResult;
+  }
+  
+  @RequestMapping(value="getShop", method=RequestMethod.POST)
+  public AjaxResult getShop(String email) throws Exception{
+	  boolean result = memberService.emailCheck(email);
+	  AjaxResult ajaxResult = new AjaxResult("success", result);
 	  
+	  return ajaxResult;
+  }
+  
+  @RequestMapping(value="checkLogin", method=RequestMethod.GET)
+  @ResponseBody
+  public AjaxResult check(HttpServletRequest request) throws Exception{
 	  
-	  return null;
+    Member member = (Member)request.getSession().getAttribute("loginUser");
+	AjaxResult ajaxResult = new AjaxResult("checkLogin", member);    
+    if (member == null) {
+      return ajaxResult.setData(null); // 다음으로 가는 것을 멈춰라!
+    }
+	    
+    return ajaxResult;
   }
   
   @RequestMapping(value="logout", method=RequestMethod.GET)

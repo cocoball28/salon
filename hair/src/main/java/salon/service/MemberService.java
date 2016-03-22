@@ -9,5 +9,7 @@ public interface MemberService {
 
 	String insert(Member member, MultipartHttpServletRequest mRequest);
 
-	String updateMember(Member member, MultipartHttpServletRequest mRequest);
+	Member updateMember(Member member, MultipartHttpServletRequest mRequest);
+
+	boolean emailCheck(String email);
 }
