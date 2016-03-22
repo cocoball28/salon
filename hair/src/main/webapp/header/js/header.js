@@ -40,15 +40,20 @@ $(document).ready(function(){
 			$.ajax({
 				   url: "/hair2/salon/ajax/update.do",
 				   method: 'get',
-				   data: {no:memberNo},
+				   data: {mno:memberNo},
 				   success: function(data){
 						   $(".section").load("/hair2/header/modify.html .container", function() {
 							   $("#nick_reg").val(data.nick);
 							   $("#email_reg").val(data.email);
-							   $('.preImg').attr('src', data.filePath);
+							   $("#email_reg").attr("readonly", "true");
+							   if(data.photoPath != null){
+								   $('.preImg').attr('src', data.photoPath);
+							   }else{
+								   $('.preImg').attr('src', "images/placeholder.png");
+							   }
 						   });
 						   console.log(data)
-						   console.log(data.filePath)
+						   console.log(data.photoPath)
 				   },
 				   error: function(){
 					   alert("오류");
@@ -59,31 +64,26 @@ $(document).ready(function(){
 		});  
 	
 	 /* my page modify update */
-	 $("#update_frm").submit(function(){
-			 alert("update");
+	 $(document).on("submit", "#update_frm", function(){
 			
 			var form = $("#update_frm")[0];
 			var formData = new FormData(form);
-			
+			console.log(form);
 			formData.append("files", $("#file")[0].files[0]);
-			formData.append("no", $('#dd').find("[type=hidden]").val())
+			formData.append("mno", $('#dd').find("[type=hidden]").val())
+			
 			$.ajax({
-				   url: "/hair2/auth/update.do",
+				   url: "/hair2/salon/ajax/update.do",
 				   processData: false,
 				   contentType: false,
 				   data: formData,
 				   method: 'POST',
 				   success: function(resultObj){
-					   if(resultObj.data == "success"){
 						   alert("회원정보가 수정되었습니다.");
 						   window.location.href = "/hair2/main/mainlist.html"
-					   }else{
-						   alert("회원가입 실패");
-					   }
-					   
 				   },
 				   error: function(){
-					   alert("오류");
+					   alert("비밀번호를 확인해 주세요");
 				   }
 				});
 			
@@ -91,6 +91,9 @@ $(document).ready(function(){
 			return false;
 		});
 	 
+	 $(document).on("change", "#file", function(){
+		 readURL(this);
+	 });
 	 
 });
 

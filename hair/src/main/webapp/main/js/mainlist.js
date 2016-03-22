@@ -5,11 +5,18 @@
 	}
 
 	var contextPath =  getContextPath();
+	
 	 /* check login */
-	/*$.get("/hair2/check/checkLogin.do", function(data){
+	$.get("/hair2/auth/checkLogin.do", function(data){
 		console.log(data);
+		 if(data.data == null){
+			 alert("로그인이 필요한 페이지 입니다.");
+			 window.location.href = contextPath+"/auth/login.html";
+			 } else{ 
+			 return true;
+		 }
 	}); 
-	*/
+	
 	/* header */
 	$(".header").load(contextPath+"/header/header.html .header");
 		 
@@ -56,7 +63,7 @@
 				if(cnt == 5) cnt = 0;
 		  }) 
 		   $("#dd").append(resultObj.member.nick);
-		   $("#dd").append("<input type='hidden' id='memberNo' value="+resultObj.member.no+" />")
+		   $("#dd").append("<input type='hidden' id='memberNo' value="+resultObj.member.mno+" />")
 	});
 	})
 	
