@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+body {
+	background: white;
+	font-family: sans-serif;
+}
+
+.controlBtnDiv{
+	color:#666;
+}
+
+.reservationBody {
+	height: 65px;
+}
+
+.reservationInfoDiv {
+	padding: 0px;
+	margin: 0px;
+}
+
+.reservationTd{
+	text-align: center;
+}
+
+.hairdresserName{
+	cursor: pointer;
+}
+
+.hairdresserName:HOVER{
+	color: #aaa;	
+}
