@@ -21,7 +21,7 @@ body .container {
 	position: relative;
 	overflow: hidden;
 	width: 350px;
-	height: 600px;
+	height: 700px;
 	margin: 70px auto 0;
 	background-color: rgba( 255, 255, 255, 0.7 );
 	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -296,3 +296,7 @@ keyframes slideIn { 0% {
 	text-decoration: none;
 }
 
+/* check email */
+#checkE{
+	color: blue;
+}

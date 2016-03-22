@@ -38,12 +38,16 @@ $("#login_frm").submit(function(event){
 			email: $("#email").val(),
 			password: $("#password").val()
 		},
-		error: function(data){
-			alert("error"+ data);
-			console.log(data);
-		},
 		success: function(resultObj){
-			window.location.href = contextPath+"/main/mainlist.html"
+			console.log(resultObj.ajaxResult)
+			if(resultObj.ajaxResult.data != null){
+				window.location.href = contextPath+"/main/mainlist.html"
+			}else{
+				alert("이메일 또는 비밀번호를 확인해 주세요")
+				$("#email").val("");
+				$("#password").val("");
+				return false;
+			}
 		}
 	}
 	)
@@ -86,10 +90,12 @@ $("#file").change(function(){
 
 $("#regist_frm").submit(function(event){
 	event.preventDefault();
-	
 	var form = $("#regist_frm")[0];
+	console.log(form);
 	var formData = new FormData(form);
+	console.log(formData);
 	formData.append("files", $("#file")[0].files[0]);
+	
 	$.ajax({
 		   url: "/hair2/auth/add.do",
 		   processData: false,
@@ -112,5 +118,59 @@ $("#regist_frm").submit(function(event){
 	
 
 	return false;
+});
+
+		/* email check */
+$("#email_reg").focus(function(){
+	$("#email_reg").keyup(function(){
+		var email = $("#email_reg").val();
+		/*$("#checkP").attr("display", "block")*/
+		$.post("/hair2/auth/emailCheck.do",
+				{email : email},
+				function(resultObj){
+					console.log(resultObj.ajaxResult.data)
+					if(resultObj.ajaxResult.data == true){
+						$("#checkE").css("color", "blue");
+						$("#checkE").html("사용가능한 이메일 입니다");
+					}else{
+						$("#checkE").css("color", "red");
+						$("#checkE").html("사용 불가능한 이메일 입니다");
+					}
+				}, "json");
+		
+	});
+})
+
+$("#email_reg").blur(function(){
+	$("#checkE").html("");
+});
+
+		/* radio button */
+$("#radio2").click(function(){
+	$("#searchShop").show("slow");
+	$("#update").show("slow");
+});
+$("#radio1").click(function(){
+	$("#searchShop").hide("slow");
+	$("#update").hide("slow");
+});
+
+$('#search').keyup(function(){
+	var searchField = $('#searchShop').val();
+	var myExp = new RegExp(searchField, 'i');
+	$.getJSON('/hair2/salon/ajax/shopSearch.do', function(data){
+		var output = '<ul class="searchresult">';
+		$.each(data, function(key, val){
+			if(val.name/*(val.name.search(myExp) != -1) || (val.bio.search(myExp) != -1)*/) {
+				output +='<li>';
+				output +='<h2>' + val.name + '</h2>';
+				/*output +='<img src="images/' + val.shortname + '_tn.jpg" alt="'+ val.name +'" />';
+				output +='<p>' + val.bio + '</p>';*/
+				output +='</li>';
+			}
+		});
+		output += '</ul>';
+		$('#update').html(output);
+	});
 });
 
