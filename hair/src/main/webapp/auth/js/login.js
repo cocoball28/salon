@@ -97,7 +97,7 @@ $("#regist_frm").submit(function(event){
 	formData.append("files", $("#file")[0].files[0]);
 	
 	$.ajax({
-		   url: "/hair2/auth/add.do",
+		   url: contextPath+"/auth/add.do",
 		   processData: false,
 		   contentType: false,
 		   data: formData,
@@ -105,7 +105,7 @@ $("#regist_frm").submit(function(event){
 		   success: function(resultObj){
 			   if(resultObj.data == "success"){
 				   alert("회원가입을 축하");
-				   window.location.href = "/hair2/auth/login.html"
+				   window.location.href = contextPath+"/auth/login.html"
 			   }else{
 				   alert("회원가입 실패");
 			   }
@@ -124,8 +124,7 @@ $("#regist_frm").submit(function(event){
 $("#email_reg").focus(function(){
 	$("#email_reg").keyup(function(){
 		var email = $("#email_reg").val();
-		/*$("#checkP").attr("display", "block")*/
-		$.post("/hair2/auth/emailCheck.do",
+		$.post(contextPath+"/auth/emailCheck.do",
 				{email : email},
 				function(resultObj){
 					console.log(resultObj.ajaxResult.data)
@@ -155,10 +154,16 @@ $("#radio1").click(function(){
 	$("#update").hide("slow");
 });
 
-$('#search').keyup(function(){
-	var searchField = $('#searchShop').val();
-	var myExp = new RegExp(searchField, 'i');
-	$.getJSON('/hair2/salon/ajax/shopSearch.do', function(data){
+/* shop search */
+
+
+$(document).on("keyup",'#searchShop',function(){
+//$('#search').keyup(function(){
+	var shop = $('#searchShop').val();
+	alert("keyup");
+	console.log("keyup " + shop);
+	$.post(contextPath+'/auth/getShop.do',{name: shop}, function(data){
+		console.log(data);
 		var output = '<ul class="searchresult">';
 		$.each(data, function(key, val){
 			if(val.name/*(val.name.search(myExp) != -1) || (val.bio.search(myExp) != -1)*/) {
@@ -171,6 +176,6 @@ $('#search').keyup(function(){
 		});
 		output += '</ul>';
 		$('#update').html(output);
-	});
+	},"json");
 });
 

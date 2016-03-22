@@ -42,8 +42,8 @@
 		update member 
 		   set nick = #{nick},
 		       photo_path = #{photoPath}
-		 where mno = #{mno},
-		       pwd = #{pwd}
+		 where mno = #{mno}
+		   and pwd = #{pwd}
 	</update>
   	
   	<select id="emailCheck" parameterType="string" resultType="int">
@@ -54,10 +54,13 @@
   	
   	<!-- shop information -->
   	<select id="getShop" parameterType="string">
-  		select *
+  		select name
   		  from shop
   		 where name like %#{name}%
   	</select>
+  	
+  	
+  	
 </mapper>
 
 

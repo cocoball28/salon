@@ -22,7 +22,7 @@ $(document).ready(function(){
 	$(document).on("click","#out",function(){
  		var result = confirm("로그 아웃 하시겠습니까?");
  		if(result){
- 			$.get("/hair2/auth/logout.do", function(data){
+ 			$.get(contextPath+"/auth/logout.do", function(data){
  				if(data == "success"){
  					window.location.href = contextPath+"/auth/login.html";
  				}else{
@@ -38,11 +38,11 @@ $(document).ready(function(){
 	 $(document).on("click","#pro",function( ){
 			var memberNo = $(this).closest('#dd').find("[type=hidden]").val();			
 			$.ajax({
-				   url: "/hair2/salon/ajax/update.do",
+				   url: contextPath+"/salon/ajax/update.do",
 				   method: 'get',
 				   data: {mno:memberNo},
 				   success: function(data){
-						   $(".section").load("/hair2/header/modify.html .container", function() {
+						   $(".section").load(contextPath+"/header/modify.html .container", function() {
 							   $("#nick_reg").val(data.nick);
 							   $("#email_reg").val(data.email);
 							   $("#email_reg").attr("readonly", "true");
@@ -73,14 +73,14 @@ $(document).ready(function(){
 			formData.append("mno", $('#dd').find("[type=hidden]").val())
 			
 			$.ajax({
-				   url: "/hair2/salon/ajax/update.do",
+				   url: contextPath+"/salon/ajax/update.do",
 				   processData: false,
 				   contentType: false,
 				   data: formData,
 				   method: 'POST',
 				   success: function(resultObj){
 						   alert("회원정보가 수정되었습니다.");
-						   window.location.href = "/hair2/main/mainlist.html"
+						   window.location.href = contextPath+"/main/mainlist.html"
 				   },
 				   error: function(){
 					   alert("비밀번호를 확인해 주세요");
