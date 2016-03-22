@@ -209,7 +209,7 @@ var addComment = function(blogDiv, data){
 /* 첫 화면 출력 =================================*/
 $(function(){
 	//hairdresser정보
-	$.post(
+/*	$.post(
 			"",
 			{
 				hairdresserNo:hairdresserNo, 
@@ -218,7 +218,7 @@ $(function(){
 			function(data){
 			}
 	)
-	
+	*/
 	
 	$.post(
 			blogPath+"/blog/list.do",
