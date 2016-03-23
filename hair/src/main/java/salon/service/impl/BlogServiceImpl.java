@@ -72,11 +72,23 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public Map<String, Object> selectList(Blog blog) {
+	public Map<String, Object> selectList(Blog blog, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<>();
-//		map.put("mInfo", Object);
+		Member loginMember = (Member)request.getSession().getAttribute("loginUser");
+		int loginMemberNo = loginMember.getMno();
+		int mno = blog.getMno();
+		
+		System.out.println(mno);
+		map.put("dsnInfo", blogDao.selectDsnInfo(blog));
 //		map.put("partnerInfo", Object);
 		map.put("blogList", blogDao.selectBlogList(blog));
+		boolean myBlogFlag;
+		if(loginMemberNo == mno){
+			myBlogFlag = true;
+		}else{
+			myBlogFlag = false;
+		}
+		map.put("myBlogFlag",myBlogFlag);
 		return map;
 	}
 
