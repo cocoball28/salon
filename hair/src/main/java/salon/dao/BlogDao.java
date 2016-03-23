@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import salon.domain.Blog;
 import salon.domain.BlogImage;
+import salon.domain.Member;
 import salon.domain.BlogComment;
 
 @Repository
@@ -26,4 +27,9 @@ public interface BlogDao {
 	public List<BlogComment> selectCommentList(BlogComment blogComment);
 	public BlogComment selectComment(BlogComment blogComment);
 	public void deleteComment(BlogComment blogComment);
+
+	//블로그 주인 정보
+	public Member selectDsnInfo (Blog blog);
 }
+
+
