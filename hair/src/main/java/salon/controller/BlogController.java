@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,10 +31,9 @@ public class BlogController {
 	
 	@RequestMapping(value="list", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> list(Blog blog){
+	public Map<String, Object> list(Blog blog, HttpServletRequest request){
 		System.out.println("블로그번호 :"+blog.getMno());
-		//System.out.println(list.get(0).getBlogImageList().size());
-		return blogService.selectList(blog);
+		return blogService.selectList(blog,request);
 	}
 	
 	@RequestMapping(value="delete", method=RequestMethod.POST)
@@ -65,7 +63,7 @@ public class BlogController {
 		return blogService.commentRegister(comment, request);
 	}
 	
-	//댓글 입력
+	//댓글 삭제
 	@RequestMapping(value="deleteComment", method=RequestMethod.POST)
 	@ResponseBody
 	public void deleteComment(BlogComment comment){
