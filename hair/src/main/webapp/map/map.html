@@ -8,39 +8,20 @@
 
 <!-- css -->
 <link rel="stylesheet" href="./css/mapCss.css" />
+<link rel="stylesheet" href="./css/shop.css" />
 
 <!-- title 폰트 -->
 <link href='https://fonts.googleapis.com/css?family=Comfortaa'
 	rel='stylesheet' type='text/css'>
-	
+
 <!-- bootstrap -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/bootstrap.css">
+<link rel="stylesheet" href="./css/bootstrap-theme.css">
+<link rel="stylesheet" href="./css/bootstrap-theme.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	
-<script>
-	$(function() {
-		$("#pic2").click(function() {
-			$(".bigpic").replaceWith(
-				"<img src='./images/pic1.jpg' width='550px' height='290px' border='0' class='bigpic' />");
-		});
-		$("#pic1").click(function() {
-			$(".bigpic").replaceWith(
-				"<img src='./images/mainpic.jpg' width='550px' height='290px' border='0' class='bigpic' />");
-		});
-		$("#pic3").click(function() {
-			$(".bigpic").replaceWith(
-				"<img src='./images/pic2.jpg' width='550px' height='290px' border='0' class='bigpic' />");
-		});
-		$("#pic4").click(function() {
-			$(".bigpic").replaceWith(
-				"<img src='./images/pic3.jpg' width='550px' height='290px' border='0' class='bigpic' />");
-		});
-	});
-</script>
+
 </head>
 <body>
 	<header class="header">
@@ -61,10 +42,12 @@
 				<div class="form-group" id="mainSearch">
 					<label class="sr-only" for="exampleInputAmount"></label>
 					<div class="input-group">
+					<form onsubmit="searchPlaces(); return false;">
 						<input type="text" class="form-control" id="searchBar"
 							placeholder="검색할 태그및 내용을 입력하세요">
+						</form>
 						<div class="input-group-addon">
-							<button id="searchBtn">
+							<button type="submit" id="searchBtn">
 								<img class="searchImg" src="images/search.png">
 							</button>
 						</div>
@@ -180,7 +163,7 @@
 	</header>
 
 	<section></section>
-	
+
 	<!-- 지도영역시작 -->
 	<div class="map_wrap">
 		<div id="map"
@@ -426,8 +409,8 @@
 			$('#myInput').focus()
 		})
 	</script>
-	
-	
+
+
 	<!-- 모달 정보창 시작 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -441,64 +424,455 @@
 					<h4 class="modal-title" id="myModalLabel">Choice Hair</h4>
 				</div>
 				<div class="modal-body">
-				
+
 					<!-- 정보창 div -->
-					<div id="body">
-						<div id="title">
-							<div id="addr">
-								주소 : 성남시 분당구 서현3동 11-1 <br>전화번호 : 031- 703 - 2285
-							</div>
-							<div class="btn-group btn-group-justified"
-								style="width: 180px; float: right; font-family: 'Comfortaa', cursive;">
-								<a href="#"
-									class="btn btn-default"><img src="./images/res.png" 
-									width="20px"></a> <a href="#" class="btn btn-default"><img 
-									src="./images/map.png"
-									width="20px"></a> <a href="#" class="btn btn-default"><img
-									src="./images/star.png" width="20px"></a>
-							</div>
-						</div>
-						<div id="pic">
-							<div id="small">
-								<a href="#" class="spic" id="one"> <img
-									src="./images/mainpic.jpg" width="100px" height="55px"
-									border="0" id="pic1" />
-								</a> <a href="#" class="spic" id="two"><img
-									src="./images/pic1.jpg" width="100px" height="55px" border="0"
-									id="pic2" /> </a> <a href="#" class="spic" id="three"><img
-									src="./images/pic2.jpg" width="100px" height="55px" border="0"
-									id="pic3" /> </a> <a href="#" class="spic" id="four"><img
-									src="./images/pic3.jpg" width="100px" height="55px" border="0"
-									id="pic4" /> </a>
-							</div>
-							<div id="big">
-								<img src="./images/mainpic.jpg" width="550px" height="290px"
-									border="0" class="bigpic" />
-							</div>
-						</div>
-						<div id="blog">
-							<div id="msg">디자이너 블로그로 이동</div>
-							<div id="dsn">
-								<a href="#" class="imgAnchor" style="text-align: center;"><img
-									src="./images/designer.jpg" width="75px" height="100px" style="display: block;"><찬호></a>
-								<a href="#" class="imgAnchor" style="text-align: center;"><img
-									src="./images/designer2.jpg" width="75px" height="100px" style="display: block;"><지훈></a>
-								<a href="#" class="imgAnchor" style="text-align: center;"><img
-									src="./images/designer3.jpg" width="75px" height="100px" style="display: block;"><진호></a>
-								<a href="#" class="imgAnchor" style="text-align: center;"><img
-									src="./images/designer4.jpg" width="75px" height="100px" style="display: block;"><용근></a>
-								<a href="#" class="imgAnchor" style="text-align: center;"><img
-									src="./images/designer5.jpg" width="75px" height="100px" style="display: block;"><혁민></a>
-								<a href="#" class="imgAnchor" style="text-align: center;"><img
-									src="./images/designer6.jpg" width="75px" height="100px" style="display: block;"><순형></a>
-								<a href="#" class="imgAnchor" style="text-align: center;"><img
-									src="./images/designer7.jpg" width="75px" height="100px" style="display: block;"><한샘></a>
+					<div class="wrap wrap-index">
+						<!-- 슬라이더 부분 -->
+						<div class="slider">
+							<div class="jquery-reslider">
+								<div class="slider-big">
+									<!-- <div class="slider-block" data-url="./salon/images/salon4.jpg"></div>
+					<div class="slider-block" data-url="./salon/images/salon5.jpg"></div>
+					<div class="slider-block" data-url="./salon/images/salon6.jpg"></div>   -->
+								</div>
+								<div class="menu" onclick="menu(this)">
+									<div class="a">
+										<div class="us"></div>
+										<div class="mid"></div>
+										<div class="down"></div>
+									</div>
+								</div>
+								<div class="ex">
+									<ul>
+										<li class="up"><a href="#login_form" class="if">Info</a></li>
+										<li><a href="#">Reserve</a></li>
+										<li><a href="#">Bookmark</a></li>
+										<li><a href="#join_form" class="ebtn">Edit</a></li>
+									</ul>
+								</div>
+								<a href="#x" class="overlay" id="login_form"></a>
+								<div class="popup">
+									<h2 class="stitle"></h2>
+									<p class="saddr"></p>
+									<div>
+										<label for="login">Tel</label> <label id="login" class="tel"></label>
+									</div>
+									<a class="close"
+										href="http://192.168.0.7:8008/salon/shop/shop.html"></a>
+								</div>
 							</div>
 						</div>
+						<!-- end build-->
 					</div>
+					<!-- 디자이너 슬라이드버튼 -->
+					<div class="navl">
+						<img src="./images/prev3.png" class="prev">
+					</div>
+					<div class="navr">
+						<img src="./images/next3.png" class="next">
+					</div>
+				</div>
+				<!-- 디자이너부분 -->
+				<div id="big">
+					<div id="dsnpic1" class="pic">
+						<div class="blog1">
+							<div class="bp">
+								<a href="http://192.168.0.44:8008/hair/blog/blog.html"><img
+									src="./images/blog.png"></a>
+							</div>
+							<div class="name"></div>
+							<div class="move">
+								<a href="http://192.168.0.44:8008/hair/blog/blog.html"
+									class="blogm">블로그이동</a>
+							</div>
+						</div>
+						<div class="slide1"></div>
+					</div>
+					<div id="dsnpic2" class="pic">
+						<div class="blog1">
+							<div class="bp">
+								<a href="#"><img src="./images/blog.png"></a>
+							</div>
+							<div class="name"></div>
+							<div class="move">
+								<a href="#" class="blogm">블로그이동</a>
+							</div>
+						</div>
+						<div class="slide2"></div>
+					</div>
+					<div id="dsnpic3" class="pic">
+						<div class="blog1">
+							<div class="bp">
+								<a href="#"><img src="./images/blog.png"></a>
+							</div>
+							<div class="name"></div>
+							<div class="move">
+								<a href="#" class="blogm">블로그이동</a>
+							</div>
+						</div>
+						<div class="slide3"></div>
+					</div>
+					<div id="dsnpic4" class="pic">
+						<div class="blog1">
+							<div class="bp">
+								<a href="#"><img src="./images/blog.png"></a>
+							</div>
+							<div class="name"></div>
+							<div class="move">
+								<a href="#" class="blogm">블로그이동</a>
+							</div>
+						</div>
+						<div class="slide4"></div>
+					</div>
+					<div id="dsnpic5" class="pic">
+						<div class="blog1">
+							<div class="bp">
+								<a href="#"><img src="./images/blog.png"></a>
+							</div>
+							<div class="name"></div>
+							<div class="move">
+								<a href="#" class="blogm">블로그이동</a>
+							</div>
+						</div>
+						<div class="slide5"></div>
+					</div>
+					<div id="dsnpic6" class="pic">
+						<div class="blog1">
+							<div class="bp">
+								<a href="http://192.168.0.44:8008/hair/blog/blog.html"><img
+									src="./images/blog.png"></a>
+							</div>
+							<div class="name"></div>
+							<div class="move">
+								<a href="http://192.168.0.44:8008/hair/blog/blog.html"
+									class="blogm">블로그이동</a>
+							</div>
+						</div>
+						<div class="slide1"></div>
+					</div>
+					<div id="dsnpic7" class="pic">
+						<div class="blog1">
+							<div class="bp">
+								<a href="#"><img src="./images/blog.png"></a>
+							</div>
+							<div class="name"></div>
+							<div class="move">
+								<a href="#" class="blogm">블로그이동</a>
+							</div>
+						</div>
+						<div class="slide2"></div>
+					</div>
+					<div id="dsnpic8" class="pic">
+						<div class="blog1">
+							<div class="bp">
+								<a href="#"><img src="./images/blog.png"></a>
+							</div>
+							<div class="name"></div>
+							<div class="move">
+								<a href="#" class="blogm">블로그이동</a>
+							</div>
+						</div>
+						<div class="slide3"></div>
+					</div>
+					<div id="dsnpic9" class="pic">
+						<div class="blog1">
+							<div class="bp">
+								<a href="#"><img src="./images/blog.png"></a>
+							</div>
+							<div class="name"></div>
+							<div class="move">
+								<a href="#" class="blogm">블로그이동</a>
+							</div>
+						</div>
+						<div class="slide4"></div>
+					</div>
+					<div id="dsnpic10" class="pic">
+						<div class="blog1">
+							<div class="bp">
+								<a href="#"><img src="./images/blog.png"></a>
+							</div>
+							<div class="name"></div>
+							<div class="move">
+								<a href="#" class="blogm">블로그이동</a>
+							</div>
+						</div>
+						<div class="slide5"></div>
+					</div>
+				</div>
+				<!-- 편집창 -->
+				<a href="#" class="overlay" id="join_form"></a>
+				<div class="popup2">
+					<form name="upload1" class="registForm">
+						<div class="cobox">
+							<div class="etitle">
+								<h3>EditBox</h3>
+							</div>
+							<div class="load1">
+								사진 1 파일 첨부 <input type="file" name="file1" class="f1"
+									onchange="readURL1(this);">
+							</div>
+							<div class="load2">
+								사진 2 파일 첨부 <input type="file" name="file2" class="f2"
+									onchange="readURL2(this);">
+							</div>
+							<div class="load3">
+								사진 3 파일 첨부 <input type="file" name="file3" class="f3"
+									onchange="readURL3(this);">
+							</div>
+							<div class="load4">
+								사진 4 파일 첨부 <input type="file" name="file4" class="f4"
+									onchange="readURL4(this);">
+							</div>
+							<div class="mibox">
+								<div class="blah1">
+									<img class="bbl1" src="#">
+								</div>
+								<div class="blah2">
+									<img class="bbl2" src="#">
+								</div>
+								<div class="blah3">
+									<img class="bbl3" src="#">
+								</div>
+								<div class="blah4">
+									<img class="bbl4" src="#">
+								</div>
+							</div>
+							<a class="close"
+								href="http://192.168.0.7:8008/salon/shop/shop.html"></a>
+							<div class="sub">
+								<button onclick="registShop()" class="firm">Confirm</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="cloneslider" style="display: none;">
+					<div class="slider-block" data-url="./shop/images/salon6.jpg"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
+	<!-- jQuery -->
+	<script src="./js/jquery-2.2.0.js"></script>
+	<script src="./js/commonjs.js"></script>
+	<script src="./js/jquery-ui.js"></script>
+	<!-- 페이드인 슬라이드 JavaScript -->
+	<script src="./js/jquery.reslider.js"></script>
+	<script>
+		$("#big").css("left", "0");
+		// 슬라이드 스크립트
+		$(function() {
+			$('.jquery-reslider').reSlider({
+				speed : 1000, //페이드속도
+				delay : 5000, //자동전환 속도
+				imgCount : 10, //이미지갯수
+				dots : true, //하단 페이지 버튼
+				autoPlay : true
+			//자동재생
+			})
+		})
+
+		// JSON 데이터 가져오기
+		$(function() {
+			$.getJSON(contextPath + "/shop/list.do",
+					function(data) {
+						console.log(data);
+						for (var i = 0; i < data.image.length; i++) {
+							addSlider(data.image[i].fileName);
+						}
+						$(".stitle").text(data.info.name);
+						$(".saddr").text(data.info.baddr + data.info.daddr);
+						$(".tel").text(data.info.tel);
+						for (var i = 0; i < 10; i++) {
+							$("#dsnpic" + (i + 1)).find(".name").text(
+									data.dsn[i].name);
+							$("#dsnpic" + (i + 1)).css(
+									"background-image",
+									"url('shop/images/dsn1" + data.dsn[i].no
+											+ ".jpg')")
+						}
+						$("#dsnpic10").css("background-image",
+								"url('shop/images/dsn20.jpg')")
+					});
+		})
+		// edit 버튼 전환
+		$(function() {
+			$(".ebtn").click(function() {
+				$(".slider").css("opacity", "0");
+				$(".slider").css("transition", "0.5s");
+				$("#big").css("opacity", "0.3");
+				$("#big").css("transition", "0.5s");
+				$(".ebox").show();
+			});
+		})
+		// x버튼
+		$(function() {
+			$(".x").click(function() {
+				$(".ebox").hide();
+				$(".slider").css("opacity", "1");
+				$("#big").css("opacity", "1");
+			});
+		})
+		// 이미지 업로드
+		var registShop = function() {
+			var form = $(".registForm")[0];
+			var formData = new FormData(form);
+			$.ajax({
+				url : contextPath + "/shop/regist.do",
+				processData : false,
+				contentType : false,
+				data : formData,
+				type : 'POST',
+				success : function(data) {
+					$('.popup2').hide();
+					return false;
+				}
+			});
+		}
+		// 업로드 전 미리보기
+		function readURL1(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$(".bbl1").attr('src', e.target.result);
+					$(".bbl1").css('opacity', 1);
+					$(".bbl1").css('z-index', 99);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		function readURL2(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$(".bbl2").attr('src', e.target.result);
+					$(".bbl2").css('opacity', 1);
+					$(".bbl2").css('z-index', 99);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		function readURL3(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$(".bbl3").attr('src', e.target.result);
+					$(".bbl3").css('opacity', 1);
+					$(".bbl3").css('z-index', 99);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		function readURL4(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$(".bbl4").attr('src', e.target.result);
+					$(".bbl4").css('opacity', 1);
+					$(".bbl4").css('z-index', 99);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		// 미리보기 더블클릭시 삭제함수
+		$(function() {
+			$(".bbl1").dblclick(function() {
+				$(".bbl1").css("z-index", "0");
+				$(".bbl1").css("opacity", "0");
+			});
+		})
+		$(function() {
+			$(".bbl2").dblclick(function() {
+				$(".bbl2").css("z-index", "0");
+				$(".bbl2").css("opacity", "0");
+			});
+		})
+		$(function() {
+			$(".bbl3").dblclick(function() {
+				$(".bbl3").css("z-index", "0");
+				$(".bbl3").css("opacity", "0");
+			});
+		})
+		$(function() {
+			$(".bbl4").dblclick(function() {
+				$(".bbl4").css("z-index", "0");
+				$(".bbl4").css("opacity", "0");
+			});
+		})
+		// 미용사 이미지 슬라이드함수
+		var index = 0;
+		$(function() {
+			$(".prev").click(function() {
+				if (index == 0)
+					index = 5;
+				else
+					index--;
+				move(index);
+			});
+			$(".next").click(function() {
+				if (index == 5)
+					index = 0;
+				else
+					index++;
+				move(index);
+			});
+			var move = function(loc) {
+				$("#big").animate({
+					left : -(loc * 320)
+				}, "slow");
+			}
+		});
+		var index = 0;
+		$(function() {
+			$(".navl").click(function() {
+				if (index == 0)
+					index = 5;
+				else
+					index--;
+				move(index);
+			});
+			$(".navr").click(function() {
+				if (index == 5)
+					index = 0;
+				else
+					index++;
+				move(index);
+			});
+			var move = function(loc) {
+				$("#big").animate({
+					left : -(loc * 320)
+				}, "slow");
+			}
+		});
+		// 메뉴 펼치기
+		var menu = function(data) {
+			$(data).attr('onclick', 'menuc(this)');
+			$(".ex").show("blind", 500);
+			$(".a div").css("transition", "0.5s");
+			$(".us").css("transform", "translate(0px, 8px) rotate(45deg)");
+			$(".mid").css("display", "none");
+			$(".down").css("transform", "rotate(-45deg)");
+		}
+		var menuc = function(data) {
+			$(data).attr('onclick', 'menu(this)');
+			$(".ex").hide("blind", 500);
+			$(".a div").css("transition", "0.5s");
+			$(".us").css("transform", "translate(0px) rotate(0deg)");
+			$(".mid").css("display", "block");
+			$(".down").css("transform", "rotate(0deg)");
+		}
+		// 모달 위치조정
+		$(function() {
+			$(".if").click(function() {
+				$(".popup").css("z-index", "99");
+			});
+		})
+		// 클론DIV append 함수	
+		var addSlider = function(data) {
+			var cloneSlider = $(".cloneslider").find(".slider-block").clone();
+			cloneSlider.attr("data-url", data);
+			$(cloneSlider).appendTo(".slider-big");
+		}
+	</script>
 </body>
 </html>

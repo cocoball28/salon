@@ -1,16 +1,12 @@
-
-
+.navl {
+	width: 30px;
+}
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
 
-/* body {
-    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    color: #333;
-} */
 .btn1 {
 	right: 10px;
 	background-color: white;
@@ -232,86 +228,10 @@
 	border: 1px solid blue;
 }
 
-div {
-	padding: 5px;
-}
-
-#body {
-	background: #ECECEC;
-	width: 700px;
-	height: 540px;
-	width: 700px;
-}
-
-#title {
-	width: 690px;
-	height: 50px;
-}
-
-#addr {
-	width: 250px;
-	height: 45px;
-	float: left;
-	font-family: 'Hanna', sans-serif;
-}
-
-.btn-group btn-group-justified {
-	width: 200px;
-	height: 45px;
-	float: right;
-	font-family: 'Comfortaa', cursive;
-}
-
-#pic {
-	width: 690px;
-	height: 300px;
-}
-
-#small {
-	width: 80px;
-	height: 280px;
-	float: left;
-}
-
-#big {
-	background: #ECECEC;
-	width: 561px;
-	height: 300px;
-	float: right;
-	margin-top: 10px;
-}
-
-#dsn img:hover {
-	opacity: 0.5;
-}
-
-#blog {
-	width: 690px;
-	height: 120px;
-}
-
-#msg {
-	width: 300px;
-	height: 30px;
-	margin-top: 10px;
-	font-family: 'Hanna', sans-serif;
-}
-
-#dsn {
-	background: #ECECEC;
-	width: 680px;
-	height: 110px;
-	width: 680px;
-	margin-top: 10px;
-}
-
-.imgAnchor {
-	display: inline-block;
-	margin: 0px 8px 0px 8px;
-}
 
 .modal-content {
 	width: 740px;
+	height: 500px;
 }
 
 .modal-content div {
