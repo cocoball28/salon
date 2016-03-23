@@ -95,5 +95,9 @@ $(document).ready(function(){
 		 readURL(this);
 	 });
 	 
+	 $(document).on("click", "#mainTag", function(){
+		$("#mainTag").attr("href", contextPath+"/auth/login.html") 
+	 });
+	 
 });
 
