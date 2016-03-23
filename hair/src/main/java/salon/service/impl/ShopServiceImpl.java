@@ -3,8 +3,10 @@ package salon.service.impl;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -27,8 +29,13 @@ public class ShopServiceImpl implements ShopService {
 	@Autowired ServletContext servletContext;
 
 	@Override
-	public List<Shop> selectList() {
-		return shopDao.selectShopList();
+	public Map<String, Object> selectList() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("image", shopDao.selectShopImageList());
+		//System.out.println(shopDao.selectShopImageList().get(0).getFileName());
+		map.put("dsn", shopDao.selectDesignerList());
+		map.put("info", shopDao.selectShopList());
+		return map;
 	}
 
 	@Override
