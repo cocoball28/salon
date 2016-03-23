@@ -1,5 +1,7 @@
 package salon.controller;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import salon.dao.MemberDao;
 import salon.domain.AjaxResult;
 import salon.domain.Member;
+import salon.domain.Shop;
 import salon.service.MemberService;
 
 @Controller
@@ -76,9 +79,11 @@ public class AuthController {
   }
   
   @RequestMapping(value="getShop", method=RequestMethod.POST)
-  public AjaxResult getShop(String email) throws Exception{
-	  boolean result = memberService.emailCheck(email);
-	  AjaxResult ajaxResult = new AjaxResult("success", result);
+  public AjaxResult getShop(Shop shop) throws Exception{
+	  System.out.println("show " + shop);
+	  
+	  List<Shop> shopList = memberService.getShop(shop);
+	  AjaxResult ajaxResult = new AjaxResult("success", shopList);
 	  
 	  return ajaxResult;
   }

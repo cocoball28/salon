@@ -1,6 +1,7 @@
 package salon.domain;
 
 public class Member {
+	// 이용자
 	private int mno;
 	private String email;
 	private String pwd;
@@ -9,6 +10,8 @@ public class Member {
 	private String photoPath;
 	private String gender;
 	private String status;
+	// 미용사
+	private int shopNo;
 	
 	public int getMno() {
 		return mno;

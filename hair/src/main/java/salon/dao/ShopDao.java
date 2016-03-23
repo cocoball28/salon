@@ -11,4 +11,5 @@ import salon.domain.ShopImage;
 public interface ShopDao {
 	public List<Shop> selectShopList();
 	public void insertImage(ShopImage shopImage);
+	public List<Shop> getShop(Shop shop);
 }

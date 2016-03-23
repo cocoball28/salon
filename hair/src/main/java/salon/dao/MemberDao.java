@@ -1,10 +1,12 @@
 package salon.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import salon.domain.Member;
+import salon.domain.Shop;
 
 @Repository
 public interface MemberDao {
@@ -19,4 +21,6 @@ public interface MemberDao {
 	void updateMember(Member member);
 
 	int emailCheck(String email);
+
+	List<Shop> getShop(Shop shop);
 }

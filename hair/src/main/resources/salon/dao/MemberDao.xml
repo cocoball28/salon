@@ -52,12 +52,7 @@
   		 where email = #{email}
   	</select>
   	
-  	<!-- shop information -->
-  	<select id="getShop" parameterType="string">
-  		select name
-  		  from shop
-  		 where name like %#{name}%
-  	</select>
+  	
   	
   	
   	

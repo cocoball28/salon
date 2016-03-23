@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -15,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import salon.dao.MemberDao;
+import salon.dao.ShopDao;
 import salon.domain.Member;
+import salon.domain.Shop;
 import salon.service.MemberService;
 
 @Service
@@ -25,6 +28,8 @@ public class MemberServiceImpl implements MemberService{
 	MemberDao memberDao;
 	@Autowired
 	ServletContext servletContext;
+	@Autowired
+	ShopDao shopDao;
 	
 	public Member retrieve(String email, String password) {
 	    HashMap<String,Object> paramMap = new HashMap<>();
@@ -116,6 +121,14 @@ public class MemberServiceImpl implements MemberService{
 			return false;
 		}
 		
+	}
+
+	@Override
+	public List<Shop> getShop(Shop shop) {
+		
+		List<Shop> list = shopDao.getShop(shop);
+		
+		return list;
 	}
 	
 	

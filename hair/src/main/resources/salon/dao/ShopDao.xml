@@ -13,4 +13,12 @@
   		insert into salonpage(file_name, no)
   		values (#{fileName}, #{no})
   	</insert>
+  	
+  	<!-- shop information -->
+  	<select id="getShop" parameterType="string" resultType="shop">
+  		select name, sano no
+  		  from shop
+  		 where name like CONCAT('%', #{name}, '%')
+  	</select>
+  	
   </mapper>
