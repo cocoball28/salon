@@ -160,15 +160,17 @@ $("#radio1").click(function(){
 $(document).on("keyup",'#searchShop',function(){
 //$('#search').keyup(function(){
 	var shop = $('#searchShop').val();
-	alert("keyup");
+	/*shop = '%'+shop+'%';*/
 	console.log("keyup " + shop);
 	$.post(contextPath+'/auth/getShop.do',{name: shop}, function(data){
 		console.log(data);
+		console.log(data.ajaxResult);
 		var output = '<ul class="searchresult">';
-		$.each(data, function(key, val){
+		$.each(data.ajaxResult.data, function(key, val){
 			if(val.name/*(val.name.search(myExp) != -1) || (val.bio.search(myExp) != -1)*/) {
 				output +='<li>';
 				output +='<h2>' + val.name + '</h2>';
+				output +='<input type="hidden" value='+val.no+'>';
 				/*output +='<img src="images/' + val.shortname + '_tn.jpg" alt="'+ val.name +'" />';
 				output +='<p>' + val.bio + '</p>';*/
 				output +='</li>';
