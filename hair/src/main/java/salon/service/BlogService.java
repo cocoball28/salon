@@ -14,7 +14,7 @@ import salon.domain.BlogComment;
 public interface BlogService {
 	//본문
 	public Map<String, Object> register(Blog blog, MultipartHttpServletRequest mRequest) throws Exception;
-	public Map<String, Object> selectList(Blog blog);
+	public Map<String, Object> selectList(Blog blog, HttpServletRequest request);
 	public void delete(Blog blog);
 	
 	//댓글
