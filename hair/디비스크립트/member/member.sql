@@ -109,6 +109,10 @@ insert into shop (name) values ('choice hair');
 insert into shop (name) values ('hong hair');
 insert into shop (name) values ('kim hair');
 
+select *
+from shop
+where name like '%hair%';
+
 drop table shop;
 
 -- 미용실
