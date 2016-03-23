@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="./js/jquery.paging.min.js"></script>
+	<link href="./css/qna.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<style>
+		#paging{text-align:center;}
+		a.paging-item,a.paging-side{margin:0 .25em;}
+		a.paging-item.selected{font-weight:bold;}
+	</style>
+</head>
+<body>
+	<div id="wrap" class="qna">
+		<div class="header" id="header"></div>
+   		<div id="sidebar">
+   		</div>
+   		<div class="qna_list" id="content">
+   			<font color="#FE9A2E"><h3>Q&A</h3></font>
+   			<div class="content_section"></div>
+    		<div class="search_box">
+     			<form id="searchForm" method="get" action="javascript:check_search_form();">
+     				<input type ="hidden" name="content_id" value="751">
+       				<fieldset>
+         				<legend class="blind">검색</legend>
+         				<div class="box">
+          					<label for>
+          						<img src="./img/p.gif" alt="궁금한 점 검색으로 찾기">
+       						</label>
+	        				<select id="searchSelect">
+	         					<option value="subject">제목</option>
+	         					<option value="content">내용</option>
+	         					<option value="name">작성자</option>
+	         				</select>
+	       					<input type="search" title="검색어 입력" class="input_txt" id="search_txt" />
+	        				<input type="image" src="./img/search.gif" alt="search">
+     					</div>
+    				</fieldset>
+    			</form>
+    		</div>  
+		    <table class="basic_table" id="basic_table">     
+     		<tr height="40">
+		        <td height="40"><img src="./img/bunho.gif"></td>  
+		        <td height="40"><img src="./img/title.gif"></td>  
+		        <td height="40"><img src="./img/nick.gif"></td>  
+		        <td height="40"><img src="./img/searchsu.gif"></td>  
+		        <td height="40"><img src="./img/day.gif"></td>  
+		    </tr>
+ 			<tbody></tbody>
+			</table>		
+			<br/>
+			<div id="paging"></div>
+ 			<p align="right"><input class="btn btn-warning" type="button" value="글쓰기" onclick="document.location.href='qnaRegistForm.html'">
+            <input class="btn btn-warning" type="button" value="그림등록" onclick="document.location.href='formFile.html'"></p>	
+     	</div>
+	    <div id="righter">
+   		</div>
+   		
+   		
+   		
+	</div>
+	<script>
+		var contextRoot = 'http://localhost:8008/salon';
+		var loc = location.href; // 페이지주소받아오기위한 변수
+		var page = loc.match(/pageNo\=[0-9]+/g); // 숫자만 찾는 정규식(/PageNo <--이부분은 .html?다음에들어가는부분이다)
+		
+		if(page) 
+		{
+			page = page[0].replace('pageNo=','');
+		}
+		if(!page)
+		{
+			page= 1;
+		}
+		
+		$.ajax(contextRoot + '/board/boardCount.do', {
+			dataType: 'json',
+			method: 'GET',
+			success: function(resultObj) {
+				var toatalPage = parseInt(resultObj.data);
+				 $('#paging').paging({current:page, max:toatalPage, href:"qnaList.html?pageNo={0}"});
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("오호라.. 오류다!");
+				console.log(textStatus);
+				console.log(errorThrown);
+			}
+		});
+
+		$.ajax(contextRoot + '/board/list.do?pageNo='+page, {
+			dataType: 'json',
+			method: 'GET',
+			success: function(resultObj) {
+				  var table = $("#basic_table");
+				  $("#basic_table tr:not(:first)").remove();
+				  //alert(resultObj);
+				  for (var board of resultObj.data) {
+				    $("<tr>")
+				      .html("<td>" + board.qna_no + 
+							      "</td><td><a href='" + contextRoot + "/qna/qnaDetail.html?qna_no=" 
+							          + board.qna_no + "'>" +board.qna_title + 
+							      "</a></td><td>"+board.nick+"</td><td>" + board.viewnum +
+							      "</td><td>" + board.reg_Date + "</td>")
+							.appendTo(table);
+				  }
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("오호라.. 오류다!");
+				console.log(textStatus);
+				console.log(errorThrown);
+			}
+		});
+		
+		function check_search_form() {
+			$("#basic_table tr:not(:first)").remove();
+			$.ajax(contextRoot + '/board/list.do?pageNo='+1+'&searchSelect='+$("#searchSelect option:selected").val()+"&search_txt="+$("#search_txt").val(), {
+				dataType: 'json',
+				method: 'get',
+				success: function(resultObj) {
+					  var table = $("#basic_table");
+					  //console.dir(resultObj);
+					  for (var board of resultObj.data) {
+					    $("<tr>")
+					      .html("<td>" + board.qna_no + 
+								      "</td><td><a href='" + contextRoot + "/qna/qnaDetail.html?no=" 
+								          + board.qna_no + "'>" + board.qna_title + 
+								      "</a></td><td>"+board.nick+"</td><td>" + board.viewnum +
+								      "</td><td>" + board.reg_Date + "</td>")
+								.appendTo(table);
+					  }
+					
+					  
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert("오호라.. 오류다!");
+					console.log(textStatus);
+					console.log(errorThrown);
+				}
+				
+			});
+		}
+	</script> 
+</body>
+</html>
