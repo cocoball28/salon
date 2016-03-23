@@ -12,7 +12,7 @@ import salon.domain.BlogComment;
 public interface BlogDao {
 	//본문
 	public int insert(Blog blog);
-	public List<Blog> selectBlogList();
+	public List<Blog> selectBlogList(Blog blog);
 	public Blog selectBlogByNo(Blog blog);
 	public void deleteBlog(Blog blog);
 	
