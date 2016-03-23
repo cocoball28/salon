@@ -3,6 +3,9 @@ package salon.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import salon.dao.BlogDao;
 import salon.domain.Blog;
 import salon.domain.BlogComment;
+import salon.domain.Member;
 import salon.service.BlogService;
 
 
@@ -28,10 +32,10 @@ public class BlogController {
 	
 	@RequestMapping(value="list", method=RequestMethod.POST)
 	@ResponseBody
-	public List<Blog> list(){
-		List<Blog> list = blogService.selectList();
+	public Map<String, Object> list(Blog blog){
+		System.out.println("블로그번호 :"+blog.getMno());
 		//System.out.println(list.get(0).getBlogImageList().size());
-		return list;
+		return blogService.selectList(blog);
 	}
 	
 	@RequestMapping(value="delete", method=RequestMethod.POST)
@@ -57,8 +61,8 @@ public class BlogController {
 	//댓글 입력
 	@RequestMapping(value="registComment", method=RequestMethod.POST)
 	@ResponseBody
-	public BlogComment registComment(BlogComment comment){
-		return blogService.commentRegister(comment);
+	public BlogComment registComment(BlogComment comment, HttpServletRequest request){
+		return blogService.commentRegister(comment, request);
 	}
 	
 	//댓글 입력
