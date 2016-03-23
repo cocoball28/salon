@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<link href="./css/qna.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src ="https://code.jquery.com/jquery-1.11.2.js"></script>
+
+</head>
+<body>
+<div id="wrap" class="qna">
+     
+   	 <div id="header"></div>
+     <div id="sidebar">
+      </div>
+     
+     <div id="content" align="center">
+     <table width="500" align="center" id="basic_table">
+     </table>
+     <script>
+     	var no = location.href.split('?')[1].split('=')[1];
+		var contextRoot = 'http://localhost:8008/salon';
+		$.ajax(contextRoot + '/board/detail.do?qna_no=' + no, {
+			dataType: 'json',
+			method: 'GET',
+			success: function(resultObj) {
+				  var table = $("#basic_table");
+				 //alert(resultObj);
+				  var board = resultObj.data;
+				  //alert(board.qna_title);
+				    $("<tr>").html("<td><div class='input-group'>"+
+				             "<span class='input-group-addon' id='basic-addon1'>제목</span>"+
+				             "<input type='text' id='qna_title' value="+board.qna_title+" name='qna_title'"+ 
+				              "class='form-control aria-describedby='basic-addon1' readonly>"+
+				              "</div></td></tr>").appendTo(table);
+				    $("<tr>").html("<td><div class='input-group'>"+
+				             "<span class='input-group-addon' id='basic-addon1'>닉네임</span>"+
+				             "<input type='text' id='nick' value="+board.nick+" name='nick'"+ 
+				              "class='form-control aria-describedby='basic-addon1' readonly>"+
+				              "</div></td></tr>").appendTo(table);
+				    $("<tr>").html("<td><div class='input-group'>"+
+				             "<span class='input-group-addon' id='basic-addon1'>작성일</span>"+
+				             "<input type='text' id='reg_Date' value="+board.reg_Date+" name='reg_Date'"+ 
+				              "class='form-control aria-describedby='basic-addon1' readonly>"+
+				              "</div></td></tr>").appendTo(table);
+				    $("<tr>").html("<td><div class='input-group'>"+
+				             "<span class='input-group-addon' id='basic-addon1'>번호</span>"+
+				             "<input type='text' id='qna_no' value="+board.qna_no+" name='qna_no'"+ 
+				              "class='form-control aria-describedby='basic-addon1' readonly>"+
+				              "</div></td></tr>").appendTo(table);
+			        $("<tr>").html("<td><div class='input-group'>"+
+				             "<span class='input-group-addon' id='viewnum'>조회수</span>"+
+				             "<input type='text' id='viewnum' value="+board.viewnum+" name='viewnum'"+ 
+				              "class='form-control aria-describedby='basic-addon1' readonly>"+
+				              "</div></td></tr>").appendTo(table);
+			        $("<tr>").html("<textarea class='form-control' rows='7' id='qna_content' readonly>"+board.qna_content+
+			        		 "</textarea>").appendTo(table);
+			
+			
+			},
+		    error: function(jqXHR, textStatus, errorThrown) {
+				alert("오호라.. 오류다!");
+				console.log(textStatus);
+				console.log(errorThrown);
+			}
+			
+			
+					
+		});
+		
+		function insertForm() {
+			
+			$("#qna_title").prop("readonly", false);
+			$("#qna_content").prop("readonly", false);
+			
+		}
+		
+		function deleteQna() {
+			location.href = contextRoot + "/board/delete.do?qna_no=" + no;
+			
+		}
+		
+		function updateForm(){
+			location.href = contextRoot + "/board/update.do?salon board="+board ;
+		}
+		
+		</script>
+		
+  
+         
+         
+         <input class="btn btn-default" type="button" value="입력" onclick="insertForm()">
+         <input class="btn btn-default" type="button" value="수정" onckick="updateForm()">
+         <input class="btn btn-default" type="button" value="답글" 
+          onclick="document.location.href='qnaReRegist.html'">
+         <input class="btn btn-default" type="button" value="삭제" onclick="deleteQna()">
+         <input class="btn btn-default" type="button" value="리스트"
+          onclick="document.location.href='qnaList.html'">
+                                                            
+     
+     </div>
+     
+     <div id="righter">
+     </div>
+</div>
+</body>
+</html>
