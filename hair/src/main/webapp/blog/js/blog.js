@@ -1,3 +1,4 @@
+// 현재 들어온 블로그 번호
 var currentViewDsnNo = $(location).attr('search').split("=")[1];
 console.log(currentViewDsnNo);
 
@@ -220,12 +221,61 @@ $(function(){
 			{"mno":currentViewDsnNo},
 			function(data){
 				console.log(data);
+				blogOwnerCheck(data.myBlogFlag);
+				printDsnInfo(data.dsnInfo);	
 				for(var i = 0; i < data.blogList.length ; i ++){
 						addBoard(data.blogList[i]);
 				}
 	});
 })
 /* 첫 화면 출력 =================================*/
+
+
+/* 디자이너 본인 여부 확인 ===========================*/
+var blogOwnerCheck = function(data){
+	if(data == false){
+		$("#viewRegistFormBtn").remove();
+		$(".registForm").remove();
+	}
+}
+/* 디자이너 본인 여부 확인 ===========================*/
+
+
+
+/* 디자이너 정보 출력 =============================*/
+var printDsnInfo = function(data){
+	console.log("디자이너 정보 : "+data);
+	if(data.photoPath == null){
+		$("#hairdresserPhoto").attr("src","img/contents/default-portrait.png");
+	}else{
+		$("#hairdresserPhoto").attr("src",data.photoPath);
+	}
+	$("#hairdresserName").text(data.nick);
+	var gender="";
+	if(data.gender == "f"){
+		gender = "female";
+	}else{
+		gender = "male";
+	}
+	$("#hairdresserIntroduce").text(data.email+", "+data.nick+", "+gender);
+	/*
+	<div class="infoDiv">
+	<div style="background: white; width: 250px; padding: 20px; border: 1px solid #F5F3F3;">
+		<img id="hairdresserPhoto" src="img/contents/info.jpg" width="210px;"> 
+	</div>
+	<div style="background: white; width: 250px; margin-top:5px;; border: 1px solid #F5F3F3; text-align: center;">
+		<h5><b id="hairdresserName">Cara Delevingne</b></h5>
+	</div>
+	<div style="background: white; width: 250px; padding: 10px 0px 0px 10px; margin-top:5px;; border: 1px solid #F5F3F3; font-size: 10px">
+		<p id="hairdresserIntroduce">Cara|25|actrees, model, pangpang salon</p>
+		<p>2016-03-03</p>
+	</div>
+	</div>
+	*/
+	
+};
+/* 디자이너 정보 출력 =============================*/
+
 
 /* 블로그 글삭제 파트 ==================================*/
 var deleteMainContent = function(target){
