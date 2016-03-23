@@ -1,14 +1,13 @@
 package salon.controller;
 
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import salon.dao.ShopDao;
@@ -24,18 +23,23 @@ public class ShopController {
 	@Autowired ShopService shopService;
 	
 	@RequestMapping("list")
-	public List<Shop> list() {
+	public Map<String, Object> list() {
 		return shopService.selectList();
 	}
 	
 	@RequestMapping(value="regist", method=RequestMethod.POST)
 	@ResponseBody
-	public List<Shop> regist(Shop shop, MultipartHttpServletRequest mRequest) throws Exception {
+	public List<ShopImage> regist(Shop shop, MultipartHttpServletRequest mRequest) throws Exception {
 		System.out.println("컨트롤러");
 		System.out.println(mRequest);
 		
 		shopService.register(shop, mRequest);
-		return shopService.selectList();
+		List<ShopImage> list = (List<ShopImage>) shopService.selectList().get("image");
+		
+		return list;
+		
+		
+	/*	return shopService.selectList();*/
 		//return shopService.register(mRequest);
 	}
 }
