@@ -1,3 +1,7 @@
+var currentViewDsnNo = $(location).attr('search').split("=")[1];
+console.log(currentViewDsnNo);
+
+
 // 왼쪽 정보창 떠다니게 하기
 $(".infoDiv").each(function(){
 	var $window = $(window),
@@ -14,9 +18,6 @@ $(".infoDiv").each(function(){
 	});
 	$window.trigger('scroll');
 });
-
-
-
 
 
 $(".repImg").each(function(){
@@ -136,11 +137,13 @@ var likePull = function(data){
 
 /* 댓글 입력 ==================================*/
 var registComment = function(target){
+	var blogNo = $(target).closest(".mainContents").attr("blogNo");
 	var content = $(target).val();
+	var blogDiv = $(target).closest(".comment_list");
 	if(event.keyCode == 13){
 		$.post(
 			blogPath+"/blog/registComment.do",
-			{no:blogNo, content:content},
+			{"bno":blogNo, content:content},
 			function(data){
 				console.log(data);
 				addComment(blogDiv, data)
@@ -158,7 +161,7 @@ var removeComment = function(target){
 	var commentNo = $(commentTr).attr("commentno");
 		$.post(
 				blogPath+"/blog/deleteComment.do",
-				{commentNo:commentNo},
+				{"cno":commentNo},
 				function(){
 					commentTr.hide('slow');
 				}
@@ -171,11 +174,13 @@ var removeComment = function(target){
 var viewComments = function(target){
 	var blogDiv = $(target).closest(".mainContents");
 	var blogNo = $(blogDiv).attr('blogNo');
+	console.log("blogno :" + blogNo)
 	$(blogDiv).find(".comment_list").show("fast");
 		$.post(
 				blogPath+"/blog/listComment.do",
-				{no:blogNo},
+				{"bno":blogNo},
 				function(data){
+					console.log("댓글 데이터:"+data);
 					for(var i = 0 ; i < data.length ; i ++){
 						addComment(blogDiv, data[i]);
 					};
@@ -198,9 +203,11 @@ var closeComments = function(target){
 
 /* 댓글 출력 파트 ===============================*/
 var addComment = function(blogDiv, data){
+	console.log(data);
 	var cloneTr = $('#commentClone table').find("tr").clone();
 	cloneTr.find(".commentContent").html(data.content);
-	cloneTr.attr("commentNo", data.commentNo);
+	cloneTr.find(".commentNick").html(data.nickName);
+	cloneTr.attr("commentNo", data.cno);
 	$(blogDiv).find('table').append(cloneTr);
 }
 /* 댓글 출력 파트 ===============================*/
@@ -208,28 +215,16 @@ var addComment = function(blogDiv, data){
 
 /* 첫 화면 출력 =================================*/
 $(function(){
-	//hairdresser정보
-/*	$.post(
-			"",
-			{
-				hairdresserNo:hairdresserNo, 
-				viewPostNo: viewPostNo	
-			},
-			function(data){
-			}
-	)
-	*/
-	
 	$.post(
 			blogPath+"/blog/list.do",
+			{"mno":currentViewDsnNo},
 			function(data){
 				console.log(data);
-				for(var i = 0; i < data.length ; i ++){
-						addBoard(data[i]);
+				for(var i = 0; i < data.blogList.length ; i ++){
+						addBoard(data.blogList[i]);
 				}
 	});
 })
-
 /* 첫 화면 출력 =================================*/
 
 /* 블로그 글삭제 파트 ==================================*/
@@ -238,7 +233,7 @@ var deleteMainContent = function(target){
 	var blogNo = $(blogDiv).attr("blogno");
 	$.post(
 			blogPath+"/blog/delete.do",
-			{no:blogNo},
+			{"bno":blogNo},
 			function(){
 				$(target).closest(".mainContents").hide('slow');
 	});
@@ -275,13 +270,13 @@ var registBlog = function(){
 /* 블로그 출력 파트 =================================*/
 var addBoard = function(blog){
 	var cloneContent = $(".cloneMainContents > .mainContents").clone();
-	cloneContent.attr("blogNo", blog.no);
+	cloneContent.attr("blogNo", blog.bno);
 	cloneContent.find('.tag').text(blog.tag);
 	cloneContent.find('.description').text(blog.content);
 	//console.log(blog.blogImageList.length);
 	for(var i = 0 ; i < blog.blogImageList.length ; i ++){
 		var cloneImage = $(".cloneblogImagesDiv .blogImage").clone();
-		cloneImage.attr('src',blog.blogImageList[i].fileName);
+		cloneImage.attr('src',blog.blogImageList[i].path);
 		cloneContent.find('.blogImagesDiv').append(cloneImage)
 	}
 	if(blog.blogImageList.length == 0 ){
@@ -321,4 +316,4 @@ var readURL = function(input) {
 //더미데이터에 임시번호 부여함, 댓글 테스트용
 $(".dummyMainContent").attr("blogNo", 1);
 
-$(".header").load(contextPath+"/header/header.html .header");
+/*$(".header").load(contextPath+"/header/header.html .header");*/
