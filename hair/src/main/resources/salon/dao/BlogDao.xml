@@ -96,4 +96,10 @@
 		delete FROM BLOG_COMMENT
 		where cno = #{cno}
 	</delete>
+	
+	<select id="selectDsnInfo" parameterType="blog" resultType="member">
+	    select mno, email, pwd, name, nick, photo_path as photoPath, gender, status
+		  from member
+		 where mno = #{mno}
+	</select>
 </mapper>
