@@ -3,8 +3,16 @@ package salon.domain;
 public class Shop {
 	private int no;
 	private String name;
-	private String phoName;
-	
+	private int tel;
+	private int post;
+	private String addr;
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
 	public int getNo() {
 		return no;
 	}
@@ -17,10 +25,16 @@ public class Shop {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPhoName() {
-		return phoName;
+	public int getTel() {
+		return tel;
 	}
-	public void setPhoName(String phoName) {
-		this.phoName = phoName;
+	public void setTel(int tel) {
+		this.tel = tel;
+	}
+	public int getPost() {
+		return post;
+	}
+	public void setPost(int post) {
+		this.post = post;
 	}
 }
