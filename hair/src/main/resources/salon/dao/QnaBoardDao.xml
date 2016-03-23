@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="salon.dao.QnaBoardDao">
+	
+	
+	<resultMap type="qnaBoard" id="qnaBoardResultMap">
+		<result column="qna_no" property="qna_no" />
+		<result column="nick" property="nick" />
+		<result column="qna_content" property="qna_content" />
+		<result column="reg_Date" property="reg_Date" />
+		<result column="qna_title" property="qna_title" />
+		<result column="viewnum" property="viewnum" />
+		
+	</resultMap>
+	
+	<select id="boardCount" resultType="int">
+	   select count(*) from qna_board
+	</select>
+	
+	<select id="selectBoardVOs" parameterType="map" resultType="qnaBoard">		
+        select * 
+        from qna_board
+        <if test="searchSelect != null">
+        	<if test="search_txt != null">
+        		<choose>
+        		<when test="searchSelect.equals('subject')">
+        			WHERE qna_title LIKE CONCAT('%', #{search_txt}, '%')
+        		</when>
+        		<when test="searchSelect.equals('content')">
+        			WHERE qna_content LIKE CONCAT('%', #{search_txt}, '%')
+        		</when>
+        		<when test="searchSelect.equals('name')">
+        			WHERE nick = #{search_txt}
+        		</when>
+        		</choose>
+        	</if>
+        </if>
+        order by qna_no desc, seq asc 
+        <if test="pageNo != null">
+        limit #{startIdx}, 10
+        </if>
+	</select>
+	
+	
+	
+	<insert id="reInsertBoardVO" parameterType="qnaBoard">
+	    insert into qna_board (qna_title,qna_content,nick, viewnum,grp,seq,lvl) 
+	    values (#{qna_title},#{qna_content},#{nick},0,(,seq+1,lvl+1) 
+	</insert>
+	
+	<insert id="insertBoardVO" parameterType="qnaBoard">
+	    insert into qna_board (qna_title,qna_content,nick,viewnum,grp,seq,lvl) 
+	    values (#{qna_title},#{qna_content},#{nick},0,(select last_insert_id()+1),1,0)
+	     
+	</insert>
+	
+	<select id="selectBoardVO" parameterType="int" resultType="qnaBoard">
+	     select * from qna_board where qna_no = #{qna_no}
+	</select>
+	
+	<delete id="deleteBoardVO" parameterType="int" >
+	   delete from qna_board where qna_no = #{qna_no}
+	</delete>
+	
+	<update id="updateBoardVO" parameterType="qnaboard">
+	   update qna_board set qna_title=#{qna_title} qna_content=#{qna_content} 
+	</update>
+	
+	<update id="updateView" parameterType="int">
+	    update qna_board set viewnum = viewnum+1 where qna_no = #{qna_no}
+	</update>
+	
+	<insert id="saveImage" parameterType="java.util.Map">
+    insert into img_table blob values (#{img})    
+    </insert>
+    
+    
+</mapper>
