@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import salon.dao.BlogDao;
 import salon.domain.Blog;
 import salon.domain.BlogImage;
+import salon.domain.Member;
 import salon.domain.BlogComment;
 import salon.service.BlogService;
 
@@ -35,8 +37,10 @@ public class BlogServiceImpl implements BlogService {
 	// 본문 파트
 	@Override
 	public Map<String, Object> register(Blog blog, MultipartHttpServletRequest mRequest) throws Exception{
+		Member member = (Member)mRequest.getSession().getAttribute("loginUser");
+		blog.setMno(member.getMno());
 		blogDao.insert(blog);
-		int no = blog.getNo();
+		int bno = blog.getBno();
 		//System.out.println("글번호 : "+no);
 		Map<String, Object> map = new HashMap<String, Object>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
@@ -57,8 +61,8 @@ public class BlogServiceImpl implements BlogService {
 				String saveFullFileName = filePath+"/"+realFileName;
 				String srcPath = "../upload/"+ sdfPath;
 				mFile.transferTo(new File(saveFullFileName));
-				blogImage.setFileName(srcPath+realFileName);
-				blogImage.setNo(no);
+				blogImage.setPath(srcPath+realFileName);
+				blogImage.setBno(bno);
 				blogDao.insertImage(blogImage);
 			}
 		}
@@ -68,8 +72,12 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public List<Blog> selectList() {
-		return blogDao.selectBlogList();
+	public Map<String, Object> selectList(Blog blog) {
+		Map<String, Object> map = new HashMap<>();
+//		map.put("mInfo", Object);
+//		map.put("partnerInfo", Object);
+		map.put("blogList", blogDao.selectBlogList(blog));
+		return map;
 	}
 
 	@Override
@@ -80,8 +88,13 @@ public class BlogServiceImpl implements BlogService {
 		
 	// 댓글 파트
 	@Override
-	public BlogComment commentRegister(BlogComment blogComment) {
+	public BlogComment commentRegister(BlogComment blogComment, HttpServletRequest request) {
+		Member member = (Member)request.getSession().getAttribute("loginUser");
+		blogComment.setMno(member.getMno());
+		blogComment.setNickName(member.getNick());
 		blogDao.insertComment(blogComment);
+		int cno = blogComment.getCno();
+		blogComment.setCno(cno);
 		return blogDao.selectComment(blogComment);
 	}
 
