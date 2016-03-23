@@ -2,15 +2,18 @@ package salon.domain;
 
 public class BlogComment {
 	private String content;
-	private int commentNo;
-	private int no;
-
-	public int getNo() {
-		return no;
+	private int cno;
+	private int bno;
+	private int mno;
+	private String nickName;
+	private String regDate;
+	
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setNo(int no) {
-		this.no = no;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getContent() {
@@ -21,12 +24,35 @@ public class BlogComment {
 		this.content = content;
 	}
 
-	public int getCommentNo() {
-		return commentNo;
+	public int getCno() {
+		return cno;
 	}
 
-	public void setCommentNo(int commentNo) {
-		this.commentNo = commentNo;
+	public void setCno(int cno) {
+		this.cno = cno;
 	}
 
+	public int getBno() {
+		return bno;
+	}
+
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+
+	public int getMno() {
+		return mno;
+	}
+
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
 }

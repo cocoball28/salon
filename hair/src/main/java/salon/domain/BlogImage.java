@@ -1,32 +1,32 @@
 package salon.domain;
 
 public class BlogImage {
-	private String fileName;
-	private String fileNo;
-	private int no;
+	private String path;
+	private int bpno;
+	private int bno;
 
-	public String getFileName() {
-		return fileName;
+	public String getPath() {
+		return path;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
-	public String getFileNo() {
-		return fileNo;
+	public int getBpno() {
+		return bpno;
 	}
 
-	public void setFileNo(String fileNo) {
-		this.fileNo = fileNo;
+	public void setBpno(int bpno) {
+		this.bpno = bpno;
 	}
 
-	public int getNo() {
-		return no;
+	public int getBno() {
+		return bno;
 	}
 
-	public void setNo(int no) {
-		this.no = no;
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 
 }
