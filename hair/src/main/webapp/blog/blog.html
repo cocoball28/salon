@@ -22,14 +22,13 @@
 <!-- Custom styles for this template -->
 <link href="css/blog.css" rel="stylesheet">
 </head>
-<body style="background: #black">
+<body style="background: ">
 	<!-- Fixed navbar -->
 	<header class="header" ></header>
 		
 	<div class="container">
 		<div class="varDiv">
 			<div class="contentsDiv">
-
 				<!-- 왼쪽 정보 DIV -->
 				<div class="infoDiv">
 					<div style="background: white; width: 250px; padding: 20px; border: 1px solid #F5F3F3;">
@@ -152,7 +151,7 @@
 <!-- 오른쪽정보 DIV--------------------------------------------------------- -->
 			<div class="secondInfoDiv" style=" background:; color: grey; ">
 				<div>
-					<img class="showShopIcon" src="img/icon/shop.png" width="100%" style="cursor: pointer; opacity:0.8;" onclick="showShopDetail()">
+					<img class="showShopIcon" src="img/icon/shop2.png" width="100%" style="cursor: pointer; opacity:0.8;" onclick="showShopDetail()">
 					<div class="partnerInfoDiv_1" style="background: white; margin: 5px; cursor: pointer;">
 						<img src="./img/contents/partner-1.jpg" width="40px"
 							height="40px"><span style="padding: 10px; "><b>First Partner </b></span>
@@ -226,11 +225,12 @@
 		<img src="img/icon/up.png" style="height: 30px; cursor: pointer;" onclick="scrolltotop()">
 	</div>
 	
+	
+<!-- 댓글 클론 -->	
 	<div id="commentClone" style="display: none;">
 		<table>
 			<tr>		
-				<td width="50px;"><img src="./img/contents/info.jpg"
-					class="img-circle" style="width: 40px; margin: 3px;"></td>
+				<td width="50px;"><img  src="./img/contents/info.jpg" class="img-circle commentPortrait" style="width: 40px; margin: 3px;"></td>
 				<td width="540px"><a href="#" class="commentNick">cara</a>&nbsp;<span class="commentContent"></span></td>
 				<td class="deleteCommentBtn"><img src="img/icon/close.png" width="10px;" style="cursor: pointer;" onclick="removeComment(this)"></td>
 			</tr>
@@ -301,8 +301,8 @@
 	
 	<script src="js/blog.js"></script>
 	<!-- <script src="http://192.168.0.44:3000/socket.io/socket.io.js/"></script> -->
-	<!-- <script src="../header/js/header.js"></script>
-	<script src="../header/js/message.js"></script> -->
+	<script src="../header/js/header.js"></script>
+	<!-- <script src="../header/js/message.js"></script> -->
 	
 	<!-- socket.io -->
 	

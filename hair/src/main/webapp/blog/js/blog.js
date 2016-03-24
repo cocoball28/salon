@@ -104,7 +104,7 @@ $(".partnerInfoDiv_4").hover(
 
 $(".showShopIcon").hover(
 		function(){
-			$('.showShopIcon').animate({opacity:0.5},200)
+			$('.showShopIcon').animate({opacity:0.7},200)
 		},
 		function(){
 			$('.showShopIcon').animate({opacity:0.8},200)
@@ -207,7 +207,14 @@ var addComment = function(blogDiv, data){
 	console.log(data);
 	var cloneTr = $('#commentClone table').find("tr").clone();
 	cloneTr.find(".commentContent").html(data.content);
-	cloneTr.find(".commentNick").html(data.nickName);
+	cloneTr.find(".commentNick").html(data.nick);
+	var portrait = "";
+	if(data.phothPath != null){
+		portrait = data.photoPath;
+	}else{
+		portrait = "img/contents/default-portrait.png";
+	}
+	cloneTr.find(".commentPortrait").attr("src",portrait);
 	cloneTr.attr("commentNo", data.cno);
 	$(blogDiv).find('table').append(cloneTr);
 }
@@ -226,6 +233,7 @@ $(function(){
 				for(var i = 0; i < data.blogList.length ; i ++){
 						addBoard(data.blogList[i]);
 				}
+				$("#loginUserId").text(data.loginUser.nick);
 	});
 })
 /* 첫 화면 출력 =================================*/
@@ -350,4 +358,4 @@ var readURL = function(input) {
 //더미데이터에 임시번호 부여함, 댓글 테스트용
 $(".dummyMainContent").attr("blogNo", 1);
 
-/*$(".header").load(contextPath+"/header/header.html .header");*/
+$(".header").load(contextPath+"/header/header.html .header");
