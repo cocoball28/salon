@@ -16,7 +16,8 @@ public interface BlogDao {
 	public List<Blog> selectBlogList(Blog blog);
 	public Blog selectBlogByNo(Blog blog);
 	public void deleteBlog(Blog blog);
-	
+	public void deleteImageByBlogNo(Blog blog);
+	public void deleteCommentByBlogNo(Blog blog);
 	
 	//이미지파일
 	public void insertImage(BlogImage blogImage);
@@ -30,6 +31,8 @@ public interface BlogDao {
 
 	//블로그 주인 정보
 	public Member selectDsnInfo (Blog blog);
+	
+	
 }
 
 

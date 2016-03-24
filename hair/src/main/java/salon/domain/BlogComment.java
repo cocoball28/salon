@@ -1,20 +1,16 @@
 package salon.domain;
 
 public class BlogComment {
-	private String content;
+
 	private int cno;
 	private int bno;
 	private int mno;
-	private String nickName;
+	private String nick;
+	private String content;
 	private String regDate;
-	
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
+	private String photoPath;
+	private String gender;
+	private String status;
 
 	public String getContent() {
 		return content;
@@ -48,6 +44,14 @@ public class BlogComment {
 		this.mno = mno;
 	}
 
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
 	public String getRegDate() {
 		return regDate;
 	}
@@ -55,4 +59,29 @@ public class BlogComment {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	
+	public String getPhotoPath() {
+		return photoPath;
+	}
+
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 }

@@ -74,11 +74,12 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public Map<String, Object> selectList(Blog blog, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<>();
-		Member loginMember = (Member)request.getSession().getAttribute("loginUser");
-		int loginMemberNo = loginMember.getMno();
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		int loginMemberNo = loginUser.getMno();
 		int mno = blog.getMno();
 		
 		System.out.println(mno);
+		map.put("loginUser", loginUser);
 		map.put("dsnInfo", blogDao.selectDsnInfo(blog));
 //		map.put("partnerInfo", Object);
 		map.put("blogList", blogDao.selectBlogList(blog));
@@ -94,6 +95,8 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public void delete(Blog blog) {
+		blogDao.deleteCommentByBlogNo(blog);
+		blogDao.deleteImageByBlogNo(blog);
 		blogDao.deleteBlog(blog);
 	}
 	
@@ -103,7 +106,7 @@ public class BlogServiceImpl implements BlogService {
 	public BlogComment commentRegister(BlogComment blogComment, HttpServletRequest request) {
 		Member member = (Member)request.getSession().getAttribute("loginUser");
 		blogComment.setMno(member.getMno());
-		blogComment.setNickName(member.getNick());
+		blogComment.setNick(member.getNick());
 		blogDao.insertComment(blogComment);
 		int cno = blogComment.getCno();
 		blogComment.setCno(cno);
