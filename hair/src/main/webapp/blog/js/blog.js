@@ -241,7 +241,6 @@ var blogOwnerCheck = function(data){
 /* 디자이너 본인 여부 확인 ===========================*/
 
 
-
 /* 디자이너 정보 출력 =============================*/
 var printDsnInfo = function(data){
 	console.log("디자이너 정보 : "+data);
@@ -258,21 +257,6 @@ var printDsnInfo = function(data){
 		gender = "male";
 	}
 	$("#hairdresserIntroduce").text(data.email+", "+data.nick+", "+gender);
-	/*
-	<div class="infoDiv">
-	<div style="background: white; width: 250px; padding: 20px; border: 1px solid #F5F3F3;">
-		<img id="hairdresserPhoto" src="img/contents/info.jpg" width="210px;"> 
-	</div>
-	<div style="background: white; width: 250px; margin-top:5px;; border: 1px solid #F5F3F3; text-align: center;">
-		<h5><b id="hairdresserName">Cara Delevingne</b></h5>
-	</div>
-	<div style="background: white; width: 250px; padding: 10px 0px 0px 10px; margin-top:5px;; border: 1px solid #F5F3F3; font-size: 10px">
-		<p id="hairdresserIntroduce">Cara|25|actrees, model, pangpang salon</p>
-		<p>2016-03-03</p>
-	</div>
-	</div>
-	*/
-	
 };
 /* 디자이너 정보 출력 =============================*/
 
