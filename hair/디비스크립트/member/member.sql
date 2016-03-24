@@ -1,22 +1,4 @@
-drop table test_member;
-
-create table test_member(
-	no int(10) primary key auto_increment,
-	nick varchar(10) not null,
-	email varchar(10) not null,
-	pwd varchar(20) not null,
-	file_path varchar(100) 
-);
-
-create table test_shop(
-	no int(10) primary key auto_increment,
-	name varchar(20) not null 
-);
-
-insert into test_shop(name) values('choice hair');
-insert into test_shop(name) values('hong hair');
-insert into test_shop(name) values('kim hair');
-
+----------------------------------------------------------member
 CREATE TABLE MEMBER (
 	MNO    INTEGER      NOT NULL, -- 회원고유번호
 	EMAIL  VARCHAR(40)  NOT NULL, -- 이메일
@@ -27,18 +9,10 @@ CREATE TABLE MEMBER (
 	GENDER VARCHAR(5)   NOT NULL, -- 성별
 	STATUS VARCHAR(10)  NULL      -- 상태
 );
-select * from member;
-select count(email)
-  		  from member
-  		 where email = 'a@a.net';
 
-
-update member set nick = 'bb' where mno = 0;
 alter table member modify name varchar(50) null;
 alter table member modify gender varchar(5) default 'f';
 alter table member modify status varchar(10) default 'u';
-
-
 --ALTER TABLE MEMBER MODIFY GENDER VARCHAR(5) NOT NULL;
 ALTER TABLE MEMBER CHANGE PHOTO PHOTO_PATH VARCHAR(100) NULL;
 
@@ -61,10 +35,41 @@ CREATE UNIQUE INDEX UIX_MEMBER2
 
 ALTER TABLE MEMBER
 	MODIFY COLUMN MNO INTEGER NOT NULL AUTO_INCREMENT;
+----------------------------------------------------------member
+---------------------------------------------------------미용실
+CREATE TABLE SHOP (
+	SANO    INTEGER      primary key, -- 미용실고유번호
+	NAME    VARCHAR(50)  NOT NULL -- 이름
+);
 
---
-select * from member;
--- 미용사
+insert into shop (name) values ('choice hair');
+insert into shop (name) values ('hong hair');
+insert into shop (name) values ('kim hair');
+
+-- 미용실
+ALTER TABLE SHOP
+	ADD CONSTRAINT PK_SHOP -- 미용실 기본키
+		PRIMARY KEY (
+			SANO -- 미용실고유번호
+		);
+
+-- 미용실 인덱스
+CREATE INDEX IX_SHOP
+	ON SHOP( -- 미용실
+	);
+
+-- 미용실 인덱스2
+CREATE INDEX IX_SHOP2
+	ON SHOP( -- 미용실
+		NAME ASC -- 이름
+	);
+
+ALTER TABLE SHOP
+	MODIFY COLUMN SANO INTEGER NOT NULL AUTO_INCREMENT;
+
+---------------------------------------------------------미용실	
+
+--------------------------------------------------------- 미용사
 CREATE TABLE DESIGNER (
 	MNO   INTEGER    NOT NULL, -- 미용사고유번호
 	SANO  INTEGER    NOT NULL, -- 미용실고유번호
@@ -96,45 +101,13 @@ CREATE INDEX IX_DESIGNER
 ALTER TABLE DESIGNER
 	MODIFY COLUMN MNO INTEGER NOT NULL AUTO_INCREMENT;	
 	
-	
--- 미용실 test
+--------------------------------------------------------- 미용사
 
 
-CREATE TABLE SHOP (
-	SANO    INTEGER      primary key, -- 미용실고유번호
-	NAME    VARCHAR(50)  NOT NULL -- 이름
-);
 
-insert into shop (name) values ('choice hair');
-insert into shop (name) values ('hong hair');
-insert into shop (name) values ('kim hair');
 
-select *
-from shop
-where name like '%hair%';
-
-drop table shop;
-
--- 미용실
-ALTER TABLE SHOP
-	ADD CONSTRAINT PK_SHOP -- 미용실 기본키
-		PRIMARY KEY (
-			SANO -- 미용실고유번호
-		);
-
--- 미용실 인덱스
-CREATE INDEX IX_SHOP
-	ON SHOP( -- 미용실
-	);
-
--- 미용실 인덱스2
-CREATE INDEX IX_SHOP2
-	ON SHOP( -- 미용실
-		NAME ASC -- 이름
-	);
-
-ALTER TABLE SHOP
-	MODIFY COLUMN SANO INTEGER NOT NULL AUTO_INCREMENT;
-
- 
+select count(email)
+  		  from member
+  		 where email = 'a@a.net';
+select * from member;
  
