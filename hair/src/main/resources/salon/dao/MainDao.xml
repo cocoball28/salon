@@ -12,12 +12,28 @@
 		<result column="favorite" property="favorite"/>
 	</resultMap>
 	
-	<select id="mainList" resultMap="mainMap" parameterType="map">
+	<resultMap id="blogMap" type="blog">
+  		<id property="bno" column="bno" />
+  		<result property="tag" column="tag"/>
+  		<result property="content" column="content"/>
+  		<collection property="blogImageList" ofType="blogImage">
+  			<id property="bpno" column="bpno"/>
+  			<result property="path" column="path"/>
+  		</collection>
+	</resultMap>
+	
+	<select id="mainList" resultMap="blogMap" parameterType="map">
+	select t1.bno, t1.mno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 
+      from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
+     order by t1.bno
+     limit #{startIndex}, #{length};
+	</select> 
+<!-- 	<select id="mainList" resultMap="mainMap" parameterType="map">
 		select *
 		  from test_test
 		 order by no desc
 		 limit #{startIndex}, #{length};
-	</select>
+	</select> -->
 
 	
 	<select id="selectByNo" parameterType="int" resultType="main">
@@ -32,6 +48,8 @@
 		 where no = #{no}
 	</select>
   
+  	
+  	
 </mapper>
 
 
