@@ -1,40 +1,16 @@
 ----------------------------------------------------------member
 CREATE TABLE MEMBER (
-	MNO    INTEGER      NOT NULL, -- 회원고유번호
+	MNO    INTEGER      primary key auto_increment, -- 회원고유번호
 	EMAIL  VARCHAR(40)  NOT NULL, -- 이메일
 	PWD    VARCHAR(50)  NOT NULL, -- 비밀번호
-	NAME   VARCHAR(50)  NOT NULL, -- 이름
+	NAME   VARCHAR(50)  NULL, -- 이름
 	NICK   VARCHAR(55)  NOT NULL, -- 닉네임
 	PHOTO_PATH  VARCHAR(100) NULL,     -- 사진
-	GENDER VARCHAR(5)   NOT NULL, -- 성별
-	STATUS VARCHAR(10)  NULL      -- 상태
+	GENDER VARCHAR(5)   NOT NULL default 'f', -- 성별
+	STATUS VARCHAR(10)  not NULL default 'u'     -- 상태
 );
 
-alter table member modify name varchar(50) null;
-alter table member modify gender varchar(5) default 'f';
-alter table member modify status varchar(10) default 'u';
---ALTER TABLE MEMBER MODIFY GENDER VARCHAR(5) NOT NULL;
-ALTER TABLE MEMBER CHANGE PHOTO PHOTO_PATH VARCHAR(100) NULL;
-
-ALTER TABLE MEMBER
-	ADD CONSTRAINT PK_MEMBER -- 회원 기본키
-		PRIMARY KEY (
-			MNO -- 회원고유번호
-		);
-
--- 회원 유니크 인덱스
-CREATE UNIQUE INDEX UIX_MEMBER
-	ON MEMBER ( -- 회원
-	);
-
--- 회원 유니크 인덱스2
-CREATE UNIQUE INDEX UIX_MEMBER2
-	ON MEMBER ( -- 회원
-		EMAIL ASC -- 이메일
-	);
-
-ALTER TABLE MEMBER
-	MODIFY COLUMN MNO INTEGER NOT NULL AUTO_INCREMENT;
+drop table member;
 ----------------------------------------------------------member
 ---------------------------------------------------------미용실
 CREATE TABLE SHOP (
