@@ -1,10 +1,10 @@
 package salon.domain;
 
 public class Shop {
-	private int no;
+	private int sano;
 	private String name;
 	private int tel;
-	private int post;
+	private int zip;
 	private String addr;
 	public String getAddr() {
 		return addr;
@@ -13,12 +13,6 @@ public class Shop {
 		this.addr = addr;
 	}
 
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
-	}
 	public String getName() {
 		return name;
 	}
@@ -28,13 +22,19 @@ public class Shop {
 	public int getTel() {
 		return tel;
 	}
+	public int getSano() {
+		return sano;
+	}
+	public void setSano(int sano) {
+		this.sano = sano;
+	}
+	public int getZip() {
+		return zip;
+	}
+	public void setZip(int zip) {
+		this.zip = zip;
+	}
 	public void setTel(int tel) {
 		this.tel = tel;
-	}
-	public int getPost() {
-		return post;
-	}
-	public void setPost(int post) {
-		this.post = post;
 	}
 }
