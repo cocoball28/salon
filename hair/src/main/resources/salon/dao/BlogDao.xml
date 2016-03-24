@@ -69,23 +69,25 @@
 	<!-- 댓글 파트 -->
 	<!-- 댓글 리스트 출력 -->
 	 <select id="selectCommentList" parameterType="blogComment" resultType="blogComment">
-	select cno, bno, content, reg_date as regDate, nick_name as nickName 
-	  from BLOG_COMMENT
+	select cno, bno, content, reg_date as regDate, nick, photo_path as phtoPath, gender, status 
+	  from BLOG_COMMENT join member
+        on blog_comment.mno = member.mno 
 	 where bno = #{bno}
 	 order by cno;
 	 </select>
 	 
 	 <!-- 댓글 입력 후 댓글 출력 -->
 	 <select id="selectComment" parameterType="blogComment" resultType="blogComment">
-	 select cno, bno, content, reg_date as regDate, nick_name as nickName 
-	 from BLOG_COMMENT
+	select cno, bno, content, reg_date as regDate, nick, photo_path as phtoPath, gender, status 
+	  from BLOG_COMMENT join member
+        on blog_comment.mno = member.mno 
 	 where cno = #{cno}
 	 </select>
 	 
 	 <!-- 댓글 입력-->
 	<insert id="insertComment" parameterType="blogComment">
-	  insert into BLOG_COMMENT(bno, content, nick_name, mno) 
-	  values (#{bno}, #{content}, #{nickName}, #{mno})
+	  insert into BLOG_COMMENT(bno, content, mno) 
+	  values (#{bno}, #{content}, #{mno})
 	  	<selectKey keyProperty="cno" resultType="Integer" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -97,9 +99,23 @@
 		where cno = #{cno}
 	</delete>
 	
+	
+	<!-- 디자이너 정보 출력 -->
 	<select id="selectDsnInfo" parameterType="blog" resultType="member">
 	    select mno, email, pwd, name, nick, photo_path as photoPath, gender, status
 		  from member
 		 where mno = #{mno}
 	</select>
+	
+	<!-- 글삭제시 글에 달린 모든 댓글 삭제 -->
+	<delete id="deleteCommentByBlogNo" parameterType="blog">
+	   delete FROM BLOG_COMMENT
+		where bno = #{bno}
+	</delete>
+
+	<!-- 글삭제시 첨부이미지 삭제 -->
+	<delete id="deleteImageByBlogNo" parameterType="blog">
+	   delete FROM BLOG_PHO
+		where bno = #{bno}
+	</delete>
 </mapper>
