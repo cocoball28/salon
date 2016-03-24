@@ -115,7 +115,7 @@ a:hover { color: #41ccff; }
 }
 #mainLogo{
 	position: absolute;
-	width: 400px;
+	width: 25%;
 	height: 150px;
 }
 
@@ -171,4 +171,7 @@ a:hover { color: #41ccff; }
 }
 label{
 	display: none;
+}
+#myHomeLi{
+	display: none;	
 }
