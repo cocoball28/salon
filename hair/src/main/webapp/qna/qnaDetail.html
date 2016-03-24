@@ -8,6 +8,12 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <link href="./css/qna.css" rel="stylesheet">
 
+<!-- 헤더 스타일 -->
+<link rel="stylesheet" href="../header/css/header.css">
+<link rel="stylesheet" type="text/css" href="../header/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../header/css/noJS.css" />
+<link href="../header/css/message.css" rel="stylesheet"> 
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -15,18 +21,30 @@
 
 </head>
 <body>
+<header class="header" ></header>
 <div id="wrap" class="qna">
      
-   	 <div id="header"></div>
-     <div id="sidebar">
-      </div>
+   	<!--<div id="header"></div>-->
+     <div id="sidebar"></div>
      
      <div id="content" align="center">
+     <br/>
      <table width="500" align="center" id="basic_table">
      </table>
+     <br/>
      <script>
      	var no = location.href.split('?')[1].split('=')[1];
-		var contextRoot = 'http://localhost:8008/salon';
+    	
+     	// contextpath ///////////////
+		function getContextPath(){
+		    var offset=location.href.indexOf(location.host)+location.host.length;
+		    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+		    return ctxPath;
+		}
+		var contextPath =  getContextPath();
+		// contextpath ///////////////
+		
+		var contextRoot = contextPath;
 		$.ajax(contextRoot + '/board/detail.do?qna_no=' + no, {
 			dataType: 'json',
 			method: 'GET',
@@ -110,5 +128,11 @@
      <div id="righter">
      </div>
 </div>
+
+ <script>
+	var contextRoot = 'http://localhost:8008/salon';
+	$(".header").load(contextRoot+"/header/header.html .header");
+</script>
+	<script src="../header/js/header.js"></script>
 </body>
 </html>

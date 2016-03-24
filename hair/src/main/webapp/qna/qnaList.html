@@ -9,6 +9,13 @@
 	<link href="./css/qna.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	
+	<!-- 헤더 스타일 -->
+	<link rel="stylesheet" href="../header/css/header.css">
+	<link rel="stylesheet" type="text/css" href="../header/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../header/css/noJS.css" />
+	<link href="../header/css/message.css" rel="stylesheet"> 
+	
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<style>
 		#paging{text-align:center;}
@@ -16,9 +23,12 @@
 		a.paging-item.selected{font-weight:bold;}
 	</style>
 </head>
-<body>
+<body style="background: white;">
+
+	<header class="header" ></header>
+	
 	<div id="wrap" class="qna">
-		<div class="header" id="header"></div>
+	<!-- 	<div class="header" id="header"></div> -->
    		<div id="sidebar">
    		</div>
    		<div class="qna_list" id="content">
@@ -30,9 +40,7 @@
        				<fieldset>
          				<legend class="blind">검색</legend>
          				<div class="box">
-          					<label for>
-          						<img src="./img/p.gif" alt="궁금한 점 검색으로 찾기">
-       						</label>
+          					<img src="img/p.gif" alt="궁금한 점 검색으로 찾기">
 	        				<select id="searchSelect">
 	         					<option value="subject">제목</option>
 	         					<option value="content">내용</option>
@@ -46,11 +54,11 @@
     		</div>  
 		    <table class="basic_table" id="basic_table">     
      		<tr height="40">
-		        <td height="40"><img src="./img/bunho.gif"></td>  
-		        <td height="40"><img src="./img/title.gif"></td>  
-		        <td height="40"><img src="./img/nick.gif"></td>  
-		        <td height="40"><img src="./img/searchsu.gif"></td>  
-		        <td height="40"><img src="./img/day.gif"></td>  
+		        <td height="40" width="50"><img src="./img/bunho.gif"></td>  
+		        <td height="40" width="300"><img src="./img/title.gif"></td>  
+		        <td height="40" width="70"><img src="./img/nick.gif"></td>  
+		        <td height="40" width="50"><img src="./img/searchsu.gif"></td>  
+		        <td height="40" width="130"><img src="./img/day.gif"></td>  
 		    </tr>
  			<tbody></tbody>
 			</table>		
@@ -66,7 +74,17 @@
    		
 	</div>
 	<script>
-		var contextRoot = 'http://localhost:8008/salon';
+		// contextpath ///////////////
+		function getContextPath(){
+		    var offset=location.href.indexOf(location.host)+location.host.length;
+		    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+		    return ctxPath;
+		}
+		var contextPath =  getContextPath();
+		// contextpath ///////////////
+		
+		//var contextRoot = 'http://localhost:8008/salon';
+		var contextRoot = contextPath;
 		var loc = location.href; // 페이지주소받아오기위한 변수
 		var page = loc.match(/pageNo\=[0-9]+/g); // 숫자만 찾는 정규식(/PageNo <--이부분은 .html?다음에들어가는부분이다)
 		
@@ -145,6 +163,9 @@
 				
 			});
 		}
+		
+		$(".header").load(contextRoot+"/header/header.html .header");
 	</script> 
+	<script src="../header/js/header.js"></script>
 </body>
 </html>
