@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/login.css">
+<!-- dropdown -->
+<link rel="shortcut icon" href="../favicon.ico"> 
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+<script type="text/javascript" src="js/modernizr.custom.79639.js"></script> 
+<link rel="stylesheet" type="text/css" href="css/noJS.css" />
 <style>
 .preDiv{
 	width: 130px;
@@ -137,18 +143,11 @@ input.radio:focus ~ label:before {
 	display: none;
 	border: 1px solid #d9d9d9;
 	width: 270px;
+	z-index: 50;
 }
 
-#update{
-	height: 50px;
-	width: 50px;
-	border: 1px solid red;
-	position: absolute;
-	top: 370px;
-	width: 350px;
-	display: none;
-	background-color : #f3f3f3;
-}
+
+
 
 </style>
 </head>
@@ -192,7 +191,19 @@ input.radio:focus ~ label:before {
 						<label class="radioLabel" for="radio2">Designer</label>
 					</div>
 					<!-- shop search -->
+					
 					<input type="search" name="search" id="searchShop" placeholder="seach name" />
+					<input type="hidden" name="sano" id="sano" />
+					<div class="wrapper-demo">
+						<div id="dd" class="wrapper-dropdown-5" tabindex="1">
+							<ul class="dropdown">
+								<!-- <li><a href="#">Profile</a></li>
+								<li><a href="#">Settings</a></li>
+								<li><a href="#">Settings</a></li>
+								<li><a href="#">Log out</a></li> -->
+							</ul>
+						</div>
+					​</div>
 					
 					<input type="text" name="nick" id="nick_reg" class="inpt" required="required" placeholder="Your nickname"> 
 					<label for="name"></label> 
@@ -217,8 +228,7 @@ input.radio:focus ~ label:before {
 			</div>
 		</div>
 	</article>
-	<div id="update">
-	</div>
+	
 </section>
 
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

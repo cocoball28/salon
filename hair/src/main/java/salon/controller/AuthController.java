@@ -66,6 +66,7 @@ public class AuthController {
   @RequestMapping(value="add", method=RequestMethod.POST)
   @ResponseBody
   public AjaxResult add(Member member, MultipartHttpServletRequest mRequest) throws Exception {
+	  System.out.println("sano" + member.getSano());
 	  String result = memberService.insert(member, mRequest);
     return new AjaxResult("success", result);
   }

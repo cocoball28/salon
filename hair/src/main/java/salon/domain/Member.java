@@ -11,7 +11,8 @@ public class Member {
 	private String gender;
 	private String status;
 	// 미용사
-	private int shopNo;
+	private int sano;
+	
 	
 	public int getMno() {
 		return mno;
@@ -61,6 +62,13 @@ public class Member {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public int getSano() {
+		return sano;
+	}
+	public void setSano(int sano) {
+		this.sano = sano;
+	}
+	
 	
 	
 }

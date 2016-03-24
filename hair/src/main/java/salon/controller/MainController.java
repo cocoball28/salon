@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import salon.dao.MainDao;
 import salon.dao.MemberDao;
 import salon.domain.AjaxResult;
+import salon.domain.Blog;
 import salon.domain.Main;
 import salon.domain.Member;
 import salon.service.MemberService;
@@ -42,7 +43,8 @@ public class MainController {
 	resultMap.put("startIndex", (pageNo - 1) * pageSize);
 	resultMap.put("length", pageSize);
 	
-    List<Main> mList = mainDao.mainList(resultMap);
+    List<Blog> mList = mainDao.mainList(resultMap);
+    
     Member member = (Member)request.getSession().getAttribute("loginUser");
     resultMap.put("member", member);
     resultMap.put("mList", mList);

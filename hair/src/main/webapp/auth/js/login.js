@@ -122,7 +122,7 @@ $("#regist_frm").submit(function(event){
 
 		/* email check */
 $("#email_reg").focus(function(){
-	$("#email_reg").keyup(function(){
+	$("#email_reg").blur(function(){
 		var email = $("#email_reg").val();
 		$.post(contextPath+"/auth/emailCheck.do",
 				{email : email},
@@ -140,44 +140,78 @@ $("#email_reg").focus(function(){
 	});
 })
 
-$("#email_reg").blur(function(){
-	$("#checkE").html("");
-});
-
 		/* radio button */
 $("#radio2").click(function(){
 	$("#searchShop").show("slow");
-	$("#update").show("slow");
+	$(".wrapper-demo").show("slow");
 });
 $("#radio1").click(function(){
 	$("#searchShop").hide("slow");
-	$("#update").hide("slow");
+	$(".wrapper-demo").hide("slow");
 });
 
+/*  dropdown  */
+/*function DropDown(el) {
+	this.dd = el;
+	this.initEvents();
+}
+DropDown.prototype = {
+	initEvents : function() {
+		var obj = this;
+
+		obj.dd.on('click', function(event){
+			$(this).toggleClass('active');
+			event.stopPropagation();
+		});	
+	}
+}
+
+$(function() {
+	var dd = new DropDown( $('#dd') );
+	$(document).click(function() {
+		// all dropdowns
+		$('.wrapper-dropdown-5').removeClass('active');
+	});
+});*/
+
+/* 검색창 목록 없애기 */
+$(document).on("click",function(event){
+	$("#dd").removeClass("active");
+});
 /* shop search */
 
 
-$(document).on("keyup",'#searchShop',function(){
-//$('#search').keyup(function(){
-	var shop = $('#searchShop').val();
-	/*shop = '%'+shop+'%';*/
-	console.log("keyup " + shop);
-	$.post(contextPath+'/auth/getShop.do',{name: shop}, function(data){
-		console.log(data);
-		console.log(data.ajaxResult);
-		var output = '<ul class="searchresult">';
-		$.each(data.ajaxResult.data, function(key, val){
-			if(val.name/*(val.name.search(myExp) != -1) || (val.bio.search(myExp) != -1)*/) {
-				output +='<li>';
-				output +='<h2>' + val.name + '</h2>';
-				output +='<input type="hidden" value='+val.no+'>';
-				/*output +='<img src="images/' + val.shortname + '_tn.jpg" alt="'+ val.name +'" />';
-				output +='<p>' + val.bio + '</p>';*/
-				output +='</li>';
-			}
-		});
-		output += '</ul>';
-		$('#update').html(output);
-	},"json");
+$(document).on("keypress",'#searchShop',function(event){
+	 var keycode = (event.keyCode ? event.keyCode : event.which);
+	    if(keycode == '13'){
+	    	event.preventDefault()
+	    	var shop = $('#searchShop').val();
+	    	console.log("keyup " + shop);
+	    	$.post(contextPath+'/auth/getShop.do',{name: shop}, function(data){
+	    		console.log(data);
+	    		console.log(data.ajaxResult);
+	    		var output = '<ul class="searchresult">';
+	    		$.each(data.ajaxResult.data, function(key, val){
+	    			if(val.name/*(val.name.search(myExp) != -1) || (val.bio.search(myExp) != -1)*/) {
+	    				output +='<li>';
+	    				output +='<a>' + val.name + '</a>';
+	    				output +='<input type="hidden" class="shopNo" value='+val.no+'>';
+	    				output +='<input type="hidden" class="shopName" value='+val.name+'>';
+	    				output +='</li>';
+	    			}
+	    		});
+	    		output += '</ul>';
+	    		$('.dropdown').html(output);
+	    		$("#dd").addClass("active");
+	    	},"json");
+	    }
 });
 
+$(document).on("click","li",function(event){
+	var resultNo = $(this).find(".shopNo").val()
+	var name = $(this).find(".shopName").val()
+	$("#searchShop").val(name);
+	$("#sano").val(resultNo);
+	$(this).closest("#dd").removeClass('active')
+	return false;
+});
