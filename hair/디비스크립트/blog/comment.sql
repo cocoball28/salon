@@ -3,7 +3,6 @@ create table BLOG_COMMENT(
 	CNO 		integer auto_increment primary key,
 	BNO 		integer 	 not null,
 	MNO 		integer  	 not null,
-	nick_name 	varchar(30)  not null,
 	CONTENT 	varchar(300) not null,
 	REG_DATE DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -12,6 +11,13 @@ create table BLOG_COMMENT(
 
 
 select * from blog_comment
+
+select *
+  from BLOG_COMMENT join member
+    on blog_comment.mno = member.mno 
+ order by blog_comment.cno;
+
+
 
 
 drop table BLOG_COMMENT;
