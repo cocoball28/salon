@@ -99,5 +99,10 @@ $(document).ready(function(){
 		$("#mainTag").attr("href", contextPath+"/auth/login.html") 
 	 });
 	 
+	 $(document).on("click", "#mapSearch", function(){
+		 window.location.href = contextPath + "/map3/map3.html"; 
+	 });
+	 
+	 
 });
 
