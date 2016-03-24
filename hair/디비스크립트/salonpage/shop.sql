@@ -14,4 +14,4 @@ insert into shop (sano, name, tel, zip, addr)
 insert into shop (sano, name, tel, zip, addr)
 	 	  values (3, "hq", 027152314, 125848, "서울특별시 서초구 서초대로74길 11");
 drop table shop;
-select * from shop;
+select sano, name from shop;
