@@ -14,6 +14,7 @@
 	
 	<resultMap id="blogMap" type="blog">
   		<id property="bno" column="bno" />
+  		<result property="mno" column="mno"/>
   		<result property="tag" column="tag"/>
   		<result property="content" column="content"/>
   		<collection property="blogImageList" ofType="blogImage">
@@ -23,32 +24,60 @@
 	</resultMap>
 	
 	<select id="mainList" resultMap="blogMap" parameterType="map">
-	select t1.bno, t1.mno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 
+	select t1.bno, t1.mno, t1.tag, t1.content, t2.bpno, t2.path 
       from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
      order by t1.bno
      limit #{startIndex}, #{length};
 	</select> 
-<!-- 	<select id="mainList" resultMap="mainMap" parameterType="map">
-		select *
-		  from test_test
-		 order by no desc
-		 limit #{startIndex}, #{length};
-	</select> -->
-
 	
-	<select id="selectByNo" parameterType="int" resultType="main">
-		select *
-		  from test_test
-		 where no = #{no}
+	<select id="selectByNo" parameterType="map" resultType="int">
+		select fav
+		  from favorite
+		 where bno = #{bno}
+		   and mno = #{mno}
 	</select>
 	
-	<select id="updateFav" parameterType="main">
-		update test_test
-		   set favorite = #{favorite}
-		 where no = #{no}
+	<select id="favList" parameterType="int" resultType="int">
+		select bno
+		  from favorite
+		 where mno = #{mno}
 	</select>
-  
+	
+	<insert id="insertFav" parameterType="map">
+		insert into favorite (mno, bno) 
+		values (#{mno}, #{bno})
+	</insert>
+	
+	<delete id="deleteFav" parameterType="map">
+		delete from favorite
+		 where mno = #{mno}
+		   and bno = #{bno}
+	</delete>
+	  	
+  	<select id="getBlogbyFav" parameterType="map" resultMap="blogMap">
+  		select t1.bno, t1.mno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 
+	      from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
+		 where t1.bno in (select bno
+					     from favorite
+					    where mno = 1)
+	     order by t1.bno 
+  		 limit #{startIndex}, #{length};
+  	</select>
   	
+  	<select id="search" parameterType="map" resultMap="blogMap">
+		 select t1.bno, t1.mno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 
+	      from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
+	      <where>
+	      	t1.tag like
+	      	   <foreach collection="resultArray" item="result" separator="and t1.tag like" >
+					CONCAT('%', '${result}' , '%') 
+				</foreach> 
+	      </where>
+	     order by t1.bno 
+  		 limit #{startIndex}, #{length}; 	
+  	</select>
+
+
   	
 </mapper>
 

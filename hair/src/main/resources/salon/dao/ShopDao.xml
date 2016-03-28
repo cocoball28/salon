@@ -41,7 +41,7 @@
   	
   	<!-- shop information -->
   	<select id="getShop" parameterType="string" resultType="shop">
-  		select name, sano no
+  		select name, sano
   		  from shop
   		 where name like CONCAT('%', #{name}, '%')
   	</select>
