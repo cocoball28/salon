@@ -96,13 +96,21 @@ $(document).ready(function(){
 	 });
 	 
 	 $(document).on("click", "#mainTag", function(){
-		$("#mainTag").attr("href", contextPath+"/auth/login.html") 
+		$("#mainTag").attr("href", contextPath+"/auth/index.html#signin") 
 	 });
 	 
 	 $(document).on("click", "#mapSearch", function(){
 		 window.location.href = contextPath + "/map3/map3.html"; 
 	 });
 	 
+	 $(document).on("click", "#search", function(event){
+		 var searchVal = $("#searchBar").val();
+//		 searchVal.replace(" ", '%^');
+		 console.log(searchVal);
+		 event.preventDefault();
+		 window.location.href = contextPath + "/main/search.html?" + searchVal ;
+		 
+	 });
 	 
 });
 

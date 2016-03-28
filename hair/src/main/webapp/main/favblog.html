@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="../header/css/header.css">
+<link rel="stylesheet" type="text/css" href="../header/css/style.css" />
+<script type="text/javascript" src="js/modernizr.custom.79639.js"></script> 
+<link rel="stylesheet" type="text/css" href="../header/css/noJS.css" />
+<script src="js/jquery-2.2.0.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="shortcut icon" href="../favicon.ico"> 
+<script src="js/favblog.js"></script>
+<script src="js/responsive_waterfall.js"></script>
+<link rel="stylesheet" type="text/css" href="../header/css/modify.css" />
+<!-- 아이콘 -->
+<style>
+
+/* list */
+.optionDiv{
+	width: 13%;
+}
+.optionImg {
+	position: relative;
+	left: 670%;
+}
+
+hr{
+	border: 1px solid #363636;
+	margin: 5px
+}
+
+.bookHide{
+	display: none;
+}
+.bookHide{
+	color: blue;
+}
+
+.fa-heart-o{
+	margin-left: 700%;
+}
+
+.fa-heart{
+	margin-left: 700%;
+}
+label{
+	display: none;
+}
+</style>
+
+</head>
+<body>
+	<header class="header">
+	</header>
+    <!-- ************************** section ************************** -->
+    
+    <section class="section">
+        <div class="wf-container">
+        	
+        </div>
+    </section>
+<script>
+$(window).load(function(){
+	
+	var mno = $("#dd").find("#memberNo").val();
+	alert('mno ' + mno) 
+	$.getJSON(contextPath+"/salon/ajax/favBlog.do",{mno: mno},function(resultObj){
+		var cnt = 0;
+		   $.each(resultObj.data, function(key, value){
+			    var html = ""
+				html += '<div class="wf-box">'; 
+				html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
+				html += '<image src='+value.blogImageList[0].path+'/></a>';
+				html += '<div class="content">';
+				html += '<h3>'+value.tag+'</h3>';
+				html += '<hr>';
+				html += '<p>'+value.content+'</p>';
+				html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
+				html += '<div class="optionDiv">'
+				html += '<a class="bookmark">';
+				html += '<i class="fa fa-heart"></i>'
+				html += '</a>';
+				html += '</div></div></div>';
+				$(".wf-column:eq("+cnt+")").append(html);
+				cnt++;
+				if(cnt == 5) cnt = 0;
+		  });
+	})
+})
+</script>
+<script src="js/app.js"></script>
+<script src="../header/js/modify.js"></script>
+</body>
+</html>

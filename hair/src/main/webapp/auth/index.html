@@ -15,6 +15,13 @@
 <link rel="stylesheet" type="text/css" href="css/indexstyle.css" />
 <link rel="stylesheet" type="text/css" href="css/indexlogin.css" />
 <link href='https://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
+<!-- login -->
+<link rel="stylesheet" href="css/login.css">
+<link rel="shortcut icon" href="../favicon.ico"> 
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+<script type="text/javascript" src="js/modernizr.custom.79639.js"></script> 
+<link rel="stylesheet" type="text/css" href="css/noJS.css" />
 <script type="text/javascript" src="js/modernizr.custom.86080.js"></script>
 <style>
 .big {
@@ -35,6 +42,143 @@
 	color: pink;
 	transition: 1s;
 }
+
+/* login */
+.preDiv{
+	width: 130px;
+	height: 150px;
+	margin: 0 auto;
+	display: none;
+}
+.preImg{
+	width: 130px;
+	heigth: 150px;
+	position: absolute;
+}
+#file{
+	width: 130px;
+	height: 130px;
+	position: absolute;
+	z-index: 10;
+	opacity: 0;
+}
+
+/* radio */
+input.radio:empty {
+	margin-left: -999px;
+}
+
+/* style label */
+input.radio:empty ~ label {
+	position: relative;
+	float: left;
+	line-height: 2.5em;
+	text-indent: 3.25em;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+input.radio:empty ~ label:before {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	content: '';
+	width: 2.5em;
+	background: #D1D3D4;
+	border-radius: 3px 0 0 3px;
+}
+
+/* toggle hover */
+input.radio:hover:not(:checked) ~ label:before {
+	content:'\2714';
+	text-indent: .9em;
+	color: #C2C2C2;
+}
+
+input.radio:hover:not(:checked) ~ label {
+	color: #888;
+}
+
+/* toggle on */
+input.radio:checked ~ label:before {
+	content:'\2714';
+	text-indent: .9em;
+	color: #9CE2AE;
+	background-color: #4DCB6D;
+}
+
+input.radio:checked ~ label {
+	color: #777;
+}
+
+/* radio focus */
+input.radio:focus ~ label:before {
+	box-shadow: 0 0 0 3px #999;
+}
+
+.radioLabel {
+  width: 100px;
+  border-radius: 3px;
+  border: 1px solid #D1D3D4
+}
+.radioDiv{
+	float: left;
+	margin-bottom: 12px;
+	margin-right: 12px;
+}
+
+/* gender */
+.gender{
+	display: none;
+}
+.gender + label:before {
+    content: "";  
+    display: inline-block;  
+    width: 15px;  
+    height: 15px;  
+    vertical-align:middle;
+    margin-right: 8px;  
+    background-color: #aaa;  
+    box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
+    border-radius: 8px;  
+}
+.gender:checked + label:before {
+    content: "\2022"; /* Bullet */
+    color:white;
+    background-color: #666; 
+    font-size:1.8em;
+    text-align:center;
+    line-height:14px;
+    text-shadow:0px 0px 3px #eee;
+}
+.genderLabel{
+	maring-left: 5px;
+}
+
+#email_reg{
+	margin-bottom: 5px;
+}
+
+#pwd_reg{
+	margin-top: 10px;
+}
+
+/* search */
+#searchShop{
+	height: 30px;
+	padding-left: 13px;
+	margin-bottom: 13px;
+	display: none;
+	border: 1px solid #d9d9d9;
+	width: 270px;
+	z-index: 50;
+}
+
 </style>
 </head>
 <body id="page">
@@ -72,51 +216,82 @@
 	</div>
 		<section class="big">
 		<article class="half">
-			<h1>Salon</h1>
-			<div class="tabs">
-				<span class="tab signin active"><a href="#signin">Sign in</a></span>
-				<span class="tab signup"><a href="#signup">Sign up</a></span>
+		<h1>Design</h1>
+		<div class="preDiv">
+			<input type="file" name="img" id="file" class="inpt designerMenu" />
+			<label for="file"></label>
+			<img class="preImg" src="images/placeholder.png"/>
+		</div>
+		<div class="tabs">
+			<span class="tab signin active"><a href="#signin">Sign in</a></span>
+			<span class="tab signup"><a href="#signup">Sign up</a></span>
+		</div>
+		<div class="content">
+			<div class="signin-cont cont">
+				<form action="login.do" method="post" id="login_frm" >
+					<input type="email" name="email" id="email" class="inpt" required="required" placeholder="Your email"> 
+					<label for="email"></label> 
+					<input type="password" name="password" id="password" class="inpt" required="required" placeholder="Your password"> 
+					<label for="password"></label> 
+					<input type="checkbox" id="remember" class="checkbox"checked> 
+					<label for="remember">Remember me</label>
+					<div class="submit-wrap">
+						<input type="submit" value="Sign in" class="submit"> 
+							<a	href="#" class="more">Forgot your password?</a>
+					</div>
+				</form>
 			</div>
-			<div class="content">
-				<div class="signin-cont cont">
-					<form action="#" method="post" enctype="multipart/form-data">
-						<input type="email" name="email" id="email" class="inpt"
-							required="required" placeholder="Your email"> <label
-							for="email"></label> <input type="password"
-							name="password" id="password" class="inpt" required="required"
-							placeholder="Your password"> <label for="password">
-							</label> <input type="checkbox" id="remember" class="checkbox"
-							checked> <label for="remember">Remember me</label>
-						<div class="submit-wrap">
-							<input type="submit" value="Sign in" class="submit"> <a
-								href="#" class="more">Forgot your password?</a>
+			<div class="signup-cont cont">
+				<form id="regist_frm" >
+					<div class="radioDiv">
+						<input type="radio" name="status" id="radio1" class="radio" value="u" checked/>
+						<label class="radioLabel" for="radio1">User</label>
+					</div>
+					
+					<div class="radioDiv">
+						<input type="radio" name="status" id="radio2" class="radio"  value="d"/>
+						<label class="radioLabel" for="radio2">Designer</label>
+					</div>
+					<!-- shop search -->
+					
+					<input type="search" name="saname" id="searchShop" placeholder="seach name" />
+					<input type="hidden" name="sano" id="sano" value="0" />
+					<div class="wrapper-demo">
+						<div id="dd" class="wrapper-dropdown-5" tabindex="1">
+							<ul class="dropdown">
+							</ul>
 						</div>
-					</form>
-				</div>
-				<div class="signup-cont cont">
-					<form class="la" action="#" method="post" enctype="multipart/form-data">
-						<input type="text" name="name" id="name" class="inpt"
-							required="required" placeholder="Your name"> <label
-							for="name"></label> <input type="email" name="email"
-							id="email" class="inpt" required="required"
-							placeholder="Your email"> <label for="email">
-							</label> <input type="password" name="password" id="password"
-							class="inpt" required="required" placeholder="Your password">
-						<label for="password"></label>
-						<div class="submit-wrap">
-							<input type="submit" value="Sign up" class="submit"> <a
-								href="#" class="more">Treat your hair by Your own designer</a>
-						</div>
-					</form>
-				</div>
+					​</div>
+					
+					<input type="text" name="nick" id="nick_reg" class="inpt" required="required" placeholder="Your nickname"> 
+					<label for="name"></label> 
+					<input type="email" name="email" id="email_reg" class="inpt" required="required" placeholder="Your email"> 
+					<label for="email"></label>
+					<p id="checkE"></p>
+					 
+					<!-- gender -->
+					<input type="radio" id="rb1" name="gender" value="f" class="gender" checked>
+					<label  class="genderLabel" for="rb1">Female</label>
+					<input type="radio" id="rb2" name="gender" value="m"  class="gender">
+					<label  class="genderLabel" for="rb2">Male</label><br>
+					
+					<input type="password" name="pwd" id="pwd_reg" class="inpt" required="required" placeholder="Your password">
+					<input type="password" name="pwd1" id="pwd2_reg" class="inpt" required="required" placeholder="Your password">
+					<label for="password"></label>
+					<div class="submit-wrap">
+						<input type="submit" value="Sign up" class="submit"> 
+						<a href="#" class="more">Treat your hair by Your own designer</a>
+					</div>
+				</form>
 			</div>
-		</article>
+		</div>
+	</article>
 	</section>
 
 
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="js/login.js"></script>
 	<script type="text/javascript">
 		// 로그인 회원가입 전환 제이쿼리
 		$('.tabs .tab').click(function() {
@@ -142,16 +317,6 @@
 			});
 		});
 		
-		// JSON 처리
-		$('.la').submit(function() {
-			var param = $(this).serialize();
-			console.log(123123123);
-			$.post("http://192.168.0.5:8008/salon/member/regist.do",
-					param,
-					function(resultObj){
-			});
-			return false;
-		})
 	</script>
 </body>
 </html>

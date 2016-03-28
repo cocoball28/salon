@@ -8,6 +8,20 @@ function getContextPath(){
 
 var contextPath =  getContextPath();
 
+$(document).ready(function(){
+	/* parameter */
+	var getParameter = function(url) {
+		var paramText = decodeURI(url).split(".html")[1];
+		return paramText;
+	};
+	var pageParam = getParameter(document.location.href);
+	
+	if(pageParam){
+		$("#button").hide();
+		$(".big").show();
+	}
+})
+
 $('.tabs .tab').click(function() {
 	if ($(this).hasClass('signin')) {
 		$('.tabs .tab').removeClass('active');
@@ -88,6 +102,8 @@ $("#file").change(function(){
 	return true;
 } */
 
+/* regist */
+
 $("#regist_frm").submit(function(event){
 	event.preventDefault();
 	var form = $("#regist_frm")[0];
@@ -105,13 +121,14 @@ $("#regist_frm").submit(function(event){
 		   success: function(resultObj){
 			   if(resultObj.data == "success"){
 				   alert("회원가입을 축하");
-				   window.location.href = contextPath+"/auth/login.html"
+				   window.location.href = contextPath+"/auth/index.html#signin"
 			   }else{
 				   alert("회원가입 실패");
 			   }
 			   
 		   },
-		   error: function(){
+		   error: function(data){
+			   console.log(data)
 			   alert("오류");
 		   }
 		});
@@ -144,43 +161,21 @@ $("#email_reg").focus(function(){
 $("#radio2").click(function(){
 	$("#searchShop").show("slow");
 	$(".wrapper-demo").show("slow");
+	$("#sano").show("slow");
 });
 $("#radio1").click(function(){
 	$("#searchShop").hide("slow");
 	$(".wrapper-demo").hide("slow");
+	$("#sano").hide("slow");
 });
 
-/*  dropdown  */
-/*function DropDown(el) {
-	this.dd = el;
-	this.initEvents();
-}
-DropDown.prototype = {
-	initEvents : function() {
-		var obj = this;
-
-		obj.dd.on('click', function(event){
-			$(this).toggleClass('active');
-			event.stopPropagation();
-		});	
-	}
-}
-
-$(function() {
-	var dd = new DropDown( $('#dd') );
-	$(document).click(function() {
-		// all dropdowns
-		$('.wrapper-dropdown-5').removeClass('active');
-	});
-});*/
 
 /* 검색창 목록 없애기 */
 $(document).on("click",function(event){
 	$("#dd").removeClass("active");
 });
+
 /* shop search */
-
-
 $(document).on("keypress",'#searchShop',function(event){
 	 var keycode = (event.keyCode ? event.keyCode : event.which);
 	    if(keycode == '13'){
@@ -195,7 +190,7 @@ $(document).on("keypress",'#searchShop',function(event){
 	    			if(val.name/*(val.name.search(myExp) != -1) || (val.bio.search(myExp) != -1)*/) {
 	    				output +='<li>';
 	    				output +='<a>' + val.name + '</a>';
-	    				output +='<input type="hidden" class="shopNo" value='+val.no+'>';
+	    				output +='<input type="hidden" class="shopNo" value='+val.sano+'>';
 	    				output +='<input type="hidden" class="shopName" value='+val.name+'>';
 	    				output +='</li>';
 	    			}

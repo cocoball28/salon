@@ -17,11 +17,12 @@ body {
 }
 
 body .big {
+	background-color: rgba(255, 255, 255, 0.7);
 	position: relative;
 	overflow: hidden;
 	width: 350px;
-	height: 500px;
-	margin: 140px auto 0;
+	height: 700px;
+	margin: 70px auto 0;
 	background-color: rgba(255, 255, 255, 0.7);
 	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -282,7 +283,7 @@ body .big .content .checkbox:checked+label:before {
 }
 
 body .big .content .submit-wrap {
-	position: absolute;
+	position: inherit;
 	bottom: 0;
 	width: 100%;
 }
