@@ -8,6 +8,8 @@
 	<resultMap id="blogMap" type="blog">
   		<id property="bno" column="bno" />
   		<result property="tag" column="tag"/>
+  		<result property="mno" column="mno"/>
+  		<result property="regDate" column="reg_date"/>
   		<result property="content" column="content"/>
   		<collection property="blogImageList" ofType="blogImage">
   			<id property="bpno" column="bpno"/>
@@ -118,4 +120,7 @@
 	   delete FROM BLOG_PHO
 		where bno = #{bno}
 	</delete>
+	
+	
+
 </mapper>
