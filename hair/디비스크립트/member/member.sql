@@ -9,41 +9,10 @@ CREATE TABLE MEMBER (
 	GENDER VARCHAR(5)   NOT NULL default 'f', -- 성별
 	STATUS VARCHAR(10)  not NULL default 'u'     -- 상태
 );
-
+select * from member;
 drop table member;
 ----------------------------------------------------------member
----------------------------------------------------------미용실
-CREATE TABLE SHOP (
-	SANO    INTEGER      primary key, -- 미용실고유번호
-	NAME    VARCHAR(50)  NOT NULL -- 이름
-);
 
-insert into shop (name) values ('choice hair');
-insert into shop (name) values ('hong hair');
-insert into shop (name) values ('kim hair');
-
--- 미용실
-ALTER TABLE SHOP
-	ADD CONSTRAINT PK_SHOP -- 미용실 기본키
-		PRIMARY KEY (
-			SANO -- 미용실고유번호
-		);
-
--- 미용실 인덱스
-CREATE INDEX IX_SHOP
-	ON SHOP( -- 미용실
-	);
-
--- 미용실 인덱스2
-CREATE INDEX IX_SHOP2
-	ON SHOP( -- 미용실
-		NAME ASC -- 이름
-	);
-
-ALTER TABLE SHOP
-	MODIFY COLUMN SANO INTEGER NOT NULL AUTO_INCREMENT;
-
----------------------------------------------------------미용실	
 
 --------------------------------------------------------- 미용사
 CREATE TABLE DESIGNER (
