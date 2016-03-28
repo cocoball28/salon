@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.core.json.DupDetector;
+
 import salon.dao.MainDao;
 import salon.dao.MemberDao;
 import salon.domain.AjaxResult;
 import salon.domain.Blog;
-import salon.domain.Main;
 import salon.domain.Member;
+import salon.service.MainService;
 import salon.service.MemberService;
 
 @Controller("ajax.BoardController")
@@ -34,6 +36,7 @@ public class MainController {
   @Autowired ServletContext servletContext;
   @Autowired MemberDao memberDao;
   @Autowired MemberService memberService; 
+  @Autowired MainService mainService;
   
   @RequestMapping("list")
   @ResponseBody
@@ -44,26 +47,30 @@ public class MainController {
 	resultMap.put("length", pageSize);
 	
     List<Blog> mList = mainDao.mainList(resultMap);
-    
     Member member = (Member)request.getSession().getAttribute("loginUser");
+    int mno = member.getMno();
+    System.out.println(mno);
+    List<Integer> favList = mainDao.favList(mno);
+        
     resultMap.put("member", member);
     resultMap.put("mList", mList);
+    resultMap.put("favList", favList);
     
     return resultMap;
   }
   
   @RequestMapping(value="updateFav", method=RequestMethod.GET)
   @ResponseBody
-  public AjaxResult updateFav(int no) throws Exception {
-	Main main = mainDao.selectByNo(no);
-	
-	if(main.getFavorite() == 1){
-		main.setFavorite(0);
-		mainDao.updateFav(main);
+  public AjaxResult updateFav(int bno, int mno, int fav) throws Exception {
+	System.out.println(bno + "  " + mno + "  " + fav);
+	HashMap<String, Object> map = new HashMap<>();
+	map.put("bno", bno);
+	map.put("mno", mno);
+	if(fav == 1 ){
+		mainDao.insertFav(map);
 	}else{
-		main.setFavorite(1);
-		mainDao.updateFav(main);
-	}
+		mainDao.deleteFav(map);
+	} 
 	
 	System.out.println("성공");
     return new AjaxResult("success", "success");
@@ -98,5 +105,37 @@ public class MainController {
 	  return null;
   }
   
+  @RequestMapping("favBlog")
+  @ResponseBody
+  public AjaxResult favBlog(int mno,
+	@RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="20") int pageSize) throws Exception{
+	  System.out.println("mno " + mno);
+	  
+	  HashMap<String, Object> resultMap = new HashMap<>();
+	  resultMap.put("startIndex", (pageNo - 1) * pageSize);
+	  resultMap.put("length", pageSize);
+	  resultMap.put("mno", mno);
+	  
+	  List<Blog> favBlog = mainService.favBlog(resultMap);
+	  
+	  return new AjaxResult("favBlog", favBlog);
+  }
+  
+  @RequestMapping("search")
+  @ResponseBody
+  public AjaxResult search(String result,
+		  @RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="20") int pageSize) throws Exception{
+	 
+	  System.out.println("result " + result);
+	  
+	  HashMap<String, Object> resultMap = new HashMap<>();
+	  resultMap.put("startIndex", (pageNo - 1) * pageSize);
+	  resultMap.put("length", pageSize);
+	  resultMap.put("result", result);
+	  
+	  List<Blog> searchList = mainService.search(resultMap);
+	  
+	  return new AjaxResult("result", searchList);
+  }
   
 }

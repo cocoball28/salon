@@ -103,7 +103,6 @@ public class MemberServiceImpl implements MemberService{
 				member.setPhotoPath(srcPath+realFileName);
 			}
 		}
-		System.out.println("member service last" + member.getNick());
 		memberDao.updateMember(member);
 		member = memberDao.getMember(member.getMno());
 		

@@ -6,14 +6,21 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import salon.domain.Blog;
-import salon.domain.Main;
 
 @Repository
 public interface MainDao {
 	
 	List<Blog> mainList(HashMap<String, Object> resultMap);
 
-	Main selectByNo(int no);
+	int selectByNo(HashMap<String, Object> map);
 
-	void updateFav(Main main);
+	void insertFav(HashMap<String, Object> map);
+
+	void deleteFav(HashMap<String, Object> map);
+
+	List<Integer> favList(int mno);
+
+	List<Blog> getBlogbyFav(HashMap<String, Object> resultMap);
+
+	List<Blog> search(HashMap<String, Object> resultMap);
 }

@@ -81,7 +81,6 @@ public class AuthController {
   
   @RequestMapping(value="getShop", method=RequestMethod.POST)
   public AjaxResult getShop(Shop shop) throws Exception{
-	  System.out.println("show " + shop);
 	  
 	  List<Shop> shopList = memberService.getShop(shop);
 	  AjaxResult ajaxResult = new AjaxResult("success", shopList);

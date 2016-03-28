@@ -10,9 +10,9 @@ public class Member {
 	private String photoPath;
 	private String gender;
 	private String status;
-	// 미용사
+	// 미용실
 	private int sano;
-	
+	private String saname;
 	
 	public int getMno() {
 		return mno;
@@ -68,7 +68,12 @@ public class Member {
 	public void setSano(int sano) {
 		this.sano = sano;
 	}
-	
+	public String getSaname() {
+		return saname;
+	}
+	public void setSaname(String saname) {
+		this.saname = saname;
+	}
 	
 	
 }
