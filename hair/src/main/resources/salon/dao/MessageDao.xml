@@ -5,34 +5,29 @@
 
 <mapper namespace="salon.dao.MessageDao">
 	
-	<!-- 본문  -->
-	<!-- 본문  전체 리스트 -->
+		<!-- 멤버 닉네임 검색 -->
+	<select id="selectMemberListByNick" parameterType="member" resultType="member">
+		select * 
+		  from member
+		 WHERE nick LIKE '%${nick}%'
+	</select>
+	
 	<select id="selectList" resultType="message" parameterType="message">
-	select *
-      from salon_message
-     where (sender = #{sender} and receiver = #{receiver}) or (sender = #{receiver} and receiver = #{sender})
-     order by no;
+	select sender_mno as smno, receiver_mno as rmno, content, message_no as messageNo, nick as senderNick
+      from message join member
+        on message.sender_mno = member.mno
+     where (sender_mno = #{smno} and receiver_mno = #{rmno}) or (sender_mno = #{rmno} and receiver_mno = #{smno})
+     order by message_no desc
+     limit 5;
 	</select>
 	
-	<!-- 본문 작성 후 한개 보여주기 -->
-	<select id="selectByNo" resultType="message" parameterType="message">
-	select *
-      from salon_message
-	 where no = #{no}
+	<select id="selectMoreList" resultType="message" parameterType="message">
+	select sender_mno as smno, receiver_mno as rmno, content, message_no as messageNo, nick as senderNick
+      from message join member
+        on message.sender_mno = member.mno
+     where (sender_mno = #{smno} and receiver_mno = #{rmno}) or (sender_mno = #{rmno} and receiver_mno = #{smno})
+     order by message_no desc
+     limit #{messageNo}, 10;
 	</select>
-	
-	<!-- 본문 작성  -->
-	<insert id="insert" parameterType="message">
-		insert into salon_message(sender, receiver, content) 
-		values (#{sender},#{receiver}, #{content})
-		<selectKey keyProperty="no" resultType="Integer" order="AFTER">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-	</insert>
-	
-	<!-- 본문 삭제  -->
-	<delete id="delete" parameterType="message">
-		delete FROM salon_message
-		where no = #{no}
-	</delete>
+
 </mapper>
