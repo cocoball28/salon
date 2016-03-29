@@ -69,5 +69,7 @@ public class BlogController {
 	public void deleteComment(BlogComment comment){
 		blogService.commentDelete(comment);
 	}
+
+
 	
 }

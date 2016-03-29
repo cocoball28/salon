@@ -3,7 +3,6 @@ package salon.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,6 @@ import salon.domain.Member;
 import salon.domain.Message;
 import salon.service.MessageService;
 
-
 @Controller
 @RequestMapping("/message/*")
 public class MessageController {
@@ -27,28 +25,35 @@ public class MessageController {
 	@Autowired 
 	MessageService messageService;
 	
+	//메시지 출력
 	@RequestMapping(value="list", method=RequestMethod.POST)
 	@ResponseBody
-	public List<Message> list(HttpServletRequest request, HttpServletResponse response, Message message){
-		Member member = (Member)request.getSession().getAttribute("loginUser");
-		String sender = member.getNick();
-		message.setSender(sender);
+	public List<Message> list(Message message){
 		List<Message> list = messageService.selectList(message);
 		return list;
 	}
 	
-	@RequestMapping(value="delete", method=RequestMethod.POST)
+	//메시지 출력
+	@RequestMapping(value="moreList", method=RequestMethod.POST)
 	@ResponseBody
-	public void delete(Message message){
-		messageService.delete(message);
+	public List<Message> moreList(Message message){
+		System.out.println(message.getMessageNo());
+		List<Message> list = messageService.selectMoreList(message);
+		return list;
 	}
 	
-	@RequestMapping(value="regist", method=RequestMethod.POST)
+	//로그인 유저 정보
+	@RequestMapping(value="loginUserInfo", method=RequestMethod.POST)
 	@ResponseBody
-	public Message regist(HttpServletRequest request, HttpServletResponse response, Message message) throws Exception{
-		Member member = (Member)request.getSession().getAttribute("loginUser");
-		String sender = member.getNick();
-		message.setSender(sender);
-		return messageService.register(message);
+	public Member loginUserInfo(HttpServletRequest request){
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		return loginUser;
+	}
+	
+	//유저 검색
+	@RequestMapping(value="memberList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Member> memberList(Member member){
+		return messageDao.selectMemberListByNick(member); 
 	}
 }
