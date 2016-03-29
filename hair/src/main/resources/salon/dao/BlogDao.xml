@@ -73,7 +73,7 @@
 	 <select id="selectCommentList" parameterType="blogComment" resultType="blogComment">
 	select cno, bno, content, reg_date as regDate, nick, photo_path as phtoPath, gender, status 
 	  from BLOG_COMMENT join member
-        on blog_comment.mno = member.mno 
+        on blog_comment.mno = member.mno
 	 where bno = #{bno}
 	 order by cno;
 	 </select>
