@@ -9,7 +9,7 @@ $(".infoDiv").each(function(){
 		$infoDiv = $(this),
 		infoDivOffsetTop = $infoDiv.offset().top;
 	$window.on('scroll',function(){
-		if($window.scrollTop()+10 > infoDivOffsetTop){
+		if($window.scrollTop()+100 > infoDivOffsetTop){
 			$infoDiv.addClass('sticky');
 			$(".infoDivDummy").show();
 		}else{
@@ -62,45 +62,19 @@ var closeMessage = function(){
 
 
 // 동료 미용사 정보 
-var showPartnerInfoStatus = 0;
-$(".partnerInfoDiv_1").hover(
-		function(){
-			if(showPartnerInfoStatus == 0){
-				$(".partnerDetailInfoDiv_1").show('slow');
-				showPartnerInfoStatus = 1;
-			}
-		},
-		function(){
-			if(showPartnerInfoStatus == 1){
-				$(".partnerDetailInfoDiv_1").hide('slow');
-				showPartnerInfoStatus = 0;
-			}
-		}
-);
-$(".partnerInfoDiv_2").hover(
-		function(){
-			$(".partnerDetailInfoDiv_2").show('slow');
-		},
-		function(){
-			$(".partnerDetailInfoDiv_2").hide('slow');
-		}
-);
-$(".partnerInfoDiv_3").hover(
-		function(){
-			$(".partnerDetailInfoDiv_3").show('slow');
-		},
-		function(){
-			$(".partnerDetailInfoDiv_3").hide('slow');
-		}
-);
-$(".partnerInfoDiv_4").hover(
-		function(){
-			$(".partnerDetailInfoDiv_4").show('slow');
-		},
-		function(){
-			$(".partnerDetailInfoDiv_4").hide('slow');
-		}
-);
+var isAnimate = false;
+$(".partnerInfo").mouseenter(function(e){
+	e.stopPropagation();
+	if (isAnimate == true) return;
+	isAnimate = true;
+	$(this).next().show('slow', function() {
+		isAnimate = false;
+	});
+});
+
+$(".partnerInfo").mouseout(function(e){
+	$(this).next().hide('slow');
+});
 
 $(".showShopIcon").hover(
 		function(){
@@ -244,6 +218,7 @@ var blogOwnerCheck = function(data){
 	if(data == false){
 		$("#viewRegistFormBtn").remove();
 		$(".registForm").remove();
+		$(".deleteMainContent").remove();
 	}
 }
 /* 디자이너 본인 여부 확인 ===========================*/
@@ -357,5 +332,5 @@ var readURL = function(input) {
 
 //더미데이터에 임시번호 부여함, 댓글 테스트용
 $(".dummyMainContent").attr("blogNo", 1);
-
 $(".header").load(contextPath+"/header/header.html .header");
+
