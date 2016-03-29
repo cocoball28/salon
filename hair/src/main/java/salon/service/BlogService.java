@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import salon.domain.Blog;
 import salon.domain.BlogComment;
+import salon.domain.Member;
 
 public interface BlogService {
 	//본문
@@ -21,4 +22,5 @@ public interface BlogService {
 	public List<BlogComment> selectCommentList(BlogComment comment);
 	public BlogComment commentRegister(BlogComment comment, HttpServletRequest request);
 	public void commentDelete(BlogComment comment);
+
 }

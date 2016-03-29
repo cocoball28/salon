@@ -7,7 +7,6 @@ import salon.domain.Message;
 
 public interface MessageService {
 	//본문
-	public Message register(Message message);
 	public List<Message> selectList(Message message);
-	public void delete(Message message);
+	public List<Message> selectMoreList(Message message);
 }

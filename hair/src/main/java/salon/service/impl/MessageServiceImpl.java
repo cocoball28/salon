@@ -23,23 +23,14 @@ public class MessageServiceImpl implements MessageService {
 
 
 	@Override
-	public Message register(Message message) {
-		messageDao.insert(message);
-		return messageDao.selectByNo(message);
-	}
-
-
-	@Override
 	public List<Message> selectList(Message message) {
 		return messageDao.selectList(message);
 	}
-
-
-	@Override
-	public void delete(Message message) {
-		messageDao.delete(message);
-	}
 	
-		
+	@Override
+	public List<Message> selectMoreList(Message message) {
+		return messageDao.selectMoreList(message);
+	}
+
 
 }

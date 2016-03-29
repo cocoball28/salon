@@ -3,10 +3,9 @@ package salon.domain;
 import java.util.List;
 
 public class Blog {
-	private int no;
-	private int mno;
 	private int bNo;
 	private int bno;
+	private int mno;
 	private String tag;
 	private String content;
 	private String regDate; 
@@ -30,13 +29,6 @@ public class Blog {
 		this.regDate = regDate;
 	}
 
-	public int getNo() {
-		return no;
-	}
-
-	public void setNo(int no) {
-		this.no = no;
-	}
 
 	public int getMno() {
 		return mno;
@@ -52,14 +44,6 @@ public class Blog {
 
 	public void setBlogImageList(List<BlogImage> blogImageList) {
 		this.blogImageList = blogImageList;
-	}
-	
-	public int getbNo() {
-		return bNo;
-	}
-
-	public void setbNo(int bNo) {
-		this.bNo = bNo;
 	}
 
 	public String getTag() {
@@ -78,4 +62,10 @@ public class Blog {
 		this.content = content;
 	}
 
+	@Override
+	public String toString() {
+		return "Blog [mno=" + mno + ", bno=" + bno + ", tag=" + tag + ", content=" + content + ", regDate=" + regDate
+				+ ", blogImageList=" + blogImageList + "]";
+	}
+	
 }

@@ -1,33 +1,42 @@
 package salon.domain;
 
 public class Message {
-	private int no;
-	private String sender;
-	private String receiver;
+	private int messageNo;
+	private int smno;
+	private int rmno;
 	private String content;
+	private String senderNick;
 
-	public int getNo() {
-		return no;
+	public String getSenderNick() {
+		return senderNick;
 	}
 
-	public void setNo(int no) {
-		this.no = no;
+	public void setSenderNick(String senderNick) {
+		this.senderNick = senderNick;
 	}
 
-	public String getSender() {
-		return sender;
+	public int getMessageNo() {
+		return messageNo;
 	}
 
-	public void setSender(String sender) {
-		this.sender = sender;
+	public void setMessageNo(int messageNo) {
+		this.messageNo = messageNo;
 	}
 
-	public String getReceiver() {
-		return receiver;
+	public int getSmno() {
+		return smno;
 	}
 
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
+	public void setSmno(int smno) {
+		this.smno = smno;
+	}
+
+	public int getRmno() {
+		return rmno;
+	}
+
+	public void setRmno(int rmno) {
+		this.rmno = rmno;
 	}
 
 	public String getContent() {
@@ -37,4 +46,5 @@ public class Message {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 }
