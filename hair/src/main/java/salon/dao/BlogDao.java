@@ -31,7 +31,7 @@ public interface BlogDao {
 
 	//블로그 주인 정보
 	public Member selectDsnInfo (Blog blog);
-	
+
 	
 }
 
