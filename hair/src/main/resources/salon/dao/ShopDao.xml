@@ -15,27 +15,36 @@
 	</resultMap> 
    -->
 	
-	<!-- 셀렉문 -->
-  	<select id="selectShopList" resultType="shop">
+	<!-- 미용실 데이터 조회 -->
+  	<select id="selectShopList" resultType="shop" parameterType="shop">
   		select *
-  			from shop;
+  			from shop
+  		 where sano = #{sano};
   	</select>
   	
-  	<select id="selectShopImageList" resultType="shopImage">
-  		select file_name as fileName, file_no as fileNo, shop_no as no
+  	<!-- 미용실 이미지 조회 -->
+  	<select id="selectShopImageList" resultType="shopImage" parameterType="shop">
+  		select path, sano, spno
   		  from shopImage
+  		 where sano = #{sano};
   	</select>
   	
-  	<select id="selectDesignerList" resultType="designer">
-  		select member.name, dsn.no
-  		  from member inner join dsn
-     	    on member.no = dsn.no
- 		 order by dsn.no;
+  	
+  	<!-- 디자이너 정보 조회 -->
+  	<select id="selectDesignerList" resultType="member">
+<!--   		select member.name, designer.mno
+  		  from member inner join designer
+     	    on member.mno = designer.mno
+ 		 order by designer.mno; -->
+ 		 select nick, photo_path as photoPath
+ 		   from member
+ 		  where sano = #{sano}
   	</select>
-  	<!-- 인서트문 -->
+  	
+  	<!-- 이미지 업로드-->
   	<insert id="insertImage" parameterType="shopImage">
-  		insert into shopImage(file_name, shop_no)
-  		values (#{fileName}, #{no})
+  		insert into shopImage(path, sano)
+  		values (#{path}, #{sano})
   	</insert>
 
   	
