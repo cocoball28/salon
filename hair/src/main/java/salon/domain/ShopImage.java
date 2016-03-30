@@ -1,25 +1,25 @@
 package salon.domain;
 
 public class ShopImage {
-	private String fileName;
-	private String fileNo;
-	private int no;
-	public String getFileName() {
-		return fileName;
+	private int spno;
+	private int sano;
+	private String path;
+	public int getSpno() {
+		return spno;
 	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setSpno(int spno) {
+		this.spno = spno;
 	}
-	public String getFileNo() {
-		return fileNo;
+	public int getSano() {
+		return sano;
 	}
-	public void setFileNo(String fileNo) {
-		this.fileNo = fileNo;
+	public void setSano(int sano) {
+		this.sano = sano;
 	}
-	public int getNo() {
-		return no;
+	public String getPath() {
+		return path;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setPath(String path) {
+		this.path = path;
 	}
 }
