@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import salon.dao.ShopDao;
+import salon.domain.Member;
 import salon.domain.Shop;
 import salon.domain.ShopImage;
 import salon.service.ShopService;
@@ -29,18 +30,17 @@ public class ShopServiceImpl implements ShopService {
 	@Autowired ServletContext servletContext;
 
 	@Override
-	public Map<String, Object> selectList() {
+	public Map<String, Object> selectList(Shop shop) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("image", shopDao.selectShopImageList());
-		//System.out.println(shopDao.selectShopImageList().get(0).getFileName());
-		map.put("dsn", shopDao.selectDesignerList());
-		map.put("info", shopDao.selectShopList());
+		map.put("image", shopDao.selectShopImageList(shop));
+		map.put("dsn", shopDao.selectDesignerList(shop));
+		map.put("info", shopDao.selectShopList(shop));
 		return map;
 	}
 
 	@Override
-	public List<Shop> register(Shop shop, MultipartHttpServletRequest mRequest) throws Exception {
-		int no = shop.getNo();
+	public List<ShopImage> register(Shop shop, MultipartHttpServletRequest mRequest) throws Exception {
+		int sano = shop.getSano();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
 		String realPath = servletContext.getRealPath("/upload/");
 		String sdfPath = sdf.format(new Date());
@@ -61,12 +61,12 @@ public class ShopServiceImpl implements ShopService {
 				String saveFullFileName = filePath+"/"+realFileName;
 				String srcPath = "../upload/"+ sdfPath;
 				mFile.transferTo(new File(saveFullFileName));
-				shopImage.setFileName(srcPath+realFileName);
-				shopImage.setNo(no);
+				shopImage.setPath(srcPath+realFileName);
+				shopImage.setSano(sano);
 				shopDao.insertImage(shopImage);
 			}
 		}
-		return shopDao.selectShopList();
+		return shopDao.selectShopImageList(shop);
 	}
 	
 }
