@@ -28,4 +28,15 @@ drop table blog;
 select *
       from permterest_hairdresser
      order by no desc limit 1;
+     
+select * 
+		  from member
+		 WHERE nick LIKE 'root'
+     
+     
 -- 쿼리 메모장 --------------------------------------
+
+     
+     	select t1.bno, t1.mno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 
+      from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
+     order by t1.bno

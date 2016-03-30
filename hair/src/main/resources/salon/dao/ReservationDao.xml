@@ -6,17 +6,26 @@
 <mapper namespace="salon.dao.ReservationDao">
 	<!-- 예약 리스트  -->
 	<select id="selectList" parameterType="reservation" resultType="reservation">
-		select rNo, saNo, dName, cName, style, RSV_DATE as rsvDate, sTime, eTime
+		select rno, sano, mno, cName, style, RSV_DATE as rsvDate, sTime, eTime
 		  from RSV
-		 where SANO = #{saNo} and RSV_DATE = #{rsvDate}
+		 where SANO = #{sano} and RSV_DATE = #{rsvDate}
+	</select>
+	
+	<!-- 미용사 리스트  -->
+	<select id="selectMemberList" resultType="member" parameterType="reservation">
+		select mno, email, nick, photo_path as photoPath, gender, status
+		  from member
+		 where sano = #{sano}
 	</select>
 	
 	<!-- 본문 작성  -->
 	<insert id="insert" parameterType="reservation" >
-		insert into RSV(SANO, DNAME, CNAME,	STYLE, RSV_DATE, STIME, ETIME) 
-		values (#{saNo}, #{dName}, #{cName}, #{style}, #{rsvDate}, #{sTime}, #{eTime})
-		<selectKey keyProperty="rNo" resultType="Integer" order="AFTER">
+		insert into RSV(SANO, MNO, CNAME,	STYLE, RSV_DATE, STIME, ETIME) 
+		values (#{sano}, #{mno}, #{cName}, #{style}, #{rsvDate}, #{sTime}, #{eTime})
+		<selectKey keyProperty="rno" resultType="Integer" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+	
+	
 </mapper>
