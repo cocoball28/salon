@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import salon.domain.Member;
 import salon.domain.Reservation;
 import salon.service.ReservationService;
 
@@ -27,7 +28,7 @@ public class ReservationController {
 	@RequestMapping(value="list", method=RequestMethod.POST)
 	@ResponseBody
 	public List<Reservation> list(Reservation reservation){
-		System.out.println(reservation);
+		//System.out.println(reservation);
 		return reservationService.selectList(reservation);
 	}
 	
@@ -36,6 +37,12 @@ public class ReservationController {
 	public void regist(Reservation reservation){
 		reservationService.register(reservation);
 		System.out.println(reservation);
+	}
+	
+	@RequestMapping(value="memberList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Member> memberList (Reservation reservation){
+		return reservationService.selectDsnList(reservation);
 	}
 	
 }

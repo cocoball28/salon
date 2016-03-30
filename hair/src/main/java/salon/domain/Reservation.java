@@ -1,37 +1,37 @@
 package salon.domain;
 
 public class Reservation {
-	private int rNo;
-	private int saNo;
-	private String dName;
+	private int rno;
+	private int sano;
+	private int mno;
 	private String cName;
 	private String sTime;
 	private String eTime;
 	private String style;
 	private String rsvDate;
 
-	public int getrNo() {
-		return rNo;
+	public int getRno() {
+		return rno;
 	}
 
-	public void setrNo(int rNo) {
-		this.rNo = rNo;
+	public void setRno(int rno) {
+		this.rno = rno;
 	}
 
-	public int getSaNo() {
-		return saNo;
+	public int getSano() {
+		return sano;
 	}
 
-	public void setSaNo(int saNo) {
-		this.saNo = saNo;
+	public void setSano(int sano) {
+		this.sano = sano;
 	}
 
-	public String getdName() {
-		return dName;
+	public int getMno() {
+		return mno;
 	}
 
-	public void setdName(String dName) {
-		this.dName = dName;
+	public void setMno(int mno) {
+		this.mno = mno;
 	}
 
 	public String getcName() {
@@ -74,11 +74,10 @@ public class Reservation {
 		this.rsvDate = rsvDate;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "Reservation [rNo=" + rNo + ", saNo=" + saNo + ", dName=" + dName + ", cName=" + cName + ", sTime="
-				+ sTime + ", eTime=" + eTime + ", style=" + style + ", rsvDate=" + rsvDate + "]";
+		return "Reservation [rno=" + rno + ", sano=" + sano + ", mno=" + mno + ", cName=" + cName + ", sTime=" + sTime
+				+ ", eTime=" + eTime + ", style=" + style + ", rsvDate=" + rsvDate + "]";
 	}
 	
 }

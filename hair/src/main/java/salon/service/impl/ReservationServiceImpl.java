@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import salon.dao.ReservationDao;
+import salon.domain.Member;
 import salon.domain.Reservation;
 import salon.service.ReservationService;
 
@@ -18,13 +19,17 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public Reservation register(Reservation reservation) {
 		reservationDao.insert(reservation);
-		System.out.println(reservation.getrNo());
 		return null;
 	}
 
 	@Override
 	public List<Reservation> selectList(Reservation reservation) {
 		return reservationDao.selectList(reservation);
+	}
+
+	@Override
+	public List<Member> selectDsnList(Reservation reservation) {
+		return reservationDao.selectMemberList(reservation);
 	}
 
 }
