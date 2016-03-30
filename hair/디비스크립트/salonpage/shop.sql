@@ -15,3 +15,5 @@ insert into shop (name, tel, zip, addr)
 	 	  values ("hq", 027152314, 125848, "서울특별시 서초구 서초대로74길 11");
 drop table shop;
 select sano, name from shop;
+
+select * from shop;
