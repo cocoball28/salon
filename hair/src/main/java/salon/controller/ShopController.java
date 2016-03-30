@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import salon.dao.ShopDao;
+import salon.domain.Member;
 import salon.domain.Shop;
 import salon.domain.ShopImage;
 import salon.service.ShopService;
@@ -23,8 +24,8 @@ public class ShopController {
 	@Autowired ShopService shopService;
 	
 	@RequestMapping("list")
-	public Map<String, Object> list() {
-		return shopService.selectList();
+	public Map<String, Object> list(Shop shop) {
+		return shopService.selectList(shop);
 	}
 	
 	@RequestMapping(value="regist", method=RequestMethod.POST)
@@ -34,7 +35,7 @@ public class ShopController {
 		System.out.println(mRequest);
 		
 		shopService.register(shop, mRequest);
-		List<ShopImage> list = (List<ShopImage>) shopService.selectList().get("image");
+		List<ShopImage> list = (List<ShopImage>) shopService.selectList(shop).get("image");
 		
 		return list;
 		
