@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/modify.css">
+<style>
+.preDiv{
+	width: 130px;
+	height: 150px;
+	margin: 0 auto;
+}
+.preImg{
+	width: 130px;
+	heigth: 150px;
+	position: absolute;
+}
+#file{
+	width: 130px;
+	height: 130px;
+	position: absolute;
+	z-index: 10;
+	opacity: 0;
+}
+
+
+</style>
+</head>
+<body>
+<div class="container">
+	<article class="half">
+		<div class="preDiv">
+			<input type="file" name="img" id="file" class="inpt designerMenu" />
+			<label for="file"></label>
+			<img class="preImg" src="images/placeholder.png"/>
+		</div>
+		<div class="tabs">
+			<span class="tab signup"><a href="#signup">My Page</a></span>
+		</div>
+		<div class="mod_content">
+			<div class="signup-cont cont">
+				<form id="update_frm" >
+					<input type="text" name="nick" id="nick_reg" class="inpt" required="required" 
+						placeholder="Your nickname" /> 
+					<label for="name"></label> 
+					<input type="email" name="email" id="email_reg" class="inpt" required="required" 
+						placeholder="Your email" /> 
+					<label for="email"></label> 
+					
+					<input type="password" name="pwd" id="pwd_reg" class="inpt" required="required" placeholder="Your password" />
+					<label for="password"></label>
+					<div class="submit-wrap">
+						<input type="submit" value="Modify" class="submit"> 
+					</div>
+				</form>
+			</div>
+		</div>
+	</article>
+</div>
+
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="js/modify.js"></script>		
+</body>
+</html>

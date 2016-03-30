@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- header -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="jsinput.js"></script>
+<!-- dropdown -->
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+<script type="text/javascript" src="../header2/js/modernizr.custom.79639.js"></script> 
+<link rel="stylesheet" type="text/css" href="../header2/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../header2/css/noJS.css" />
+<link rel="stylesheet" type="text/css" href="../header2/css/header.css" />
+<style>
+
+
+</style>
+</head>
+<body>
+	<header class="header">
+		
+		<!-- My Page -->
+		<div class="wrapper-demo">
+			<div id="dd" class="wrapper-dropdown-5" tabindex="1">
+				<ul class="dropdown">
+					<li><a href="#"><i class="icon-envelope"></i>Message</a></li>
+					<li><a href="#"><i class="icon-calendar"></i>Reservation</a></li>
+					<li><a href="../qna/qnaList.html"><i class="icon-question-sign"></i>Question</a></li>
+					<li id="myHomeLi"><a href="" id="myHomeA"><i class="icon-inbox"></i>My Home</a></li>
+					<li><a id="pro" href="#"><i class="icon-user"></i>Profile</a></li>
+					<li><a id="out" href="#"><i class="icon-remove"></i>Log out</a></li>
+				</ul>
+			</div>
+		​</div>
+		
+		<!-- logo -->
+		<div id="mainLogo">
+        	<a id="mainTag" href=""><img class="searchImg mainImg" src="../header2/images/header-7.png"></a>
+        </div>
+		
+        <div id="border">
+        	<ul class="headerul">
+        		<li class="headerli"><a>MY BLOG</a></li>
+        		<li class="headerli"><a>MY DESIGNER</a></li>
+        		<li class="headerli"><a>MY SHOP</a></li>
+        	</ul>
+        </div>
+        
+		<div class="searchDiv">
+        <!-- search -->
+        	    <form id="searchBar" name="searchform" method="get" >
+			      <div class="fieldcontainer">
+			        <input type="text" name="s" id="searchBar" class="searchfield" placeholder="tags, designers" tabindex="1">
+			        <input type="submit" name="search" id="search" value=""> 
+			      </div><!-- @end .fieldcontainer -->
+			    </form>
+        </div>
+    </header>
+    
+	<section class="section">
+		
+	</section>
+	<script>
+		/* function DropDown(el) {
+			this.dd = el;
+			this.initEvents();
+		}
+		DropDown.prototype = {
+			initEvents : function() {
+				var obj = this;
+	
+				obj.dd.on('click', function(event){
+					$(this).toggleClass('active');
+					event.stopPropagation();
+				});	
+			}
+		}
+	
+		$(function() {
+	
+			var dd = new DropDown( $('#dd') );
+	
+			$(document).click(function() {
+				// all dropdowns
+				$('.wrapper-dropdown-5').removeClass('active');
+			});
+	
+		}); */
+	</script>
+</body>
+</html>
