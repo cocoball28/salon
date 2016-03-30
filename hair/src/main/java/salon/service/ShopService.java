@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import salon.domain.Member;
 import salon.domain.Shop;
+import salon.domain.ShopImage;
 
 public interface ShopService {
-	public Map<String, Object> selectList();
-	public List<Shop> register(Shop shop, MultipartHttpServletRequest mRequest) throws Exception;
+	public Map<String, Object> selectList(Shop shop);
+	public List<ShopImage> register(Shop shop, MultipartHttpServletRequest mRequest) throws Exception;
 }
