@@ -7,14 +7,14 @@ function getContextPath(){
 var contextPath =  getContextPath();
 
 
-
 //현재 로그인 되어있는 유저 닉네임 출력
 var loginUserNickName = "";
 var loginUserMno = "";
 $.post(
 		contextPath+"/message/loginUserInfo.do",
 		function(data){
-			console.log("로그인유저정보:"+data);
+			console.log("로그인유저정보:");
+			console.log(data);
 			loginUserNickName = data.nick;
 			loginUserMno = data.mno;
 			console.log(loginUserNickName);
@@ -26,7 +26,14 @@ $.post(
 //메시지창 열기
 var messageOpen = function(){
 	//$('.messageContents').animate({ scrollTop: 1000 }, 'slow');
-	$(".messageMemberList").show("slow");
+	$(".messageMemberList").show("fast");
+	$.post(
+			contextPath+"/message/messageOpen.do",
+			{mno:loginUserMno},
+			function(data){
+				console.log(data);
+			}
+	)
 	$(".tempFullScreen").show();
 };
 
@@ -77,12 +84,11 @@ var favDsnMessageMode = function(){
 var searchMemberList = function(target){
 	$(".searchDsnList").html("");
 	var nickName = $(target).val();
-	if(nickName.length > 2){
+	if(nickName.length > 1){
 		$.post(
 				contextPath+"/message/memberList.do",
 				{"nick":nickName},
 				function(data){
-					console.log(data);
 					for(var i = 0; i < data.length ; i ++){
 						addDsnInfoList(data[i]);
 					}
@@ -112,9 +118,8 @@ var addDsnInfoList = function(data){
 
 //메신저창 열기
 var messageBegin = function(target){
-	$(".tempFullScreen").hide();
+	//$(".tempFullScreen").hide();
 	var mno = $(target).attr("mno");
-	console.log(mno);
 	$(".messageMemberList").hide('slow');
 	$(".messageBox").show("slow");
 	$(".messageRoomName").text(loginUserNickName + " + " + targetUserNickName);
@@ -128,7 +133,6 @@ var loadMessageList = function(){
 			{rmno:targetUserMno, smno:loginUserMno},
 			function(data) {
 				for(var i = data.length-1 ; i >= 0 ; i--){
-					console.log(data[i]);
 					if(data[i].smno == loginUserMno){
 						addMyMessage(data[i]);
 					}else{
@@ -147,6 +151,8 @@ var sendMessage = function(target){
 	if(content == ""){
 		return null;
 	}
+	
+	//node.js
 	/*
 	if(event.keyCode == 13){
 		$.ajax({
@@ -164,6 +170,7 @@ var sendMessage = function(target){
 	*/
 };
 
+//node.js
 //소켓 생성
 /*
 var socket = io.connect('http://192.168.0.44:3000');
@@ -218,6 +225,7 @@ var loadMoreMessageList = function(firstMessageNo){
 			  //console.log(data);
 		  });
 };
+
 //더 보기
 var addMoreMyMessage = function(data){
 	var cloneSendMessage = $(".messageClone").find(".sendMessage").clone();

@@ -65,27 +65,23 @@
 <!-- 메시지 파트  시작 -->
         <div class="messageDiv" style="z-index: 100">
         	<!-- 대화 상대 리스트  -->
-        	<div class="messageMemberList" style="width: 280px; background: rgba(30,30,30,0.92); top: 80px; right: 10%; position: fixed; border-radius:3px; display: none ; z-index: 1000; color: white;">
+        	<div class="messageMemberList" style="width: 280px; background: rgba(30,30,30,0.92); top: 80px; right: 5%; position: fixed; border-radius:3px; ; z-index: 1000; color: white; display: none;">
         		<div class="loginUserMenu" style="height: 50px; padding: 11px; text-align: left; padding-left: 20px;">
-	        		<span style="">
-	        			<img src="../header/images/partner.jpg" width="28px;">
-	        		</span>
-	        		&nbsp;
-	        		<span class="loginUserNickName" style="font-weight: bold; font-size: 14px; ">아이디</span>
+	        		<span class="loginUserNickName" style="font-weight: bold; font-size: 14px; padding-top: px;">아이디</span>
 	        		<span>
 	        			<img class="favDsnMessageMode" onclick="dsnSearchMode();" src="../header/images/plus.png" width="20px;" style="float: right; margin-top: 4px;  cursor: pointer; ">
-	        			<span class="dsnSearchMode" onclick="favDsnMessageMode();" style="float: right; margin-top: 4px;  display: none; font-weight: bold; color:grey; cursor: pointer;" >안 할래요</span>
+	        			<span class="dsnSearchMode" onclick="favDsnMessageMode();" style="float: right; margin-top: 4px;  display: none; font-weight: bold; color:grey; cursor: pointer; color: white" >안 할래요</span>
 	        		</span>
         		</div>
         		<div>
         			<div class="searchDsn" style="display: none;">
-        				<div style="padding: 15px; border-top: 1px solid black">
-        					<input class="searchMemberList" type="text" placeholder="Search" style="width: 100%; border: 0px;" onkeydown="searchMemberList(this);">
+        				<div style="padding: 15px; border-top: 1px solid grey">
+        					<input class="searchMemberList" type="text" placeholder="Search" style="width: 100%; border: 0px; background: rgba(40,40,40,0.92)" onkeydown="searchMemberList(this);">
         				</div>
         				<div class="searchDsnList"></div>
         			</div>
         			<div class="favDsnList" style="max-height: 325px; overflow: auto; ">
-        				<div class="dsnMemberDiv" style="height: 65px;margin:0px;padding:0px; cursor: pointer; border-top: 1px solid lightgrey">
+        				<div class="dsnMemberDiv" style="height: 65px;margin:0px;padding:0px; cursor: pointer; border-top: 1px solid grey">
         					<div style="text-align: left;padding: 12px;white-space: nowrap;">
 		        				<div style="float: left;">
 									<img class="dsnPhoto" src="../header/images/partner.jpg" width="40px;" style="margin-right: 10px;">       		
@@ -100,7 +96,7 @@
         		</div>
         	</div>
         	<!-- 메시지 창 -->
-	       	<div class="messageBox" style="background-image: url('../header/images/massageBoxBackground.jpg'); z-index: 10; display: none" >
+	       	<div class="messageBox" style="background-image: url('../header/images/massageBoxBackground.jpg'); z-index: 10; display: none;" >
 		       	<div style="width: 100%; height: 25px;">
 		       		<span style="float:left; font-weight:bold; margin: 11px; color: white;" class="messageRoomName"></span>
 		       		<span style="float: right;">
@@ -131,7 +127,7 @@
 			
 			
 	        <div class="cloneFavDsnList" style="padding: 10px; display: none;" >
-   				<div class="dsnMemberDiv" style="height: 65px;margin:0px;padding:0px; cursor: pointer; border-top: 1px solid lightgrey" onclick="messageBegin(this);">
+   				<div class="dsnMemberDiv" style="height: 65px;margin:0px;padding:0px; cursor: pointer; border-top: 1px solid grey" onclick="messageBegin(this);">
    					<div style="text-align: left;padding: 12px;white-space: nowrap;">
      				<div style="float: left;">
 						<img class="dsnPhoto" src="../header/images/partner.jpg" width="40px;" style="margin-right: 10px;">       		
