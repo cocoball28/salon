@@ -359,7 +359,6 @@ $(function() {
 					$("#dsnpic" + (i+1)).find(".name").text(data.dsn[i].nick);
 					$("#dsnpic" + (i+1)).css("background-image", "url('"+ data.dsn[i].photoPath +"')")
 				}
-				$("#dsnpic10").css("background-image", "url('shop/images/dsn20.jpg')")
 		});
 	};
 	showPhotoList();
@@ -523,8 +522,8 @@ $(function() {
 	$("#infoBtn").on("click", function() {
 		console.log("lat" + lat + "lng" + lng)
 		setTimeout(function(){
-			map.relayout();
 			map.setCenter(new daum.maps.LatLng(lat, lng));
+			map.relayout();
 		}, 300);
 	});
 
