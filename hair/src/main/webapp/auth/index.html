@@ -177,6 +177,7 @@ input.radio:focus ~ label:before {
 	border: 1px solid #d9d9d9;
 	width: 270px;
 	z-index: 50;
+	background-color: rgba(0, 0, 0, 0);
 }
 
 </style>
@@ -253,12 +254,24 @@ input.radio:focus ~ label:before {
 						<label class="radioLabel" for="radio2">Designer</label>
 					</div>
 					<!-- shop search -->
+					<ul class='clone-ul'>
+					<li>
+		    			<a></a>
+		    			<input type="hidden" class="shopNo">
+		    			<input type="hidden" class="shopName">
+	    			</li>
+					</ul>
+					
+					
 					
 					<input type="search" name="saname" id="searchShop" placeholder="seach name" />
+					<label for="email"></label>
 					<input type="hidden" name="sano" id="sano" value="0" />
 					<div class="wrapper-demo">
 						<div id="dd" class="wrapper-dropdown-5" tabindex="1">
 							<ul class="dropdown">
+							<ul class="searchresult">
+							</ul>
 							</ul>
 						</div>
 					​</div>
@@ -288,7 +301,7 @@ input.radio:focus ~ label:before {
 	</article>
 	</section>
 
-
+	
 
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/login.js"></script>

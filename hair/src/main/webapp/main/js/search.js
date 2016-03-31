@@ -7,7 +7,7 @@
 	var contextPath =  getContextPath();
 	
 	/* header */
-	$(".header").load(contextPath+"/header/header.html .header");
+	$(".header").load(contextPath+"/header2/header.html .header");
 		
 	$(document).ready(function(){
 		 /* check login */

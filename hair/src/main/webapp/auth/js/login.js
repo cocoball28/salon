@@ -185,18 +185,17 @@ $(document).on("keypress",'#searchShop',function(event){
 	    	$.post(contextPath+'/auth/getShop.do',{name: shop}, function(data){
 	    		console.log(data);
 	    		console.log(data.ajaxResult);
-	    		var output = '<ul class="searchresult">';
+	    		//var output = '<ul class="searchresult">';
 	    		$.each(data.ajaxResult.data, function(key, val){
-	    			if(val.name/*(val.name.search(myExp) != -1) || (val.bio.search(myExp) != -1)*/) {
-	    				output +='<li>';
-	    				output +='<a>' + val.name + '</a>';
-	    				output +='<input type="hidden" class="shopNo" value='+val.sano+'>';
-	    				output +='<input type="hidden" class="shopName" value='+val.name+'>';
-	    				output +='</li>';
+	    			if(val.name) {
+	    				var clone = $('.clone-ul>li').clone();
+	    				clone.find('a').text(val.name);
+	    				clone.find('.shopNo').val(val.sano);
+	    				clone.find('.shopName').val(val.name);
+	    				$('.searchresult').append(clone);
+	    				
 	    			}
 	    		});
-	    		output += '</ul>';
-	    		$('.dropdown').html(output);
 	    		$("#dd").addClass("active");
 	    	},"json");
 	    }

@@ -1,0 +1,33 @@
+
+/* list */
+.optionDiv{
+	width: 13%;
+}
+.optionImg {
+	position: relative;
+	left: 670%;
+}
+
+hr{
+	border: 1px solid #363636;
+	margin: 5px
+}
+
+.bookHide{
+	display: none;
+	color: blue;
+}
+
+.fa-heart-o{
+	margin-left: 700%;
+}
+
+.fa-heart{
+	margin-left: 700%;
+}
+label{
+	display: none;
+}
+a{
+	cursor: pointer;	
+}

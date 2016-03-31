@@ -23,7 +23,7 @@
 	}); 
 	
 	/* header */
-	$(".header").load(contextPath+"/header/header.html .header");
+	$(".header").load(contextPath+"/header2/header.html .header");
 		 
 	 
 	/* add bookmark */
@@ -55,7 +55,6 @@
 	  $.getJSON( ""+contextPath+"/salon/ajax/list.do"+"", function(resultObj) {
 		   var cnt = 0;
 		   $.each(resultObj.mList, function(key, value){
-			   console.log(value);
 				var html = ""
 				html += '<div class="wf-box '+ value.bno +'">'; 
 				html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
@@ -129,7 +128,4 @@
 	});
 	
 	
-	/* fav blog list */
-	$(document).on("click", "#favList", function(){
-		window.location.href = contextPath + "/main/favblog.html";
-	});
+	

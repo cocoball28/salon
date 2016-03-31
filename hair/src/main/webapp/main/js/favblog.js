@@ -7,12 +7,12 @@
 	var contextPath =  getContextPath();
 	
 	/* header */
-	$(".header").load(contextPath+"/header/header.html .header");
+	$(".header").load(contextPath+"/header2/header.html .header");
 	 /* check login */
-	$.get("/hair2/auth/checkLogin.do", function(data){
+	$.get(contextPath+"/auth/checkLogin.do", function(data){
 		 if(data.data == null){
 			 alert("로그인이 필요한 페이지 입니다.");
-			 window.location.href = contextPath+"/auth/login.html";
+			 window.location.href = contextPath+"/auth/index.html#signin";
 			 } else{ 
 				 $("#dd").append(data.data.nick);
 				 $("#dd").append("<input type='hidden' id='memberNo' value="+data.data.mno+" />")
@@ -27,7 +27,6 @@
 		var mno = $("#dd").find("#memberNo").val();
 		var change = $(this).find(".fa");
 		var getClass = $(this).find("i").attr("class");
-		console.log("class : "+ getClass)
 		var fav;
 		if(getClass == "fa fa-heart-o"){
 			fav = 1;
@@ -45,9 +44,7 @@
 	});
 
 	/* fav blog list */
-	/*var mno = $("#dd").find("#memberNo").val();
-	alert('mno ' + mno)
-	$.getJSON(contextPath+"/salon/ajax/favBlog.do",{mno:mno},function(resultObj){
+	$.getJSON(contextPath+"/salon/ajax/favBlog.do",function(resultObj){
 		var cnt = 0;
 		   $.each(resultObj.data, function(key, value){
 			    var html = ""
@@ -68,7 +65,7 @@
 				cnt++;
 				if(cnt == 5) cnt = 0;
 		  });
-	})*/
+	})
 	
 	/* scroll */
 	var page = 1;
