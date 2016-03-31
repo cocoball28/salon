@@ -1,3 +1,8 @@
+.headSticky {
+	top:-283px;;
+	position: fixed;
+}
+
 *{
 	margin: 0px;
 	padding: 0px;
