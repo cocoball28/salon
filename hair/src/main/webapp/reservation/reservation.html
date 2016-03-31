@@ -5,260 +5,225 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/reservation.css" rel="stylesheet">
 <link href="css/reservation-calender.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
 <title>ShopInfomation</title>
 </head>
-<body>
-	<div style="width: 60%; min-width:500px; min-height: 250px; margin: auto; margin-top: 50px; background:#f7f6f3;" >
-		<div class="reservationCtlBody" style="max-height: 400px;" >
-			<!-- 미용실 이름 -->
-			<h2 style="padding-left: 10px;" class="shopName">SALON DE MAI</h2>
+<body style="background:">
+	
+	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#shopReservationForm">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="shopReservationForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+	<div style="width: 60%; min-width:700px; margin: auto; margin-top: 50px; background:#fafafa; border-radius:5px;" >
+		<div class="reservationCtlBody" style="max-height: 400px;">
+			<div style="color:#666; border-radius:5px 5px 0px 0px;background: black;">
+					<!-- 미용실 이름 -->
+					<!-- <h2 style="text-align: center; padding-top: 10px; margin-bottom: 0px;" class="shopName">Choice hair</h2> -->
+					<!-- <div style="text-align: right; padding-right: 10px; font-weight: bold;"><span>TEL : </span><span style="margin-right: 10px;">010 - 1234 - 1234</span></div> -->
+					
+					<!-- 예약 조정 버튼 -->
+					<div class="controlBtnDiv mainControl" style="padding: 10px; cursor: default; font-weight: bold; margin-left:10px;">
+						<span class="selectedDateDisplay" style="cursor: pointer;" onclick="showReservarionCalender()"></span>
+						<!-- 예약 날짜 셀렉터 -->
+						<div class="reservationDateSelector" style="display: none; float: left;margin-top: 25px; opacity:0.9;">
+							<div id="reservationCalendar"  style="width:300px; position: absolute; margin-top: 0px;z-index: 10"></div>
+						</div>	
+						<span style="margin-left:10px; cursor: pointer;" onclick ="openReservationForm();">RESERVATION</span>
+						<span style="margin-right: 10px; float: right;">0</span>
+						<span style="margin-right: 10px; float: right;">1</span>
+						<span style="margin-right: 10px; float: right;">2</span>
+						<!-- 예약 폼 -->
+						<div class="reservationForm" style=" margin-top:0px; opacity:0.95; padding: 0px; display: none">
+							<form class="form-inline" style="position: absolute; z-index: 10; width: 500px; background-color: #222;margin-top:10px; padding: 10px;">
+							    <div class="form-group" style="float: right; margin: 10px;">
+							    	<label>HAIRDESIGNER</label>
+							 		<select class="form-control HairDesignerList" style="width:300px; z-index: 10;" onchange="selectDsnOption(this);">
+							 			<option>HAIRDESIGNER LIST</option>
+							 		</select>
+							 	</div>
+							    <div class="form-group" style="float: right; margin: 10px;">
+							    	<label>CUSTOMER</label>
+							    	<input class="form-control customerName" placeholder="CUSTOMER NAME" style="width: 300px">
+							 	</div>
+							 	
+							    <div class="form-group" style="float: right; margin: 10px;">
+							    	<label>HAIR STYLE</label>
+							    	<input class="form-control hairStyle" placeholder="HAIR STYLE" style="width: 300px">
+							 	</div>
+							    
+							    <!-- 시작시간 -->
+							    <div class="form-group" style="float: right; margin: 10px;">
+							    	<label>BEGIN TIME</label>
+							    	<input class="form-control beginTimeInputBox" type="text" style="width: 300px; cursor: pointer; " placeholder="BEGIN TIME" onclick="showSelectBeginTime()">
+							        <select multiple="" class="form-control beginTimeSelectBox" style="width:300px;; display:none ; z-index: 10;" >
+							          <option>09:00</option>
+							          <option>09:15</option>
+							          <option>09:30</option>
+							          <option>09:45</option>
+							          <option>10:00</option>
+							          <option>10:15</option>
+							          <option>10:30</option>
+							          <option>10:45</option>
+							          <option>11:00</option>
+							          <option>11:15</option>
+							          <option>11:30</option>
+							          <option>11:45</option>
+							          <option>12:00</option>
+							          <option>12:15</option>
+							          <option>12:30</option>
+							          <option>12:45</option>
+							          <option>13:00</option>
+							          <option>13:15</option>
+							          <option>13:30</option>
+							          <option>13:45</option>
+							          <option>14:00</option>
+							          <option>14:15</option>
+							          <option>14:30</option>
+							          <option>14:45</option>
+							          <option>15:00</option>
+							          <option>15:15</option>
+							          <option>15:30</option>
+							          <option>15:45</option>
+							          <option>16:00</option>
+							          <option>16:15</option>
+							          <option>16:30</option>
+							          <option>16:45</option>
+							          <option>17:00</option>
+							          <option>17:15</option>
+							          <option>17:30</option>
+							          <option>17:45</option>
+							          <option>18:00</option>
+							          <option>18:15</option>
+							          <option>18:30</option>
+							          <option>18:45</option>
+							          <option>19:00</option>
+							          <option>19:15</option>
+							          <option>19:30</option>
+							          <option>19:45</option>
+							          <option>20:00</option>
+							          <option>20:15</option>
+							          <option>20:30</option>
+							          <option>20:45</option>
+							          <option>21:00</option>
+							        </select>
+							 	</div>
+							    
+							    <!-- 종료시간 -->
+							    <div class="form-group" style="float: right; margin: 10px;">
+							      <label>END TIME</label>
+							        <input disabled="" class="form-control endTimeInputBox" type="text" style="width:300px; cursor: pointer;" placeholder="END TIME" onclick="showSelectEndTime()">
+							        <select multiple="" class="form-control endTimeSelectBox" style="width:300px;; display:none ; z-index: 10;">
+							          <option>09:30</option>
+							          <option>09:45</option>
+							          <option>10:00</option>
+							          <option>10:15</option>
+							          <option>10:30</option>
+							          <option>10:45</option>
+							          <option>11:00</option>
+							          <option>11:15</option>
+							          <option>11:30</option>
+							          <option>11:45</option>
+							          <option>12:00</option>
+							          <option>12:15</option>
+							          <option>12:30</option>
+							          <option>12:45</option>
+							          <option>13:00</option>
+							          <option>13:15</option>
+							          <option>13:30</option>
+							          <option>13:45</option>
+							          <option>14:00</option>
+							          <option>14:15</option>
+							          <option>14:30</option>
+							          <option>14:45</option>
+							          <option>15:00</option>
+							          <option>15:15</option>
+							          <option>15:30</option>
+							          <option>15:45</option>
+							          <option>16:00</option>
+							          <option>16:15</option>
+							          <option>16:30</option>
+							          <option>16:45</option>
+							          <option>17:00</option>
+							          <option>17:15</option>
+							          <option>17:30</option>
+							          <option>17:45</option>
+							          <option>18:00</option>
+							          <option>18:15</option>
+							          <option>18:30</option>
+							          <option>18:45</option>
+							          <option>19:00</option>
+							          <option>19:15</option>
+							          <option>19:30</option>
+							          <option>19:45</option>
+							          <option>20:00</option>
+							          <option>20:15</option>
+							          <option>20:30</option>
+							          <option>20:45</option>
+							          <option>21:00</option>
+							        </select>
+							    </div>
 			
-			<!-- 예약 조정 버튼 -->
-			<div class="controlBtnDiv mainControl" style="padding-left: 10px; cursor: default; font-weight: bold; ">
-				<span class="selectedDateDisplay" style="cursor: pointer;" onclick="showReservarionCalender()"></span>
-				<!-- 예약 날짜 셀렉터 -->
-				<div class="reservationDateSelector" style="display: none; float: left;margin-top: 30px; opacity:0.9">
-					<div id="reservationCalendar"  style="width:300px; position: absolute; margin-top: 0px"></div>
-				</div>	
-				<span style="margin-left:10px; cursor: pointer;" onclick ="openReservationForm();">RESERVATION</span>
-			</div>
-			
-			
-			<!-- 예약 폼 -->
-			<div class="reservationForm" style="padding: 30px; display: none; ">
-				<form class="form-horizontal" >
-				  <fieldset>
-				    <div class="form-group" style="margin-left: 10%;">
-				      <label class="col-lg-2 control-label">HAIRDRESSER</label>
-				      <div class="col-lg-10">
-				       <select class="form-control hairdresserName" style="width:80%; z-index: 10;" >
-				          <option>DRAGON</option>
-				          <option>JINO</option>
-				          <option>SHINJI</option>
-				          <option>CHAR</option>
-				       </select>
-				      </div>
-				    </div>
-				    <div class="form-group" style="margin-left: 10%;">
-				      <label class="col-lg-2 control-label">CUSTOMER</label>
-				      <div class="col-lg-10">
-				        <input class="form-control customerName" placeholder="CUSTOMER NAME" style="width: 80%">
-				      </div>
-				    </div>
-				    <div class="form-group" style="margin-left: 10%;">
-				      <label class="col-lg-2 control-label">HAIR STYLE</label>
-				      <div class="col-lg-10">
-				        <input class="form-control hairStyle" placeholder="HAIR STYLE" style="width: 80%">
-				      </div>
-				    </div>
-				    
-				    <!-- 시작시간 -->
-				    <div class="form-group" style="margin-left: 10%;">
-				      <label for="select" class="col-lg-2 control-label">BEGIN TIME</label>
-				      <div class="col-lg-10">
-				      	<input class="form-control beginTimeInputBox" type="text" style="width:80%; cursor: pointer; " placeholder="BEGIN TIME" onclick="showSelectBeginTime()">
-				        <select multiple="" class="form-control beginTimeSelectBox" style="width:76%; display: none; position: absolute; z-index: 10;" >
-				          <option>09:00</option>
-				          <option>09:15</option>
-				          <option>09:30</option>
-				          <option>09:45</option>
-				          <option>10:00</option>
-				          <option>10:15</option>
-				          <option>10:30</option>
-				          <option>10:45</option>
-				          <option>11:00</option>
-				          <option>11:15</option>
-				          <option>11:30</option>
-				          <option>11:45</option>
-				          <option>12:00</option>
-				          <option>12:15</option>
-				          <option>12:30</option>
-				          <option>12:45</option>
-				          <option>13:00</option>
-				          <option>13:15</option>
-				          <option>13:30</option>
-				          <option>13:45</option>
-				          <option>14:00</option>
-				          <option>14:15</option>
-				          <option>14:30</option>
-				          <option>14:45</option>
-				          <option>15:00</option>
-				          <option>15:15</option>
-				          <option>15:30</option>
-				          <option>15:45</option>
-				          <option>16:00</option>
-				          <option>16:15</option>
-				          <option>16:30</option>
-				          <option>16:45</option>
-				          <option>17:00</option>
-				          <option>17:15</option>
-				          <option>17:30</option>
-				          <option>17:45</option>
-				          <option>18:00</option>
-				          <option>18:15</option>
-				          <option>18:30</option>
-				          <option>18:45</option>
-				          <option>19:00</option>
-				          <option>19:15</option>
-				          <option>19:30</option>
-				          <option>19:45</option>
-				          <option>20:00</option>
-				          <option>20:15</option>
-				          <option>20:30</option>
-				          <option>20:45</option>
-				          <option>21:00</option>
-				        </select>
-				        <input class="form-control beginTimeSelectBox" style="width: 40PX; display: none;">
-				     </div>
-				    </div>
-				    
-				    <!-- 종료시간 -->
-				    <div class="form-group" style="margin-left: 10%;">
-				      <label for="select" class="col-lg-2 control-label">END TIME</label>
-				      <div class="col-lg-10" >
-				        <input disabled="" class="form-control endTimeInputBox" type="text" style="width:80%; text-align: " placeholder="END TIME" onclick="showSelectEndTime()">
-				        <select multiple="" class="form-control endTimeSelectBox" style="width:76%; display: none; position: absolute; z-index: 10" >
-				          <option>09:30</option>
-				          <option>09:45</option>
-				          <option>10:00</option>
-				          <option>10:15</option>
-				          <option>10:30</option>
-				          <option>10:45</option>
-				          <option>11:00</option>
-				          <option>11:15</option>
-				          <option>11:30</option>
-				          <option>11:45</option>
-				          <option>12:00</option>
-				          <option>12:15</option>
-				          <option>12:30</option>
-				          <option>12:45</option>
-				          <option>13:00</option>
-				          <option>13:15</option>
-				          <option>13:30</option>
-				          <option>13:45</option>
-				          <option>14:00</option>
-				          <option>14:15</option>
-				          <option>14:30</option>
-				          <option>14:45</option>
-				          <option>15:00</option>
-				          <option>15:15</option>
-				          <option>15:30</option>
-				          <option>15:45</option>
-				          <option>16:00</option>
-				          <option>16:15</option>
-				          <option>16:30</option>
-				          <option>16:45</option>
-				          <option>17:00</option>
-				          <option>17:15</option>
-				          <option>17:30</option>
-				          <option>17:45</option>
-				          <option>18:00</option>
-				          <option>18:15</option>
-				          <option>18:30</option>
-				          <option>18:45</option>
-				          <option>19:00</option>
-				          <option>19:15</option>
-				          <option>19:30</option>
-				          <option>19:45</option>
-				          <option>20:00</option>
-				          <option>20:15</option>
-				          <option>20:30</option>
-				          <option>20:45</option>
-				          <option>21:00</option>
-				        </select>
-				        <input class="form-control endTimeSelectBox" style="width: 40PX; display: none;">
-				      </div>
-				    </div>
-				    <div class="form-group" style="margin-left: 10%;">
-				      <div class="col-lg-10 col-lg-offset-2 controlBtnDiv">
-				        <SPAN onclick="closeReservationForm()" style="cursor: pointer;">CANCEL</SPAN>
-				        &nbsp;
-				        <SPAN onclick="confirmReservationForm()" style="cursor: pointer;">CONFIRM</SPAN>
-				      </div>
-				    </div>
-				  </fieldset>
-				</form>
+							    <div class="form-group" style="width: 100%">
+							      <div class="reservationControlBtn" style="margin: auto; text-align: center;">
+							        <SPAN onclick="closeReservationForm()" style="cursor: pointer;">CANCEL</SPAN>
+							        <SPAN onclick="confirmReservationForm()" style="cursor: pointer;">CONFIRM</SPAN>
+							      </div>
+							    </div>
+							</form>
+						</div>
+					</div>
 			</div>
 		</div>
-		<br>
-		
 		
 		<!-- 예약 현황 디스플레이 -->
-		<div class="reservationStatusDisply" style="overflow: auto; ">
-			<table class="table table-striped table-hover" style="color: #666; cursor: default; width: 2000px; ">
-				<thead>
-					<tr>
-						<th>TIME</th>
-						<th colspan="4">09:00</th>
-						<th colspan="4">10:00</th>
-						<th colspan="4">11:00</th>
-						<th colspan="4">12:00</th>
-						<th colspan="4">13:00</th>
-						<th colspan="4">14:00</th>
-						<th colspan="4">15:00</th>
-						<th colspan="4">16:00</th>
-						<th colspan="4">17:00</th>
-						<th colspan="4">18:00</th>
-						<th colspan="4">19:00</th>
-						<th colspan="4" style="background: #ddd">20:00</th>
-					</tr>
-				</thead>
-				<tbody>
-					 <tr class="active reservationBody">
-						<th width="150px;"><div class="hairdresserName" style="margin-top: 12px; width: 100%">DRAGON</div></th>
-						<td class="900"></td>
-						<td class="915"></td>
-						<td class="930"></td>
-						<td class="945"></td>
-						<td class="1000"></td>
-						<td class="1015"></td>
-						<td class="1030"></td>
-						<td class="1045"></td>
-						<td class="1100"></td>
-						<td class="1115"></td>
-						<td class="1130"></td>
-						<td class="1145"></td>
-						<td class="1200"></td>
-						<td class="1215"></td>
-						<td class="1230"></td>
-						<td class="1245"></td>
-						<td class="1300"></td>
-						<td class="1315"></td>
-						<td class="1330"></td>
-						<td class="1345"></td>
-						<td class="1400"></td>
-						<td class="1415"></td>
-						<td class="1430"></td>
-						<td class="1445"></td>
-						<td class="1500"></td>
-						<td class="1515"></td>
-						<td class="1530"></td>
-						<td class="1545"></td>
-						<td class="1600"></td>
-						<td class="1615"></td>
-						<td class="1630"></td>
-						<td class="1645"></td>
-						<td class="1700"></td>
-						<td class="1715"></td>
-						<td class="1730"></td>
-						<td class="1745"></td>
-						<td class="1800"></td>
-						<td class="1815"></td>
-						<td class="1830"></td>
-						<td class="1845"></td>
-						<td class="1900"></td>
-						<td class="1915"></td>
-						<td class="1930"></td>
-						<td class="1945"></td>
-						<td class="2000"></td>
-						<td class="2015"></td>
-						<td class="2030"></td>
-						<td class="2045"></td>
-					</tr>
-				</tbody>
-			</table> 
+		<div>
+			<div style="float: left">
+				<table class="table table-striped table-hover" style="color: #666; cursor: default;">
+					<thead>
+						<tr>
+							<th>DESIGNER</th>
+						</tr>
+					</thead>
+					<tbody class="hairDsnNameList" style="text-align: center;">
+				   <!-- <tr class="reservationBody" style="height: 73px; border-bottom: 1px solid lightgrey">
+							<td>
+								<div class="hairDsnName" style="margin-top: 24px; width: 100%">용뿌리</div>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+			<div class="reservationStatusDisplay" style="overflow: auto; ">
+				<table class="table table-striped table-hover" style="color: #666; cursor: default; width: 2000px; ">
+					<thead>
+						<tr style="border-bottom: 1px solid lightgrey">
+							<!-- <th>TIME</th> -->
+							<th colspan="4">09:00</th>
+							<th colspan="4">10:00</th>
+							<th colspan="4">11:00</th>
+							<th colspan="4">12:00</th>
+							<th colspan="4">13:00</th>
+							<th colspan="4">14:00</th>
+							<th colspan="4">15:00</th>
+							<th colspan="4">16:00</th>
+							<th colspan="4">17:00</th>
+							<th colspan="4">18:00</th>
+							<th colspan="4">19:00</th>
+							<th colspan="4" style="background: #ddd">20:00</th>
+						</tr>
+					</thead>
+					<tbody class="reservationTbody"></tbody>
+				</table> 
+			</div>
 		</div>
 		
+		
+		<select class="cloneHairdresserName" style="display: none">
+          <option>미용사 닉네임</option>
+        </select>
 		
 		
 		<!-- 예약 현황 클론  -->
@@ -270,9 +235,20 @@
 			</div>
 		</div>
 		
+		<!-- clone. 미용사리스트  -->
+		<table class="cloneHairDsnNameList" style="text-align: center; display: none">
+			<tr class="reservationBody" style="height: 73px; border-bottom: 1px solid lightgrey">
+				<td>
+					<div class="hairDsnName" style="margin-top: 24px; width: 100%; font-weight: bold;"></div>
+				</td>
+			</tr>
+		</table>
+
+		
+		
 		<table class="cloneReservationBody" style="display: none">
-			<tr class="active reservationBody">
-				<th width="150px;"><div class="hairdresserName" style="margin-top: 12px; width: 100%">Dragon</div></th>
+			<tr class="active reservationBody" style="height: 73px; border-bottom: 1px solid lightgrey">
+				<!-- <th width="150px;"><div class="hairdresserName" style="margin-top: 12px; width: 100%">Dragon</div></th> -->
 				<td class="900"></td>
 				<td class="915"></td>
 				<td class="930"></td>
@@ -323,8 +299,9 @@
 				<td class="2045"></td>
 			</tr>
 		</table>
-	</div>
-	
+    </div>
+  </div>
+</div>
 	
 	<script src="js/jquery-2.2.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>

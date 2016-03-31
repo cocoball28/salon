@@ -1,12 +1,9 @@
-
-
+var currentViewPageNo = $(location).attr('search').split("=")[1];
 
 $("td").css("padding","2px");
 
-
 var openReservationForm = function() {
 	$(".reservationForm").show('slow');
-	$(".mainControl").hide('fast');
 }
 
 var closeReservationForm = function() {
@@ -17,9 +14,10 @@ var closeReservationForm = function() {
 	$(".endTimeInputBox").attr("disabled","");
 }
 
+
 var confirmReservationForm = function(){
 	$(".endTimeInputBox").attr("disabled","");
-	var hairdresser = $(".hairdresserName").val();
+	var hairDsnMno = $(".HairDesignerList").attr("mno");
 	var customer = $(".customerName").val();
 	var hairStyle = $(".hairStyle").val();
 	var beginTimeStr = $(".beginTimeInputBox").val();
@@ -33,9 +31,9 @@ var confirmReservationForm = function(){
 	$.post(
 			"/salon/reservation/regist.do",
 			{	
-				"saNo":"1",
+				"sano":currentViewPageNo,
 				"rsvDate":rsvDate,
-				"dName":hairdresser,
+				"mno":hairDsnMno,
 				"cName":customer,
 				"sTime":beginTimeStr,
 				"eTime":endTimeStr,
@@ -45,44 +43,32 @@ var confirmReservationForm = function(){
 				alert("success");
 			}
 	)
-	
-	/*	
-	private String hdName;
-	private String ctName;
-	private String beginTime;
-	private String endTime;
-	private String style;
-	private String bookDate;
-	*/
-	
-	
-	
-	
 	$(".customerName").val("");
 	$(".hairStyle").val("");
 	$(".beginTimeInputBox").val("");
 	$(".endTimeInputBox").val("");
-	addReservation(hairdresser, customer, hairStyle, beginTimeStr, endTimeStr);
+	//addReservation(hairdresser, customer, hairStyle, beginTimeStr, endTimeStr);
 	//reservationTimeSelector(beginTime,endTime)
 }
 
-var addReservation = function (hairdresser, customer, hairStyle, beginTime, endTime, reservationNo) {
+var addReservation = function (data) {
+	console.log(data);
 	var cloneReservation = $(".cloneReservationInfo").find(".reservationInfoDiv").clone();
-	$(cloneReservation).find(".time").text(beginTime + " - " + endTime);
-	$(cloneReservation).find(".style").text(hairStyle);
-	$(cloneReservation).find(".customer").text(customer);
+	$(cloneReservation).find(".time").text(data.sTime + " - " + data.eTime);
+	$(cloneReservation).find(".style").text(data.style);
+	$(cloneReservation).find(".customer").text(data.cName);
 	$(cloneReservation).find(".customer").css({"font-weight":"bold","font-size":"20px"});
-	$(cloneReservation).attr("rNo",reservationNo);
-	reservationTimeSelector(beginTime,endTime,reservationNo);
-	var beginHour = beginTime.split(":")
+	$(cloneReservation).attr("rno",data.rno);
+	reservationTimeSelector(data.sTime,data.eTime,data.rno,data.mno);
+	var beginHour = data.sTime.split(":")
 	var targetTd = beginHour[0]*1+beginHour[1];
 	//console.log(targetTd);
-	$(".reservationStatusDisply").find("."+targetTd).append(cloneReservation);
+	$(".reservationTbody").find("[name="+data.mno+"]").find("."+targetTd).append(cloneReservation);
 }
 
 
 
-var reservationTimeSelector = function(begin, end, rNo) {
+var reservationTimeSelector = function(begin, end, rno, mno) {
 	var beginTime = begin.split(":")
 	var beginHour = beginTime[0]*1
 	var beginMinute = beginTime[1]*1
@@ -94,18 +80,25 @@ var reservationTimeSelector = function(begin, end, rNo) {
 		endHour--;
 	}
 	console.log(endMinute);
-	
 	for(var i = beginHour ; i <= endHour ; i++){
 		for(var j = beginMinute ; j <= 45 ; j+=15 ) {
 			var selectedClass = (i*100)+ j;
 			//console.log(i + ":" + j);
 			console.log(selectedClass);
+			var selectedRsvTd = $(".reservationTbody").find("[name="+mno+"]").find("."+selectedClass);
+			$(selectedRsvTd).css(
+				{"background-color":"deepskyblue", 
+					"color":"white"
+				}
+			);
+			/*
 			$("."+selectedClass).css(
 					{"background-color":"deepskyblue", 
 					"color":"white"
 					}
 			);
-			$("."+selectedClass).attr("rNo",rNo);
+			*/
+			$(selectedRsvTd).attr("rno",rno);
 			if(i == endHour && j == endMinute) break;
 		}
 		beginMinute = 0;
@@ -115,11 +108,20 @@ var reservationTimeSelector = function(begin, end, rNo) {
 
 $(".controlBtnDiv span").hover(
 	function() {
-		$(this).css("color","#aaa");
+		$(this).css("color","white");
 	}, 
 	function() {
-		$(this).css("color","#666");
+		$(this).css("color","#aaa");
 	}
+);
+
+$(".reservationControlBtn span").hover(
+		function() {
+			$(this).css("color","white");
+		}, 
+		function() {
+			$(this).css("color","#aaa");
+		}
 );
 
 var showSelectBeginTime = function(){
@@ -149,9 +151,6 @@ $(".endTimeSelectBox option").click(function(){
 })
 
 
-
-
-
 var currentYear = "";
 var currentMonth = "";
 var currentDate = "";
@@ -164,7 +163,6 @@ var realDate = dateObj.getDate();
 
 /* 현재 날짜 표시 ==================================*/
 var dataDisplayClass = "#reservationCalendar ."+realyear+realmonth+realDate;
-console.log(dataDisplayClass);
 $(".selectedDateDisplay").attr("rsvDate",""+realyear+realmonth+realDate);
 
 
@@ -255,8 +253,13 @@ var printCalendar = function(id, date) {
 	
 	/* 날짜 선택 =====================================================*/
 	$("#reservationCalendar tbody td").click(function(){
-		$("td").css("border","0px")
-		$(this).css("border","2px solid white")
+		if($(this).attr("selectedDate") == "true"){
+			closeReservarionCalender();
+		}
+		$("td").attr("selectedDate","");
+		$(this).attr("selectedDate","true");
+		$("td").css("border","2px");
+		$(this).css("border","2px solid white");
 		var selectDate = $(this).text()*1;
 		dateSelector(currentYear,currentMonth,selectDate);
 		$(".reservationStatusDisply").find(".reservationBody").remove();
@@ -296,31 +299,59 @@ var closeReservarionCalender = function(){
 }
 
 
-/* 첫화면 미용사리스트 뽑아내기 */
+var addDsnInfo = function(data){
+	var cloneDsnList = $(".cloneHairDsnNameList").find(".reservationBody").clone();
+	cloneDsnList.find(".hairDsnName").text(data.nick);
+	$(".hairDsnNameList").append(cloneDsnList);
+	var cloneDsnName = $(".cloneHairdresserName").find("option").clone();
+	cloneDsnName.text(data.nick);
+	cloneDsnName.attr("mno",data.mno);
+	cloneDsnName.attr("name",data.nick);
+	$(".HairDesignerList").append(cloneDsnName);
+	var cloneReservationBody = $(".cloneReservationBody").find(".reservationBody").clone();
+	/*cloneReservationBody.find(".hairdresserName").text(data.nick);*/
+	cloneReservationBody.attr("name",data.mno);
+	$(".reservationTbody").append(cloneReservationBody);
+};
 
-
-/* 첫화면 리스트 뽑아내기 */
 var printReservationList = function(){
+	/* 첫화면 미용사리스트 뽑아내기 */
+	$.post(
+			"/salon/reservation/memberList.do",
+			{"sano":currentViewPageNo},
+			function(data){
+				//console.log(data);
+				$(".reservationTbody").html("");
+				$(".HairDesignerList").html("<option>HAIRDESIGNER LIST</option>")
+				$(".hairDsnNameList").html("");
+				for(var i = 0 ; i < data.length ; i++){
+					addDsnInfo(data[i]);
+				}
+				
+			}
+	);
+	/* 첫화면 리스트 뽑아내기 */
 	$.post(
 			"/salon/reservation/list.do",
 			{
-				"saNo":1,
+				"sano":currentViewPageNo,
 				"rsvDate":$(".selectedDateDisplay").attr("rsvDate")
 			},
 			function(data){
 				console.log(data);
 				for(var i = 0 ; i < data.length ; i ++){
-					addReservation(data[i].dName, data[i].cName, data[i].style, data[i].sTime, data[i].eTime, data[i].rNo)
+					addReservation(data[i])
 				}
 			}
 	)
 }
-
 printReservationList();
 
-
-
-
-
+var selectDsnOption = function(target){
+	var targetNick = $(target).val();
+	console.log(targetNick);
+	var mno = $(target).find("[name="+targetNick+"]").attr("mno");
+	$(".HairDesignerList").attr("mno",mno);
+}
 
 
