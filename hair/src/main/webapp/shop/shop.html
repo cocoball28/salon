@@ -346,15 +346,28 @@ $(function() {
 			 	$(".stitle").text(data.info[0].name);
 				$(".addr").text(data.info[0].addr);
 				$(".tel").text(data.info[0].tel);
-				$.getJSON("https://apis.daum.net/local/geo/addr2coord?apikey=91c44d2bcf308d32698e4bce184444f8&q="+data.info[0].addr+"&output=json",
-						function(data2) {
-							lat = data2.channel.item[0].lat;
-							lng = data2.channel.item[0].lng;
-							
-							console.log("data2" + lat + "   " + lng);
-							console.log(data2);
-						}
-				)
+				
+				
+				$.ajax({
+							url:"https://apis.daum.net/local/geo/addr2coord?apikey=91c44d2bcf308d32698e4bce184444f8&q="+data.info[0].addr+"&output=json",
+							dataType: "jsonp",
+							success: function(data2) {
+								console.log(data2);
+								lat = data2.channel.item[0].lat;
+								lng = data2.channel.item[0].lng;
+								console.log("data2" + lat + "   " + lng);
+								console.log(data2);
+							}
+				})
+				/* $.ajax({
+					  url: "http://ip:8080/jsp/upload",
+					  dataType: "jsonp",
+					  success: function(data) {
+					    if (data != null) {
+					      alert(data.result + ", " + data.go);
+					    }
+					  }
+					}); */
 				for (var i = 0; i < data.dsn.length; i++) {
 					$("#dsnpic" + (i+1)).find(".name").text(data.dsn[i].nick);
 					$("#dsnpic" + (i+1)).css("background-image", "url('"+ data.dsn[i].photoPath +"')")
@@ -522,8 +535,8 @@ $(function() {
 	$("#infoBtn").on("click", function() {
 		console.log("lat" + lat + "lng" + lng)
 		setTimeout(function(){
-			map.setCenter(new daum.maps.LatLng(lat, lng));
 			map.relayout();
+			map.setCenter(new daum.maps.LatLng(lat, lng));
 		}, 300);
 	});
 
