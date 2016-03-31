@@ -23,10 +23,8 @@ import salon.service.MemberService;
 @Controller
 @RequestMapping("/auth/*")
 public class AuthController {  
-  @Autowired 
-  MemberService memberService;
-  @Autowired
-  MemberDao memberDao;
+  @Autowired MemberService memberService;
+  @Autowired MemberDao memberDao;
   
   @RequestMapping(value="login", method=RequestMethod.GET)
   public String loginform() {

@@ -107,14 +107,15 @@ public class MainController {
   
   @RequestMapping("favBlog")
   @ResponseBody
-  public AjaxResult favBlog(int mno,
+  public AjaxResult favBlog(HttpServletRequest request,
 	@RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="20") int pageSize) throws Exception{
-	  System.out.println("mno " + mno);
+	  
+	  Member member = (Member)request.getSession().getAttribute("loginUser");
 	  
 	  HashMap<String, Object> resultMap = new HashMap<>();
 	  resultMap.put("startIndex", (pageNo - 1) * pageSize);
 	  resultMap.put("length", pageSize);
-	  resultMap.put("mno", mno);
+	  resultMap.put("mno", member.getMno());
 	  
 	  List<Blog> favBlog = mainService.favBlog(resultMap);
 	  
