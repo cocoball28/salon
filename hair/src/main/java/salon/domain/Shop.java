@@ -3,7 +3,7 @@ package salon.domain;
 public class Shop {
 	private int sano;
 	private String name;
-	private int tel;
+	private String tel;
 	private int zip;
 	private String addr;
 	public String getAddr() {
@@ -19,7 +19,7 @@ public class Shop {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getTel() {
+	public String getTel() {
 		return tel;
 	}
 	public int getSano() {
@@ -34,7 +34,7 @@ public class Shop {
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
-	public void setTel(int tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 }
