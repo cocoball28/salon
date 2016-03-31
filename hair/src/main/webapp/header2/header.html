@@ -21,10 +21,10 @@
 	<header class="header">
 		
 		<!-- My Page -->
-		<div class="wrapper-demo">
+		<div class="wrapper-demo" style="position: fixed; z-index: 20">
 			<div id="dd" class="wrapper-dropdown-5" tabindex="1">
 				<ul class="dropdown">
-					<li><a href="#"><i class="icon-envelope"></i>Message</a></li>
+					<li onclick="messageOpen()"><a><i class="icon-envelope"></i>Message</a></li>
 					<li><a href="#"><i class="icon-calendar"></i>Reservation</a></li>
 					<li><a href="../qna/qnaList.html"><i class="icon-question-sign"></i>Question</a></li>
 					<li id="myHomeLi"><a href="" id="myHomeA"><i class="icon-inbox"></i>My Home</a></li>
@@ -56,6 +56,115 @@
 			      </div><!-- @end .fieldcontainer -->
 			    </form>
         </div>
+        
+        
+        
+        
+        
+        
+<!-- 메시지 파트  시작 -->
+        <div class="messageDiv" style="z-index: 100">
+        	<!-- 대화 상대 리스트  -->
+        	<div class="messageMemberList" style="width: 280px; background: rgba(30,30,30,0.92); top: 80px; right: 10%; position: fixed; border-radius:3px; display: none ; z-index: 1000; color: white;">
+        		<div class="loginUserMenu" style="height: 50px; padding: 11px; text-align: left; padding-left: 20px;">
+	        		<span style="">
+	        			<img src="../header/images/partner.jpg" width="28px;">
+	        		</span>
+	        		&nbsp;
+	        		<span class="loginUserNickName" style="font-weight: bold; font-size: 14px; ">아이디</span>
+	        		<span>
+	        			<img class="favDsnMessageMode" onclick="dsnSearchMode();" src="../header/images/plus.png" width="20px;" style="float: right; margin-top: 4px;  cursor: pointer; ">
+	        			<span class="dsnSearchMode" onclick="favDsnMessageMode();" style="float: right; margin-top: 4px;  display: none; font-weight: bold; color:grey; cursor: pointer;" >안 할래요</span>
+	        		</span>
+        		</div>
+        		<div>
+        			<div class="searchDsn" style="display: none;">
+        				<div style="padding: 15px; border-top: 1px solid black">
+        					<input class="searchMemberList" type="text" placeholder="Search" style="width: 100%; border: 0px;" onkeydown="searchMemberList(this);">
+        				</div>
+        				<div class="searchDsnList"></div>
+        			</div>
+        			<div class="favDsnList" style="max-height: 325px; overflow: auto; ">
+        				<div class="dsnMemberDiv" style="height: 65px;margin:0px;padding:0px; cursor: pointer; border-top: 1px solid lightgrey">
+        					<div style="text-align: left;padding: 12px;white-space: nowrap;">
+		        				<div style="float: left;">
+									<img class="dsnPhoto" src="../header/images/partner.jpg" width="40px;" style="margin-right: 10px;">       		
+		        				</div>
+		        				<div style="float: left; font-size: 15px; font-weight: bold;">
+		        					<div class="dsnNickName" style="margin-bottom: 2px">root(tester)</div>
+		        					<div class="" style="color: grey;white-space: nowrap; width: 200px;overflow-x: hidden;">root: testtesttesttesttesttesttesttest</div>
+		        				</div>
+	        				</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        	<!-- 메시지 창 -->
+	       	<div class="messageBox" style="background-image: url('../header/images/massageBoxBackground.jpg'); z-index: 10; display: none" >
+		       	<div style="width: 100%; height: 25px;">
+		       		<span style="float:left; font-weight:bold; margin: 11px; color: white;" class="messageRoomName"></span>
+		       		<span style="float: right;">
+		       			<img src="../header/images/x-mark.png" width="11px;" style="margin: 18px; cursor: pointer;" onclick="messageClose()">
+		       		</span>
+		       	</div>
+		       	<!-- 대화내용이 들어가는 태그 -->
+		       	<div class="messageContents" ></div>
+		       	<div style="background-color:white; width: 100%; padding: 5px;">
+		       		<input type="text" style="width: 100%; height:40px; border: 0px; padding-left: 5px;" placeholder="message" onkeydown="sendMessage(this)">
+		       	</div>
+	        </div>
+	       
+			<div class="messageClone" style="display: none">
+				<div class="receiveMessage" style="display: none">
+		  			<div class="reciveMessagePhoto">
+		  				<img src="../header/images/partner.jpg" width="40px">
+		  			</div>
+		  			<div class="reciveMessageContentBox">
+						<div class="reciveMessageName"></div>
+						<div class="reciveMessageContent"></div>
+					</div>
+				</div>
+				<div class="sendMessage" style="display: none">
+					<div class="sendMessageContent"></div>
+				</div>
+			</div>
+			
+			
+	        <div class="cloneFavDsnList" style="padding: 10px; display: none;" >
+   				<div class="dsnMemberDiv" style="height: 65px;margin:0px;padding:0px; cursor: pointer; border-top: 1px solid lightgrey" onclick="messageBegin(this);">
+   					<div style="text-align: left;padding: 12px;white-space: nowrap;">
+     				<div style="float: left;">
+						<img class="dsnPhoto" src="../header/images/partner.jpg" width="40px;" style="margin-right: 10px;">       		
+     				</div>
+     				<div style="float: left; font-size: 15px; font-weight: bold;">
+     					<div class="dsnNickName" style="margin-bottom: 2px"></div>
+     					<div class="dsnShopName" style="color: grey;white-space: nowrap; width: 200px;overflow-x: hidden;">Choice Hair</div>
+     				</div>
+    				</div>
+   				</div>
+   			</div>
+	   		<div class="cloneDisplayMessageAlarm" style="display: none">
+	   			<div class="displayMessageAlarm" style="display: none">
+					<div class="receiveMessage">
+			  			<div class="reciveMessagePhoto">
+			  				<img src="../header/images/partner.jpg" width="40px">
+			  			</div>
+			  			<div class="reciveMessageContentBox">
+							<div class="reciveMessageName"></div>
+							<div class="reciveMessageContent"></div>
+						</div>
+					</div>
+				</div>
+	       	</div>
+	       	<div class="cloneReadMoreMessage" style="display: none">
+	       		<div class="readMoreMessage" onclick="readMoreMessage(this);">read more</div>
+	       	</div>
+       	</div>
+		
+		<div class="alramDiv"></div>
+<!-- 메시지 끝 -->
+        
+        
     </header>
     
 	<section class="section">
@@ -88,5 +197,6 @@
 	
 		}); */
 	</script>
+	<script type="text/javascript" src="../blog/js/headerFix.js"></script>
 </body>
 </html>
