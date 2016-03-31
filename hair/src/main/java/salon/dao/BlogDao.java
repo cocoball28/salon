@@ -31,7 +31,9 @@ public interface BlogDao {
 
 	//블로그 주인 정보
 	public Member selectDsnInfo (Blog blog);
-
+	
+	//파트너 정보
+	public List<Member> selectPartnerDsnInfo(Member member);
 	
 }
 

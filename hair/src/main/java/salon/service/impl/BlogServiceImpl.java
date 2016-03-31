@@ -75,19 +75,20 @@ public class BlogServiceImpl implements BlogService {
 	public Map<String, Object> selectList(Blog blog, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<>();
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		System.out.println("로그인유저의 미용실번호 : "+loginUser.getSano());
 		int loginMemberNo = loginUser.getMno();
+		String loginMemberStatus = loginUser.getStatus();
 		int mno = blog.getMno();
-		
 		System.out.println(mno);
 		map.put("loginUser", loginUser);
 		map.put("dsnInfo", blogDao.selectDsnInfo(blog));
-//		map.put("partnerInfo", Object);
+		map.put("partnerInfo", blogDao.selectPartnerDsnInfo(loginUser));
 		map.put("blogList", blogDao.selectBlogList(blog));
-		boolean myBlogFlag;
+		boolean myBlogFlag = false;
 		if(loginMemberNo == mno){
-			myBlogFlag = true;
-		}else{
-			myBlogFlag = false;
+			if(loginMemberStatus.equals("d")){
+				myBlogFlag = true;
+			};
 		}
 		map.put("myBlogFlag",myBlogFlag);
 		return map;
