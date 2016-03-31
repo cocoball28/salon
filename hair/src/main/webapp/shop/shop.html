@@ -7,50 +7,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!--------------------------------------------------- jQuery ------------------------------------------>
+
 <script src="./shop/js/jquery-2.2.0.js"></script>
 <script src="./shop/js/commonjs.js"></script>
 <script src="./shop/js/jquery-ui.js"></script>
 
 <!------------------------------------ Bootstrap, CSS ------------------------------------------------->
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link href="shop/css/shop.css" rel="stylesheet" media="screen" />
+<link href="shop/css/bootstrap.min.css" rel="stylesheet" media="screen" />
 <link href='https://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
 <link rel="shortcut icon" href="../favicon.ico">
 <link rel="stylesheet" type="text/css" href="./shop/css/style.css" />
 <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700'
 	rel='stylesheet' type='text/css' />
 <script type="text/javascript" src="./shop/js/modernizr.custom.79639.js"></script>
-<noscript><link rel="stylesheet" type="text/css" href="css/noJS.css" /></noscript>
-<style>
-.topbar {
-	position: fixed;
-	width: 100%;
-	height: 17px;
-	background: #FDFAF1;
-	top: 0;
-	z-index: 99;
-}
-.icon {
-	right: 0;
-	width: 25%;
-	height: 17px;
-	background: rgba(234, 12, 23, 0);
-	z-index: 100;
-	position: fixed;
-	top: 0;
-}
-.icon button {
-	border-style: none;
-	background: rgba(34, 34, 34, 0);
-	margin-left: 35px;
-}
-/* .info {
-	margin-right: 5px;
-} */
-</style>
 </head>
 <body>
 
@@ -64,7 +38,8 @@
 				
 <!------------------------------------------------------- 상단 메뉴 버튼 ------------------------------------>				
 				
-				<div class="topbar">Salon de Mai
+				<div class="topbar">
+					<div class="stitle"></div>
 					<div class="icon">
 						<button id="infoBtn" data-toggle="modal" data-target="#myModal"><i class="icon-info-sign"></i>Info</button>
 						<button><i class="icon-time"></i>Reserve</button>
@@ -83,7 +58,7 @@
 		        				<h4 class="modal-title" id="myModalLabel"></h4>
 		      				</div>
 		      			<div class="modal-body">
-		      				<div id="map" style="width: 100%; height: 350px;"></div>
+		      				<div id="map" style="width: 100%; height: 300px;"></div>
 		        			<div class="addr"></div>
 		        			<div class="tel"></div>
 		      			</div>
@@ -96,14 +71,17 @@
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=91c44d2bcf308d32698e4bce184444f8&libraries=services"></script>
 <script>
 // url 주소번호 ------------------------------------------------------------------
+var lat = 0;
+var lng = 0;
 var currentViewDsnNo = $(location).attr('search').split("=")[1];
 	console.log(currentViewDsnNo);
 	
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        center: new daum.maps.LatLng(lat, lng), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
+
 
 // 지도를 생성합니다 
 
@@ -157,17 +135,21 @@ $(function() {
 									<div class="cobox">
 										<input type="text" name="sano" style="display: none">
 										<div class="etitle"></div>
-										<div class="load1">사진 1 파일 첨부
+										<div class="load">사진 1 파일 첨부
 											<input type="file" name="file1" id="f1" class="file" onchange="readURL1(this);">
+											<div class="sbtn">Search</div>
 										</div>
-										<div class="load2">사진 2 파일 첨부
+										<div class="load">사진 2 파일 첨부
 											<input type="file" name="file2" id="f2" class="file" onchange="readURL2(this);">
+											<div class="sbtn">Search</div>
 										</div>
-										<div class="load3">사진 3 파일 첨부
+										<div class="load">사진 3 파일 첨부
 											<input type="file" name="file3" id="f3" class="file" onchange="readURL3(this);">
+											<div class="sbtn">Search</div>
 										</div>
-										<div class="load4">사진 4 파일 첨부
+										<div class="load">사진 4 파일 첨부
 											<input type="file" name="file4" id="f4" class="file" onchange="readURL4(this);">
+											<div class="sbtn">Search</div>
 										</div>
 										<div class="mibox">
 											<div class="blah1"><img class="bbl1"></div>
@@ -183,10 +165,10 @@ $(function() {
 								</form>
 							</div> 
 		      			</div>
-		       			<div class="modal-footer">
+		       			<!-- <div class="modal-footer">
 		        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        			<button type="button" class="btn btn-primary">Save changes</button>
-		      			</div> 
+		      			</div> --> 
 		    			</div>
 		  			</div>
 				</div>
@@ -361,10 +343,15 @@ $(function() {
 					addSlider(data.image[i].path);
 				}
 				$("#myModalLabel").text(data.info[0].name);
+			 	$(".stitle").text(data.info[0].name);
 				$(".addr").text(data.info[0].addr);
 				$(".tel").text(data.info[0].tel);
 				$.getJSON("https://apis.daum.net/local/geo/addr2coord?apikey=91c44d2bcf308d32698e4bce184444f8&q="+data.info[0].addr+"&output=json",
 						function(data2) {
+							lat = data2.channel.item[0].lat;
+							lng = data2.channel.item[0].lng;
+							
+							console.log("data2" + lat + "   " + lng);
 							console.log(data2);
 						}
 				)
@@ -534,8 +521,10 @@ $(function() {
 	
 	// 모달 호출 및 지도 위치 재지정 -------------------------------------------------------------
 	$("#infoBtn").on("click", function() {
+		console.log("lat" + lat + "lng" + lng)
 		setTimeout(function(){
 			map.relayout();
+			map.setCenter(new daum.maps.LatLng(lat, lng));
 		}, 300);
 	});
 

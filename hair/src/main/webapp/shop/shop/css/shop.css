@@ -1,5 +1,70 @@
-/*reset*/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,700,700italic);
+
+/* 업로드 창 */
+.cobox {
+	width: 99%;
+	height: 98%;
+}
+.mibox {
+	width:100%;
+	height: 100px;
+	background: rgba(245, 222, 179, 0.5);
+	border: 2px dashed black;
+	border-radius: 10px;
+	margin-top: 5%;
+}
+.load {
+	padding: 2%;
+	width: 100%;
+	height: 30px;
+	background: rgba(253, 180, 223, 0.5);
+	margin-top: 5%;
+	border-radius: 6px;
+	padding-top: 5px;
+}
+.sbtn {
+	position: absolute;
+	width: 30%;
+	height: 30px;
+	margin-top: -26px;
+	right: 21px;
+	border: 1px solid black;
+	font-family: 'Syncopate', sans-serif;
+	font-size: large;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 6px;
+	padding-top: 3px;
+}
+.sbtn:hover {
+	transition: 0.5s;
+	border-color: #F05504;
+	color: #F05504;
+}
+.sub {
+	width: 40px;
+	margin: auto;
+	margin-top: 5%;
+}
+.firm {
+	width: 200px;
+	border: 1px solid black;
+	background-color: rgba(255, 255, 255, 0);
+	font-family: 'Syncopate', sans-serif;
+	font-size: x-large;
+	font-weight: bold;
+	margin: 3% -200%;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 6px;
+}
+.firm:hover {
+	transition: 0.5s;
+	border-color: #F05504;
+	color: #F05504;
+}
+
+/* 파일 업로드 미리보기 부분 */
 .mibox img {
 	max-height: 100%;
 	display: block;
@@ -13,7 +78,8 @@
 	height: 100%;
 	float: right;
 	width: 30%;
-	opacity: 1;
+	opacity: 0;
+	z-index: 99;
 }
 #f2 {
 	height: 100%;
@@ -31,145 +97,11 @@
 	height: 100%;
 	float: right;
 	width: 30%;
-	opacity: 1;
+	opacity: 0;
 	border: 1px solid red;
 }
-.cobox {
-	width: 99%;
-	height: 98%;
-}
-.mibox {
-	width:100%;
-	height: 100px;
-	background: wheat;
-	border: 2px dashed black;
-	border-radius: 10px;
-	margin-top: 2%;
-}
-.load1 {
-	padding: 2%;
-	width: 100%;
-	height: 10%;
-	background: pink;
-	background-image: url('../images/plus.png');
-	background-size: 7%;
-	background-repeat: no-repeat;
-	background-position: center right;
-}
-.load2 {
-padding: 2%;
-	width: 100%;
-	height: 10%;
-	background: pink;
-	background-image: url('../images/plus.png');
-	background-size: 7%;
-	background-repeat: no-repeat;
-	background-position: center right;
-	margin-top: 5%;
-}
-.load3 {
-padding: 2%;
-	width: 100%;
-	height: 10%;
-	background: pink;
-	background-image: url('../images/plus.png');
-	background-size: 7%;
-	background-repeat: no-repeat;
-	background-position: center right;
-	margin-top: 5%;
-}
-.load4 {
-padding: 2%;
-	width: 100%;
-	height: 10%;
-	background: pink;
-	background-image: url('../images/plus.png');
-	background-size: 7%;
-	background-repeat: no-repeat;
-	background-position: center right;
-	margin-top: 5%;
-}
-.sub {
-	width: 40px;
-	margin: auto;
-	margin-top: 5%;
-}
-.firm {
-	width: 200px;
-	border: 1px solid black;
-	background-color: rgba(255, 255, 255, 0);
-	font-family: 'Syncopate', sans-serif;
-	font-size: x-large;
-	font-weight: bold;
-	margin: 3% -200%;
-}
-.firm:hover {
-	transition: 0.5s;
-	border-color: #F05504;
-	color: #F05504;
-}
 
-.ex a {
-	color: #F05504;
-}
-.ex a:hover {
-	text-decoration: none;
-	color: #f02d04;
-}
-.menu {
-	width: 40px;
-	height: 40px;
-	right: 0%;
-	top: 0%;
-	position: fixed;
-	z-index: 99;
-	border-radius: 6px;
-	background: #FD8B5E;
-	cursor: pointer;
-}
-.a {
-	margin-top: 9px;
-	margin-left: -2px;
-}
-.a div {
-	width: 80%;
-	height: 10%;
-	padding: 2px;
-	background: white;
-	margin-top: 5px;
-	margin-left: 5px;
-}
-.menu:hover {
-	background: #FA6A0A;
-	transition: 0.5s;
-}
-.ex {
-	position: fixed;
-	width: 100px;
-	height: 150px;
-	z-index: 99;
-	top: 40px;
-	right: 0;
-	background: #F0F0F0;
-	border-radius: 7px;
-	color: #F05504;
-	display: none;
-}
-/* li {
-	font-family: "Open Sans", sans-serif;
-	text-align: center;
-	right: 2px;
-	height: 30px;
-	vertical-align: middle;
-}
-li:hover {
-	background: #E7E7E7;
-	transition: 0.4s;
-	color: #f02d04;
-} */
-.up {
-	margin-top: 15px;
-}
+/* 디자이너 슬라이드 */
 .navl {
 	position: fixed;
 	width: 30px;
@@ -224,11 +156,15 @@ li:hover {
 	position: absolute;
 	right: 0;
 }
+
+/* 전체 마진 패딩 */
 * {
 	margin: 0;
 	padding: 0;
 	
 }
+
+/* 화면 하단 디자이너 부분 */
 #big {
 	position:absolute;
 	width: 200%;
@@ -236,6 +172,13 @@ li:hover {
 	top: 50%;
 	right: 0;
 	overflow: hidden;
+}
+.name {
+	font-family: 'Syncopate', sans-serif;
+	font-size: x-large;
+}
+.move {
+	font-size: x-large;
 }
 #dsnpic1 {
 	width: 10%;
@@ -326,9 +269,11 @@ li:hover {
 	color: white;
 	z-index: 100;
 }
+
+/* 디자이너 개별 호버 슬라이드 */
 .slide1 {
 	z-index: 3;
-	width:20%;
+	width:10%;
 	height:50%;
 	position: absolute;
 	bottom: -60%;
@@ -337,7 +282,7 @@ li:hover {
 	opacity:0;
 }
 .slide2 {
-	width:20%;
+	width:10%;
 	height:50%;
 	position: absolute;
 	bottom: -60%;
@@ -346,7 +291,7 @@ li:hover {
 	opacity:0;
 }
 .slide3 {
-	width:20%;
+	width:10%;
 	height:50%;
 	position: absolute;
 	bottom: -60%;
@@ -355,7 +300,7 @@ li:hover {
 	opacity:0;
 }
 .slide4 {
-	width:20%;
+	width:10%;
 	height:50%;
 	position: absolute;
 	bottom: -60%;
@@ -364,7 +309,7 @@ li:hover {
 	opacity:0;
 }
 .slide5 {
-	width:20%;
+	width:10%;
 	height:50%;
 	position: absolute;
 	bottom: -60%;
@@ -372,6 +317,8 @@ li:hover {
 	transition:.5s;
 	opacity:0;
 }
+
+/* 디자이너 개별 호버 */
 #big .pic:hover .name {
 	color: black;
 	transition: 1s;
@@ -401,49 +348,39 @@ li:hover {
 	bottom: 0%;
 	opacity:0.8;
 }
+
+/* a링크 밑줄 삭제 */
 a {
 	text-decoration: none;
 	color: white;
 	background-repeat: 
-}
-
-body {
-	font-family: Microsoft YaHei, "Source Sans Pro", Helvetica, Arial,
-		sans-serif;
-	overflow-x: hidden;
-}
-
-a {
 	cursor: pointer;
 }
 
-ul {
-	padding: 0;
-	margin: 0;
-	list-style: none;
+/* 바디전체 */
+body {
+	font-family: Microsoft YaHei, "Source Sans Pro", Helvetica, Arial, sans-serif;
+	overflow-x: hidden;
 }
 
+/* 화면 상단 미용실 슬라이드 */
 .wrap-index {
 	overflow: hidden;
 }
-
 .dark-green {
 	color: #4c5b52;
 }
-
 .light-green {
 	color: #00853e;
 }
-
 .mb-50 {
 	margin-bottom: 50px;
 }
 
-/*slider*/
+/* 실제 슬라이더 */
 .slider {
 	float: left;
 }
-
 .slider .jquery-reslider .slider-block {
 	width: 100%; 
 	height: 50%;
@@ -454,32 +391,12 @@ ul {
 	background-size: cover;
 	opacity: 0;
 }
-.pop {
-	font-family: "Open Sans", sans-serif;
-	position: absolute;
-	width: 25%;
-	height: 5%;
-	bottom: 95%;
-	right: 0%;
-	z-index: 99;
-	text-align: right;
-}
-.ebtn {
-	background-color: rgba(255, 255, 255, 0);
-	border-style: none;
-	width: 100%;
-}
-.edit {
-	width:50%;
-	float: right;
-}
 .slider .jquery-reslider .slider-dots {
 	position: absolute;
 	width: 100%;
 	text-align: center;
 	bottom: 50%;
 }
-
 .slider .jquery-reslider .slider-dots li {
 	width: 15px;
 	height: 15px;
@@ -489,21 +406,16 @@ ul {
 	border: 1px solid #ffffff;
 	cursor: pointer;
 }
-
 .slider .jquery-reslider .slider-dots li.active {
 	background-color: #ffffff;
 }
-.ebox {
-	display: none;
-	border: 1px solid tomato;
-	background-color: #F5F5F5;
-	position:fixed;
-	width: 100%;
-	height: 30%;
-	right: 0;
-	z-index: 99;
-	opacity: 0.8;
+
+/* 미용실 정보창 */
+#map {
+	margin-top: 15px;
 }
+
+/* 미용실 사진 에딧창 */
 .registForm {
 	width: 100%;
 	height: 100%;
@@ -537,6 +449,43 @@ ul {
 	margin-left: 5%;
 }
 
+/* 화면 최상단 아이콘 DIV */
+.topbar {
+	position: fixed;
+	width: 100%;
+	height: 20px;
+	background: #FDFAF1;
+	top: 0;
+	z-index: 99;
+}
+.stitle {
+	left: 0;
+	width: 10%;
+	height: 20px;
+	background: rgba(234, 12, 23, 0);
+	z-index: 100;
+	position: fixed;
+	top: 0;
+}
+.icon {
+	right: 0;
+	width: 25%;
+	height: 20px;
+	background: rgba(234, 12, 23, 0);
+	z-index: 100;
+	position: fixed;
+	top: 0;
+}
+.icon button {
+	border-style: none;
+	background: rgba(34, 34, 34, 0);
+	margin-left: 35px;
+}
+.icon button:hover {
+	color: #F05504;
+	transition: 0.5s;
+}
+
 @media screen and (max-width: 768px) {
 	.slider .jquery-reslider .slider-direction {
 		zoom: .8;
@@ -544,11 +493,4 @@ ul {
 	.slider .jquery-reslider .slider-dots {
 		position: absolute;
 	}
-}
-.name {
-	font-family: 'Syncopate', sans-serif;
-	font-size: x-large;
-}
-.move {
-	font-size: x-large;
 }
