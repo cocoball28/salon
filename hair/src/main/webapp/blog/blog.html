@@ -3,23 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
-<link href="../header/css/message.css" rel="stylesheet">
-
+<link href="css/blog.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../header2/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../header2/css/noJS.css" />
+<link rel="stylesheet" type="text/css" href="../header2/css/header.css" />
+<link href="../header2/css/message.css" rel="stylesheet">
+<script src="http://192.168.0.44:3000/socket.io/socket.io.js/"></script>
 <title>blog</title>
 <!-- Bootstrap core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link href="css/blog.css" rel="stylesheet">
+<!-- <style type="text/css">
+.headSticky {
+	top:-200px;;
+	position: fixed;
+}
+</style> -->
 </head>
-<body style="background:#eee">
+<body style="background:#f5f5f5">
 
 	<!-- Fixed navbar -->
-	<header class="header"></header>
-			
-	<div class="container" style="margin-top: 67px;">
+	<header class="header" style="background:white; z-index: 1; border-bottom: 1px solid #eee"></header>
+	<div class="headerSupport" style="height: 340px; display: none"></div>
+	<div class="container" style="margin-top: 0px">
 		<div class="varDiv">
 			<div class="contentsDiv">
 				<!-- 왼쪽 정보 DIV -->
@@ -281,9 +290,14 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/blog_common.js"></script>
 	<script src="js/blog.js"></script>
-	<script src="http://192.168.0.44:3000/socket.io/socket.io.js/"></script>
- 	<script src="../header/js/message.js"></script>
-	<!-- socket.io -->
+	<script type="text/javascript" src="../blog/js/headerFix.js"></script>
 	
+	<!-- <script src="http://192.168.0.44:3000/socket.io/socket.io.js/"></script> -->
+  	<script src="../header2/js/message.js"></script>
+	<!-- socket.io -->
+	<script type="text/javascript">
+		$(".header").load(contextPath+"/header2/header.html .header");
+	</script>
+	<script type="text/javascript" src="../header2/js/modernizr.custom.79639.js"></script> 
 </body>
 </html>

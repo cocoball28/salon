@@ -1,4 +1,4 @@
-// 현재 들어온 블로그 번호
+// 현재 들어온 페이지 번호
 var currentViewDsnNo = $(location).attr('search').split("=")[1];
 console.log(currentViewDsnNo);
 
@@ -9,7 +9,7 @@ $(".infoDiv").each(function(){
 		$infoDiv = $(this),
 		infoDivOffsetTop = $infoDiv.offset().top;
 	$window.on('scroll',function(){
-		if($window.scrollTop()+100 > infoDivOffsetTop){
+		if($window.scrollTop() +65> infoDivOffsetTop){
 			$infoDiv.addClass('sticky');
 			$(".infoDivDummy").show();
 		}else{
@@ -90,7 +90,7 @@ var scrolltotop = function(){
 };
 
 var viewRegistForm = function(){
-	$('html, body').animate({ scrollTop: 0 }, 'slow');
+	$('html, body').animate({ scrollTop: 284 }, 'slow');
 	$('.registForm').show('slow');
 }
 var cancelRegist = function(){
@@ -332,5 +332,5 @@ var readURL = function(input) {
 
 //더미데이터에 임시번호 부여함, 댓글 테스트용
 $(".dummyMainContent").attr("blogNo", 1);
-$(".header").load(contextPath+"/header/header.html .header");
+
 

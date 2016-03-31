@@ -1,7 +1,6 @@
 @CHARSET "UTF-8";
 
 body {
-  background: #f7f6f3;
   font-family: sans-serif;
 }
 
@@ -97,6 +96,7 @@ body {
 
 .sticky {
 	position: fixed;
+	top: 50px;
 }
 
 .stickyElse {
