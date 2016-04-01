@@ -57,7 +57,7 @@ var addReservation = function (data) {
 	$(cloneReservation).find(".time").text(data.sTime + " - " + data.eTime);
 	$(cloneReservation).find(".style").text(data.style);
 	$(cloneReservation).find(".customer").text(data.cName);
-	$(cloneReservation).find(".customer").css({"font-weight":"bold","font-size":"20px"});
+	$(cloneReservation).find(".customer").css({"font-weight":"bold","font-size":"17px"});
 	$(cloneReservation).attr("rno",data.rno);
 	reservationTimeSelector(data.sTime,data.eTime,data.rno,data.mno);
 	var beginHour = data.sTime.split(":")
@@ -303,6 +303,10 @@ var addDsnInfo = function(data){
 	var cloneDsnList = $(".cloneHairDsnNameList").find(".reservationBody").clone();
 	cloneDsnList.find(".hairDsnName").text(data.nick);
 	$(".hairDsnNameList").append(cloneDsnList);
+	if(data.status == "m"){
+		$(".messengerOpen").attr("managerNo",data.mno);
+		$(".messengerOpen").attr("managerNick",data.nick);
+	}
 	var cloneDsnName = $(".cloneHairdresserName").find("option").clone();
 	cloneDsnName.text(data.nick);
 	cloneDsnName.attr("mno",data.mno);
@@ -345,7 +349,6 @@ var printReservationList = function(){
 			}
 	)
 }
-printReservationList();
 
 var selectDsnOption = function(target){
 	var targetNick = $(target).val();

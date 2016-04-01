@@ -464,13 +464,13 @@ body {
 	z-index: 99;
 }
 .stitle {
-	left: 0;
+/* 	left: 0;
 	width: 10%;
 	height: 20px;
 	background: rgba(234, 12, 23, 0);
 	z-index: 100;
 	position: fixed;
-	top: 0;
+	top: 0; */
 }
 .icon {
 	right: 0;
