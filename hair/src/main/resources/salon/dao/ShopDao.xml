@@ -36,7 +36,7 @@
   		  from member inner join designer
      	    on member.mno = designer.mno
  		 order by designer.mno; -->
- 		 select nick, photo_path as photoPath
+ 		 select mno, nick, photo_path as photoPath
  		   from member
  		  where sano = #{sano}
   	</select>
