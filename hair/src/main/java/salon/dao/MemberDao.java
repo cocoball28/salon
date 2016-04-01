@@ -1,5 +1,6 @@
 package salon.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,4 +24,6 @@ public interface MemberDao {
 	int emailCheck(String email);
 
 	List<Shop> getShop(Shop shop);
+
+	List<Member> favMember(HashMap<String, Object> resultMap);
 }

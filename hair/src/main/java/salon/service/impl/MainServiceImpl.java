@@ -36,20 +36,10 @@ public class MainServiceImpl implements MainService{
 		/* sprit */
 		
 		String[] resultArray = result.split(" ");
-		
-		
-		for(String a : resultArray){
-			System.out.println("array "+a);
-		}
 		resultMap.put("resultArray", resultArray);
 		
 		List<Blog> searchList = mainDao.search(resultMap);
 		
-		for(Blog b: searchList){
-			System.out.println("결과 " + b.getTag());
-		}
-		
-//		return null;
 		return searchList;
 	}
 	
