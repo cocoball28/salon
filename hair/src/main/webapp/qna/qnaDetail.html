@@ -8,42 +8,64 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <link href="./css/qna.css" rel="stylesheet">
 
-<!-- 헤더 스타일 -->
-<link rel="stylesheet" href="../header/css/header.css">
-<link rel="stylesheet" type="text/css" href="../header/css/style.css" />
-<link rel="stylesheet" type="text/css" href="../header/css/noJS.css" />
-<link href="../header/css/message.css" rel="stylesheet"> 
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src ="https://code.jquery.com/jquery-1.11.2.js"></script>
 
+
 </head>
 <body>
-<header class="header" ></header>
 <div id="wrap" class="qna">
      
-   	<!--<div id="header"></div>-->
+   	 <div id="header"></div>
      <div id="sidebar"></div>
      
      <div id="content" align="center">
-     <br/>
      <table width="500" align="center" id="basic_table">
      </table>
+     
+     
      <br/>
+     <input class="btn btn-default" type="button" value="입력" onclick="insertForm()">
+     <input class="btn btn-default" type="button" value="수정" onclick="updateForm()">
+     <input class="btn btn-default" type="button" value="삭제" onclick="deleteQna()">
+     <input class="btn btn-default" type="button" value="리스트" onclick="document.location.href='qnaList.html'">
+     
+     <br/><br/>
+     
+     <div id="replyList">
+     
+		<table class="table table-hover" width="500" align="center" id="reply_table" border="1">
+        </table>
+        <form action="/hair/board/insertReply.do" method="post" name="replyForm">
+        <div class="form-group">
+         <input type="text" class="form-control" id="inputNick" name="nick" placeholder="닉네임을 입력하세요">
+        </div>
+         <textarea class="form-control" rows="2" name="qnaReply_content" id="inputContent"></textarea><br/>
+         <input type="hidden" name="qna_no" />
+         <input class="btn btn-default" type="submit" value="댓글등록" >
+     </form>
+	 </div>
+	 
+     
+     
+     
+     
      <script>
+     function getContextPath(){
+ 	    var offset=location.href.indexOf(location.host)+location.host.length;
+ 	    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+ 	    return ctxPath;
+ 	}
+ 	var blogPath =  getContextPath();
+ 	var contextPath =  getContextPath();
+        
+     
+     
      	var no = location.href.split('?')[1].split('=')[1];
-    	
-     	// contextpath ///////////////
-		function getContextPath(){
-		    var offset=location.href.indexOf(location.host)+location.host.length;
-		    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
-		    return ctxPath;
-		}
-		var contextPath =  getContextPath();
-		// contextpath ///////////////
-		
 		var contextRoot = contextPath;
 		$.ajax(contextRoot + '/board/detail.do?qna_no=' + no, {
 			dataType: 'json',
@@ -78,10 +100,9 @@
 				             "<input type='text' id='viewnum' value="+board.viewnum+" name='viewnum'"+ 
 				              "class='form-control aria-describedby='basic-addon1' readonly>"+
 				              "</div></td></tr>").appendTo(table);
-			        $("<tr>").html("<textarea class='form-control' rows='7' id='qna_content' readonly>"+board.qna_content+
-			        		 "</textarea>").appendTo(table);
-			
-			
+			        $("<tr>").html("<td><textarea name='qna_content' id='qna_content'rows='7'cols='70' readonly>"+board.qna_content+
+			        		 "</textarea></td></tr>").appendTo(table);
+			        $("[name='qna_no']").val(board.qna_no);
 			},
 		    error: function(jqXHR, textStatus, errorThrown) {
 				alert("오호라.. 오류다!");
@@ -101,38 +122,96 @@
 		}
 		
 		function deleteQna() {
-			location.href = contextRoot + "/board/delete.do?qna_no=" + no;
+			alert(no+"번 삭제");
+			location.href = contextRoot + "/board/delete.do?qna_no=" + no;			
 			
 		}
 		
+		
 		function updateForm(){
-			location.href = contextRoot + "/board/update.do?salon board="+board ;
+			var content =$("#qna_content").val();
+			var title = $("#qna_title").val();
+			$.ajax(contextRoot +'/board/update.do?qna_no=' + no+"&qna_title="+title+"&qna_content="+content,{
+			    dataType: 'json',
+				method: 'GET'
+				
+				
+		  })
+		  
+		};
+		
+		
+		
+	  
+		$.ajax(contextRoot + '/board/selectReply.do?qna_no='+no,{
+			dataType: 'json',
+			method: 'GET',
+			success: function(resultObj) {
+			var table = $("#reply_table");
+		    for (var reply of resultObj.data) {
+		    	$("<tr>")
+			      .html("<td align='center'>닉네임:"+reply.nick+"</td>"+
+			             "<td align='center'>작성일:"+reply.qnaReply_date+"</td></tr>").appendTo(table);
+			    $("<tr>")
+			      .html("<td colspan='2'>"+reply.qnaReply_content+"</td></tr>").appendTo(table);
+			    $("<tr>")
+			      .html("<td colspan='2' align='center'>"+
+			           "<input type='button' class='btn btn-default' data-target='#layerpop' data-toggle='modal' value='수정'"+
+			            "onclick='updateReply("+reply.qnaReply_no+")'>&nbsp"+
+			              "<input type='button' class='btn btn-default' value='삭제'onclick='deleteReply("+reply.qnaReply_no+")'></td></tr>").appendTo(table);   
+			  }
+		},
+		
+		   
+	});
+		
+		function deleteReply(del_no){
+			alert("댓글"+del_no+"번 삭제");
+			location.href = contextRoot + "/board/deleteReply.do?qnaReply_no=" + del_no + "&qna_no=" + no;
 		}
 		
-		</script>
+		function updateReply(qnaReply_no) {
+			alert(qnaReply_no);
+			var df=document.ReplyForm;
+			df.qna_no.value = no;
+			df.qnaReply_no.value = qnaReply_no
+			
+		}
 		
-  
-         
-         
-         <input class="btn btn-default" type="button" value="입력" onclick="insertForm()">
-         <input class="btn btn-default" type="button" value="수정" onckick="updateForm()">
-         <input class="btn btn-default" type="button" value="답글" 
-          onclick="document.location.href='qnaReRegist.html'">
-         <input class="btn btn-default" type="button" value="삭제" onclick="deleteQna()">
-         <input class="btn btn-default" type="button" value="리스트"
-          onclick="document.location.href='qnaList.html'">
-                                                            
-     
-     </div>
-     
-     <div id="righter">
-     </div>
+		
+  </script>	
+	
+	<div class="modal fade" id="layerpop" >
+    <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="/hair/board/updateReply.do" method="post" name="ReplyForm">
+      <!-- header -->
+      <div class="modal-header">
+        <!-- 닫기(x) 버튼 -->
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <!-- header title -->
+        <h4 class="modal-title">댓글 수정</h4>
+      </div>
+      <!-- body -->
+      <div class="modal-body">
+      <input type="text" class="form-control" placeholder="댓글 입력" name="qnaReply_content">
+      <input type="hidden" name="qnaReply_no"/>
+      <input type="hidden" name="qna_no"/>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer">
+        <input class="btn btn-default" type="submit" value="수정">
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
-
- <script>
-	var contextRoot = 'http://localhost:8008/salon';
-	$(".header").load(contextRoot+"/header/header.html .header");
-</script>
-	<script src="../header/js/header.js"></script>
+	
+		
+		
+		
+  </div>
+  <div id="righter"></div>
+</div>
 </body>
 </html>
