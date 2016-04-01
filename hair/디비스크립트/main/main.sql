@@ -2,7 +2,9 @@
 CREATE TABLE FAVORITE(
 	BFNO INT PRIMARY KEY AUTO_INCREMENT,
 	MNO INT NOT NULL,
-	BNO INT NOT NULL
+	BNO INT NULL,
+	SANO INT NULL,
+	MDNO INT NULL
 );
 
 select * from favorite;
@@ -13,6 +15,33 @@ select fav
   and   mno = 1;
 
 DROP TABLE FAVORITE;
+
+insert into favorite (mno, 
+	<choose>
+		<when test="FROM == 'blog'">bno</when>
+		<when test="FROM == 'shop'">sano</when>
+		<when test="FROM == 'designer'">mdno</when>
+	</choose>
+) values (#{mno},
+	<choose>
+		<when test="FROM == 'blog'">#{bno}</when>
+		<when test="FROM == 'shop'">#{sano}</when>
+		<when test="FROM == 'designer'">#{mdno}</when>
+	</choose>
+)
+
+      bno,
+      title,
+      views,
+      cre_dt 
+    from board
+    order by 
+    <choose>
+      <when test="keyword == 'title'">title </when>
+      <when test="keyword == 'views'">views </when>
+      <otherwise>bno </otherwise>
+    </choose>
+
 
 -- get fav list
 
