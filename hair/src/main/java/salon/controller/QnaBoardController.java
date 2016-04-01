@@ -10,15 +10,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import salon.domain.AjaxResult;
 import salon.domain.Member;
 import salon.domain.QnaBoard;
 import salon.domain.QnaReply;
@@ -151,10 +150,12 @@ public class QnaBoardController {
     }
     
     @RequestMapping("/getSession.do")
-    public @ResponseBody String getNick(HttpSession session, HttpServletRequest req){
+    public @ResponseBody Map<String, Object> getNick(HttpSession session, HttpServletRequest req){
     	Member member = (Member)req.getSession().getAttribute("loginUser");
     	String nick = member.getNick();
-    	return nick;
+    	Map<String, Object> result = new HashMap<>();
+    	result.put("nick", nick);
+    	return result;
     	
     }
    
