@@ -6,8 +6,8 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.pattern.IntegerPatternConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import salon.domain.Member;
 import salon.domain.QnaBoard;
+import salon.domain.QnaReply;
 import salon.service.QnaBoardService;
 
 
@@ -47,8 +48,13 @@ public class QnaBoardController {
 	    		param.put("startIdx", Integer.parseInt(param.get("pageNo").toString())*10-10);
 	    	}
 	    }
-		
-	    List<QnaBoard> board = boardService.listBoard(param);
+		List<QnaBoard> board = boardService.listBoard(param);
+		if(board != null) {
+			for(int i=0; i<board.size(); i++) {
+				QnaBoard qnaBoard = board.get(i);
+				qnaBoard.setReplyCount(boardService.replyCount(qnaBoard.getQna_no()));
+			}
+		}
 		resultObj.put("status", "success");
 		resultObj.put("data", board);	
 		
@@ -59,7 +65,7 @@ public class QnaBoardController {
 	public @ResponseBody Map<String, Object> boardCount(@RequestParam Map<String, Object> param){
 	   
 	    Map<String, Object> resultObj = new HashMap<String, Object>();		
-	    int count = boardService.boardCount();
+	    int count = boardService.boardCount(param);
 		int number;
 		if(count%10!=0){
 			number = count/10+1;
@@ -81,25 +87,17 @@ public class QnaBoardController {
 	public String registPost( @ModelAttribute("board") QnaBoard board,RedirectAttributes redirectAttributes){
 		
 		boardService.regist(board);
-		
+	  
 	    return "redirect:/qna/qnaList.html";
 	}
-	
-	@RequestMapping(value="/reRegist.do",method=RequestMethod.POST)
-	public String reRegist( @ModelAttribute("board") QnaBoard board,RedirectAttributes redirectAttributes){
-		
-		
-		boardService.reRegi(board);
-		
-	    return "redirect:/qna/qnaList.html";
-	}
-	
     @RequestMapping(value="/detail.do")
 	public @ResponseBody Map<String,Object> detailBoard(@RequestParam("qna_no") int no){
     	boardService.viewUpdate(no);
+    	//List<QnaReply> replyList = boardService.replySelect(no);
     	Map<String, Object> resultObj = new HashMap<String, Object>();
     	resultObj.put("status", "success");
-		resultObj.put("data", boardService.detail(no));	
+		resultObj.put("data", boardService.detail(no));
+		//resultObj.put("replyList", replyList);
 		return resultObj; 
     	
 	}
@@ -111,14 +109,54 @@ public class QnaBoardController {
 	}
 	
 	@RequestMapping(value="/update.do")
-	public @ResponseBody String update(QnaBoard board,RedirectAttributes redirectAttributes){
-		boardService.update(board);
-		return "redirect:/qna/qnaList.html";
+	public String updateBoard(QnaBoard board,RedirectAttributes redirectAttributes){
+		
+    	boardService.update(board);
+	    return "redirect:/qna/qnaList.html";
+	}
+	
+	 @RequestMapping("/replyCount.do")
+	 public int selectReCount(@RequestParam("qna_no") int no){
+	    return boardService.replyCount(no);
+	 }
+	
+	
+	/* 댓글 */
+	
+	@RequestMapping(value="/insertReply.do")
+	public String insertReply(QnaReply reply,RedirectAttributes redirectAttributes){
+		boardService.replyInsert(reply);
+		return "redirect:/qna/qnaDetail.html?qna_no="+reply.getQna_no();
+	}
+	
+    @RequestMapping(value="/selectReply.do") 
+	public @ResponseBody Map<String, Object> selectReply(int qna_no){
+		List<QnaReply> replyList = boardService.replySelect(qna_no);
+    	Map<String, Object> resultObj = new HashMap<String, Object>();
+    	resultObj.put("status", "success");
+    	resultObj.put("data", replyList);
+		return resultObj; 
+	}
+    
+    @RequestMapping("/deleteReply.do")
+	public String deleteReply(@RequestParam("qnaReply_no") int no, @RequestParam("qna_no") int qna_no, RedirectAttributes redirectAttributes){
+		boardService.qnaDelete(no);
+		return "redirect:/qna/qnaDetail.html?qna_no=" + qna_no;
+    }
+    
+    @RequestMapping("/updateReply.do")
+    public String updateReply(QnaReply reply,RedirectAttributes redirectAttributes){
+    	boardService.updateReply(reply);
+    	return "redirect:/qna/qnaDetail.html?qna_no=" + reply.getQna_no();
+    }
+    
+    @RequestMapping("/getSession.do")
+    public @ResponseBody String getNick(HttpSession session, HttpServletRequest req){
+    	Member member = (Member)req.getSession().getAttribute("loginUser");
+    	String nick = member.getNick();
+    	return nick;
     	
     }
-	
-}
-	
-	
-	
-	
+   
+    	
+}	
