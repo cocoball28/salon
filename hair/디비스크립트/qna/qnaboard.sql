@@ -4,8 +4,5 @@ qna_title varchar(100) not null,
 qna_content varchar(300) not null,
 nick varchar(100) not null,
 reg_date datetime default CURRENT_TIMESTAMP not null ,
-viewnum int,
-grp int,
-seq int,
-lvl varchar(100)
+viewnum int
 );
