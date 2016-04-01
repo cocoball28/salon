@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import salon.domain.Blog;
 import salon.domain.BlogImage;
 import salon.domain.Member;
+import salon.domain.Shop;
 import salon.domain.BlogComment;
 
 @Repository
@@ -35,6 +36,8 @@ public interface BlogDao {
 	//파트너 정보
 	public List<Member> selectPartnerDsnInfo(Member member);
 	
+	//미용실 정보
+	public Shop selectShopInfo(int sano);
 }
 
 

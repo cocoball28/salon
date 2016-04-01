@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import salon.dao.MessageDao;
 import salon.domain.Member;
 import salon.domain.Message;
+import salon.domain.Shop;
 import salon.service.MessageService;
 
 @Controller
@@ -55,5 +56,12 @@ public class MessageController {
 	@ResponseBody
 	public List<Member> memberList(Member member){
 		return messageDao.selectMemberListByNick(member); 
+	}
+	
+	//미용실 리스트
+	@RequestMapping(value="favShopList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Shop> favShopList(Member member){
+		return messageService.selectFavShopList(member); 
 	}
 }
