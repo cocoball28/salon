@@ -10,94 +10,58 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 헤더 스타일 -->
-<link rel="stylesheet" href="../header/css/header.css">
-<link rel="stylesheet" type="text/css" href="../header/css/style.css" />
-<link rel="stylesheet" type="text/css" href="../header/css/noJS.css" />
-<link href="../header/css/message.css" rel="stylesheet"> 
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8"></script>
+
 <script>
-$(function(){
-    //전역변수선언
-    var editor_object = [];
-     
-    nhn.husky.EZCreator.createInIFrame({
-        oAppRef: editor_object,
-        elPlaceHolder: "smarteditor",
-        sSkinURI: "./SmartEditor2Skin.html", 
-        htParams : {
-            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseToolbar : true,             
-            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseVerticalResizer : true,     
-            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseModeChanger : true, 
-        }
-    });
-     
-    //전송버튼 클릭이벤트
-    $("#savebutton").click(function(){
-        //id가 smarteditor인 textarea에 에디터에서 대입
-        editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
-         
-        // 이부분에 에디터 validation 검증
-         
-        //폼 submit
-        $("#frm").submit();
-    })
-})
+function getContextPath(){
+	    var offset=location.href.indexOf(location.host)+location.host.length;
+	    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+	    return ctxPath;
+	}
+	var blogPath =  getContextPath();
+	var contextPath =  getContextPath();
+
+
+    var contextRoot = contextPath;
+
+  $.ajax(contextRoot + '/board/getSession.do',{
+	dataType: 'json',
+	method: 'GET',
+	success: function(nick) {
+	   $("[name='nick']").val(nickname);
+	}
+ });
+
+
 </script>
+
 </head>
-<body style="background: white;">
-	<!-- 헤더 -->
-	<header class="header" ></header>
-	
+<body>
 <div id="wrap" class="qna">
   
-  <!--<div id="header"></div>-->
+   <div id="header"></div>
    <div id="sidebar"></div>
  
  <div id="content">
-<form action="/salon/board/regist.do" enctype="multipart/form-data" method="post" id="frm">
-<br/>
+<form action="/hair/board/regist.do" enctype="multipart/form-data" method="post">
 <table align="center" width="650px">
 <tr><td><div class="input-group">
   <span class="input-group-addon" id="basic-addon1">닉네임</span>
-  <input type="text" name="nick" class="form-control" placeholder="닉네임입력" aria-describedby="basic-addon1">
+  <input type="text" name="nick" class="form-control" placeholder="닉네임입력"  aria-describedby="basic-addon1">
 </div></td></tr>
 <tr><td><div class="input-group">
   <span class="input-group-addon" id="basic-addon1">제목</span>
   <input type="text" name="qna_title" class="form-control" placeholder="제목입력" aria-describedby="basic-addon1">
-</div></td></tr></table>
-<textarea name="qna_content" id="smarteditor" rows="7" cols="79"></textarea>
-
- <p align="center"><input type="submit" value="글등록">
+</div></td></tr>
+<tr><td><textarea class="form-control" name="qna_content" rows="7"></textarea></td></tr>
+ </table>
+<p align="center"><input type="submit" id="savebutton" value="글등록">
  <input type="button" value="취소" onclick="document.location.href='qnaList.html'"></p>
  </form>
 </div>
 
 
-<div id="righter">
-</div>
-</div>
-
-	<script>
-	// contextpath ///////////////
-	function getContextPath(){
-	    var offset=location.href.indexOf(location.host)+location.host.length;
-	    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
-	    return ctxPath;
-	}
-	var contextPath =  getContextPath();
-	// contextpath ///////////////
-	
-	//var contextRoot = 'http://localhost:8008/salon';
-	var contextRoot = contextPath;
-	$(".header").load(contextRoot+"/header/header.html .header");
-	</script>
-	<script src="../header/js/header.js"></script>
+<div id="righter"></div>
+</div>   
 </body>
 </html>
