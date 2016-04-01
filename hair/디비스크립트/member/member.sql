@@ -1,5 +1,6 @@
 ----------------------------------------------------------member
 CREATE TABLE MEMBER (
+	SANO   INTEGER      default 0,   
 	MNO    INTEGER      primary key auto_increment, -- 회원고유번호
 	EMAIL  VARCHAR(40)  NOT NULL, -- 이메일
 	PWD    VARCHAR(50)  NOT NULL, -- 비밀번호
@@ -9,8 +10,12 @@ CREATE TABLE MEMBER (
 	GENDER VARCHAR(5)   NOT NULL default 'f', -- 성별
 	STATUS VARCHAR(10)  not NULL default 'u'     -- 상태
 );
+
 select * from member;
 drop table member;
+update member set status='d' where status='u'
+update member set status='m' where mno='1'
+delete from member where mno = 4 
 ----------------------------------------------------------member
 
 
