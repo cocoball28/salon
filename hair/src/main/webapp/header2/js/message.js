@@ -10,32 +10,51 @@ var contextPath =  getContextPath();
 //현재 로그인 되어있는 유저 닉네임 출력
 var loginUserNickName = "";
 var loginUserMno = "";
+var loginUserPhoto = "";
 $.post(
-		contextPath+"/message/loginUserInfo.do",
-		function(data){
-			console.log("로그인유저정보:");
-			console.log(data);
-			loginUserNickName = data.nick;
-			loginUserMno = data.mno;
-			console.log(loginUserNickName);
-			$(".loginUserNickName").text(loginUserNickName);
-			$(".loginUserNameDisply").text(loginUserNickName);
-		}
+	contextPath+"/message/loginUserInfo.do",
+	function(data){
+		console.log("로그인유저정보:");
+		console.log(data);
+		loginUserNickName = data.nick;
+		loginUserMno = data.mno;
+		loginUserPhoto = data.photoPath;
+		console.log(loginUserPhoto);
+		console.log(loginUserNickName);
+		
+		/*$(".loginUserNameDisply").text(loginUserNickName);*/
+	}
 )
+
 
 //메시지창 열기
 var messageOpen = function(){
 	//$('.messageContents').animate({ scrollTop: 1000 }, 'slow');
 	$(".messageMemberList").show("fast");
+	$(".loginUserNickName").text(loginUserNickName);
 	$.post(
-			contextPath+"/message/messageOpen.do",
+			contextPath+"/message/favShopList.do",
 			{mno:loginUserMno},
 			function(data){
+				$(".favShopList").html("");
+				$(".searchDsnList").html("");
 				console.log(data);
+				for(var i = 0 ; i < data.length ; i++){
+					addFavShopList(data[i]);
+				}
 			}
 	)
-	$(".tempFullScreen").show();
+	/*$(".tempFullScreen").show();*/
 };
+
+
+//즐겨찾기 빠른 메시지를 위한 미용실리스트
+var addFavShopList = function(data){
+	var cloneFavShopDiv = $(".cloenFavShopList").find(".dsnMemberDiv").clone();
+	$(cloneFavShopDiv).find(".shopName").text(data.name);
+	$(".favShopList").append(cloneFavShopDiv);
+}
+
 
 //메시지창 닫기
 var messageClose = function(){
@@ -65,6 +84,7 @@ var addReceiveMessage = function(data){
 }
 
 var dsnSearchMode = function(){
+	$(".favShopList").hide();
 	$(".favDsnMessageMode").hide();
 	$(".dsnSearchMode").show();
 	$(".searchDsn").show();
@@ -72,6 +92,7 @@ var dsnSearchMode = function(){
 }
 
 var favDsnMessageMode = function(){
+	$(".favShopList").show();
 	$(".favDsnMessageMode").show();
 	$(".dsnSearchMode").hide();
 	$(".favDsnList").show();
@@ -89,6 +110,7 @@ var searchMemberList = function(target){
 				contextPath+"/message/memberList.do",
 				{"nick":nickName},
 				function(data){
+					console.log(data);
 					for(var i = 0; i < data.length ; i ++){
 						addDsnInfoList(data[i]);
 					}
@@ -97,9 +119,7 @@ var searchMemberList = function(target){
 	}
 }
 
-//채팅대상 이름 지정
-var targetUserNickName = "";
-var targetUserMno = "";
+
 
 //채팅대상리스트 출력
 var addDsnInfoList = function(data){
@@ -108,20 +128,24 @@ var addDsnInfoList = function(data){
 	if(data.photoPath != null){
 		cloneDsnMemberDiv.find(".dsnPhoto").attr("src",data.photoPath);
 	}
-	if(data.nick != null){
-		cloneDsnMemberDiv.find(".dsnNickName").text(data.nick);
-		targetUserNickName = data.nick;
-		targetUserMno = data.mno;
-	}
+	cloneDsnMemberDiv.find(".dsnNickName").text(data.nick);
 	$(".searchDsnList").append(cloneDsnMemberDiv);
 };
 
 //메신저창 열기
 var messageBegin = function(target){
-	//$(".tempFullScreen").hide();
-	var mno = $(target).attr("mno");
+	//채팅대상 이름 지정
+	
+	var targetUserNickName = $(target).find(".dsnNickName").text();
+	var mno = 5;
+	if(target != null){
+		var mno = $(target).attr("mno");
+	}
 	$(".messageMemberList").hide('slow');
 	$(".messageBox").show("slow");
+	if(targetUserNickName == ""){
+		targetUserNickName = "Bruce";
+	}
 	$(".messageRoomName").text(loginUserNickName + " + " + targetUserNickName);
 	loadMessageList();
 }
@@ -153,7 +177,6 @@ var sendMessage = function(target){
 	}
 	
 	//node.js
-	/*
 	if(event.keyCode == 13){
 		$.ajax({
 			   url: "http://192.168.0.44:3000/sendMsg?callback=?&smno=" + loginUserMno + "&rmno=" + targetUserMno+"&content="+content,
@@ -161,39 +184,42 @@ var sendMessage = function(target){
 			   contentType: false,
 			   type: 'GET'
 		});
-		var data = {content:content, rmno:targetUserMno, smno:loginUserMno}
+		console.log(loginUserPhoto);
+		console.log(loginUserNickName);
+		var data = {content:content, rmno:targetUserMno, smno:loginUserMno, smpho:loginUserPhoto, smnick:loginUserNickName}
 		socket.emit('fromClient',data);
 		addMyMessage(data);
 		$(target).val("");
 		$('.messageContents').animate({ scrollTop: 100000 }, 'slow');
 	}
-	*/
+	
 };
 
 //node.js
 //소켓 생성
-/*
 var socket = io.connect('http://192.168.0.44:3000');
 	socket.on('toClient',function(data){
+		console.log(data);
     if(data.rmno == loginUserMno){
     	console.log(data.content);
     	addReceiveMessage(data);
     	var cloneAlram = $(".cloneDisplayMessageAlarm").find(".displayMessageAlarm").clone();
-    	$(cloneAlram).find(".reciveMessageName").text("aaa");
-    	$(cloneAlram).find(".reciveMessageContent").text(data.content);
+    	$(cloneAlram).find(".senderName").text(data.smnick);
+    	if(data.smpho != null){
+    		$(cloneAlram).find(".senderPhoto").attr("src",data.smpho);
+    	}
     	$(".alramDiv").append(cloneAlram);
-    	$(cloneAlram).show('slow');
+    	$(cloneAlram).show('fast');
     	//지정된 시간 후에 실행하는 함수
     	setTimeout(function() {
     		setTimeout(function(){
     			$(cloneAlram).remove();
     		},1000)
-    		$(cloneAlram).hide('slow');
+    		$(cloneAlram).hide('fast');
     	}, 4000);
     }
     $('.messageContents').animate({ scrollTop: 100000 }, 'slow');
 });
-*/
 
 //메시지 더 보기 버튼
 var readMoreMessage = function(target){

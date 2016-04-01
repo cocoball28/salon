@@ -62,6 +62,7 @@ var closeMessage = function(){
 
 
 // 동료 미용사 정보 
+/*
 var isAnimate = false;
 $(".partnerInfo").mouseenter(function(e){
 	e.stopPropagation();
@@ -75,6 +76,9 @@ $(".partnerInfo").mouseenter(function(e){
 $(".partnerInfo").mouseout(function(e){
 	$(this).next().hide('slow');
 });
+*/
+
+
 
 $(".showShopIcon").hover(
 		function(){
@@ -201,16 +205,40 @@ $(function(){
 			blogPath+"/blog/list.do",
 			{"mno":currentViewDsnNo},
 			function(data){
+				console.log("블로그 화면 출력");
 				console.log(data);
+				insertShopInfo(data.shopInfo);
 				blogOwnerCheck(data.myBlogFlag);
 				printDsnInfo(data.dsnInfo);	
 				for(var i = 0; i < data.blogList.length ; i ++){
-						addBoard(data.blogList[i]);
+					addBoard(data.blogList[i]);
+				}
+				for(var i = 0 ; i < data.partnerInfo.length ; i++){
+					addPartnerInfo(data.partnerInfo[i]);
 				}
 				$("#loginUserId").text(data.loginUser.nick);
 	});
 })
 /* 첫 화면 출력 =================================*/
+
+
+/* 미용실 정보 출력*/
+var insertShopInfo = function(data){
+	$(".shopName").text(data.name);
+	$(".shopTelephoneNumber").text(data.tel);
+	$(".shopAddr").text(data.addr);
+	$(".shopInformation").attr("sano",data.sano)
+}
+/* 미용실 정보 출력*/
+
+
+/* 미용실로 이동 ================================*/
+var moveToShopService = function(target){
+	var sano = $(target).attr("sano");
+	var url = contextPath+"/shop/shop.html?sano="+sano;    
+	$(location).attr('href',url);
+}
+/* 미용실로 이동 ================================*/
 
 
 /* 디자이너 본인 여부 확인 ===========================*/
@@ -225,8 +253,9 @@ var blogOwnerCheck = function(data){
 
 
 /* 디자이너 정보 출력 =============================*/
+var blogDsnNick = "";
+var blogDsnMno = "";
 var printDsnInfo = function(data){
-	console.log("디자이너 정보 : "+data);
 	if(data.photoPath == null){
 		$("#hairdresserPhoto").attr("src","img/contents/default-portrait.png");
 	}else{
@@ -239,9 +268,47 @@ var printDsnInfo = function(data){
 	}else{
 		gender = "male";
 	}
+	blogDsnMno = data.mno;
 	$("#hairdresserIntroduce").text(data.email+", "+data.nick+", "+gender);
 };
 /* 디자이너 정보 출력 =============================*/
+
+
+/* 파트너 디자이너 정보 출력 ================================*/
+var addPartnerInfo = function(data){
+	if(data.mno == blogDsnMno){
+		return null;
+	}
+	var clonePartnerInfo = $(".clonePartnerInfoList").find(".partnerInfo").clone();
+	if(data.photoPath != null){
+		clonePartnerInfo.find(".partnerGeneralInfo").find(".partnerPhoto").attr("src",data.photoPath);
+		clonePartnerInfo.find(".partnerDetailInfoDiv").find(".partnerPhoto").attr("src",data.photoPath);
+	}
+	clonePartnerInfo.find(".partnerGeneralInfo").find(".partnerName").text(data.nick);
+	clonePartnerInfo.find(".partnerDetailInfoDiv").find(".partnerName").text(data.nick);
+	var gender="";
+	if(data.gender == "f"){
+		gender = "female";
+	}else{
+		gender = "male";
+	}
+	clonePartnerInfo.find(".partnerDetailInfoDiv").find(".parnerIntroduce").text(data.email+", "+data.nick+", "+gender);
+	$(".partnerInfoList").append(clonePartnerInfo);
+}
+/* 파트너 디자이너 정보 출력 ===============================*/
+
+
+
+/* 파트너 디자이너 상세정보 열기 및 닫기 =============================*/
+var viewPartnerDetailInfo = function(target){
+	$(target).closest(".partnerInfo").find(".partnerDetailInfoDiv").show('slow');
+	$(target).attr("onclick","closePartnerDetailInfo(this)");
+}
+var closePartnerDetailInfo = function(target){
+	$(target).closest(".partnerInfo").find(".partnerDetailInfoDiv").hide('slow');
+	$(target).attr("onclick","viewPartnerDetailInfo(this)");
+}
+/* 파트너 디자이너 상세정보 열기 및 닫기=============================*/
 
 
 /* 블로그 글삭제 파트 ==================================*/
