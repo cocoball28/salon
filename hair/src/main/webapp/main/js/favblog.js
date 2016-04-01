@@ -16,6 +16,7 @@
 			 } else{ 
 				 $("#dd").append(data.data.nick);
 				 $("#dd").append("<input type='hidden' id='memberNo' value="+data.data.mno+" />")
+				 list(data.data.mno);
 			 return true;
 		 }
 	});
@@ -42,31 +43,52 @@
 		 }); 
 		return false; 
 	});
-
+	
+	var getParameter = function(url) {
+		var paramText = decodeURI(url).split("?")[1];
+		return paramText;
+	};
+	var pageParam = getParameter(document.location.href);
+	
 	/* fav blog list */
-	$.getJSON(contextPath+"/salon/ajax/favBlog.do",function(resultObj){
+	function list(mno){
+		$.getJSON(contextPath+"/salon/ajax/favBlog.do",{from: pageParam, mno: mno},function(resultObj){
 		var cnt = 0;
+		console.log(resultObj);
+		if(resultObj.status == "favBlog"){
 		   $.each(resultObj.data, function(key, value){
-			    var html = ""
-				html += '<div class="wf-box">'; 
-				html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
-				html += '<image src='+value.blogImageList[0].path+'/></a>';
-				html += '<div class="content">';
-				html += '<h3>'+value.tag+'</h3>';
-				html += '<hr>';
-				html += '<p>'+value.content+'</p>';
-				html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
-				html += '<div class="optionDiv">'
-				html += '<a class="bookmark">';
-				html += '<i class="fa fa-heart"></i>'
-				html += '</a>';
-				html += '</div></div></div>';
-				$(".wf-column:eq("+cnt+")").append(html);
+			   var clone = $(".cloneClass").clone();
+			   	clone.toggleClass("cloneClass wf-box");
+			    clone.find("a").attr("href", contextPath +'/blog/blog.html?no='+value.mno);
+			    clone.find("img").attr("src", value.blogImageList[0].path);
+			    clone.find("h3").text(value.tag);
+			    clone.find("p").text(value.content);
+				clone.find(".contentNo").val(value.no);
+			    
+				$(".wf-column:eq("+cnt+")").append(clone);
 				cnt++;
 				if(cnt == 5) cnt = 0;
 		  });
+		} else if(resultObj.status == "favMember"){
+			console.log(resultObj.data)
+			$.each(resultObj.data, function(key, value){
+				var clone = $(".cloneClass").clone();
+			   	clone.toggleClass("cloneClass wf-box");
+			    clone.find("a").attr("href", contextPath +'/blog/blog.html?no='+value.mno);
+			    clone.find("img").attr("src", value.photoPath);
+			    clone.find("h3").text(value.nick);
+			    clone.find("p").text(value.email);
+				clone.find(".contentNo").val(value.mno);
+			    
+				$(".wf-column:eq("+cnt+")").append(clone);
+				cnt++;
+				if(cnt == 5) cnt = 0;
+			});
+		}else if(resultObj.status == "favShop"){
+			
+		}
 	})
-	
+	}
 	/* scroll */
 	var page = 1;
 	$(document).scroll(function() {
