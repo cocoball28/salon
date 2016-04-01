@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import salon.dao.MessageDao;
+import salon.domain.Member;
 import salon.domain.Message;
+import salon.domain.Shop;
 import salon.service.MessageService;
 
 @Service
@@ -30,6 +32,11 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> selectMoreList(Message message) {
 		return messageDao.selectMoreList(message);
+	}
+
+	@Override
+	public List<Shop> selectFavShopList(Member member) {
+		return messageDao.selectFavShopList();
 	}
 
 

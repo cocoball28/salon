@@ -18,12 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import salon.dao.BlogDao;
-import salon.dao.MainDao;
 import salon.domain.Blog;
-import salon.domain.BlogComment;
 import salon.domain.BlogImage;
-import salon.domain.Favorite;
 import salon.domain.Member;
+import salon.domain.BlogComment;
 import salon.service.BlogService;
 
 @Service
@@ -32,11 +30,9 @@ public class BlogServiceImpl implements BlogService {
 	@Autowired
 	BlogDao blogDao;
 	
+	
 	@Autowired
 	ServletContext servletContext;
-
-	@Autowired
-	MainDao mainDao;
 	
 	// 본문 파트
 	@Override
@@ -70,7 +66,6 @@ public class BlogServiceImpl implements BlogService {
 				blogDao.insertImage(blogImage);
 			}
 		}
-		
 		map.put("blog", blogDao.selectBlogByNo(blog));
 		map.put("blogImageList", blogDao.selectImage(blog));
 		return map;
@@ -80,21 +75,24 @@ public class BlogServiceImpl implements BlogService {
 	public Map<String, Object> selectList(Blog blog, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<>();
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		System.out.println("로그인유저의 미용실번호 : "+loginUser.getSano());
 		int loginMemberNo = loginUser.getMno();
+		String loginMemberStatus = loginUser.getStatus();
 		int mno = blog.getMno();
-		
 		System.out.println(mno);
 		map.put("loginUser", loginUser);
 		map.put("dsnInfo", blogDao.selectDsnInfo(blog));
-//		map.put("partnerInfo", Object);
+		//블로그 주인의 미용실 번호
+		int sano = blogDao.selectDsnInfo(blog).getSano();
+		map.put("partnerInfo", blogDao.selectPartnerDsnInfo(loginUser));
 		map.put("blogList", blogDao.selectBlogList(blog));
-		boolean myBlogFlag;
+		map.put("shopInfo", blogDao.selectShopInfo(sano));
+		boolean myBlogFlag = false;
 		if(loginMemberNo == mno){
-			myBlogFlag = true;
-		}else{
-			myBlogFlag = false;
+			if(loginMemberStatus.equals("d")){
+				myBlogFlag = true;
+			};
 		}
-		map.put("favList", mainDao.favBlogList(mno));
 		map.put("myBlogFlag",myBlogFlag);
 		return map;
 	}
