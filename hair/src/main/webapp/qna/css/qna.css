@@ -27,11 +27,11 @@ a:hover,
 a:focus {color:#ae5200;}
 
 .basic_table {width:100%; border-collapse:collapse; border-spacing:0; border:2px solid #474747; border-width:2px 0;}
-.basic_table th,
-.basic_table td {padding:12px 0; color:#b9b9b9; font-size:11px; text-align:center;}
+.basic_table th ,
+.basic_table td {padding:12px 0; color:#b9b9b9; font-size:11px;}
 .basic_table th {border-bottom:1px solid #d7d7d7; background:url(../../koloncamping/images/2012ss/common/line_th.gif) no-repeat;}
 .basic_table th:first-child {background:none;}
-.basic_table .td_title {padding-left:20px; text-align:left;}
+.basic_table .td_title {padding-left:20px;}
 .basic_table .td_title,
 .basic_table .td_writer {color:#878787; font-size:12px;}
 .basic_table .td_title a:hover,
