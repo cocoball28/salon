@@ -7,7 +7,7 @@
 	
 		<!-- 멤버 닉네임 검색 -->
 	<select id="selectMemberListByNick" parameterType="member" resultType="member">
-		select * 
+		select email, gender, mno, nick, photo_path as photoPath, sano, status
 		  from member
 		 WHERE nick LIKE '%${nick}%'
 	</select>
@@ -30,4 +30,8 @@
      limit #{messageNo}, 10;
 	</select>
 
+	<select id="selectFavShopList" resultType="shop">
+	select * <!-- sano, name, tel, zip, addr, mno, nick, PHOTO_PATH as photoPath, STATUS, email -->
+	  from shop
+	</select>
 </mapper>
