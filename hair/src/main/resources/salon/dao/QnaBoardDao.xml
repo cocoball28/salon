@@ -81,8 +81,8 @@
 	</update>
 	
 	<insert id="insertReply" parameterType="qnaReply">
-	   insert into qna_reply (nick,qnaReply_content,qna_no) 
-	   values(#{nick},#{qnaReply_content},#{qna_no})
+	   insert into qna_reply (qnaReply_nick,qnaReply_content,qna_no) 
+	   values(#{qnaReply_nick},#{qnaReply_content},#{qna_no})
 	</insert>
 	
 	<select id="selectReply" parameterType="int" resultType="qnaReply">
