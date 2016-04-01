@@ -1,0 +1,59 @@
+@CHARSET "UTF-8";
+
+body {
+	background: white;
+	font-family: sans-serif;
+}
+
+.controlBtnDiv{
+	color:#aaa;
+}
+
+#reservationCalendar{
+	color:#eee;
+}
+
+.reservationBody {
+	height: 65px;
+}
+
+.reservationInfoDiv {
+	padding: 0px;
+	margin: 0px;
+}
+
+.reservationTd{
+	text-align: center;
+}
+
+.hairdresserName{
+	cursor: pointer;
+}
+
+.hairdresserName:HOVER{
+	color: #aaa;	
+}
+
+
+#reservationCalendar {width: 100%; height: 260px; background-color: #222; margin: auto; margin-top: 20px; padding: 5px;}
+#reservationCalendar #header {height: 50px; line-height: 50px; text-align: center; font-size: 18px; font-weight: bold}
+#reservationCalendar .button {color: lightgrey; text-decoration: none;}
+#reservationCalendar table {width: 100%; height: 200px;}
+#reservationCalendar caption {display: none;}
+#reservationCalendar .sun {text-align: center; color: deeppink;}
+#reservationCalendar .mon {text-align: center;}
+#reservationCalendar .tue {text-align: center;}
+#reservationCalendar .wed {text-align: center;}
+#reservationCalendar .thu {text-align: center;}
+#reservationCalendar .fri {text-align: center;}
+#reservationCalendar .sat {text-align: center; color: deepskyblue;}
+#reservationCalendar tbody td{
+	padding:2px;
+	cursor: pointer;
+	width: 50px;
+}
+#reservationCalendar tbody td:HOVER{
+	border: 2px solid white;
+}
+
+

@@ -176,6 +176,7 @@
 .name {
 	font-family: 'Syncopate', sans-serif;
 	font-size: x-large;
+	padding-top: 62px;
 }
 .move {
 	font-size: x-large;
@@ -383,7 +384,11 @@ body {
 }
 .slider .jquery-reslider .slider-block {
 	width: 100%; 
-	height: 50%;
+	/* 1024용 높이 */
+	height: 321.5px;
+	top: 20px;
+	/* 1280용 높이
+	height: 50%; */
 	right: 0;
 	position: absolute;
 	z-index: 97;
@@ -469,7 +474,7 @@ body {
 }
 .icon {
 	right: 0;
-	width: 25%;
+	width: 40%;
 	height: 20px;
 	background: rgba(234, 12, 23, 0);
 	z-index: 100;
