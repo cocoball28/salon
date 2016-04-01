@@ -10,19 +10,13 @@
 		<result column="qna_content" property="qna_content" />
 		<result column="reg_Date" property="reg_Date" />
 		<result column="qna_title" property="qna_title" />
-		<result column="viewnum" property="viewnum" />
-		
+		<result column="viewnum" property="viewnum" />		
 	</resultMap>
 	
-	<select id="boardCount" resultType="int">
+	<select id="boardCount" parameterType="map" resultType="int">
 	   select count(*) from qna_board
-	</select>
-	
-	<select id="selectBoardVOs" parameterType="map" resultType="qnaBoard">		
-        select * 
-        from qna_board
-        <if test="searchSelect != null">
-        	<if test="search_txt != null">
+	   <if test="searchSelect != null">
+        	<if test="search_txt != null and !search_txt.equals('')">
         		<choose>
         		<when test="searchSelect.equals('subject')">
         			WHERE qna_title LIKE CONCAT('%', #{search_txt}, '%')
@@ -36,7 +30,27 @@
         		</choose>
         	</if>
         </if>
-        order by qna_no desc, seq asc 
+	</select>
+	
+	<select id="selectBoardVOs" parameterType="map" resultType="qnaBoard">		
+        select * 
+        from qna_board
+        <if test="searchSelect != null">
+        	<if test="search_txt != null and !search_txt.equals('')">
+        		<choose>
+        		<when test="searchSelect.equals('subject')">
+        			WHERE qna_title LIKE CONCAT('%', #{search_txt}, '%')
+        		</when>
+        		<when test="searchSelect.equals('content')">
+        			WHERE qna_content LIKE CONCAT('%', #{search_txt}, '%')
+        		</when>
+        		<when test="searchSelect.equals('name')">
+        			WHERE nick = #{search_txt}
+        		</when>
+        		</choose>
+        	</if>
+        </if>
+        order by qna_no desc 
         <if test="pageNo != null">
         limit #{startIdx}, 10
         </if>
@@ -44,15 +58,9 @@
 	
 	
 	
-	<insert id="reInsertBoardVO" parameterType="qnaBoard">
-	    insert into qna_board (qna_title,qna_content,nick, viewnum,grp,seq,lvl) 
-	    values (#{qna_title},#{qna_content},#{nick},0,(,seq+1,lvl+1) 
-	</insert>
-	
 	<insert id="insertBoardVO" parameterType="qnaBoard">
-	    insert into qna_board (qna_title,qna_content,nick,viewnum,grp,seq,lvl) 
-	    values (#{qna_title},#{qna_content},#{nick},0,(select last_insert_id()+1),1,0)
-	     
+	    insert into qna_board (qna_title,qna_content,nick, viewnum) 
+	    values (#{qna_title},#{qna_content},#{nick}, 0) 
 	</insert>
 	
 	<select id="selectBoardVO" parameterType="int" resultType="qnaBoard">
@@ -63,17 +71,40 @@
 	   delete from qna_board where qna_no = #{qna_no}
 	</delete>
 	
-	<update id="updateBoardVO" parameterType="qnaboard">
-	   update qna_board set qna_title=#{qna_title} qna_content=#{qna_content} 
+	<update id="updateBoardVO" parameterType="qnaBoard">
+	   update qna_board set qna_title=#{qna_title}, qna_content=#{qna_content} 
+	   where qna_no=#{qna_no}
 	</update>
 	
 	<update id="updateView" parameterType="int">
 	    update qna_board set viewnum = viewnum+1 where qna_no = #{qna_no}
 	</update>
 	
-	<insert id="saveImage" parameterType="java.util.Map">
-    insert into img_table blob values (#{img})    
-    </insert>
+	<insert id="insertReply" parameterType="qnaReply">
+	   insert into qna_reply (nick,qnaReply_content,qna_no) 
+	   values(#{nick},#{qnaReply_content},#{qna_no})
+	</insert>
+	
+	<select id="selectReply" parameterType="int" resultType="qnaReply">
+	    select * from qna_reply where qna_no=#{qna_no} order by qnaReply_no desc
+	</select>
+	
+	<delete id="deleteReply" parameterType="int">
+	    delete from qna_reply where qnaReply_no = #{qnaReply_no}
+	</delete>
+	
+	<select id="selectReCount" parameterType="int" resultType="int">
+	    select count(*) from qna_reply where qna_no = #{qna_no}
+	</select>
+	
+	<update id="updateReply" parameterType="qnaReply">
+	    update qna_reply set qnaReply_content = #{qnaReply_content} where qnaReply_no=#{qnaReply_no}
+	</update>
+	
+	
+	
+	
     
     
+	
 </mapper>
