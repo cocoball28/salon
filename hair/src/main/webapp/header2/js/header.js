@@ -35,14 +35,20 @@ $(document).ready(function(){
  	});  
 	
 	/* my page modify get*/
-	 $(document).on("click","#pro",function( ){
+	 $(document).on("click","#pro",function(){
+		 	/* 주변 흐리게 */
+		 $("#cover, #callmodi").css("display", "block");
+		 $(document).on("click", "#cover", function(){
+			 $("#cover, #callmodi").css("display", "none");
+			 $(".container").remove();
+		 })
 			var memberNo = $(this).closest('#dd').find("[type=hidden]").val();			
 			$.ajax({
 				   url: contextPath+"/salon/ajax/update.do",
 				   method: 'get',
 				   data: {mno:memberNo},
 				   success: function(data){
-						   $(".section").load(contextPath+"/header/modify.html .container", function() {
+					   	   $("#callmodi").load(contextPath+"/header/modify.html .container", function() {
 							   $("#nick_reg").val(data.nick);
 							   $("#email_reg").val(data.email);
 							   $("#email_reg").attr("readonly", "true");
@@ -52,8 +58,6 @@ $(document).ready(function(){
 								   $('.preImg').attr('src', "images/placeholder.png");
 							   }
 						   });
-						   console.log(data)
-						   console.log(data.photoPath)
 				   },
 				   error: function(){
 					   alert("오류");
@@ -96,12 +100,18 @@ $(document).ready(function(){
 	 });
 	 
 	 $(document).on("click", "#mainTag", function(){
-		$("#mainTag").attr("href", contextPath+"/auth/index.html#signin") 
+		$("#mainTag").attr("href", contextPath+"/main/mainlist.html") 
 	 });
 	 
 	 $(document).on("click", "#mapSearch", function(){
 		 window.location.href = contextPath + "/map3/map3.html"; 
 	 });
+	 
+	 /* fav blog list */
+	$(document).on("click", "#favBlog", function(){
+		window.location.href = contextPath + "/main/favblog.html";
+	});
+	 
 	 
 	 $(document).on("click", "#search", function(event){
 		 var searchVal = $("#searchBar").val();
