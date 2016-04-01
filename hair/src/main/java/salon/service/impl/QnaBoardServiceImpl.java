@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import salon.dao.QnaBoardDao;
 import salon.domain.QnaBoard;
+import salon.domain.QnaReply;
 import salon.service.QnaBoardService;
 
 @Service
@@ -32,26 +33,39 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 		dao.deleteBoardVO(qna_no);
 	}
 	
-	
-	public void update(QnaBoard board){
-		dao.updateBoardVO(board);
+	public void update(QnaBoard vo){
+		dao.updateBoardVO(vo);
 	}
 	
 	public void viewUpdate(int qna_no){
 		dao.updateView(qna_no);
 	}
 	
-	public int boardCount(){
-		return dao.boardCount();
+	public int boardCount(Map<String, Object> param){
+		return dao.boardCount(param);
 	}
 	
-	public void regiImage(Map<String,Object> hmap){
-	    dao.saveImage(hmap);
+	public void replyInsert(QnaReply reply){
+		dao.insertReply(reply);
 	}
 
-	public void reRegi(QnaBoard board){
-		dao.reInsertBoardVO(board);
+	public List<QnaReply> replySelect(int qna_no) {
+		return dao.selectReply(qna_no);
 	}
+	
+	public void qnaDelete(int qnaReply_no){
+		dao.deleteReply(qnaReply_no);
+	}
+	
+	public int replyCount(int qna_no){
+		return dao.selectReCount(qna_no);
+	}
+	
+	public void updateReply(QnaReply reply){
+		dao.updateReply(reply);
+	}
+	
+	
 	
 
 
