@@ -29,9 +29,9 @@
      
      
      <br/>
-     <input class="btn btn-default" type="button" value="입력" onclick="insertForm()">
-     <input class="btn btn-default" type="button" value="수정" onclick="updateForm()">
-     <input class="btn btn-default" type="button" value="삭제" onclick="deleteQna()">
+     <input class="btn btn-default" id="insert" type="button" value="입력" onclick="insertForm()">
+     <input class="btn btn-default" id="update" type="button" value="수정" onclick="updateForm()">
+     <input class="btn btn-default" id="delete" type="button" value="삭제" onclick="deleteQna()">
      <input class="btn btn-default" type="button" value="리스트" onclick="document.location.href='qnaList.html'">
      
      <br/><br/>
@@ -41,10 +41,9 @@
 		<table class="table table-hover" width="500" align="center" id="reply_table" border="1">
         </table>
         <form action="/hair/board/insertReply.do" method="post" name="replyForm">
-        <div class="form-group">
-         <input type="text" class="form-control" id="inputNick" name="nick" placeholder="닉네임을 입력하세요">
-        </div>
+        
          <textarea class="form-control" rows="2" name="qnaReply_content" id="inputContent"></textarea><br/>
+         <input type="hidden" name="qnaReply_nick"/>
          <input type="hidden" name="qna_no" />
          <input class="btn btn-default" type="submit" value="댓글등록" >
      </form>
@@ -63,7 +62,7 @@
  	var blogPath =  getContextPath();
  	var contextPath =  getContextPath();
         
-     
+ 	
      
      	var no = location.href.split('?')[1].split('=')[1];
 		var contextRoot = contextPath;
@@ -83,7 +82,7 @@
 				    $("<tr>").html("<td><div class='input-group'>"+
 				             "<span class='input-group-addon' id='basic-addon1'>닉네임</span>"+
 				             "<input type='text' id='nick' value="+board.nick+" name='nick'"+ 
-				              "class='form-control aria-describedby='basic-addon1' readonly>"+
+				             "class='form-control aria-describedby='basic-addon1' readonly>"+
 				              "</div></td></tr>").appendTo(table);
 				    $("<tr>").html("<td><div class='input-group'>"+
 				             "<span class='input-group-addon' id='basic-addon1'>작성일</span>"+
@@ -103,6 +102,24 @@
 			        $("<tr>").html("<td><textarea name='qna_content' id='qna_content'rows='7'cols='70' readonly>"+board.qna_content+
 			        		 "</textarea></td></tr>").appendTo(table);
 			        $("[name='qna_no']").val(board.qna_no);
+			        
+			        
+			        $.ajax(contextRoot + '/board/getSession.do',{
+				 		dataType: 'json',
+				 		method: 'GET',
+				 		success: function(result) {
+				 		 	var nickname = result.nick;
+				 		 	var nick = $("#nick").val();
+				 		 	$("[name='qnaReply_nick']").val(nickname);
+				 		 	alert(nickname+","+nick);
+				 		 	if(nickname!=nick){
+				 		 		$("#insert").attr("disabled","disabled");
+				 		 		$("#update").attr("disabled","disabled");
+				 		 		$("#delete").attr("disabled","disabled");
+				 		 		
+				 		}
+				 	  } 	
+			        });
 			},
 		    error: function(jqXHR, textStatus, errorThrown) {
 				alert("오호라.. 오류다!");
@@ -113,13 +130,18 @@
 			
 					
 		});
+
+		
+		
 		
 		function insertForm() {
-			
-			$("#qna_title").prop("readonly", false);
-			$("#qna_content").prop("readonly", false);
-			
+		    $("#qna_title").prop("readonly", false);
+		    $("#qna_content").prop("readonly", false);
+			  
 		}
+			
+			
+		
 		
 		function deleteQna() {
 			alert(no+"번 삭제");
@@ -150,20 +172,33 @@
 			var table = $("#reply_table");
 		    for (var reply of resultObj.data) {
 		    	$("<tr>")
-			      .html("<td align='center'>닉네임:"+reply.nick+"</td>"+
+			      .html("<td align='center'>닉네임:"+reply.qnaReply_nick+"</td>"+
 			             "<td align='center'>작성일:"+reply.qnaReply_date+"</td></tr>").appendTo(table);
 			    $("<tr>")
 			      .html("<td colspan='2'>"+reply.qnaReply_content+"</td></tr>").appendTo(table);
 			    $("<tr>")
 			      .html("<td colspan='2' align='center'>"+
-			           "<input type='button' class='btn btn-default' data-target='#layerpop' data-toggle='modal' value='수정'"+
+			           "<input type='button' id='replyupdate' class='btn btn-default' data-target='#layerpop' data-toggle='modal' value='수정'"+
 			            "onclick='updateReply("+reply.qnaReply_no+")'>&nbsp"+
-			              "<input type='button' class='btn btn-default' value='삭제'onclick='deleteReply("+reply.qnaReply_no+")'></td></tr>").appendTo(table);   
-			  }
-		},
-		
-		   
-	});
+			              "<input type='button' id='replydelete' class='btn btn-default' value='삭제'onclick='deleteReply("+reply.qnaReply_no+")'></td></tr>").appendTo(table);   
+			    $.ajax(contextRoot + '/board/getSession.do',{
+			 		dataType: 'json',
+			 		method: 'GET',
+			 		success: function(result) {
+			 			var nickname = result.nick;
+			 		 	var reply_nick =reply.qnaReply_nick;
+			 		 	if(nickname!=reply_nick){
+			 		 		$("#replyupdate").attr("disabled","disabled");
+					 		$("#replydelete").attr("disabled","disabled");
+			            }
+		    	    
+		    
+			 		}
+		 		  });	 	
+ 		 	
+		        }
+			} 
+		  });
 		
 		function deleteReply(del_no){
 			alert("댓글"+del_no+"번 삭제");
@@ -171,12 +206,13 @@
 		}
 		
 		function updateReply(qnaReply_no) {
-			alert(qnaReply_no);
 			var df=document.ReplyForm;
 			df.qna_no.value = no;
 			df.qnaReply_no.value = qnaReply_no
 			
 		}
+		
+		
 		
 		
   </script>	
