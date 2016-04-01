@@ -36,15 +36,15 @@
 				<!-- 왼쪽 정보 DIV -->
 				<div class="infoDiv">
 					<div style="background: white; width: 220px; padding: 10px; border: 1px solid #F5F3F3;">
-						<img id="hairdresserPhoto" src="img/contents/info.jpg" width="200px;"> 
+						<img id="hairdresserPhoto" src="img/contents/default-portrait.png" width="200px;"> 
 					</div>
 					<div style="background: white; width: 220px; height:30px;; margin-top:3px;; border: 1px solid #F5F3F3; text-align: center; padding-top: 3px;">
 						<span style="text-align: center;"><b id="hairdresserName">Cara Delevingne</b><input type="hidden" id="mdno" value=""/></span>
 						<span style="float: right; width: 0px; right: 20px; position: absolute;"><a class="bookmark" from="designer"><i class="fa fa-heart-o" ></i></a></span>
 					</div>
 					<div style="background: white; width: 220px; padding: 5px 0px 0px 0px; margin-top:3px; border: 1px solid #F5F3F3; font-size: 12px; text-align: center;">
-						<p id="hairdresserIntroduce">Cara | 25 | actrees | model | pangpang salon</p>
-						<p>2016-03-03</p>
+						<p id="hairdresserIntroduce">email, nick, gender, shopName</p>
+						<p id="telephoneNumber">010-1234-1234</p>
 					</div>
 				</div>
 				<div class="infoDivDummy">
@@ -156,67 +156,26 @@
 <!-- 오른쪽정보 DIV--------------------------------------------------------- -->
 			<div class="secondInfoDiv" style=" background:; color: grey; ">
 				<div>
-					 <img class="showShopIcon" src="img/icon/shop2.png" width="100%" style="cursor: pointer; opacity:0.8;" onclick="showShopDetail()">
-					<div class="partnerInfo partnerInfoDiv_1" style="background: white; margin: 5px; cursor: pointer;">
-						<img src="./img/contents/partner-1.jpg" width="40px"
-							height="40px"><span style="padding: 10px; "><b>First Partner </b></span>
+					<div style="text-align: center; font-weight: bold; font-size: 15px; background: rgba(30,30,30,0.9); color: lightgrey;">
+						<span>SHOP INFORMATION</span>
 					</div>
-					<div class="partnerDetailInfoDiv_1" style="display: none;">
-						<div  style="background: white; width: 220px; padding: 10px; border: 1px solid #F5F3F3; margin-left: 5px;">
-							<img  src="./img/contents/partner-1.jpg" width="100%" ></div>
-						<div style="background: white; width: 220px;  margin-left: 5px; margin-top:5px;; border: 1px solid #F5F3F3; text-align: center;">
-							<h5><b>First Partner</b></h5>
+						<div class="shopInformation" style="background: white; margin: 5px; cursor: pointer; border: 1px solid #eee;" onclick="moveToShopService(this);">
+							<div style="padding: 10px; text-align: center;">
+								<div>
+									<span class="shopName" style="font-weight: bold; font-size: 14px;">유숙헤어</span>
+								</div>
+								<div>
+									<span>Tel : </span><span class="shopTelephoneNumber">02-1313-1313</span>
+								</div>
+								<div>
+									<span>Loc : </span><span class="shopAddr">경기도 광명시</span>
+								</div>
+							</div>
 						</div>
-						<div style="background: white; width: 220px;  margin-left: 5px; padding: 10px 0px 0px 10px; margin-top:5px;; border: 1px solid #F5F3F3; font-size: 10px">
-							<p>Cara|25|actrees, model, pangpang salon</p>
-							<p>2016-03-03</p>
-						</div>
+					<div style="margin-top:20px;;text-align: center; font-weight: bold; font-size: 15px; background: rgba(30,30,30,0.9); color: lightgrey;">
+						<span>PARTNER DESIGNER</span>
 					</div>
-					<div class="partnerInfo partnerInfoDiv_2" style="background: white; margin: 5px; cursor: pointer;">
-						<img src="./img/contents/partner-2.jpg" width="40px"
-							height="40px"><span style="padding: 10px;"><b>Second Partner </b></span>
-					</div>
-					<div class="partnerDetailInfoDiv_2" style="display: none;">
-						<div style="background: white; width: 220px;  margin-left: 5px; padding: 10px; border: 1px solid #F5F3F3;">
-							<img  src="./img/contents/partner-2.jpg" width="100%" ></div>
-						<div style="background: white; width: 220px;  margin-left: 5px; margin-top:5px;; border: 1px solid #F5F3F3; text-align: center;">
-							<h5><b>Second Partner</b></h5>
-						</div>
-						<div style="background: white; width: 220px;  margin-left: 5px; padding: 10px 0px 0px 10px; margin-top:5px;; border: 1px solid #F5F3F3; font-size: 10px">
-							<p>Cara|25|actrees, model, pangpang salon</p>
-							<p>2016-03-03</p>
-						</div>
-					</div>
-					<div class="partnerInfo partnerInfoDiv_3" style="background: white; margin: 5px; cursor: pointer;">
-						<img src="./img/contents/partner-3.jpg" width="40px"
-							height="40px"><span style="padding: 10px;"><b>Third Partner </b></span>
-					</div>
-					<div class="partnerDetailInfoDiv_3" style="display: none;">
-						<div style="background: white; width: 220px;  margin-left: 5px; padding: 10px; border: 1px solid #F5F3F3;">
-							<img src="./img/contents/partner-3.jpg" width="100%" ></div>
-						<div style="background: white; width: 220px;  margin-left: 5px; margin-top:5px;; border: 1px solid #F5F3F3; text-align: center;">
-							<h5><b>Third Partner</b></h5>
-						</div>
-						<div style="background: white; width: 220px;  margin-left: 5px; padding: 10px 0px 0px 10px; margin-top:5px;; border: 1px solid #F5F3F3; font-size: 10px">
-							<p>Cara|25|actrees, model, pangpang salon</p>
-							<p>2016-03-03</p>
-						</div>
-					</div>
-					<div class="partnerInfo partnerInfoDiv_4" style="background: white; margin: 5px; cursor: pointer;">
-						<img src="./img/contents/partner-4.jpg" width="40px"
-							height="40px"><span style="padding: 10px;"><b>Fourth Partner </b></span>
-					</div>
-					<div class="partnerDetailInfoDiv_4" style="display: none;">
-						<div style="background: white; width: 220px;  margin-left: 5px; padding: 10px; border: 1px solid #F5F3F3;">
-							<img  src="./img/contents/partner-4.jpg" width="100%" ></div>
-						<div style="background: white; width: 220px;  margin-left: 5px; margin-top:5px;; border: 1px solid #F5F3F3; text-align: center;">
-							<h5><b>Fourth Partner</b></h5>
-						</div>
-						<div style="background: white; width: 220px;  margin-left: 5px; padding: 10px 0px 0px 10px; margin-top:5px;; border: 1px solid #F5F3F3; font-size: 10px">
-							<p>Cara|25|actrees, model, pangpang salon</p>
-							<p>2016-03-03</p>
-						</div>
-					</div>
+					<div class="partnerInfoList"></div>
 				</div>		
 			</div>
 		</div>
@@ -285,6 +244,29 @@
 		<img class="blogImage" src="" width="100%" >
 	</div>
 	
+<!-- 이미지 업로드 클론 -------------------------------------------------------------------------------->
+<div class="clonePartnerInfoList" style="display: none">
+	<div class="partnerInfo">
+		<div class="partnerGeneralInfo" style="background: white; margin: 5px; cursor: pointer; border: 1px solid #eee;" onclick="viewPartnerDetailInfo(this);">
+			<img class="partnerPhoto" src="img/contents/default-portrait.png" width="40px" height="40px" >
+			<span style="padding: 10px;">
+				<b class="partnerName"></b>
+			</span>
+		</div>
+		<div class="partnerDetailInfoDiv" style="display:none">
+			<div style="background: white; width: 220px; padding: 10px; border: 1px solid #eee; margin-left: 5px;">
+				<img class="partnerPhoto" src="img/contents/default-portrait.png" width="100%" >
+			</div>
+			<div style="margin-left: 5px;background: white; width: 220px; height:30px;; margin-top:3px;; border: 1px solid #eee; text-align: center; padding-top: 3px;">
+				<span style="text-align: center;"><b class="partnerName"></b></span>
+			</div>
+			<div style=" margin-left: 5px;background: white; width: 220px; padding: 5px 0px 0px 0px; margin-top:3px; border: 1px solid #eee; font-size: 12px; text-align: center;">
+				<p class="parnerIntroduce">email, nick, gender, shopName</p>
+			</div>
+		</div>
+	</div>
+</div>	
+	
 	<!-- /container -->
 	<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -293,15 +275,15 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/blog_common.js"></script>
 	<script src="js/blog.js"></script>
+	<script type="text/javascript" src="../header2/js/modernizr.custom.79639.js"></script> 
 	<script type="text/javascript" src="../blog/js/headerFix.js"></script>
 	
-	<!-- <script src="http://192.168.0.44:3000/socket.io/socket.io.js/"></script> -->
+		
+	<script src="http://192.168.0.44:3000/socket.io/socket.io.js/"></script>
   	<script src="../header2/js/message.js"></script>
-  	<script src="../header2/js/header.js"></script>
 	<!-- socket.io -->
 	<script type="text/javascript">
 		$(".header").load(contextPath+"/header2/header.html .header");
 	</script>
-	<script type="text/javascript" src="../header2/js/modernizr.custom.79639.js"></script> 
 </body>
 </html>
