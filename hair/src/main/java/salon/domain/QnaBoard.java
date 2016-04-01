@@ -3,6 +3,8 @@ package salon.domain;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class QnaBoard {
 	
 	private int qna_no;
@@ -11,30 +13,11 @@ public class QnaBoard {
 	private String qna_content;
 	private Date reg_Date;
 	private int viewnum;
-	private int grp;
-	private int seq;
-	private String lvl;
+	private int replyCount;
 	
 	
-	public int getGrp() {
-		return grp;
-	}
-	public void setGrp(int grp) {
-		this.grp = grp;
-	}
-	public int getSeq() {
-		return seq;
-	}
-	public void setSeq(int seq) {
-		this.seq = seq;
-	}
 	
-	public String getLvl() {
-		return "";
-	}
-	public void setLvl(String lvl) {
-		this.lvl = lvl;
-	}
+	
 	public int getViewnum() {
 		return viewnum;
 	}
@@ -74,8 +57,12 @@ public class QnaBoard {
 		this.reg_Date = reg_Date;
 	}
 	
+	public int getReplyCount() {
+		return this.replyCount;
+	}
 	
-	
-	
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
 
 }
