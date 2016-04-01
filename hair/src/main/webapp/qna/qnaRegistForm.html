@@ -24,14 +24,13 @@ function getContextPath(){
 
     var contextRoot = contextPath;
 
-  $.ajax(contextRoot + '/board/getSession.do',{
+$.ajax(contextRoot + '/board/getSession.do',{
 	dataType: 'json',
 	method: 'GET',
-	success: function(nick) {
-	   $("[name='nick']").val(nickname);
+	success: function(result) {
+	 $("[name='nick']").val(result.nick);
 	}
- });
-
+});
 
 </script>
 
@@ -45,16 +44,14 @@ function getContextPath(){
  <div id="content">
 <form action="/hair/board/regist.do" enctype="multipart/form-data" method="post">
 <table align="center" width="650px">
-<tr><td><div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">닉네임</span>
-  <input type="text" name="nick" class="form-control" placeholder="닉네임입력"  aria-describedby="basic-addon1">
-</div></td></tr>
+
 <tr><td><div class="input-group">
   <span class="input-group-addon" id="basic-addon1">제목</span>
   <input type="text" name="qna_title" class="form-control" placeholder="제목입력" aria-describedby="basic-addon1">
 </div></td></tr>
 <tr><td><textarea class="form-control" name="qna_content" rows="7"></textarea></td></tr>
  </table>
+  <input type="hidden" name="nick">
 <p align="center"><input type="submit" id="savebutton" value="글등록">
  <input type="button" value="취소" onclick="document.location.href='qnaList.html'"></p>
  </form>
