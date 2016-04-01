@@ -1,5 +1,6 @@
 package salon.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,5 @@ public interface ShopDao {
 	public List<ShopImage> selectShopImageList(Shop shop);
 	public void insertImage(ShopImage shopImage);
 	public List<Shop> getShop(Shop shop);
+	public List<Shop> favShop(HashMap<String, Object> resultMap);
 }
