@@ -11,21 +11,24 @@ var contextPath =  getContextPath();
 var loginUserNickName = "";
 var loginUserMno = "";
 var loginUserPhoto = "";
-$.post(
-	contextPath+"/message/loginUserInfo.do",
-	function(data){
-		console.log("로그인유저정보:");
-		console.log(data);
-		loginUserNickName = data.nick;
-		loginUserMno = data.mno;
-		loginUserPhoto = data.photoPath;
-		console.log(loginUserPhoto);
-		console.log(loginUserNickName);
-		
-		/*$(".loginUserNameDisply").text(loginUserNickName);*/
-	}
-)
 
+var messageInit = function(){
+	$.post(
+		contextPath+"/message/loginUserInfo.do",
+		function(data){
+			console.log("로그인유저정보:");
+			console.log(data);
+			loginUserNickName = data.nick;
+			loginUserMno = data.mno;
+			loginUserPhoto = data.photoPath;
+			console.log(loginUserPhoto);
+			console.log(loginUserNickName);
+			
+			/*$(".loginUserNameDisply").text(loginUserNickName);*/
+		}
+	)
+}
+messageInit();
 
 //메시지창 열기
 var messageOpen = function(){
@@ -135,7 +138,6 @@ var addDsnInfoList = function(data){
 //메신저창 열기
 var messageBegin = function(target){
 	//채팅대상 이름 지정
-	
 	var targetUserNickName = $(target).find(".dsnNickName").text();
 	var mno = 5;
 	if(target != null){
@@ -150,8 +152,18 @@ var messageBegin = function(target){
 	loadMessageList();
 }
 
+//알람으로 받은 메시지창 열기
+var alramMessageBegin = function(target){
+	//채팅대상 이름 지정
+	var targetUserNickName = $(target).find(".senderName").text();
+	targetUserMno = $(target).attr("smno");
+	$(".messageBox").show("fast");
+	$(".messageRoomName").text(loginUserNickName + " + " + targetUserNickName);
+	loadMessageList(targetUserMno);
+}
+
 //메신저창에 대화 불러오기
-var loadMessageList = function(){
+var loadMessageList = function(targetUserMno){
 	$.post(
 			contextPath+"/message/list.do",
 			{rmno:targetUserMno, smno:loginUserMno},
@@ -208,8 +220,10 @@ var socket = io.connect('http://192.168.0.44:3000');
     	if(data.smpho != null){
     		$(cloneAlram).find(".senderPhoto").attr("src",data.smpho);
     	}
+    	$(cloneAlram).attr("smno",data.smno);
     	$(".alramDiv").append(cloneAlram);
     	$(cloneAlram).show('fast');
+    	
     	//지정된 시간 후에 실행하는 함수
     	setTimeout(function() {
     		setTimeout(function(){
@@ -217,6 +231,7 @@ var socket = io.connect('http://192.168.0.44:3000');
     		},1000)
     		$(cloneAlram).hide('fast');
     	}, 4000);
+    	
     }
     $('.messageContents').animate({ scrollTop: 100000 }, 'slow');
 });
@@ -268,4 +283,16 @@ var addMoreReceiveMessage = function(data){
 	$(cloneReceiveMessage).attr("messageNo",data.messageNo);
 	$(".messageContents").prepend(cloneReceiveMessage);
 	$(cloneReceiveMessage).show();
+}
+
+var reservationToMessenger = function(target){
+	messageInit();
+	$(".messageBox").show("fast");
+	var managerNo = $(target).attr("managerNo")
+	var managerNick = $(target).attr("managerNick")
+	var shopName = $(target).attr("shopName")
+	console.log(managerNo, managerNick, shopName);
+	$(".messageRoomName").text(loginUserNickName+" + "+shopName+"/"+managerNick);
+	targetUserMno = managerNo;
+	
 }
