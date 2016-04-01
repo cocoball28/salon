@@ -6,18 +6,21 @@ import java.util.Date;
 public class QnaReply {
 	
 	private int qnaReply_no;
-	private String nick;
+	private String qnaReply_nick;
 	private String qnaReply_content;
 	private Date qnaReply_date;
 	private int qna_no;
 	
 	
 	
-	public String getNick() {
-		return nick;
+	
+	
+	
+	public String getQnaReply_nick() {
+		return qnaReply_nick;
 	}
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setQnaReply_nick(String qnaReply_nick) {
+		this.qnaReply_nick = qnaReply_nick;
 	}
 	public int getQna_no() {
 		return qna_no;
