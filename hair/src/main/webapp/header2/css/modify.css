@@ -1,12 +1,20 @@
-@CHARSET "UTF-8";
-@charset "UTF-8";
-
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-
-* {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
+/* file */
+.preDiv{
+	width: 200px;
+	height: 300px;
+	margin: 0 auto;
+}
+.preImg{
+	width: 100%;
+	heigth: 100%;
+	position: relative;
+}
+#file{
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	z-index: 10;
+	opacity: 0;
 }
 
 body {
@@ -17,16 +25,23 @@ body {
 	background-size: cover;
 }
 
+#callmodi{
+	position: absolute;
+	height: 700px;
+	width: 100%;
+	display: none;
+}
+
 body .container {
 	position: relative;
-	overflow: hidden;
 	width: 350px;
-	height: 600px;
+	height: 700px;
 	margin: 70px auto 0;
-	background-color: rgba( 255, 255, 255, 0.7 );
+	background-color: #867b7b;
 	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
+	z-index: 100;
 }
 
 body .container .half {
@@ -293,20 +308,4 @@ keyframes slideIn { 0% {
 	text-decoration: none;
 }
 
-.preDiv{
-	width: 130px;
-	height: 150px;
-	margin: 0 auto;
-}
-.preImg{
-	width: 130px;
-	heigth: 150px;
-	position: absolute;
-}
-#file{
-	width: 130px;
-	height: 130px;
-	position: absolute;
-	z-index: 10;
-	opacity: 0;
-}
+
