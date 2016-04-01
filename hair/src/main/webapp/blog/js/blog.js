@@ -1,3 +1,46 @@
+// login check
+$(document).ready(function(){
+	 /* check login */
+	$.get("/hair2/auth/checkLogin.do", function(data){
+		 if(data.data == null){
+			 alert("로그인이 필요한 페이지 입니다.");
+			 window.location.href = contextPath+"/auth/index.html#signin";
+			 } else{ 
+				 $("#dd").append(data.data.nick);
+				 $("#dd").append("<input type='hidden' id='memberNo' value="+data.data.mno+" />")
+			 return true;
+		 }
+	});
+		
+}); 
+
+/* favorite ==================================*/
+$(document).on('click', '.bookmark', function(){
+	var mno = $("#dd").find("#memberNo").val();
+	var mdno = $("#mdno").val();
+	var bno	=$(this).closest(".mainContents").attr("blogNo");
+	var from = $(this).attr("from")
+	console.log("from" + from);
+	var change = $(this).find(".fa");
+	var getClass = $(this).find("i").attr("class");
+	var fav;
+	if(getClass == "fa fa-heart"){
+		fav = 0;
+	}else{
+		fav = 1;
+	}
+	 $.get("/hair2/salon/ajax/updateFav.do",
+		{mno: mno,
+		 mdno: mdno,
+		 bno: bno,
+		 from: from,
+		 fav: fav})
+		.done(function(){
+		change.toggleClass("fa-heart fa-heart-o");
+	 }); 
+	return false; 
+});
+
 // 현재 들어온 페이지 번호
 var currentViewDsnNo = $(location).attr('search').split("=")[1];
 console.log(currentViewDsnNo);
@@ -61,8 +104,8 @@ var closeMessage = function(){
 );*/
 
 
-// 동료 미용사 정보 
-/*
+// 동료 미용사 정보
+/* 
 var isAnimate = false;
 $(".partnerInfo").mouseenter(function(e){
 	e.stopPropagation();
@@ -77,8 +120,6 @@ $(".partnerInfo").mouseout(function(e){
 	$(this).next().hide('slow');
 });
 */
-
-
 
 $(".showShopIcon").hover(
 		function(){
@@ -205,13 +246,19 @@ $(function(){
 			blogPath+"/blog/list.do",
 			{"mno":currentViewDsnNo},
 			function(data){
-				console.log("블로그 화면 출력");
 				console.log(data);
-				insertShopInfo(data.shopInfo);
 				blogOwnerCheck(data.myBlogFlag);
-				printDsnInfo(data.dsnInfo);	
+				printDsnInfo(data.dsnInfo);
 				for(var i = 0; i < data.blogList.length ; i ++){
-					addBoard(data.blogList[i]);
+						addBoard(data.blogList[i]);
+				}
+				for(var i = 0; i < data.favList.length ; i ++){
+					if(data.favList[i].mdno == $("#mdno").val()){
+						dsnFav(data.favList[i].mdno);
+					}
+				}
+				for(var i = 0; i < data.favList.length ; i ++){
+					addFav(data.favList[i].bno);
 				}
 				for(var i = 0 ; i < data.partnerInfo.length ; i++){
 					addPartnerInfo(data.partnerInfo[i]);
@@ -220,25 +267,6 @@ $(function(){
 	});
 })
 /* 첫 화면 출력 =================================*/
-
-
-/* 미용실 정보 출력*/
-var insertShopInfo = function(data){
-	$(".shopName").text(data.name);
-	$(".shopTelephoneNumber").text(data.tel);
-	$(".shopAddr").text(data.addr);
-	$(".shopInformation").attr("sano",data.sano)
-}
-/* 미용실 정보 출력*/
-
-
-/* 미용실로 이동 ================================*/
-var moveToShopService = function(target){
-	var sano = $(target).attr("sano");
-	var url = contextPath+"/shop/shop.html?sano="+sano;    
-	$(location).attr('href',url);
-}
-/* 미용실로 이동 ================================*/
 
 
 /* 디자이너 본인 여부 확인 ===========================*/
@@ -253,9 +281,12 @@ var blogOwnerCheck = function(data){
 
 
 /* 디자이너 정보 출력 =============================*/
-var blogDsnNick = "";
-var blogDsnMno = "";
 var printDsnInfo = function(data){
+	console.log("디자이너 정보 : "+data);
+	console.log(data);
+	/* 디자이너 멤버 번호 */
+	$("#mdno").val(data.mno);
+	
 	if(data.photoPath == null){
 		$("#hairdresserPhoto").attr("src","img/contents/default-portrait.png");
 	}else{
@@ -268,47 +299,13 @@ var printDsnInfo = function(data){
 	}else{
 		gender = "male";
 	}
-	blogDsnMno = data.mno;
 	$("#hairdresserIntroduce").text(data.email+", "+data.nick+", "+gender);
 };
+
+var dsnFav = function(mdno){
+	$(".infoDiv").find(".fa").toggleClass("fa-heart fa-heart-o");
+}
 /* 디자이너 정보 출력 =============================*/
-
-
-/* 파트너 디자이너 정보 출력 ================================*/
-var addPartnerInfo = function(data){
-	if(data.mno == blogDsnMno){
-		return null;
-	}
-	var clonePartnerInfo = $(".clonePartnerInfoList").find(".partnerInfo").clone();
-	if(data.photoPath != null){
-		clonePartnerInfo.find(".partnerGeneralInfo").find(".partnerPhoto").attr("src",data.photoPath);
-		clonePartnerInfo.find(".partnerDetailInfoDiv").find(".partnerPhoto").attr("src",data.photoPath);
-	}
-	clonePartnerInfo.find(".partnerGeneralInfo").find(".partnerName").text(data.nick);
-	clonePartnerInfo.find(".partnerDetailInfoDiv").find(".partnerName").text(data.nick);
-	var gender="";
-	if(data.gender == "f"){
-		gender = "female";
-	}else{
-		gender = "male";
-	}
-	clonePartnerInfo.find(".partnerDetailInfoDiv").find(".parnerIntroduce").text(data.email+", "+data.nick+", "+gender);
-	$(".partnerInfoList").append(clonePartnerInfo);
-}
-/* 파트너 디자이너 정보 출력 ===============================*/
-
-
-
-/* 파트너 디자이너 상세정보 열기 및 닫기 =============================*/
-var viewPartnerDetailInfo = function(target){
-	$(target).closest(".partnerInfo").find(".partnerDetailInfoDiv").show('slow');
-	$(target).attr("onclick","closePartnerDetailInfo(this)");
-}
-var closePartnerDetailInfo = function(target){
-	$(target).closest(".partnerInfo").find(".partnerDetailInfoDiv").hide('slow');
-	$(target).attr("onclick","viewPartnerDetailInfo(this)");
-}
-/* 파트너 디자이너 상세정보 열기 및 닫기=============================*/
 
 
 /* 블로그 글삭제 파트 ==================================*/
@@ -367,6 +364,9 @@ var addBoard = function(blog){
 		cloneContent.find('.blogImagesDiv').remove();
 	}
 	$(".blogMainContents").prepend(cloneContent);
+}
+var addFav = function(favList){
+	$("[blogNo="+favList+"]").find(".fa").toggleClass("fa-heart fa-heart-o");
 }
 /* 블로그 출력 파트 =================================*/
 
