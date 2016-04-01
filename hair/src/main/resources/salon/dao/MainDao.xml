@@ -30,28 +30,45 @@
      limit #{startIndex}, #{length};
 	</select> 
 	
-	<select id="selectByNo" parameterType="map" resultType="int">
+	<!-- <select id="selectByNo" parameterType="map" resultType="int">
 		select fav
 		  from favorite
 		 where bno = #{bno}
 		   and mno = #{mno}
-	</select>
+	</select> -->
 	
-	<select id="favList" parameterType="int" resultType="int">
-		select bno
-		  from favorite
-		 where mno = #{mno}
-	</select>
+	<!-- favorite -->
 	
-	<insert id="insertFav" parameterType="map">
-		insert into favorite (mno, bno) 
-		values (#{mno}, #{bno})
+	<insert id="insertFav" parameterType="favorite">
+			insert into favorite (mno, 
+				<choose>
+					<when test="from == 'blog'">bno</when>
+					<when test="from == 'shop'">sano</when>
+					<when test="from == 'designer'">mdno</when>
+				</choose>
+			) values (#{mno},
+				<choose>
+					<when test="from == 'blog'">#{bno}</when>
+					<when test="from == 'shop'">#{sano}</when>
+					<when test="from == 'designer'">#{mdno}</when>
+				</choose>
+			)
 	</insert>
 	
-	<delete id="deleteFav" parameterType="map">
+	<delete id="deleteFav" parameterType="favorite">
 		delete from favorite
 		 where mno = #{mno}
-		   and bno = #{bno}
+		   and <choose>
+					<when test="from == 'blog'">bno</when>
+					<when test="from == 'shop'">sano</when>
+					<when test="from == 'designer'">mdno</when>
+				</choose> 
+				= 
+				<choose>
+					<when test="from == 'blog'">#{bno}</when>
+					<when test="from == 'shop'">#{sano}</when>
+					<when test="from == 'designer'">#{mdno}</when>
+				</choose>
 	</delete>
 	  	
   	<select id="getBlogbyFav" parameterType="map" resultMap="blogMap">
@@ -59,10 +76,19 @@
 	      from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
 		 where t1.bno in (select bno
 					     from favorite
-					    where mno = 1)
+					    where mno = #{mno})
 	     order by t1.bno 
   		 limit #{startIndex}, #{length};
   	</select>
+  	
+  	
+  	
+  	
+  	<select id="favBlogList" parameterType="int" resultType="favorite">
+		select bno, sano, mdno
+		  from favorite
+		 where mno = #{mno}
+	</select>
   	
   	<select id="search" parameterType="map" resultMap="blogMap">
 		 select t1.bno, t1.mno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 

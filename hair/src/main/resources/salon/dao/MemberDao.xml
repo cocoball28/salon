@@ -31,6 +31,15 @@
   		  from member
   		 where mno = #{mno}
   	</select>
+	
+	<!-- fav designer member -->
+  	<select id="favMember" parameterType="map" resultMap="memberMap">
+  		select mno, nick, email, photo_path, gender, status
+  		  from member
+  		 where mno in (select mdno
+  		 				 from favorite
+  		 				where mno = #{mno})
+  	</select> 
    	
 	<select id="modifyUser" parameterType="int" resultType="member">
 		select *
