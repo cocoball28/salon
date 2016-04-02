@@ -69,7 +69,6 @@
     
 	
 	/* search list */
-		console.log(pageParam);
       $("#searchBar").val(pageParam);
 		$.getJSON(contextPath+"/salon/ajax/search.do",{result:pageParam},function(resultObj){
 			var cnt = 0;
