@@ -64,7 +64,11 @@
 				var html = ""
 				html += '<div class="wf-box '+ value.bno +'">'; 
 				html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
-				html += '<image src='+value.blogImageList[0].path+'/></a>';
+				if(value.blogImageList[0].path != null){	
+					html += '<image src='+value.blogImageList[0].path+'/></a>';
+				}else{
+					html += '<image src="images/user.png"/></a>';
+				}
 				html += '<div class="content">';
 				html += '<h3>'+value.tag+'</h3>';
 				html += '<hr>';
@@ -80,7 +84,6 @@
 				if(cnt == 5) cnt = 0;
 		  });
 		   $.each(resultObj.favList, function(key, value){
-			   console.log(value)
 			   var no = value.bno;
 			   $("." + no).find(".fa").toggleClass("fa-heart fa-heart-o");
 		   })
