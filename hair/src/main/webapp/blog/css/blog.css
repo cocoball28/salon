@@ -12,12 +12,10 @@ body {
 
 .contentControlBtn {
 	cursor: pointer; 
-	font-size: 10px;
+	font-size: 15px;
 	/* 
 	font-weight:bold; 
 	*/
-	color: grey;
-	cursor:pointer;
 }
 .contentControlBtn:HOVER {
 	color: lightgrey;
@@ -73,9 +71,13 @@ body {
 	
 }
 
+.contentControlBtn:HOVER{
+	background: #d00;
+	color: white;
+}
+
 .mainContents {
 	background: white;
-	padding: 10px;
 	margin: 10px;
 	border: 1px solid #F5F3F3;
 }

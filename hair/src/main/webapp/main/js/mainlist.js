@@ -9,7 +9,7 @@
 	 /* check login */
 	$(document).ready(function(){
 		 /* check login */
-		$.get("/hair2/auth/checkLogin.do", function(data){
+		$.get(contextPath+"/auth/checkLogin.do", function(data){
 			 if(data.data == null){
 				 alert("로그인이 필요한 페이지 입니다.");
 				 window.location.href = contextPath+"/auth/index.html#signin";
@@ -42,7 +42,7 @@
 		}else{
 			fav = 1;
 		}
-		 $.get("/hair2/salon/ajax/updateFav.do",
+		 $.get(contextPath+"/salon/ajax/updateFav.do",
 			{mno: mno,
 			 bno: bno,
 			 from: from,
@@ -57,8 +57,9 @@
 /* list ajax */
 	$(document).ready(function(){
 		
-	  $.getJSON( ""+contextPath+"/salon/ajax/list.do"+"", function(resultObj) {
+	  $.getJSON( contextPath+"/salon/ajax/list.do", function(resultObj) {
 		   var cnt = 0;
+		   console.log(resultObj);
 		   $.each(resultObj.mList, function(key, value){
 				var html = ""
 				html += '<div class="wf-box '+ value.bno +'">'; 

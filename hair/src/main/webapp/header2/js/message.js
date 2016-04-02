@@ -189,6 +189,7 @@ var sendMessage = function(target){
 	}
 	
 	//node.js
+	/*
 	if(event.keyCode == 13){
 		$.ajax({
 			   url: "http://192.168.0.44:3000/sendMsg?callback=?&smno=" + loginUserMno + "&rmno=" + targetUserMno+"&content="+content,
@@ -204,11 +205,13 @@ var sendMessage = function(target){
 		$(target).val("");
 		$('.messageContents').animate({ scrollTop: 100000 }, 'slow');
 	}
+	*/
 	
 };
 
 //node.js
 //소켓 생성
+/*
 var socket = io.connect('http://192.168.0.44:3000');
 	socket.on('toClient',function(data){
 		console.log(data);
@@ -235,6 +238,8 @@ var socket = io.connect('http://192.168.0.44:3000');
     }
     $('.messageContents').animate({ scrollTop: 100000 }, 'slow');
 });
+*/
+
 
 //메시지 더 보기 버튼
 var readMoreMessage = function(target){

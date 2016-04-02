@@ -1,7 +1,7 @@
 // login check
 $(document).ready(function(){
 	 /* check login */
-	$.get("/hair2/auth/checkLogin.do", function(data){
+	$.get(blogPath+"/auth/checkLogin.do", function(data){
 		 if(data.data == null){
 			 alert("로그인이 필요한 페이지 입니다.");
 			 window.location.href = contextPath+"/auth/index.html#signin";
@@ -29,7 +29,7 @@ $(document).on('click', '.bookmark', function(){
 	}else{
 		fav = 1;
 	}
-	 $.get("/hair2/salon/ajax/updateFav.do",
+	 $.get(blogPath + "/salon/ajax/updateFav.do",
 		{mno: mno,
 		 mdno: mdno,
 		 bno: bno,
@@ -256,6 +256,10 @@ $(function(){
 				for(var i = 0; i < data.blogList.length ; i ++){
 						addBoard(data.blogList[i]);
 				}
+				for(var i = 0 ; i < data.partnerInfo.length ; i++){
+					addPartnerInfo(data.partnerInfo[i]);
+				}
+				$("#loginUserId").text(data.loginUser.nick);
 				for(var i = 0; i < data.favList.length ; i ++){
 					if(data.favList[i].mdno == $("#mdno").val()){
 						dsnFav(data.favList[i].mdno);
@@ -264,10 +268,7 @@ $(function(){
 				for(var i = 0; i < data.favList.length ; i ++){
 					addFav(data.favList[i].bno);
 				}
-				for(var i = 0 ; i < data.partnerInfo.length ; i++){
-					addPartnerInfo(data.partnerInfo[i]);
-				}
-				$("#loginUserId").text(data.loginUser.nick);
+				partnerInfoEffect();
 	});
 })
 /* 첫 화면 출력 =================================*/
@@ -280,7 +281,33 @@ var insertShopInfo = function(data){
 	$(".shopAddr").text(data.addr);
 	$(".shopInformation").attr("sano",data.sano)
 }
+$(".shopInformation").hover(
+		function(){
+			$(".shopInformation").animate({opacity:0.6},200);
+			$(".shopInformation").css({"background-color":"#ddd"});
+			$(".shopInformationBanner").css({"background-color":"#d00"})
+		},
+		function(){
+			$(".shopInformation").css({"background-color":"white"})
+			$(".shopInformation").animate({opacity:1},200);
+			$(".shopInformationBanner").css({"background-color":"#333"})
+			$(".shopInformationBanner").animate({opacity:1},200);
+		}
+)
+var partnerInfoEffect = function(){ 
+	$(".partnerInfomation").hover(
+			function(){
+				$(".partnerInformationBanner").css({"background-color":"#d00"})
+			},
+			function(){
+				$(".partnerInformationBanner").css({"background-color":"#333"})
+			}
+	)
+}
+
 /* 미용실 정보 출력*/
+
+
 
 
 /* 미용실로 이동 ================================*/
@@ -312,6 +339,7 @@ var printDsnInfo = function(data){
 	}else{
 		$("#hairdresserPhoto").attr("src",data.photoPath);
 	}
+	$("#mdno").val(data.mno);
 	$("#hairdresserName").text(data.nick);
 	var gender="";
 	if(data.gender == "f"){
@@ -320,7 +348,7 @@ var printDsnInfo = function(data){
 		gender = "male";
 	}
 	blogDsnMno = data.mno;
-	$("#hairdresserIntroduce").text(data.email+", "+data.nick+", "+gender);
+	$("#hairdresserIntroduce").text(data.email);
 };
 /* 디자이너 정보 출력 =============================*/
 

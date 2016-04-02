@@ -13,16 +13,7 @@
 <link rel="stylesheet" type="text/css" href="../header2/css/header.css" />
 <!-- <link rel="stylesheet" type="text/css" href="../header2/css/modify.css" /> -->
 <link href="../header2/css/message.css" rel="stylesheet">
-<!-- <script src="http://192.168.0.44:3000/socket.io/socket.io.js/"></script> -->
 <title>blog</title>
-<!-- Bootstrap core CSS -->
-<!-- Custom styles for this template -->
-<!-- <style type="text/css">
-.headSticky {
-	top:-200px;;
-	position: fixed;
-}
-</style> -->
 </head>
 <body style="background:#f5f5f5">
 	<div id="cover"></div>
@@ -38,13 +29,12 @@
 					<div style="background: white; width: 220px; padding: 10px; border: 1px solid #F5F3F3;">
 						<img id="hairdresserPhoto" src="img/contents/default-portrait.png" width="200px;"> 
 					</div>
-					<div style="background: white; width: 220px; height:30px;; margin-top:3px;; border: 1px solid #F5F3F3; text-align: center; padding-top: 3px;">
-						<span style="text-align: center;"><b id="hairdresserName">Cara Delevingne</b><input type="hidden" id="mdno" value=""/></span>
-						<span style="float: right; width: 0px; right: 20px; position: absolute;"><a class="bookmark" from="designer"><i class="fa fa-heart-o" ></i></a></span>
+					<div style="background: white; width: 220px; height:30px;; margin-top:3px;; border: 1px solid #F5F3F3; text-align: center;">
+						<span style="text-align: center;"><b id="hairdresserName" style="font-size: 20px;"></b><input type="hidden" id="mdno" value=""/></span>
+						<span style="float: right; padding-right: 5px; padding-top: 3px;"><a class="bookmark" from="designer"><i class="fa fa-heart-o" ></i></a></span>
 					</div>
 					<div style="background: white; width: 220px; padding: 5px 0px 0px 0px; margin-top:3px; border: 1px solid #F5F3F3; font-size: 12px; text-align: center;">
-						<p id="hairdresserIntroduce">email, nick, gender, shopName</p>
-						<p id="telephoneNumber">010-1234-1234</p>
+						<p id="hairdresserIntroduce" style="font-size: 15px;"></p>
 					</div>
 				</div>
 				<div class="infoDivDummy">
@@ -62,8 +52,8 @@
 				<div class="contentDiv">
 <!-- 실제 컨텐츠 -------------------------------------------------------------------------------------->
 					<form class="registForm">
-						<div class="mainContents registForm" style="display: none;">
-							<div style="padding: 0px">
+						<div class="mainContents registForm" style="">
+							<div style="padding-left: 10px;padding-right: 10px;padding-top: 10px">
 								<h2 style="margin: 0px">
 									<input type="text" placeholder="Tag" name="tag" style="border: 0px; margin: 5px; width: 100%">
 								</h2>
@@ -93,19 +83,10 @@
 							
 							<hr style="margin: 0px">
 							
-							<!--  
-							<div style="padding: 0px">
-								<input type="text" placeholder="#Tag"
-									style="border: 0px; margin: 5px; width: 100%">
-							</div>
-							<hr style="margin: 0px">
-							-->
-							
 							<div>
-								<div style="margin: 5px;">
-									<span class="contentControlBtn" onclick="registBlog()" >REGIST</span>
-									&nbsp;
-									<span class="contentControlBtn" onclick="cancelRegist()" >CANCEL</span>
+								<div style="margin: 0px; padding: 0px; height: 30px;">
+									<div class="contentControlBtn" onclick="registBlog()" style="height: 30px; float: left; padding: 5px; padding-left:10px; padding-right:10px; ;color: ; font-weight: bold;" >REGIST</div>
+									<div class="contentControlBtn" onclick="cancelRegist()" style="height: 30px; float: left; padding: 5px; padding-left:10px; padding-right:10px; ;color: ; font-weight: bold;"  >CANCEL</div>
 								</div>
 							</div>
 						</div>
@@ -154,28 +135,30 @@
 			</div>
 
 <!-- 오른쪽정보 DIV--------------------------------------------------------- -->
-			<div class="secondInfoDiv" style=" background:; color: grey; ">
+			<div class="secondInfoDiv" style=" background:;">
 				<div>
-					<div style="text-align: center; font-weight: bold; font-size: 15px; background: rgba(30,30,30,0.9); color: lightgrey;">
+					<div class="shopInformationBanner" style="text-align: center; font-weight: bold; font-size: 15px; background: #333; color: white;">
 						<span>SHOP INFORMATION</span>
 					</div>
-						<div class="shopInformation" style="background: white; margin: 5px; cursor: pointer; border: 1px solid #eee;" onclick="moveToShopService(this);">
-							<div style="padding: 10px; text-align: center;">
-								<div>
-									<span class="shopName" style="font-weight: bold; font-size: 14px;">유숙헤어</span>
-								</div>
-								<div>
-									<span>Tel : </span><span class="shopTelephoneNumber">02-1313-1313</span>
-								</div>
-								<div>
-									<span>Loc : </span><span class="shopAddr">경기도 광명시</span>
-								</div>
+					<div class="shopInformation" style="background: white; margin: 5px;cursor: pointer; border: 1px solid #eee;" onclick="moveToShopService(this);">
+						<div style="padding: 10px; text-align: center;">
+							<div>
+								<span class="shopName" style="font-weight: bold; font-size: 20px;"></span>
+							</div>
+							<div>
+								<span>Tel : </span><span class="shopTelephoneNumber"></span>
+							</div>
+							<div>
+								<span class="shopAddr" style="font-size: 10px;"></span>
 							</div>
 						</div>
-					<div style="margin-top:20px;;text-align: center; font-weight: bold; font-size: 15px; background: rgba(30,30,30,0.9); color: lightgrey;">
-						<span>PARTNER DESIGNER</span>
 					</div>
-					<div class="partnerInfoList"></div>
+					<div class="partnerInfomation">
+						<div class="partnerInformationBanner" style="margin-top:20px;;text-align: center; font-weight: bold; font-size: 15px; background: rgba(30,30,30,0.9); color: white;">
+							<span>PARTNER DESIGNER</span>
+						</div>
+						<div class="partnerInfoList"></div>
+					</div>
 				</div>		
 			</div>
 		</div>
@@ -278,10 +261,9 @@
 	<script type="text/javascript" src="../header2/js/modernizr.custom.79639.js"></script> 
 	<script type="text/javascript" src="../blog/js/headerFix.js"></script>
 	
-		
-	<script src="http://192.168.0.44:3000/socket.io/socket.io.js/"></script>
-  	<script src="../header2/js/message.js"></script>
 	<!-- socket.io -->
+	<!-- <script src="http://192.168.0.44:3000/socket.io/socket.io.js/"></script> -->
+  	<script src="../header2/js/message.js"></script>
 	<script type="text/javascript">
 		$(".header").load(contextPath+"/header2/header.html .header");
 	</script>
