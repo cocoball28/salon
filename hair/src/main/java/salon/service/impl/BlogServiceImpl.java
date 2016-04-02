@@ -86,16 +86,18 @@ public class BlogServiceImpl implements BlogService {
 		System.out.println(mno);
 		map.put("loginUser", loginUser);
 		map.put("dsnInfo", blogDao.selectDsnInfo(blog));
-//		map.put("partnerInfo", Object);
+		int sano = blogDao.selectDsnInfo(blog).getSano();
+		map.put("partnerInfo", blogDao.selectPartnerDsnInfo(loginUser));
 		map.put("blogList", blogDao.selectBlogList(blog));
-		boolean myBlogFlag;
+		map.put("shopInfo", blogDao.selectShopInfo(sano));
+		boolean myBlogFlag = false;
 		if(loginMemberNo == mno){
 			myBlogFlag = true;
 		}else{
 			myBlogFlag = false;
 		}
-		map.put("favList", mainDao.favBlogList(mno));
 		map.put("myBlogFlag",myBlogFlag);
+		map.put("favList", mainDao.favBlogList(mno));
 		return map;
 	}
 
