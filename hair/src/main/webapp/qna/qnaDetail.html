@@ -24,7 +24,7 @@
      <div id="sidebar"></div>
      
      <div id="content" align="center">
-     <table width="500" align="center" id="basic_table">
+     <table width="600" align="center" id="basic_table">
      </table>
      
      
@@ -38,7 +38,7 @@
      
      <div id="replyList">
      
-		<table class="table table-hover" width="500" align="center" id="reply_table" border="1">
+		<table class="table table-hover" width="500" align="center" id="reply_table">
         </table>
         <form action="/hair/board/insertReply.do" method="post" name="replyForm">
         
@@ -87,33 +87,19 @@
 				 //alert(resultObj);
 				  var board = resultObj.data;
 				  //alert(board.qna_title);
-				    $("<tr>").html("<td><div class='input-group'>"+
-				             "<span class='input-group-addon' id='basic-addon1'>제목</span>"+
-				             "<input type='text' id='qna_title' value="+board.qna_title+" name='qna_title'"+ 
-				              "class='form-control aria-describedby='basic-addon1' readonly>"+
-				              "</div></td></tr>").appendTo(table);
-				    $("<tr>").html("<td><div class='input-group'>"+
-				             "<span class='input-group-addon' id='basic-addon1'>닉네임</span>"+
-				             "<input type='text' id='nick' value="+board.nick+" name='nick'"+ 
-				             "class='form-control aria-describedby='basic-addon1' readonly>"+
-				              "</div></td></tr>").appendTo(table);
-				    $("<tr>").html("<td><div class='input-group'>"+
-				             "<span class='input-group-addon' id='basic-addon1'>작성일</span>"+
-				             "<input type='text' id='reg_Date' value="+board.reg_Date+" name='reg_Date'"+ 
-				              "class='form-control aria-describedby='basic-addon1' readonly>"+
-				              "</div></td></tr>").appendTo(table);
-				    $("<tr>").html("<td><div class='input-group'>"+
-				             "<span class='input-group-addon' id='basic-addon1'>번호</span>"+
-				             "<input type='text' id='qna_no' value="+board.qna_no+" name='qna_no'"+ 
-				              "class='form-control aria-describedby='basic-addon1' readonly>"+
-				              "</div></td></tr>").appendTo(table);
-			        $("<tr>").html("<td><div class='input-group'>"+
-				             "<span class='input-group-addon' id='viewnum'>조회수</span>"+
-				             "<input type='text' id='viewnum' value="+board.viewnum+" name='viewnum'"+ 
-				              "class='form-control aria-describedby='basic-addon1' readonly>"+
-				              "</div></td></tr>").appendTo(table);
-			        $("<tr>").html("<td><textarea name='qna_content' id='qna_content'rows='7'cols='70' readonly>"+board.qna_content+
-			        		 "</textarea></td></tr>").appendTo(table);
+				    $("<tr>").html
+				           ("<td colspan='4'><input type='text' size='83' class='form-control' id='qna_title' value="+board.qna_title+" name='qna_title' readonly></td></tr>").appendTo(table);
+				    $("<tr>").html
+				              ("<td>닉<input text='text' size=10 id='nick' name='nick' value="+board.nick+" readonly></td>"+
+				              "<td>번호<input type='text' size=5 id='qna_no' value="+board.qna_no+" name='qna_no' readonly></td>"+
+			                  "<td align ='right'>조회수:"+board.viewnum+"</td>"+
+			                  "<td align ='right'>"+board.reg_Date+" </td></tr>").appendTo(table);
+			        $("<tr>").html
+			        ("<td colspan='4'><textarea name='qna_content' class='form-control' id='qna_content'rows='7'cols='85' readonly>"+board.qna_content+
+	        		 "</textarea></td></tr>").appendTo(table);
+			        
+			        
+			        
 			        $("[name='qna_no']").val(board.qna_no);
 			        
 			        
@@ -182,10 +168,10 @@
 				var idx = 0;
 			    for (var reply of resultObj.data) {
 			    	$("<tr>")
-				      .html("<td align='center'>닉네임:"+reply.qnaReply_nick+"</td>"+
-				             "<td align='center'>작성일:"+reply.qnaReply_date+"</td></tr>").appendTo(table);
+				      .html("<td align='center'>"+reply.qnaReply_nick+"</td>"+
+				             "<td align='center'>"+reply.qnaReply_date+"</td></tr>").appendTo(table);
 				    $("<tr>")
-				      .html("<td colspan='2'>"+reply.qnaReply_content+"</td></tr>").appendTo(table);
+				      .html("<td colspan='2'><textarea class='form-control' rows='2' readonly>"+reply.qnaReply_content+"</textarea></td></tr>").appendTo(table);
 				    $("<tr>")
 				      .html("<td colspan='2' align='center'>"+
 				           "<input type='button' id='replyupdate" + idx +"' class='btn btn-default' data-target='#layerpop' data-toggle='modal' value='수정'"+
