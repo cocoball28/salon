@@ -16,7 +16,6 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link href="shop/css/shop.css" rel="stylesheet" media="screen" />
 <link href="shop/css/reservation.css" rel="stylesheet" media="screen" />
 <link href="shop/css/reservation-calender.css" rel="stylesheet" media="screen" />
@@ -29,8 +28,9 @@
 <link href="../header/css/message.css" rel="stylesheet">
 <!-- <script src="http://192.168.0.44:3000/socket.io/socket.io.js/"></script> -->
 <script type="text/javascript" src="./shop/js/modernizr.custom.79639.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background: transparent;">
 
 <!--------------------------------------------- 슬라이더 부분 ----------------------------------------------->
 	<div style="position: absolute; z-index: 100; top: 18%; left: 10%">
@@ -42,31 +42,38 @@
 				<div class="slider-big">
 				</div>
 <!------------------------------------------------------- 상단 메뉴 버튼 ------------------------------------>				
-				<div class="topbar" style="background: #eee">
-					<div class="icon" style="background:">
-						<button id="infoBtn" data-toggle="modal" data-target="#myModal"><i class="icon-info-sign"></i>Info</button>
-						<button data-toggle="modal" data-target="#shopReservationForm" onclick="printReservationList()"><i class="icon-time"></i>Reserve</button>
-						<button><i class="icon-bookmark"></i>Bookmark</button>
-						<button data-toggle="modal" data-target="#myModal2"><i class="icon-edit"></i>Edit</button>
+				<div class="topbar" style="background:rgba(50,50,50,0.5)">
+					<div class="icon" style="font-size: 25px; color: white;">
+						<div>
+							<button id="infoBtn" data-toggle="modal" data-target="#myModal"></i>Location</button>
+						</div>
+						<div>
+							<button data-toggle="modal" data-target="#shopReservationForm" onclick="printReservationList()"></i>Reservation</button>
+						</div>
+						<div>
+							<button data-toggle="modal" data-target="#myModal2">Modify</button>
+						</div>
+						<div>
+							<button>Bookmark</button>
+						</div>
 					</div>
 				</div>
 <!-----------------------------------------------------info모달------------------------------------------>
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  			<div class="modal-dialog">
-		    			<div class="modal-content" style="border-radius:0px; background: rgba(50,50,50,0.8);">
-		      				<div class="modal-body" style="padding-left: 0px; padding-right: 0px;">
-		        				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;"><span aria-hidden="true">&times;</span></button>
-		        				<h4 class="modal-title" id="myModalLabel" style="font-family: Syncopate; margin-top: 10px;"></h4>
-			        			<div class="tel" style="color: white; margin-right: 10px; margin-left: 10px; float: right; font-size: small;"></div>
-			        			<div style="float: right; color: white; font-size: small;">|</div>
-			        			<div class="addr" style="color: white; float: right; width: 200px; font-size: small;"></div>
-			      				<div id="map" style="width: 100%; height: 300px;"></div>
+	    			<div class="modal-content" style="border-radius:0px; background: rgba(50,50,50,0.8); width: 60%; height:370px;; margin: auto; margin-top: 120px;">
+	      				<div class="modal-body" style="padding-left: 0px; padding-right: 0px;">
+	        				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; font-size:20px; margin: 5px;><span aria-hidden="true">&times;</span></button>
+		        			<div>
+	        					<span class="modal-title " id="myModalLabel" style="margin-top: 10px; font-size: 30px; padding-left: 20px; padding-top: 20px; "></span>
+			        				<span class="tel" style="padding-top:10px; color: white; margin-right: 10px; margin-left: 10px; float: right; font-size: 15px;"></span>
+			        				<span style="padding-top:10px;">|</span>
+			        				<span class="addr" style="padding-top:10px;color: white; float: right; font-size: 15px"></span>
 		      				</div>
-		    			</div>
-		  			</div>
+		      				<div id="map" style="width: 100%;height:300px;"></div>
+	      				</div>
+	    			</div>
 				</div>
 <!-------------------------------------------------------------지도 스크립트-------------------------------->		
-
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=91c44d2bcf308d32698e4bce184444f8&libraries=services"></script>
 <script>
 // url 주소번호 ------------------------------------------------------------------
@@ -110,7 +117,7 @@ $(function() {
 				
 			        // 인포윈도우로 장소에 대한 설명을 표시합니다
 			        var infowindow = new daum.maps.InfoWindow({
-			            content: '<div style="padding:5px;">' + data.info[0].name + '</div>'
+			            content: '<div style="color:red;text-align:center;"><span>' + data.info[0].name + '</span></div>'
 			        });
 			        infowindow.open(map, marker);
 			    } 
@@ -120,7 +127,6 @@ $(function() {
 </script>
 
 <!----------------------------------------------------------edit모달------------------------------------->
-
 				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  			<div class="modal-dialog">
 		    			<div class="modal-content">
@@ -496,12 +502,14 @@ $(function() {
 </div>
 </div>	
 <!------------------------------------ 디자이너 슬라이드버튼 -------------------------------------------------->
-
-	<div class="navl" style="background: transparent;"><img src="./shop/images/prev3.png" class="prev"></div>
-	<div class="navr" style="background: transparent;"><img src="./shop/images/next3.png" class="next"></div>
+	<div class="navl dsnNavBtn" style="">
+		<img src="./shop/images/prev3.png" class="prev">
+	</div>
+	<div class="navr dsnNavBtn" style="">
+		<img src="./shop/images/next3.png" class="next">
+	</div>
 	
 <!---------------------------------------- 디자이너부분 ---------------------------------------------------->
-
 	<div id="big">
 		<div id="dsnpic1" class="pic">
 			<div class="blog1">
@@ -626,21 +634,17 @@ $(function() {
 	</div>	
 
 <!-------------------------------------------------- 화면끝 ---------------------------------------------->
-
-	<div class="cloneslider" style="display: none;">
+	<div class="cloneslider" style="display: none; ">
 		<div class="slider-block" data-url="./shop/images/salon6.jpg" style="height: 50%;"></div>
 	</div>
 
 <!--------------------------------------------- JavaScript --------------------------------------------->
-
 <!-- jQuery if needed -->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="shop/js/jquery.reslider.js"></script>
 <script src="shop/js/reservation.js"></script>
 <script src="../header2/js/message.js"></script>
 <script>
-
-	
 	// 슬라이드 스크립트 ----------------------------------------------------------------
 	
 	$(function() {
@@ -654,7 +658,6 @@ $(function() {
 	})
 	
 	// JSON 데이터 가져오기 -------------------------------------------------------------
-	
 	var shopAddr = "";
 	var showPhotoList = function(){
 		$.getJSON(contextPath+"/shop/list.do",
@@ -664,9 +667,10 @@ $(function() {
 				for(var i = 0; i < data.image.length; i++) {
 					addSlider(data.image[i].path);
 				}
-				$("#myModalLabel").text(data.info[0].name);
-			 	$(".stitle").text(data.info[0].name);
-				$(".messengerOpen").attr("shopName",data.info[0].name);
+		
+				$("#myModalLabel").text(data.info[0].name.toUpperCase());
+			 	$(".stitle").text(data.info[0].name.toUpperCase());
+				$(".messengerOpen").attr("shopName",data.info[0].name.toUpperCase());
 				$(".addr").text(data.info[0].addr);
 				$(".tel").text(data.info[0].tel);
 				
@@ -809,28 +813,6 @@ $(function() {
  	})
  	
  	// 미용사 이미지 슬라이드함수---------------------------------------------------------------
- 	var index = 0;
-	$(function() {
-		$(".prev").click(function() {
-			if (index == 0)
-				index = 5;
-			else
-				index--;
-			move(index);
-		});
-		$(".next").click(function() {
-			if (index == 5)
-				index = 0;
-			else
-				index++;
-			move(index);
-		});
-		var move = function(loc) {
-			$("#big").animate({
-				left : -(loc * 20)+"%"
-			}, "slow");
-		}
-	});
  	var index = 0;
 	$(function() {
 		$(".navl").click(function() {

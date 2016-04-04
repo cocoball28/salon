@@ -64,7 +64,7 @@
 				var html = ""
 				html += '<div class="wf-box '+ value.bno +'">'; 
 				html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
-				if(value.blogImageList[0].path != null){	
+				if(value.blogImageList.length != 0){	
 					html += '<image src='+value.blogImageList[0].path+'/></a>';
 				}else{
 					html += '<image src="images/user.png"/></a>';

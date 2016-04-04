@@ -121,14 +121,6 @@
 	right: 0%;
 	cursor: pointer;
 }
-.navr:hover {
-	background: #FFD699;
-	transition: 0.5s;
-}
-.navl:hover {
-	background: #FFD699;
-	transition: 0.5s;
-}
 .nav {
 	position: fixed;
 	width: 100%;
@@ -252,6 +244,7 @@
 	
 }
 #big .pic {
+	cursor:pointer;
 	-webkit-filter: grayscale(100%);
 	filter: gray;
 }
@@ -386,7 +379,7 @@ body {
 	width: 100%; 
 	/* 1024용 높이 */
 	height: 321.5px;
-	top: 20px;
+	/* top: 20px; */
 	/* 1280용 높이
 	height: 50%; */
 	right: 0;
@@ -415,10 +408,6 @@ body {
 	background-color: #ffffff;
 }
 
-/* 미용실 정보창 */
-#map {
-	margin-top: 15px;
-}
 
 /* 미용실 사진 에딧창 */
 .registForm {
@@ -456,40 +445,43 @@ body {
 
 /* 화면 최상단 아이콘 DIV */
 .topbar {
-	position: fixed;
-	width: 100%;
-	height: 20px;
-	background: #FDFAF1;
-	top: 0;
+	position: absolute;
+	/* background: #FDFAF1; */
+	top: 0px;
+	right:0px;
+	height:50%;
+	width:30%;
 	z-index: 99;
+	padding-top: 100px;
 }
-.stitle {
-/* 	left: 0;
-	width: 10%;
-	height: 20px;
-	background: rgba(234, 12, 23, 0);
-	z-index: 100;
-	position: fixed;
-	top: 0; */
-}
-.icon {
-	right: 0;
-	width: 40%;
-	height: 20px;
-	background: rgba(234, 12, 23, 0);
-	z-index: 100;
-	position: fixed;
-	top: 0;
-}
+
 .icon button {
 	border-style: none;
 	background: rgba(34, 34, 34, 0);
-	margin-left: 35px;
 }
-.icon button:hover {
-	color: #F05504;
+.icon div{
+	padding: 5px;
+	padding-left: 30px; 
+}
+.icon div:HOVER{
+	background-color:rgba(200,200,200,0.5);
+	color:white;
 	transition: 0.5s;
 }
+.dsnNavBtn{
+	background-color: rgba(34, 34, 34, 0.3);
+	cursor: pointer;
+}
+
+.dsnNavBtn:HOVER{
+	background-color: rgba(34, 34, 34, 0.7);
+	transition: 0.5s;
+}
+
+
+/* .icon button:hover {
+	color: #F05504;
+} */
 
 @media screen and (max-width: 768px) {
 	.slider .jquery-reslider .slider-direction {
