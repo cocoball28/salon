@@ -456,6 +456,10 @@ body {
 	border-style: none;
 	background: rgba(34, 34, 34, 0);
 }
+.icon button:hover {
+	color: black;
+	transition: 0.5s;
+}
 .icon div{
 	padding: 5px;
 	padding-left: 30px; 
