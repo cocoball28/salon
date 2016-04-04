@@ -84,8 +84,10 @@ public class BlogServiceImpl implements BlogService {
 		System.out.println(mno);
 		map.put("loginUser", loginUser);
 		map.put("dsnInfo", blogDao.selectDsnInfo(blog));
+		Member blogOwner = new Member();
+		blogOwner.setSano(blogDao.selectDsnInfo(blog).getSano());
 		int sano = blogDao.selectDsnInfo(blog).getSano();
-		map.put("partnerInfo", blogDao.selectPartnerDsnInfo(loginUser));
+		map.put("partnerInfo", blogDao.selectPartnerDsnInfo(blogOwner));
 		map.put("blogList", blogDao.selectBlogList(blog));
 		map.put("shopInfo", blogDao.selectShopInfo(sano));
 		boolean myBlogFlag = false;
@@ -132,6 +134,4 @@ public class BlogServiceImpl implements BlogService {
 	public void commentDelete(BlogComment blogComment) {
 		blogDao.deleteComment(blogComment);
 	}
-
-
 }
