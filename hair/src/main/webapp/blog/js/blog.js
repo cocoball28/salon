@@ -92,37 +92,6 @@ var closeMessage = function(){
 }
 
 
-
-
-/*$(".comment_hover").hover(
-	function(){
-		$('.comment_hover').find(".deleteCommentBtn").show();
-	},
-	function(){
-		$(".deleteCommentBtn").hide();
-	}
-);*/
-
-
-// 동료 미용사 정보 
-/*
-var isAnimate = false;
-$(".partnerInfo").mouseenter(function(e){
-	e.stopPropagation();
-	if (isAnimate == true) return;
-	isAnimate = true;
-	$(this).next().show('slow', function() {
-		isAnimate = false;
-	});
-});
-
-$(".partnerInfo").mouseout(function(e){
-	$(this).next().hide('slow');
-});
-*/
-
-
-
 $(".showShopIcon").hover(
 		function(){
 			$('.showShopIcon').animate({opacity:0.7},200)
@@ -138,22 +107,29 @@ var scrolltotop = function(){
 
 var viewRegistForm = function(){
 	$('html, body').animate({ scrollTop: 284 }, 'slow');
-	$('.registForm').show('slow');
+	$('.registForm').show('fast');
+	var cloneImageAttachDiv = $(".cloneImageAttach").find(".imageAttachDiv").clone();
+	$(".imageAttach").append(cloneImageAttachDiv);
+	$(".uploadImage").hover(
+		function(){
+			$('.imageUploadBtn').animate({
+				backgroundColor:"#d00",
+				color: "#fff"		
+			},150)
+		},
+		function(){
+			$('.imageUploadBtn').animate({
+				backgroundColor:"#fff",
+				color: "black"		
+			},150);
+		}
+	);
 }
 var cancelRegist = function(){
 	$('.imagePreview').hide();
 	$('.imagePreview').attr('src', "");
-	$('.registForm').hide('slow');
-	$("input[id=uploadImage]").val("");
-}
-var likePush = function(data){
-	$(data).animate({opacity:1},500)
-	$(data).attr('onclick','likePull(this)');
-	
-}
-var likePull = function(data){
-	$(data).animate({opacity:0.3},500)
-	$(data).attr('onclick','likePush(this)');
+	$('.registForm').hide('fast');
+	$(".registForm").find(".imageAttachDiv").remove();
 }
 
 
@@ -178,16 +154,42 @@ var registComment = function(target){
 
 
 /* 댓글 삭제 ==================================*/
-var removeComment = function(target){
+//댓글 삭제 확인
+var removeCommentCheck =function(target){
 	var commentTr = $(target).closest("tr");
 	var commentNo = $(commentTr).attr("commentno");
+	var mno = $(commentTr).attr("mno");
+	$("#deleteCommentModal").attr("cno",commentNo);
+	$("#deleteCommentModal").attr("mno",mno);
+}
+
+//댓글 삭제
+var removeComment = function(){
+	var mno = $("#deleteCommentModal").attr("mno");
+	var cno = $("#deleteCommentModal").attr("cno");
+	
+	//댓글을 지우는 함수
+	var removeCommentExcute = function(){
 		$.post(
 				blogPath+"/blog/deleteComment.do",
-				{"cno":commentNo},
+				{"cno":cno},
 				function(){
-					commentTr.hide('slow');
+					$("[commentNo="+cno+"]").hide("fast");
+					//commentTr.hide('slow');
 				}
 		);
+	}
+	//댓글 지우기 권한 체크
+	if(blogOwner != true){
+		if(mno != loginUserMno){
+			alert("삭제 권한이 없습니다");
+			return null;
+		}else{
+			removeCommentExcute();
+		}
+	}else{
+		removeCommentExcute();
+	}
 }
 /* 댓글 삭제 ==================================*/
 
@@ -202,7 +204,6 @@ var viewComments = function(target){
 				blogPath+"/blog/listComment.do",
 				{"bno":blogNo},
 				function(data){
-					console.log("댓글 데이터:"+data);
 					for(var i = 0 ; i < data.length ; i ++){
 						addComment(blogDiv, data[i]);
 					};
@@ -216,7 +217,7 @@ var viewComments = function(target){
 /* 댓글 닫기 ==================================*/
 var closeComments = function(target){
 	var blogDiv = $(target).closest(".mainContents");
-	$(blogDiv).find(".comment_list").hide("slow");
+	$(blogDiv).find(".comment_list").hide("fast");
 	$(blogDiv).find('table tr').remove();
 	$(target).attr('onclick','viewComments(this)');
 };
@@ -230,15 +231,28 @@ var addComment = function(blogDiv, data){
 	cloneTr.find(".commentContent").html(data.content);
 	cloneTr.find(".commentNick").html(data.nick);
 	var portrait = "";
-	if(data.phothPath != null){
+	if(data.photoPath != null){
 		portrait = data.photoPath;
 	}else{
 		portrait = "img/contents/default-portrait.png";
 	}
 	cloneTr.find(".commentPortrait").attr("src",portrait);
 	cloneTr.attr("commentNo", data.cno);
+	cloneTr.attr("mno", data.mno);
 	$(blogDiv).find('table').append(cloneTr);
+	commentEffectStyle();
 }
+
+var commentEffectStyle = function(){
+	$(".blogCommentTr").hover(
+			function(){
+				$(this).find(".deleteCommentBtn").show(100);
+			},
+			function(){
+				$(this).find(".deleteCommentBtn").hide(100);
+			}
+	);
+};
 /* 댓글 출력 파트 ===============================*/
 
 
@@ -253,7 +267,7 @@ $(function(){
 				insertShopInfo(data.shopInfo);
 				blogOwnerCheck(data.myBlogFlag);
 				printDsnInfo(data.dsnInfo);	
-				for(var i = 0; i < data.blogList.length ; i ++){
+				for(var i = data.blogList.length-1; i >=0 ; i--){
 						addBoard(data.blogList[i]);
 				}
 				for(var i = 0 ; i < data.partnerInfo.length ; i++){
@@ -269,6 +283,7 @@ $(function(){
 					addFav(data.favList[i].bno);
 				}
 				partnerInfoEffect();
+				contentControlHoverStyle();
 	});
 })
 /* 첫 화면 출력 =================================*/
@@ -283,27 +298,71 @@ var insertShopInfo = function(data){
 }
 $(".shopInformation").hover(
 		function(){
-			$(".shopInformation").animate({opacity:0.6},200);
-			$(".shopInformation").css({"background-color":"#ddd"});
-			$(".shopInformationBanner").css({"background-color":"#d00"})
+			$('.shopInformationBanner').animate({
+				backgroundColor:"#d00",
+				color: "#fff"		
+			},150);
+			$(".shopInformation").animate({
+				"background-color":"#ddd",
+			},150);
 		},
 		function(){
-			$(".shopInformation").css({"background-color":"white"})
-			$(".shopInformation").animate({opacity:1},200);
-			$(".shopInformationBanner").css({"background-color":"#333"})
-			$(".shopInformationBanner").animate({opacity:1},200);
+			$('.shopInformationBanner').animate({
+				backgroundColor:"black",
+				color: "white"		
+			},150);
+			$(".shopInformation").animate({
+				"background-color":"white",
+			},150);
 		}
 )
+
 var partnerInfoEffect = function(){ 
-	$(".partnerInfomation").hover(
+	$(".partnerInfoList").hover(
+		function(){
+			$(".partnerInformationBanner").animate({
+				"background-color":"#d00"
+			},150)
+		},
+		function(){
+			$(".partnerInformationBanner").animate({
+				"background-color":"black"
+			},150)
+		}
+	);
+	$(".partnerGeneralInfo").hover(
+		function(){
+			$(this).animate({
+				"background-color":"#ddd",
+			},150);
+		},
+		function(){
+			$(this).animate({
+				"background-color":"white",
+			},150);
+		}	
+	);
+	$(".partnerDetailInfoDiv").hover(
 			function(){
-				$(".partnerInformationBanner").css({"background-color":"#d00"})
+				$(this).find("div").animate({
+					"background-color":"#ddd",
+				},150);
+				$(this).find(".partnerPhoto").animate({
+					opacity:"0.75",
+				},150);
 			},
 			function(){
-				$(".partnerInformationBanner").css({"background-color":"#333"})
-			}
-	)
+				$(this).find("div").animate({
+					"background-color":"white",
+				},150);
+				$(this).find(".partnerPhoto").animate({
+					opacity:"1",
+				},150);
+			}	
+	);
+	
 }
+
 
 /* 미용실 정보 출력*/
 
@@ -320,11 +379,17 @@ var moveToShopService = function(target){
 
 
 /* 디자이너 본인 여부 확인 ===========================*/
+var blogOwner = "";
 var blogOwnerCheck = function(data){
 	if(data == false){
 		$("#viewRegistFormBtn").remove();
 		$(".registForm").remove();
 		$(".deleteMainContent").remove();
+		$(".updateMainContent").remove();
+		blogOwner = false;
+	}else{
+		$(".bookmark").find("i").remove();
+		blogOwner = true;
 	}
 }
 /* 디자이너 본인 여부 확인 ===========================*/
@@ -343,12 +408,12 @@ var printDsnInfo = function(data){
 	$("#hairdresserName").text(data.nick);
 	var gender="";
 	if(data.gender == "f"){
-		gender = "female";
+		gender = "FEMALE";
 	}else{
-		gender = "male";
+		gender = "MALE";
 	}
 	blogDsnMno = data.mno;
-	$("#hairdresserIntroduce").text(data.email);
+	$("#hairdresserIntroduce").text(data.email+" | "+gender);
 };
 /* 디자이너 정보 출력 =============================*/
 
@@ -369,77 +434,109 @@ var addPartnerInfo = function(data){
 	}
 	clonePartnerInfo.find(".partnerGeneralInfo").find(".partnerName").text(data.nick);
 	clonePartnerInfo.find(".partnerDetailInfoDiv").find(".partnerName").text(data.nick);
+	clonePartnerInfo.find(".partnerDetailInfoDiv").attr("mno",data.mno);
 	var gender="";
 	if(data.gender == "f"){
-		gender = "female";
+		gender = "FEMALE";
 	}else{
-		gender = "male";
+		gender = "MALE";
 	}
-	clonePartnerInfo.find(".partnerDetailInfoDiv").find(".parnerIntroduce").text(data.email+", "+data.nick+", "+gender);
+	clonePartnerInfo.find(".partnerDetailInfoDiv").find(".parnerIntroduce").text(data.email+" | "+gender);
 	$(".partnerInfoList").append(clonePartnerInfo);
 }
 /* 파트너 디자이너 정보 출력 ===============================*/
 
 
+/* 파트너 디자이너 블로그로 이동 ===============================*/
+var moveToPartnerBlog = function(target){
+	var mno = $(target).attr("mno");
+	var url = contextPath+"/blog/blog.html?mno="+mno;    
+	$(location).attr('href',url);
+};
+/* 파트너 디자이너 블로그로 이동 ===============================*/
+
 
 /* 파트너 디자이너 상세정보 열기 및 닫기 =============================*/
 var viewPartnerDetailInfo = function(target){
-	$(target).closest(".partnerInfo").find(".partnerDetailInfoDiv").show('slow');
+	$(target).closest(".partnerInfo").find(".partnerDetailInfoDiv").show('fast');
 	$(target).attr("onclick","closePartnerDetailInfo(this)");
 }
 var closePartnerDetailInfo = function(target){
-	$(target).closest(".partnerInfo").find(".partnerDetailInfoDiv").hide('slow');
+	$(target).closest(".partnerInfo").find(".partnerDetailInfoDiv").hide('fast');
 	$(target).attr("onclick","viewPartnerDetailInfo(this)");
 }
 /* 파트너 디자이너 상세정보 열기 및 닫기=============================*/
 
 
+
+
 /* 블로그 글삭제 파트 ==================================*/
-var deleteMainContent = function(target){
+//확인과정
+var deleteMainContentCheck = function(target){
 	var blogDiv = $(target).closest(".mainContents");
-	var blogNo = $(blogDiv).attr("blogno");
+	var bno = $(blogDiv).attr("blogno");
+	$("#deleteMainContentModal").attr("bno",bno);
+}
+//확인 후 삭제
+var deleteMainContent = function(target){
+	var blogNo = $("#deleteMainContentModal").attr("bno");
 	$.post(
 			blogPath+"/blog/delete.do",
 			{"bno":blogNo},
 			function(){
-				$(target).closest(".mainContents").hide('slow');
+				$(".blogMainContents").find("[blogno="+blogNo+"]").hide("fast");
+				$(".blogMainContents").find("[blogno="+blogNo+"]").remove();
 	});
 };
 /* 블로그 글삭제 파트 ==================================*/
 
 
-/* 블로그 레지스터 ====================================*/
-var registBlog = function(){
-	var form = $(".registForm")[0];
-	var formData = new FormData(form);
-	$.ajax({
-	   url: blogPath+"/blog/regist.do",
-	   processData: false,
-	   contentType: false,
-	   data: formData,
-	   type: 'POST',
-	   success: function(data){
-		   //console.log(data);
-		  /* alert("성공");*/
-		   addBoard(data.blog, data.blogImageList);
-			$('.registForm').hide('slow');
-			$("[name=tag]").val("");
-			$("[name=content]").val("");
-			$('.imagePreview').attr('src', "");
-			$('.imagePreview').hide();
-			$("input[id=uploadImage]").val("");
-	   }
-	});
+/* 블로그 글 더보기 ===================================*/
+var viewMoreMainContentList = function(){
+	var lastMainContent = $(".blogMainContents").children().last();
+	var bno = $(lastMainContent).attr("blogno");
+	console.log(bno);
+	var mno = currentViewDsnNo;
+	console.log(mno);
+	var moreFlag = true;
+	$.post(
+			blogPath+"/blog/moreList.do",
+			{
+				mno:mno,
+				bno:bno
+			},
+			function(data){
+				console.log(data);
+				if(data.length == 0){
+					$(".lastMainContentMessage").show("fast");
+				}else{
+					for(var i = 0 ; i < data.length ; i++){
+						addBoard(data[i],moreFlag);
+					}
+				}
+				
+			}
+	)
 }
-/* 블로그 레지스터 ====================================*/
+/* 블로그 글 더보기 ===================================*/
 
 
 /* 블로그 출력 파트 =================================*/
-var addBoard = function(blog){
+var addBoard = function(blog, moreFlag){
 	var cloneContent = $(".cloneMainContents > .mainContents").clone();
 	cloneContent.attr("blogNo", blog.bno);
-	cloneContent.find('.tag').text(blog.tag);
-	cloneContent.find('.description').text(blog.content);
+	var tagArr = blog.tag.split("#");
+	//console.log(tagArr);
+	for(var i = 0 ; i < tagArr.length; i++){
+		if(tagArr[i] == ""){
+			continue;
+		}
+		var cloneTag = $(".cloneTagDiv").find(".tagSpan").clone();
+		$(cloneTag).find("a").text("#"+tagArr[i]);
+		console.log($(cloneTag).find("a").text());
+		cloneContent.find('.tag').append(cloneTag);
+	}
+	cloneContent.find('.description').html(blog.content);
 	//console.log(blog.blogImageList.length);
 	for(var i = 0 ; i < blog.blogImageList.length ; i ++){
 		var cloneImage = $(".cloneblogImagesDiv .blogImage").clone();
@@ -449,7 +546,12 @@ var addBoard = function(blog){
 	if(blog.blogImageList.length == 0 ){
 		cloneContent.find('.blogImagesDiv').remove();
 	}
-	$(".blogMainContents").prepend(cloneContent);
+	if(moreFlag != null && moreFlag == true){
+		$(".blogMainContents").append(cloneContent);
+		contentControlHoverStyle(blog.bno);
+	}else{
+		$(".blogMainContents").prepend(cloneContent);
+	}
 }
 /* 블로그 출력 파트 =================================*/
 
@@ -462,10 +564,13 @@ var prevImageOrder = 4;
 var imageAttachStatus = 0;
 var imageAttach = function(target){
 		readURL(target);
-		$(".imageAttach").children().eq(imageAttachStatus++).hide();
-		$(".imageAttach").children().eq(imageAttachStatus).show();
+		$(".registForm").find(".imageAttachDiv").children().eq(imageAttachStatus++).hide();
+		$(".registForm").find(".imageAttachDiv").children().eq(imageAttachStatus).show();
 		if(imageAttachStatus >= 5){
-			$(".imageAttach").children().eq(imageAttachStatus).hide()
+			$(".registForm").find(".imageAttachDiv").children().eq(imageAttachStatus).hide()
+			$(".registForm").css("border","");
+			prevImageOrder = 4;
+			imageAttachStatus = 0;
 		}
 }
 
@@ -483,7 +588,63 @@ var readURL = function(input) {
 /* 블로그 이미지 업로드 미리보기 ========================*/
 
 
-//더미데이터에 임시번호 부여함, 댓글 테스트용
-$(".dummyMainContent").attr("blogNo", 1);
+/* 블로그 레지스터 ====================================*/
+var registBlog = function(){
+	var content = $('[name=content]').val().replace(/\n/g, '<br>')
+	console.log(content);
+	$('[name=content]').val(content);
+	var form = $(".registForm")[0];
+	var formData = new FormData(form);
+	$.ajax({
+	   url: blogPath+"/blog/regist.do",
+	   processData: false,
+	   contentType: false,
+	   data: formData,
+	   type: 'POST',
+	   success: function(data){
+		   console.log(data);
+		  /* alert("성공");*/
+		   addBoard(data.blog);
+			$('.registForm').hide('fast');
+			$("[name=tag]").val("");
+			$("[name=content]").val("");
+			$('.imagePreview').attr('src', "");
+			$('.imagePreview').hide();
+			prevImageOrder = 4;
+			imageAttachStatus = 0;
+			$(".registForm").find(".imageAttachDiv").remove();
+			contentControlHoverStyle(data.blog.bno);
+	   }
+	});
+}
+/* 블로그 레지스터 ====================================*/
 
+/* 버튼에 효과 -=================================*/
+var contentControlHoverStyle = function(blogno){
+	var target = $(".contentControlBtn");
+	if(blogno != null){
+		target = $("[blogno="+blogno+"]").find(".contentControlBtn");
+	}
+	$(target).hover(
+			function(){
+				$(this).animate({
+					backgroundColor:"#d00",
+					color: "#fff"		
+				},150);
+			},
+			function(){
+				$(this).animate({
+					backgroundColor:"white",
+					color: "black"		
+				},150);
+			}
+	)
+	
+}
 
+/* 스크롤 페이징  ===================================*/
+$(window).scroll(function(){ 
+    if($(window).scrollTop() == $(document).height() - $(window).height()){ 
+    	viewMoreMainContentList();
+    } 
+});
