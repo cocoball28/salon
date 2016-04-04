@@ -15,6 +15,7 @@ public interface BlogDao {
 	//본문
 	public int insert(Blog blog);
 	public List<Blog> selectBlogList(Blog blog);
+	public List<Blog> selectMoreBlogList(Blog blog);
 	public Blog selectBlogByNo(Blog blog);
 	public void deleteBlog(Blog blog);
 	public void deleteImageByBlogNo(Blog blog);
@@ -22,7 +23,6 @@ public interface BlogDao {
 	
 	//이미지파일
 	public void insertImage(BlogImage blogImage);
-	public List<BlogImage> selectImage (Blog blog);
 	
 	//댓글 부분
 	public void insertComment(BlogComment blogComment);

@@ -72,7 +72,6 @@ public class BlogServiceImpl implements BlogService {
 		}
 		
 		map.put("blog", blogDao.selectBlogByNo(blog));
-		map.put("blogImageList", blogDao.selectImage(blog));
 		return map;
 	}
 
@@ -82,7 +81,6 @@ public class BlogServiceImpl implements BlogService {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		int loginMemberNo = loginUser.getMno();
 		int mno = blog.getMno();
-		
 		System.out.println(mno);
 		map.put("loginUser", loginUser);
 		map.put("dsnInfo", blogDao.selectDsnInfo(blog));
@@ -101,6 +99,10 @@ public class BlogServiceImpl implements BlogService {
 		return map;
 	}
 
+	public List<Blog> selectMoreList(Blog blog){
+		return blogDao.selectMoreBlogList(blog);
+	}
+	
 	@Override
 	public void delete(Blog blog) {
 		blogDao.deleteCommentByBlogNo(blog);

@@ -9,6 +9,12 @@ create table message(
 -- 메시지 쿼리 ---------------------------------------
 
 
+-- 마지막 주고받은 메시지 테이블 ---------------------------------------
+create table message_rct(
+	
+)
+-- 마지막 주고받은 메시지 테이블 ---------------------------------------
+
 
 insert into message(sender_mno,receiver_mno,content,reg_date)
  value ()

@@ -84,4 +84,11 @@ public class BlogComment {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "BlogComment [cno=" + cno + ", bno=" + bno + ", mno=" + mno + ", nick=" + nick + ", content=" + content
+				+ ", regDate=" + regDate + ", photoPath=" + photoPath + ", gender=" + gender + ", status=" + status
+				+ "]";
+	}
+	
 }

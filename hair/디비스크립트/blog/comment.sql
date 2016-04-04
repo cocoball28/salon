@@ -8,6 +8,13 @@ create table BLOG_COMMENT(
 );
 -- 블로그 댓글 테이블 ------------------------------
 -- 아래는 신경 ㄴㄴ 요 ------------------------------
+select cno, bno, content, reg_date as regDate, nick, photo_path as phtoPath, gender, status 
+	  from BLOG_COMMENT join member
+        on blog_comment.mno = member.mno 
+	 where cno = 18
+
+
+
 
 
 select * from blog_comment

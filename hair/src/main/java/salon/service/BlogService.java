@@ -16,6 +16,7 @@ public interface BlogService {
 	//본문
 	public Map<String, Object> register(Blog blog, MultipartHttpServletRequest mRequest) throws Exception;
 	public Map<String, Object> selectList(Blog blog, HttpServletRequest request);
+	public List<Blog> selectMoreList(Blog blog);
 	public void delete(Blog blog);
 	
 	//댓글

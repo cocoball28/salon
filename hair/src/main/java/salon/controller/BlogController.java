@@ -36,6 +36,13 @@ public class BlogController {
 		return blogService.selectList(blog,request);
 	}
 	
+	@RequestMapping(value="moreList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Blog> moreList(Blog blog){
+		System.out.println(blog);
+		return blogService.selectMoreList(blog);
+	}
+	
 	@RequestMapping(value="delete", method=RequestMethod.POST)
 	@ResponseBody
 	public void delete(Blog blog){

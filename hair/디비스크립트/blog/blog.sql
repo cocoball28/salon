@@ -21,6 +21,12 @@ select t1.no, t1.tag, t1.content, t2.no as pno, t2.file_no, t2.file_name
 select t1.no, t1.tag, t1.content, t2.no as pno, t2.file_no, t2.file_name 
       from salon_blog t1 left outer join salon_blog_image t2 on t1.no=t2.no
 
+select t1.bno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 
+  from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
+ where t1.mno = 1 and t1.bno < 100
+ order by t1.bno desc limit 5;
+      
+      
 select * from blog;
 
 drop table blog;

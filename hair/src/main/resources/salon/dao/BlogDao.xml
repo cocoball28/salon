@@ -25,7 +25,8 @@
 	select t1.bno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 
       from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
      where t1.mno = #{mno}
-     order by t1.bno;
+     order by t1.bno desc
+     limit 5;
 	</select>
 
 	
@@ -34,6 +35,15 @@
 	select t1.bno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 
       from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
 	 where t1.bno = #{bno}
+	</select>
+	
+	<!-- 블로그 리스트 더 보기 -->
+	<select id="selectMoreBlogList" resultMap="blogMap" parameterType="blog">
+	select t1.bno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 
+      from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
+     where t1.mno = #{mno} and t1.bno &lt; #{bno}
+     order by t1.bno desc
+     limit 5;
 	</select>
 	
 	<!-- 본문 작성  -->
@@ -58,20 +68,12 @@
 		insert into BLOG_PHO(PATH, BNO)
 		values (#{path}, #{bno})
 	</insert>
- 	
- 	<select id="selectImage" parameterType="blog" resultType="blogImage">
-		select path, bNo, bpno
-		  from BLOG_PHO
-		 where bno = #{bNo}
- 	</select>
- 	
- 	
- 
+
  
 	<!-- 댓글 파트 -->
 	<!-- 댓글 리스트 출력 -->
 	 <select id="selectCommentList" parameterType="blogComment" resultType="blogComment">
-	select cno, bno, content, reg_date as regDate, nick, photo_path as phtoPath, gender, status 
+	select member.mno as mno, cno, bno, content, reg_date as regDate, nick, photo_path as photoPath, gender, status 
 	  from BLOG_COMMENT join member
         on blog_comment.mno = member.mno
 	 where bno = #{bno}
@@ -80,7 +82,7 @@
 	 
 	 <!-- 댓글 입력 후 댓글 출력 -->
 	 <select id="selectComment" parameterType="blogComment" resultType="blogComment">
-	select cno, bno, content, reg_date as regDate, nick, photo_path as phtoPath, gender, status 
+	select member.mno as mno, cno, bno, content, reg_date as regDate, nick, photo_path as photoPath, gender, status 
 	  from BLOG_COMMENT join member
         on blog_comment.mno = member.mno 
 	 where cno = #{cno}
