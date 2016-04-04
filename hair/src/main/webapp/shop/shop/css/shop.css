@@ -10,16 +10,14 @@
 	height: 100px;
 	background: rgba(245, 222, 179, 0.5);
 	border: 2px dashed black;
-	border-radius: 10px;
 	margin-top: 5%;
 }
 .load {
 	padding: 2%;
 	width: 100%;
 	height: 30px;
-	background: rgba(253, 180, 223, 0.5);
+	background: rgba(255, 255, 255, 0.5);
 	margin-top: 5%;
-	border-radius: 6px;
 	padding-top: 5px;
 }
 .sbtn {
@@ -33,7 +31,6 @@
 	font-size: large;
 	text-align: center;
 	cursor: pointer;
-	border-radius: 6px;
 	padding-top: 3px;
 }
 .sbtn:hover {
@@ -56,7 +53,7 @@
 	margin: 3% -200%;
 	text-align: center;
 	cursor: pointer;
-	border-radius: 6px;
+	color: black;
 }
 .firm:hover {
 	transition: 0.5s;

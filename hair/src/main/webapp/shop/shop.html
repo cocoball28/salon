@@ -115,11 +115,6 @@ $(function() {
 			            position: coords
 			        });
 				
-			        // 인포윈도우로 장소에 대한 설명을 표시합니다
-			        var infowindow = new daum.maps.InfoWindow({
-			            content: '<div style="color:red;text-align:center;"><span>' + data.info[0].name + '</span></div>'
-			        });
-			        infowindow.open(map, marker);
 			    } 
 			});    
 		})
@@ -128,10 +123,10 @@ $(function() {
 
 <!----------------------------------------------------------edit모달------------------------------------->
 				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		    			<div class="modal-content">
+		    			<div class="modal-content" style="width: 50%; margin: auto; margin-top: 10%; border-radius:0px; background: rgba(50,50,50,0.8);">
 		      				<div class="modal-header">
-		        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        				<h4 class="modal-title2" id="myModalLabel">Edit Box</h4>
+		        				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;"><span aria-hidden="true">&times;</span></button>
+		        				<h4 class="modal-title2" id="myModalLabel" style="font-weight: bold; color: white;">Edit Box</h4>
 		      				</div>
 		      				<div class="modal-body">
 		      					<div class="popup2">
