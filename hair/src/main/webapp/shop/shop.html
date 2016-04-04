@@ -54,9 +54,10 @@
 							<button data-toggle="modal" data-target="#myModal2">Modify</button>
 						</div>
 						<div>
-							<button>Bookmark</button>
+							<button class="bookmark" from="shop"><i class="fa fa-heart-o" ></i>Bookmark</button>
 						</div>
 					</div>
+					<div id="dd" style="display: none;"></div>
 				</div>
 <!-----------------------------------------------------info모달------------------------------------------>
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -651,13 +652,14 @@ $(function() {
 	var shopAddr = "";
 	var showPhotoList = function(){
 		$.getJSON(contextPath+"/shop/list.do",
-			{'sano':currentViewDsnNo},
+			{'sano':currentViewDsnNo,
+			  mno: mno},
 			function(data){
 				console.log(data);
 				for(var i = 0; i < data.image.length; i++) {
 					addSlider(data.image[i].path);
 				}
-		
+				
 				$("#myModalLabel").text(data.info[0].name.toUpperCase());
 			 	$(".stitle").text(data.info[0].name.toUpperCase());
 				$(".messengerOpen").attr("shopName",data.info[0].name.toUpperCase());
@@ -691,6 +693,13 @@ $(function() {
 					$("#dsnpic" + (i+1)).css("background-size","auto 100%")
 					$("#dsnpic" + (i+1)).attr("onclick","moveToBlog(this)");
 				}
+					
+				/* bookmark */
+				$.each(data.favList, function(key, value){
+				   if(pageParam == value.sano){
+					   $(".bookmark").find(".fa").toggleClass("fa-heart fa-heart-o");
+				   }
+			   });
 		});
 	};
 	showPhotoList();
