@@ -148,8 +148,8 @@
 				var idx = 0;
 			    for (var reply of resultObj.data) {
 			    	$("<tr>")
-				      .html("<td align='center'>"+reply.qnaReply_nick+"</td>"+
-				             "<td align='center'>"+reply.qnaReply_date+"</td></tr>").appendTo(table);
+				      .html("<td align='left'>"+reply.qnaReply_nick+"</td>"+
+				             "<td align='right'>"+reply.qnaReply_date+"</td></tr>").appendTo(table);
 				    $("<tr>")
 				      .html("<td colspan='2'><textarea class='form-control' rows='2' readonly>"+reply.qnaReply_content+"</textarea></td></tr>").appendTo(table);
 				    $("<tr>")
