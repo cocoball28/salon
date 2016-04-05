@@ -28,7 +28,7 @@ a:focus {color:#ae5200;}
 
 .basic_table {width:100%; border-collapse:collapse; border-spacing:0; border:2px solid #474747; border-width:2px 0;}
 .basic_table th ,
-.basic_table td {padding:12px 0; color:#b9b9b9; font-size:11px;}
+.basic_table td {padding:12px 0; color:#6E6E6E; font-size:13px;}
 .basic_table th {border-bottom:1px solid #d7d7d7; background:url(../../koloncamping/images/2012ss/common/line_th.gif) no-repeat;}
 .basic_table th:first-child {background:none;}
 .basic_table .td_title {padding-left:20px;}
@@ -53,3 +53,21 @@ a:focus {color:#ae5200;}
 .content_section {width:660px;}
 .blind {z-index:-1px; overflow:hidden; visibility:hidden; position:absolute; height:1px; text-indent:-9999em;}
 
+
+.reply_table {width:100%; border-collapse:collapse; border-spacing:0; border:2px solid #474747; border-width:2px 0;}
+.reply_table th ,
+.reply_table td {padding:12px 0; color:#6E6E6E; font-size:13px;}
+.reply_table th {border-bottom:1px solid #d7d7d7; background:url(../../koloncamping/images/2012ss/common/line_th.gif) no-repeat;}
+.reply_table th:first-child {background:none;}
+.reply_table .td_title {padding-left:20px;}
+.reply_table .td_title,
+.reply_table .td_writer {color:#878787; font-size:12px;}
+.reply_table .td_title a:hover,
+.reply_table .td_title a:focus {color:#ae5200 !important;}
+.reply_table .td_title span,
+.reply_table .td_title span a {color:#ae5200;}
+.reply_table .reply .td_title {padding-left:40px; background:url(../../koloncamping/images/2012ss/common/ico_reply.gif) no-repeat 20px 8px;}
+.reply_table .reply .td_title a {color:#d3a57c;}
+.reply_table .notice strong {color:#d47209;}
+.reply_table .notice .td_title a {font-weight:bold;}
+.reply_table .notice td {border-bottom:1px dotted #d7d7d7;}
