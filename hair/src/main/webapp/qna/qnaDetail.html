@@ -24,13 +24,12 @@
      <div id="sidebar"></div>
      
      <div id="content" align="center">
-     <table width="600" align="center" id="basic_table">
+     <table width="600" align="center" id="basic_table"  class="basic_table" border="1">
      </table>
      
      
      <br/>
-     <input class="btn btn-default" id="insert" type="button" value="입력" onclick="insertForm()">
-     <input class="btn btn-default" id="update" type="button" value="수정" onclick="updateForm()">
+     <input class="btn btn-default" data-target='#layerpop1' data-toggle='modal' value='수정' id="update" type="button" value="수정" onclick="updateText()">
      <input class="btn btn-default" id="delete" type="button" value="삭제" onclick="deleteQna()">
      <input class="btn btn-default" type="button" value="리스트" onclick="document.location.href='qnaList.html'">
      
@@ -38,7 +37,7 @@
      
      <div id="replyList">
      
-		<table class="table table-hover" width="500" align="center" id="reply_table">
+		<table class="table table-hover" width="500" align="center" id="reply_table" class="reply_table">
         </table>
         <form action="/hair/board/insertReply.do" method="post" name="replyForm">
         
@@ -87,16 +86,13 @@
 				 //alert(resultObj);
 				  var board = resultObj.data;
 				  //alert(board.qna_title);
-				    $("<tr>").html
-				           ("<td colspan='4'><input type='text' size='83' class='form-control' id='qna_title' value="+board.qna_title+" name='qna_title' readonly></td></tr>").appendTo(table);
-				    $("<tr>").html
-				              ("<td>닉<input text='text' size=10 id='nick' name='nick' value="+board.nick+" readonly></td>"+
-				              "<td>번호<input type='text' size=5 id='qna_no' value="+board.qna_no+" name='qna_no' readonly></td>"+
-			                  "<td align ='right'>조회수:"+board.viewnum+"</td>"+
-			                  "<td align ='right'>"+board.reg_Date+" </td></tr>").appendTo(table);
-			        $("<tr>").html
-			        ("<td colspan='4'><textarea name='qna_content' class='form-control' id='qna_content'rows='7'cols='85' readonly>"+board.qna_content+
-	        		 "</textarea></td></tr>").appendTo(table);
+				    $("<tr height='40px' bgcolor=#2E2E2E>").html
+				           ("<td width='70%'>&nbsp&nbsp&nbsp"+board.qna_title+"</td><td align='center'>"+board.reg_Date+"</td><td align='center'>조회수:"+board.viewnum+"</td>").appendTo(table);
+				    $("<tr height='40px' bgcolor=#E6E6E6>").html
+				              ("<td colspan=2>&nbsp&nbsp&nbsp"+board.nick+"<input type='hidden' id='nick' name='nick' value="+board.nick+"></td>"+
+				               "<td align='center'>번호:"+board.qna_no+"</td></tr>").appendTo(table);
+				    $("<tr height='150'>").html
+			                  ("<td colspan='3'>&nbsp&nbsp&nbsp"+board.qna_content+"</td></tr>").appendTo(table);
 			        
 			        
 			        
@@ -106,7 +102,6 @@
 			        
 		 		 	var nick = $("#nick").val();
 		 		 	$("[name='qnaReply_nick']").val(nickname);
-		 		 	alert(nickname+","+nick);
 		 		 	if(nickname!=nick){
 		 		 		$("#insert").attr("disabled","disabled");
 		 		 		$("#update").attr("disabled","disabled");
@@ -125,16 +120,6 @@
 		});
 
 		
-		function insertForm(){
-			$("#qna_title").prop("readonly",false)
-			$("#qna_content").prop("readonly",false)
-		}
-		
-		
-			
-			
-		
-		
 		function deleteQna() {
 			alert(no+"번 삭제");
 			location.href = contextRoot + "/board/delete.do?qna_no=" + no;			
@@ -144,17 +129,12 @@
 		
 		
 		
-		function updateForm(){
-			var content =$("#qna_content").val();
-			var title = $("#qna_title").val();
-			$.ajax(contextRoot +'/board/update.do?qna_no=' + no+"&qna_title="+title+"&qna_content="+content,{
-			    dataType: 'json',
-				method: 'GET'
-				
-				
-		  })
-		  
-		};
+		function updateText() {
+			var du=document.updateForm;
+			du.qna_no.value = no;
+			
+		    
+		}
 		
 		
 		
@@ -206,7 +186,31 @@
 		
 		
   </script>	
-	
+	<div class="modal fade" id="layerpop1" >
+    <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="/hair/board/update.do" method="post" name="updateForm">
+      <!-- header -->
+      <div class="modal-header">
+        <!-- 닫기(x) 버튼 -->
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <!-- header title -->
+        <h4 class="modal-title">게시글 수정</h4>
+        <input type="text" class="form-control" placeholder="제목을 수정하세요" name="qna_title"/>
+      </div>
+      <!-- body -->
+      <div class="modal-body">
+      <textarea class="form-control" name="qna_content" placeholder="내용을 수정하세요 " rows="2"></textarea>
+      <input type="hidden" name="qna_no"/>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer">
+        <input class="btn btn-default" type="submit" value="수정">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 	
 	
 	
