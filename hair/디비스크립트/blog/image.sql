@@ -38,7 +38,7 @@ select t1.bno, t1.tag, t1.content, t2.bno as bno, t2.bpno, t2.path
 
 
 
-drop table salon_blog_image;
+drop table blog_pho;
 
 select * from salon_blog_image;
 	private String fileName;

@@ -8,7 +8,6 @@ create table BLOG(
 );
 
 
-
 -- 쿼리 메모장 --------------------------------------
 -- 여기는 신경쓰지 마세욥 -------------------------------
 select t1.no, t1.tag, t1.content, t2.file_no, t2.file_name 
