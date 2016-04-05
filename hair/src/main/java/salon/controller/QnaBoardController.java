@@ -109,9 +109,8 @@ public class QnaBoardController {
 	
 	@RequestMapping(value="/update.do")
 	public String updateBoard(QnaBoard board,RedirectAttributes redirectAttributes){
-		
-    	boardService.update(board);
-	    return "redirect:/qna/qnaList.html";
+		boardService.update(board);
+	    return "redirect:/qna/qnaDetail.html?qna_no="+board.getQna_no();
 	}
 	
 	 @RequestMapping("/replyCount.do")
@@ -153,7 +152,7 @@ public class QnaBoardController {
     public @ResponseBody Map<String, Object> getNick(HttpSession session, HttpServletRequest req){
     	Member member = (Member)req.getSession().getAttribute("loginUser");
     	String nick = member.getNick();
-    	Map<String, Object> result = new HashMap<>();
+    	Map<String, Object> result = new HashMap<String, Object>();
     	result.put("nick", nick);
     	return result;
     	
