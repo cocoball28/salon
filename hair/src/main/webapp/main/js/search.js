@@ -74,13 +74,13 @@
 			var cnt = 0;
 			   $.each(resultObj.data, function(key, value){
 				    var html = ""
-					html += '<div class="wf-box">'; 
+					html += '<div style="background:white;" class="wf-box">'; 
 					html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
 					html += '<image src='+value.blogImageList[0].path+'/></a>';
 					html += '<div class="content">';
 					html += '<h3>'+value.tag+'</h3>';
 					html += '<hr>';
-					html += '<p>'+value.content+'</p>';
+					html += '<p style="max-height:40px; overflow:hidden;">'+value.content+'</p>';
 					html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
 					html += '<div class="optionDiv">'
 					html += '<a class="bookmark">';
@@ -95,7 +95,7 @@
 	
 	/* scroll */
 	var page = 1;
-	$(document).scroll(function() {
+/*	$(document).scroll(function() {
 		maxHeight = $(document).height();
 		currentScroll = $(window).scrollTop() + $(window).height();
 		var mno = $("#dd").find("#memberNo").val();
@@ -113,7 +113,7 @@
 						html += '<div class="content">';
 						html += '<h3>'+value.tag+'</h3>';
 						html += '<hr>';
-						html += '<p>'+value.content+'</p>';
+						html += '<p style="max-height:40px; overflow:hidden;">'+value.content+'</p>';
 						html += '<input type="hidden" class="contentNo" value='+value.no+' />'
 						html += '<div class="optionDiv">'
 						html += '<a class="bookmark">';
@@ -128,4 +128,4 @@
 			});
 			
 		}
-	});
+	});*/

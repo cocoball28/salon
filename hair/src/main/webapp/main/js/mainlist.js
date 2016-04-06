@@ -61,7 +61,7 @@
 		   console.log(resultObj);
 		   $.each(resultObj.mList, function(key, value){
 				var html = ""
-				html += '<div class="wf-box '+ value.bno +'">'; 
+				html += '<div style="background:white;" class="wf-box '+ value.bno +'">'; 
 				html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
 				if(value.blogImageList.length != 0){	
 					html += '<image src='+value.blogImageList[0].path+'/></a>';
@@ -71,7 +71,7 @@
 				html += '<div class="content">';
 				html += '<h3>'+value.tag+'</h3>';
 				html += '<hr>';
-				html += '<p>'+value.content+'</p>';
+				html += '<p style="max-height:40px; overflow:hidden;">'+value.content+'</p>';
 				html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
 				html += '<div class="optionDiv">'
 				html += '<a class="bookmark" from="blog">';
@@ -105,7 +105,7 @@
 				   var cnt = 0;
 				   $.each(resultObj.mList, function(key, value){
 					   var html = ""
-							html += '<div class="wf-box '+ value.bno +'">'; 
+							html += '<div style="background:white;" class="wf-box '+ value.bno +'">'; 
 							html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
 							if(value.blogImageList.length != 0){	
 								html += '<image src='+value.blogImageList[0].path+'/></a>';
@@ -115,7 +115,7 @@
 							html += '<div class="content">';
 							html += '<h3>'+value.tag+'</h3>';
 							html += '<hr>';
-							html += '<p>'+value.content+'</p>';
+							html += '<p style="max-height:40px; overflow:hidden;">'+value.content+'</p>';
 							html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
 							html += '<div class="optionDiv">'
 							html += '<a class="bookmark" from="blog">';
