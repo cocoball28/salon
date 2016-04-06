@@ -97,7 +97,7 @@
 		var mno = $("#dd").find("#memberNo").val();
 		if (maxHeight <= currentScroll) {
 			page++;
-			$.getJSON( ""+contextPath+"/salon/ajax/favBlog.do"+"",{mno:mno, pageNo : page}, function(resultObj) {
+			$.getJSON( contextPath+"/salon/ajax/favBlog.do",{mno:mno, pageNo : page}, function(resultObj) {
 				   var cnt = 0;
 				   console.log("결과값 출력")
 				   console.log(resultObj);

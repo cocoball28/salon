@@ -56,7 +56,6 @@
 
 /* list ajax */
 	$(document).ready(function(){
-		
 	  $.getJSON( contextPath+"/salon/ajax/list.do", function(resultObj) {
 		   var cnt = 0;
 		   console.log(resultObj);
@@ -96,45 +95,50 @@
 	
 	/* scroll */
 	var page = 1;
-	$(document).scroll(function() {
-		maxHeight = $(document).height();
-		currentScroll = $(window).scrollTop() + $(window).height();
-		
-		if (maxHeight <= currentScroll) {
+	$(window).scroll(function() {
+		var maxHeight = $(document).height();
+		var currentScroll = $(window).scrollTop() + $(window).height();
+		if (maxHeight-30 <= currentScroll) {
 			page++;
-			$.getJSON( ""+contextPath+"/salon/ajax/list.do"+"",{pageNo : page}, function(resultObj) {
+			$.getJSON( contextPath+"/salon/ajax/list.do",{pageNo : page}, function(resultObj) {
+					console.log(resultObj);
 				   var cnt = 0;
 				   $.each(resultObj.mList, function(key, value){
-					    var html = ""
-						html += '<div class="wf-box">'; 
-						html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
-						html += '<image src='+value.blogImageList[0].path+'/></a>';
-						html += '<div class="content">';
-						html += '<h3>'+value.tag+'</h3>';
-						html += '<hr>';
-						html += '<p>'+value.content+'</p>';
-						html += '<input type="hidden" class="contentNo" value='+value.no+' />'
-						html += '<div class="optionDiv">'
-						html += '<a class="bookmark">';
-						html += '<i class="fa fa-heart-o"></i>'
-						html += '</a>';
-						html += '</div></div></div>';
-						$(".wf-column:eq("+cnt+")").append(html);
-						cnt++;
-						if(cnt == 5) cnt = 0;
+					   var html = ""
+							html += '<div class="wf-box '+ value.bno +'">'; 
+							html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
+							if(value.blogImageList.length != 0){	
+								html += '<image src='+value.blogImageList[0].path+'/></a>';
+							}else{
+								html += '<image src="images/user.png"/></a>';
+							}
+							html += '<div class="content">';
+							html += '<h3>'+value.tag+'</h3>';
+							html += '<hr>';
+							html += '<p>'+value.content+'</p>';
+							html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
+							html += '<div class="optionDiv">'
+							html += '<a class="bookmark" from="blog">';
+							html += '<i class="fa fa-heart-o"></i>'
+							html += '</a>';
+							html += '</div></div></div>';
+							$(".wf-column:eq("+cnt+")").append(html);
+							cnt++;
+							if(cnt == 5) cnt = 0;
 				  }) 
 				  $.each(resultObj.favList, function(key, value){
-					   var no = value;
+					   var no = value.bno;
 					   $("." + no).find(".fa").toggleClass("fa-heart fa-heart-o");
 				   })
+				   
 				   if(resultObj.member.status == "u"){
 					   $("#myHomeLi").css("display", "block")
 					   $("#myHomeA").attr("href", contextPath+"/blog/blog.html?no="+resultObj.member.mno)
-				   }
+				   } 
 				 
 			});
 			
-		}
+		} 
 	});
 	
 	
