@@ -13,6 +13,7 @@
   	<result column="photo_path" property="photoPath"/>
   	<result column="gender" property="gender"/>
   	<result column="status" property="status"/>
+  	<result column="sano" property="sano"/>
   </resultMap>
 	
   	<select id="selectOneByEmailPassword" resultMap="memberMap" parameterType="map">
