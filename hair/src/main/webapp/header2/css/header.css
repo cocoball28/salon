@@ -80,8 +80,7 @@
   background-size: 1.5em;
   position: absolute;
   background-position: 1px;
-  margin-left: 97%;
-  
+  right: 0px;  
 }
 #search:hover, #search:focus, #search2btn:hover, #search2btn:focus {
 	filter: alpha(opacity=90);
@@ -106,14 +105,13 @@
 .headerli{
 	list-style: none;	
 	width: 30%;
-	float: left;
 	cursor: pointer;
 }
 .headerul{
 	height: 30px;
-	width: 35%;
+	width: 20%;
 	margin: 0 auto;
-	text-align: center;
+	
 }
 
 
