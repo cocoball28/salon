@@ -88,25 +88,48 @@ values ("김재현", "replay@gmail.com", "1111", "m", "d", "../upload/dsnPortrai
 
 --4번 미용실 --
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
-values ("권형", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","4");
+values ("권형민", "bigbrother@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/권형민.jpg","4");
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
-values ("", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","4");
+values ("김예큰", "yesbig@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/김예큰.jpg","4");
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
-values ("", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","4");
+values ("엄진영", "um@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/엄진영.jpg","4");
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
-values ("", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","4");
+values ("김진호", "rlawlsgh@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/김진호.jpg","4");
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
-values ("", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","4");
+values ("손병찬", "sonbyung@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/손병찬.jpg","4");
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
-values ("", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","4");
+values ("정휘원", "justice@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/정휘원.jpg","4");
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
-values ("", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","4");
+values ("이미래", "thisfuture@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/이미래.jpg","4");
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
-values ("", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","4");
+values ("강동궁", "eastgung@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/강동궁.jpg","4");
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
-values ("", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","4");
+values ("노찬호", "coldtiger@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/노찬호.jpg","4");
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
-values ("", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","4");
+values ("최성원", "castleone@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/최성원.jpg","4");
+
+
+--5번 미용실 ---
+insert into member(nick, email, pwd, gender, status, photo_path, sano) 
+values ("조태오", "jotae@gmail.com0", "1111", "m", "d", "../upload/dsnPortrait/조태오.jpg","5");
+insert into member(nick, email, pwd, gender, status, photo_path, sano) 
+values ("김대오", "dao@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/김대오.jpg","5");
+insert into member(nick, email, pwd, gender, status, photo_path, sano) 
+values ("이효열", "yeol@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/이효열.jpg","5");
+insert into member(nick, email, pwd, gender, status, photo_path, sano) 
+values ("박지년", "geegirl@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/박지년.jpg","5");
+insert into member(nick, email, pwd, gender, status, photo_path, sano) 
+values ("주철민", "stealmean@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/주철민.jpg","5");
+insert into member(nick, email, pwd, gender, status, photo_path, sano) 
+values ("김지연", "delay@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/김지연.jpg","5");
+insert into member(nick, email, pwd, gender, status, photo_path, sano) 
+values ("박재상", "jaesang@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/박재상.jpg","5");
+insert into member(nick, email, pwd, gender, status, photo_path, sano) 
+values ("배장금", "jangguem@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/배장금.jpg","5");
+insert into member(nick, email, pwd, gender, status, photo_path, sano) 
+values ("유승협", "winhyup@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/유승협.jpg","5");
+insert into member(nick, email, pwd, gender, status, photo_path, sano) 
+values ("김동철", "eaststeal@gmail.com", "1111", "m", "d", "../upload/dsnPortrait/김동철.jpg","5");
 --------------------------------------------------------- 미용사
 insert into member(nick, email, pwd, gender, status, photo_path, sano) 
 values ("", "@gmail.com", "1111", "f", "d", "../upload/dsnPortrait/.jpg","3");

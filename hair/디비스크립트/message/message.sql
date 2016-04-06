@@ -8,6 +8,7 @@ create table message(
 );
 -- 메시지 쿼리 ---------------------------------------
 
+drop table message;
 
 -- 마지막 주고받은 메시지 테이블 ---------------------------------------
 create table message_rct(
