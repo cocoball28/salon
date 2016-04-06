@@ -10,5 +10,5 @@ public interface MessageService {
 	//본문
 	public List<Message> selectList(Message message);
 	public List<Message> selectMoreList(Message message);
-	public List<Shop> selectFavShopList(Member member); 
+	public List<Member> selectFavShopList(Member member); 
 }

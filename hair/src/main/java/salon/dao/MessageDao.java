@@ -15,7 +15,7 @@ public interface MessageDao {
 	public List<Member> selectMemberListByNick(Member member);
 	public List<Message> selectList(Message message);
 	public List<Message> selectMoreList(Message message);
-	public List<Shop> selectFavShopList();
+	public List<Member> selectManagerList();
 }
 
 

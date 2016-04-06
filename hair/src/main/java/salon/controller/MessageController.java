@@ -61,7 +61,7 @@ public class MessageController {
 	//미용실 리스트
 	@RequestMapping(value="favShopList", method=RequestMethod.POST)
 	@ResponseBody
-	public List<Shop> favShopList(Member member){
+	public List<Member> favShopList(Member member){
 		return messageService.selectFavShopList(member); 
 	}
 }

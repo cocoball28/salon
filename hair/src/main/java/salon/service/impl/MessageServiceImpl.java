@@ -35,8 +35,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<Shop> selectFavShopList(Member member) {
-		return messageDao.selectFavShopList();
+	public List<Member> selectFavShopList(Member member) {
+		return messageDao.selectManagerList();
 	}
 
 
