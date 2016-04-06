@@ -84,7 +84,7 @@
 					html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
 					html += '<div class="optionDiv">'
 					html += '<a class="bookmark">';
-					html += '<i class="fa fa-heart"></i>'
+					html += '<i class="fa fa-heart-o"></i>'
 					html += '</a>';
 					html += '</div></div></div>';
 					$(".wf-column:eq("+cnt+")").append(html);
