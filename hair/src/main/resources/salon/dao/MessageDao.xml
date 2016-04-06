@@ -30,8 +30,9 @@
      limit #{messageNo}, 10;
 	</select>
 
-	<select id="selectFavShopList" resultType="shop">
-	select * <!-- sano, name, tel, zip, addr, mno, nick, PHOTO_PATH as photoPath, STATUS, email -->
-	  from shop
+	<select id="selectManagerList" resultType="member" parameterType="member">
+	select sano, shop.name as saname, tel, zip, addr, mno, nick, PHOTO_PATH as photoPath 
+	  from member join shop 
+	 where #{mno};
 	</select>
 </mapper>
