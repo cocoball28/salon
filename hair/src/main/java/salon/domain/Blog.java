@@ -10,9 +10,17 @@ public class Blog {
 	private String content;
 	private String regDate; 
 	private List<BlogImage> blogImageList;
+	private int fav;
 	
 	
-	
+	public int getFav() {
+		return fav;
+	}
+
+	public void setFav(int fav) {
+		this.fav = fav;
+	}
+
 	public int getBno() {
 		return bno;
 	}

@@ -44,19 +44,19 @@ public class MainController {
   @ResponseBody
   public HashMap<String, Object> list(HttpServletRequest request, HttpServletResponse response,
 		  @RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="20") int pageSize) throws Exception {
+	  
+	Member member = (Member)request.getSession().getAttribute("loginUser");
+	int mno = member.getMno();
+	  
     HashMap<String, Object> resultMap = new HashMap<>();
 	resultMap.put("startIndex", (pageNo - 1) * pageSize);
 	resultMap.put("length", pageSize);
+	resultMap.put("mno", mno);
 	
     List<Blog> mList = mainDao.mainList(resultMap);
-    Member member = (Member)request.getSession().getAttribute("loginUser");
-    int mno = member.getMno();
-    System.out.println(mno);
-    List<Favorite> favList = mainDao.favBlogList(mno);
         
     resultMap.put("member", member);
     resultMap.put("mList", mList);
-    resultMap.put("favList", favList);
     
     return resultMap;
   }
@@ -64,7 +64,6 @@ public class MainController {
   @RequestMapping(value="updateFav", method=RequestMethod.GET)
   @ResponseBody
   public AjaxResult updateFav(Favorite favorite) throws Exception {
-	System.out.println(favorite.getBno()+"  "+ favorite.getMno() +"  "+favorite.getFav() +"  "+favorite.getFrom());
 	
 	if(favorite.getFav() == 1 ){
 		mainDao.insertFav(favorite);
@@ -72,7 +71,6 @@ public class MainController {
 		mainDao.deleteFav(favorite);
 	} 
 	
-	System.out.println("성공");
     return new AjaxResult("success", "success");
   }
   
@@ -108,7 +106,9 @@ public class MainController {
 	@RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="20") int pageSize) throws Exception{
 	  
 	  Member member = (Member)request.getSession().getAttribute("loginUser");
+	  
 	  System.out.println("check" + from);
+	  
 	  HashMap<String, Object> resultMap = new HashMap<>();
 	  resultMap.put("startIndex", (pageNo - 1) * pageSize);
 	  resultMap.put("length", pageSize);
@@ -116,7 +116,6 @@ public class MainController {
 
 	  AjaxResult ajaxResult = new AjaxResult();
 	  if(from.equals("blog")){
-		  System.out.println("in");
 		  List<Blog> favBlog = mainService.favBlog(resultMap);
 		  ajaxResult.setData(favBlog);
 		  ajaxResult.setStatus("favBlog");
@@ -124,26 +123,28 @@ public class MainController {
 		  List<Member> favMember = memberDao.favMember(resultMap);
 		  ajaxResult.setData(favMember);
 		  ajaxResult.setStatus("favMember");
-	  }else if(from.equals("shop")){
+	  }/*else if(from.equals("shop")){
 		  List<Shop> favShop = shopDao.favShop(resultMap);
 		  ajaxResult.setData(favShop);
 		  ajaxResult.setStatus("favShop");
 	  }
-	  
+	  */
 	  return ajaxResult;
   }
   
   @RequestMapping("search")
   @ResponseBody
-  public AjaxResult search(String result,
+  public AjaxResult search(String result,HttpServletRequest request,
 		  @RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="20") int pageSize) throws Exception{
 	 
 	  System.out.println("result " + result);
+	  Member member = (Member)request.getSession().getAttribute("loginUser");
 	  
 	  HashMap<String, Object> resultMap = new HashMap<>();
 	  resultMap.put("startIndex", (pageNo - 1) * pageSize);
 	  resultMap.put("length", pageSize);
 	  resultMap.put("result", result);
+	  resultMap.put("mno", member.getMno());
 	  
 	  List<Blog> searchList = mainService.search(resultMap);
 	  
