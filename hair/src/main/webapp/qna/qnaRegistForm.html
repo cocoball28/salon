@@ -10,7 +10,12 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="../header2/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../header2/css/noJS.css" />
+<link rel="stylesheet" type="text/css" href="../header2/css/header.css" />
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 <script>
 function getContextPath(){
@@ -35,7 +40,10 @@ $.ajax(contextRoot + '/board/getSession.do',{
 </script>
 
 </head>
+	
 <body>
+
+<header class="header" style="background:white; z-index: 1; border-bottom: 1px solid #eee"></header>
 <div id="wrap" class="qna">
   
    <div id="header"></div>
@@ -59,6 +67,9 @@ $.ajax(contextRoot + '/board/getSession.do',{
 
 
 <div id="righter"></div>
-</div>   
+</div>
+	<script type="text/javascript">
+		$(".header").load(contextPath+"/header2/header.html .header");
+	</script>   
 </body>
 </html>
