@@ -47,6 +47,7 @@ var confirmReservationForm = function(){
 	$(".hairStyle").val("");
 	$(".beginTimeInputBox").val("");
 	$(".endTimeInputBox").val("");
+	$(".reservationForm").hide('slow');
 	//addReservation(hairdresser, customer, hairStyle, beginTimeStr, endTimeStr);
 	//reservationTimeSelector(beginTime,endTime)
 }
@@ -57,7 +58,7 @@ var addReservation = function (data) {
 	$(cloneReservation).find(".time").text(data.sTime + " - " + data.eTime);
 	$(cloneReservation).find(".style").text(data.style);
 	$(cloneReservation).find(".customer").text(data.cName);
-	$(cloneReservation).find(".customer").css({"font-weight":"bold","font-size":"17px"});
+	$(cloneReservation).find(".customer").css({"font-weight":"bold","font-size":"14px"});
 	$(cloneReservation).attr("rno",data.rno);
 	reservationTimeSelector(data.sTime,data.eTime,data.rno,data.mno);
 	var beginHour = data.sTime.split(":")
@@ -87,7 +88,7 @@ var reservationTimeSelector = function(begin, end, rno, mno) {
 			console.log(selectedClass);
 			var selectedRsvTd = $(".reservationTbody").find("[name="+mno+"]").find("."+selectedClass);
 			$(selectedRsvTd).css(
-				{"background-color":"deepskyblue", 
+				{"background-color":"orange", 
 					"color":"white"
 				}
 			);
@@ -270,7 +271,7 @@ var printCalendar = function(id, date) {
 	})
 	
 	$(dataDisplayClass).css(
-			{background:"skyblue", color:"white", border:"2px solid white"}
+			{background:"orange", color:"white", border:"2px solid white"}
 	);
 }
 
