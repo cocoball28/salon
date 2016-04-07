@@ -104,17 +104,14 @@
 }
 .headerli{
 	list-style: none;	
-	width: 30%;
+	width: 40%;
 	cursor: pointer;
 }
 .headerul{
 	height: 30px;
-	width: 20%;
+	width: 40%;
 	margin: 0 auto;
-	
 }
-
-
 /* dropdown */
 .wrapper-demo{
 	position: absolute;
