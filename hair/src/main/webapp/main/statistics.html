@@ -30,18 +30,9 @@
     <!-- ************************** section ************************** -->
     
     <section class="section">
-    	<div class="statisticsDiv" style="">
+    	<div class="statisticsDiv" style="position: relative;">
     		<div class="rankGraphDiv">
-    			<div class="1stRank">
-		    		<div class="rankGraph" style="">
-		    			<div class="graphFigure"><span>12233</span></div>
-		    			<div class="graphDisplay" style="height: 300px;"></div>
-		    		</div>	
-		    		<div class="rankGraph" style="">
-		    			<div class="graphFigure" style="text-align: center;"><span>45614</span></div>
-		    			<div class="graphDisplay" style="height: 100px; background: pink;"></div>
-		    		</div>
-	    		</div>
+    			<div class="1stRank"></div>
     			<div class="2ndRank" style="margin-left: 90px;"></div>
     			<div class="3rdRank" style="margin-left: 180px;"></div>
     			<div class="4thRank" style="margin-left: 270px;"></div>
@@ -51,53 +42,67 @@
     			<div class="8thRank" style="margin-left: 630px;"></div>
     			<div class="9thRank" style="margin-left: 720px;"></div>
     			<div class="10thRank" style="margin-left: 810px;"></div>
+    			<hr style="position: absolute; width: 100%; bottom: 38px;padding: 0px; margin: 0px; border: 2px solid; z-index: 100" >
     		</div>
-	    	<div class="rankTagDiv" style="" >
-	   			<span class="tagRank 1stTag">#펌</span>
-	    		<span class="tagRank 2ndTag">#펌</span>
-	    		<span class="tagRank 3rdTag">#펌</span>
-	    		<span class="tagRank 4thTag">#펌</span>
-	    		<span class="tagRank 5thTag">#펌</span>
-	    		<span class="tagRank 6thTag">#펌</span>
-	    		<span class="tagRank 7thTag">#펌</span>
-	    		<span class="tagRank 8thTag">#펌</span>
-	    		<span class="tagRank 9thTag">#펌</span>
-	    		<span class="tagRank 10thTag">#펌</span>
-	    	</div>
+    		<div style="position: absolute; height: 100px; width: 200px; right:0px; top:50px" >
+    			<div style="height: 50px">
+    				<div style="width: 40px; height: 40px; border: 1px solid black; float: left;">
+    				</div>
+    				<div style="display: inline-block; padding: 10px">검색된 스타일</div>
+    			</div>
+    			<br>
+    			<div style="height: 50px;">
+    				<div style="width: 40px; height: 40px; border: 1px solid black; float: left; background: pink">
+    				</div>
+    				<div style="display: inline-block; padding: 10px">북마크 수</div>
+    			</div>
+    		</div>
     	</div>
-        <div class="wf-container"></div>
+    	<div class="cloneRankGraphPcs" style="display: none">
+    		<div class="rankGraphPc">
+	    		<div class="rankGraph" style="z-index: 100; padding:0px;">
+	    			<div><span class="searchFigure"></span></div>
+	    			<div class="graphDisplay searchGraph" style="height: 300px; margin-bottom:20px;"></div>
+	    		</div>	
+	    		<div class="rankGraph" style="padding:0px;">
+	    			<div><span class="favoriteFigure"></span></div>
+	    			<div class="graphDisplay favoriteGraph" style="height: 100px; background: pink;"></div>
+		    		<div class="rankTagName"></div>
+	    		</div>
+    		</div>
+    	</div>
     </section>
-    <!-- <div style="bottom: 50px; right: 50px; position: fixed;">
-		<img src="../blog/img/icon/up.png" style="height: 30px; cursor: pointer;" onclick="scrolltotop()">
-	</div> -->
 <script>
-/* var scrolltotop = function(){
-	$('html, body').animate({ scrollTop: 0 }, 'slow');
-};
- */
-var printGraph = function(){
-	var 1stTag = "#투블럭"; 
-	var 2ndTag = "#펌";
-	var 3rdTag = "#C컬";
-	var 4thTag = "#파마";
-	var 5thTag = "#삭발";
-	var 6thTag = "#반삭";
-	var 7thTag = "#용근머리";
-	var 8thTag = "#찬호머리";
-	var 9thTag = "#지훈머리";
-	var 10thTag = "#진호머리";
-	$(".1stTag").text(1stTag);
-	$(".2ndTag").text(2ndTag);
-	$(".3rdTag").text(3rdTag);
-	$(".4thTag").text(4thTag);
-	$(".5thTag").text(5thTag);
-	$(".6thTag").text(6thTag);
-	$(".7thTag").text(7thTag);
-	$(".8thTag").text(8thTag);
-	$(".9thTag").text(9thTag);
-	$(".10thTag").text(10thTag);
+var rankData = [
+            {"searchFigure":12314, "favoriteFigure":7330, "rankTagName":"리젠트"},
+            {"searchFigure":9432, "favoriteFigure":8423, "rankTagName":"투블럭"},
+            {"searchFigure":8521, "favoriteFigure":5525, "rankTagName":"댄디"},
+            {"searchFigure":6212, "favoriteFigure":4325, "rankTagName":"다운펌"},
+            {"searchFigure":5212, "favoriteFigure":4546, "rankTagName":"가르마"},
+            {"searchFigure":4050, "favoriteFigure":3220, "rankTagName":"모닝펌"},
+            {"searchFigure":2800, "favoriteFigure":2065, "rankTagName":"베이비펌"},
+            {"searchFigure":1400, "favoriteFigure":1034, "rankTagName":"볼륨매직"},
+            ]
+var addGraph = function(i, data){
+	 console.log(i, data);
+	 var cloneRankGraphPc =  $(".cloneRankGraphPcs").find(".rankGraphPc").clone();
+	 //$(cloneRankGraphPc).find(".searchFigure").text(data.searchFigure);
+	 $(cloneRankGraphPc).find(".searchGraph").css("height",data.searchFigure*0.024);
+	 //$(cloneRankGraphPc).find(".favoriteFigure").text(data.favoriteFigure);
+	 $(cloneRankGraphPc).find(".favoriteGraph").css("height",data.favoriteFigure*0.024);
+	 $(cloneRankGraphPc).find(".rankTagName").text(data.rankTagName);
+	 $(".rankGraphDiv").children().eq(i).append(cloneRankGraphPc);
 }
- printGraph();
+
+var printGraph = function(data){
+	console.log(data);
+	for(var i = 0; i < data.length ; i++){
+		addGraph(i, data[i])
+	}
+}
+printGraph(rankData);
+ 
+
 </script>
 <!--  -->
 <script type="text/javascript" src="../blog/js/headerFix.js"></script>
