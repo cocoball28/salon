@@ -28,18 +28,19 @@
 	$(document).on('click', '.bookmark', function(){
 		var bno = $(this).closest('.wf-box').find("[type=hidden]").val();
 		var mno = $("#dd").find("#memberNo").val();
+		var from = $(this).attr("from")
 		var change = $(this).find(".fa");
 		var getClass = $(this).find("i").attr("class");
-		console.log("class : "+ getClass)
 		var fav;
-		if(getClass == "fa fa-heart-o"){
-			fav = 1;
-		}else{
+		if(getClass == "fa fa-heart"){
 			fav = 0;
+		}else{
+			fav = 1;
 		}
-		 $.get("/hair2/salon/ajax/updateFav.do",
-			{bno: bno,
-			 mno: mno,
+		 $.get(contextPath+"/salon/ajax/updateFav.do",
+			{mno: mno,
+			 bno: bno,
+			 from: from,
 			 fav: fav})
 			.done(function(){
 			change.toggleClass("fa-heart fa-heart-o");
@@ -88,7 +89,7 @@
 					html += '<p style="max-height:40px; overflow:hidden;">'+value.content+'</p>';
 					html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
 					html += '<div class="optionDiv">'
-					html += '<a class="bookmark">';
+					html += '<a class="bookmark" from="blog">';
 					if(value.fav == 1){
 						html += '<i class="fa fa-heart"></i>'
 					}else{
