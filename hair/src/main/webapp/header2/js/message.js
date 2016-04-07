@@ -80,7 +80,8 @@ var addMyMessage = function(data){
 var addReceiveMessage = function(data){
 	var cloneReceiveMessage = $(".messageClone").find(".receiveMessage").clone();
 	$(cloneReceiveMessage).find(".reciveMessageContent").text(data.content);
-	$(cloneReceiveMessage).find(".reciveMessageName").text(data.senderNick);
+	$(cloneReceiveMessage).find(".reciveMessageName").text(data.smnick);
+	$(cloneReceiveMessage).find(".reciveMessagePhoto").find("img").attr("src",data.pho);
 	$(cloneReceiveMessage).attr("messageNo",data.messageNo);
 	$(".messageContents").append(cloneReceiveMessage);
 	$(cloneReceiveMessage).show('slow');
@@ -291,7 +292,7 @@ var addMoreReceiveMessage = function(data){
 }
 
 var reservationToMessenger = function(target){
-	messageInit();
+	//messageInit();
 	$(".messageBox").show("fast");
 	var managerNo = $(target).attr("managerNo")
 	var managerNick = $(target).attr("managerNick")
