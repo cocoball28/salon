@@ -72,11 +72,16 @@
       $("#searchBar").val(pageParam);
 		$.getJSON(contextPath+"/salon/ajax/search.do",{result:pageParam},function(resultObj){
 			var cnt = 0;
+			console.log(resultObj);
 			   $.each(resultObj.data, function(key, value){
 				    var html = ""
 					html += '<div style="background:white;" class="wf-box">'; 
 					html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
-					html += '<image src='+value.blogImageList[0].path+'/></a>';
+					if(value.blogImageList.length != 0){	
+						html += '<image src='+value.blogImageList[0].path+'/></a>';
+					}else{
+						html += '<image src="images/user.png"/></a>';
+					}
 					html += '<div class="content">';
 					html += '<h3>'+value.tag+'</h3>';
 					html += '<hr>';
@@ -84,7 +89,11 @@
 					html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
 					html += '<div class="optionDiv">'
 					html += '<a class="bookmark">';
-					html += '<i class="fa fa-heart-o"></i>'
+					if(value.fav == 1){
+						html += '<i class="fa fa-heart"></i>'
+					}else{
+						html += '<i class="fa fa-heart-o"></i>'
+					}
 					html += '</a>';
 					html += '</div></div></div>';
 					$(".wf-column:eq("+cnt+")").append(html);
@@ -95,7 +104,7 @@
 	
 	/* scroll */
 	var page = 1;
-/*	$(document).scroll(function() {
+	$(document).scroll(function() {
 		maxHeight = $(document).height();
 		currentScroll = $(window).scrollTop() + $(window).height();
 		var mno = $("#dd").find("#memberNo").val();
@@ -103,13 +112,15 @@
 			page++;
 			$.getJSON( ""+contextPath+"/salon/ajax/favBlog.do"+"",{mno:mno, pageNo : page}, function(resultObj) {
 				   var cnt = 0;
-				   console.log("결과값 출력")
-				   console.log(resultObj);
 				   $.each(resultObj.favBlog, function(key, value){
 					    var html = ""
 						html += '<div class="wf-box">'; 
 						html += '<a class="detail" href="'+ contextPath +'/blog/blog.html?no='+value.mno+'">';
-						html += '<image src='+value.blogImageList[0].path+'/></a>';
+						if(value.blogImageList.length != 0){	
+							html += '<image src='+value.blogImageList[0].path+'/></a>';
+						}else{
+							html += '<image src="images/user.png"/></a>';
+						}
 						html += '<div class="content">';
 						html += '<h3>'+value.tag+'</h3>';
 						html += '<hr>';
@@ -117,7 +128,11 @@
 						html += '<input type="hidden" class="contentNo" value='+value.no+' />'
 						html += '<div class="optionDiv">'
 						html += '<a class="bookmark">';
-						html += '<i class="fa fa-heart"></i>'
+						if(value.fav == 1){
+							html += '<i class="fa fa-heart"></i>'
+						}else{
+							html += '<i class="fa fa-heart-o"></i>'
+						}
 						html += '</a>';
 						html += '</div></div></div>';
 						$(".wf-column:eq("+cnt+")").append(html);
@@ -128,4 +143,4 @@
 			});
 			
 		}
-	});*/
+	});

@@ -7,6 +7,10 @@ CREATE TABLE FAVORITE(
 	MDNO INT NULL
 );
 
+select t1.bno, t1.mno, t1.tag, t1.content, t2.bpno, t2.path 
+      from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
+     order by t1.bno
+
 select * from favorite;
 
 select fav
@@ -85,16 +89,19 @@ select tag
 	${item[index]}
 </foreach>
 
+select t1.bno, t1.mno, t1.tag, t1.content, t2.bpno, t2.path, 
+			(select count(*) from favorite f where f.mno = 1 and t1.bno=f.bno) fav
+      from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
+     order by t1.bno desc
+     limit 1, 30;
 
+     select t1.bno, t1.mno, t1.tag, t1.content, t2.bno, t2.bpno, t2.path 
+	      from blog t1 left outer join BLOG_PHO t2 on t1.bno=t2.bno
+		 where t1.bno in (select bno
+					     from favorite
+					    where mno = 1)
+	     order by t1.bno 
 
-<foreach collection="resultArray" item="result" index="index" separator="and tag REGEXP" open="", close="">
-	${result[index]}
-</foreach>
-	
-	
-	<foreach collection="resultArray" item="result" index="index" separator="and" open="CONCAT('%',", close=",'%'">
-		${item[index]}
-	</foreach>
 
 order by t1.bno 
 limit 0, 20;

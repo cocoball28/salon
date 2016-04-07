@@ -75,17 +75,17 @@
 				html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
 				html += '<div class="optionDiv">'
 				html += '<a class="bookmark" from="blog">';
-				html += '<i class="fa fa-heart-o"></i>'
+				if(value.fav == 1){
+					html += '<i class="fa fa-heart"></i>'
+				}else{
+					html += '<i class="fa fa-heart-o"></i>'
+				}
 				html += '</a>';
 				html += '</div></div></div>';
 				$(".wf-column:eq("+cnt+")").append(html);
 				cnt++;
 				if(cnt == 5) cnt = 0;
 		  });
-		   $.each(resultObj.favList, function(key, value){
-			   var no = value.bno;
-			   $("." + no).find(".fa").toggleClass("fa-heart fa-heart-o");
-		   })
 		   if(resultObj.member.status == "u"){
 			   $("#myHomeLi").css("display", "block")
 			   $("#myHomeA").attr("href", contextPath+"/blog/blog.html?no="+resultObj.member.mno)
@@ -119,17 +119,17 @@
 							html += '<input type="hidden" class="contentNo" value='+value.bno+' />'
 							html += '<div class="optionDiv">'
 							html += '<a class="bookmark" from="blog">';
-							html += '<i class="fa fa-heart-o"></i>'
+							if(value.fav == 0){
+								html += '<i class="fa fa-heart-o"></i>'
+							}else{
+								html += '<i class="fa fa-heart"></i>'
+							}
 							html += '</a>';
 							html += '</div></div></div>';
 							$(".wf-column:eq("+cnt+")").append(html);
 							cnt++;
 							if(cnt == 5) cnt = 0;
 				  }) 
-				  $.each(resultObj.favList, function(key, value){
-					   var no = value.bno;
-					   $("." + no).find(".fa").toggleClass("fa-heart fa-heart-o");
-				   })
 				   
 				   if(resultObj.member.status == "u"){
 					   $("#myHomeLi").css("display", "block")
