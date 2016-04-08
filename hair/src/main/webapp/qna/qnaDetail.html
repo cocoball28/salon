@@ -10,7 +10,9 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
+<link rel="stylesheet" type="text/css" href="../header2/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../header2/css/noJS.css" />
+<link rel="stylesheet" type="text/css" href="../header2/css/header.css" />
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src ="https://code.jquery.com/jquery-1.11.2.js"></script>
@@ -20,7 +22,7 @@
 <body>
 <div id="wrap" class="qna">
      
-   	 <div id="header"></div>
+   	 <header class="header" style="background:white; z-index: 1; border-bottom: 1px solid #eee"></header>
      <div id="sidebar"></div>
      
      <div id="content" align="center">
@@ -247,5 +249,8 @@
   </div>
   <div id="righter"></div>
 </div>
+<script type="text/javascript">
+		$(".header").load(contextPath+"/header2/header.html .header");
+	</script>   
 </body>
 </html>
