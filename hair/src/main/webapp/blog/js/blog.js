@@ -648,3 +648,17 @@ $(window).scroll(function(){
     	viewMoreMainContentList();
     } 
 });
+
+/*썸네일이미지*/
+$(function() {
+	$.getJSON(contextPath+"/salon/ajax/list.do",
+		function(data) {
+			console.log(data);
+			$(".wrapper-demo").prepend("<div class='thumb' style='width:30px; height:30px; float:right; position:absolute; right: 150px;'></div>");
+			$("#dd").css("float", "right");
+			$(".thumb").css("background-image", "url('"+ data.member.photoPath +"')");
+			$(".thumb").css("background-size", "cover");
+			$(".thumb").css("border-radius", "50px");
+		}
+	);
+})
