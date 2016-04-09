@@ -14,7 +14,7 @@ CREATE TABLE MEMBER (
 select * from member;
 drop table member;
 update member set status='d' where status='u'
-update member set status='m' where mno='1'
+update member set status='d' where mno='17'
 delete from member where mno = 4
 ----------------------------------------------------------member
 --1번 미용실---
